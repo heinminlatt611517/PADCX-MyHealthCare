@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide.init
 import com.padc.patient.R
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.presenter.impls.HomePresenterImpl
@@ -47,6 +48,11 @@ class ConfirmDialogFragment : DialogFragment() {
         setUpPresenter()
         setUpActionsListener()
 
+        init()
+    }
+
+    private fun init(){
+        consultation_request_name_id.text = arguments?.getString(BUNDLE_NAME)+resources.getString(R.string.consultation_request_message)
     }
 
     private fun setUpActionsListener() {

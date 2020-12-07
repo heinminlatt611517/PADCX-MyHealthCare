@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ConsultationChatFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        app:titleTextColor="@color/black"
+        app:title="@string/consultation"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24"
+        android:theme ="?attr/actionBarTheme"
+        android:layout_height="?actionBarSize"
+        android:id="@+id/tb_casesummary"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="@dimen/margin_medium_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:visibility="gone"
+        android:id="@+id/rv_consultation_chat"/>
 
-</FrameLayout>
+    <include layout="@layout/list_item_consultation_chat"/>
+
+</LinearLayout>
