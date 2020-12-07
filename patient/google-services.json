@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "485711944203",
+    "firebase_url": "https://myhealthcare-622b2.firebaseio.com",
+    "project_id": "myhealthcare-622b2",
+    "storage_bucket": "myhealthcare-622b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485711944203:android:e9a1068499f06dcca7450e",
+        "android_client_info": {
+          "package_name": "com.padc.padcx_myhealthcare_monthly_assignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485711944203-8p2ao130d7730rqqv3rrp316ff0cqefr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.padc.padcx_myhealthcare_monthly_assignment",
+            "certificate_hash": "6642541df795db889726ffe3857c36615a685744"
+          }
+        },
+        {
+          "client_id": "485711944203-i60b5uebv24reo8psfcs5hblp2c4nnce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4DUXpizAeSCkmewtFeAj005tJnO1pkXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485711944203-i60b5uebv24reo8psfcs5hblp2c4nnce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485711944203:android:71a58473a995879da7450e",
+        "android_client_info": {
+          "package_name": "com.padc.patient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485711944203-i60b5uebv24reo8psfcs5hblp2c4nnce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4DUXpizAeSCkmewtFeAj005tJnO1pkXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485711944203-i60b5uebv24reo8psfcs5hblp2c4nnce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

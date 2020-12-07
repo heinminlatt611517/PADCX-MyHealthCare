@@ -1,0 +1,4 @@
+include ':share'
+include ':patient'
+include ':doctor'
+rootProject.name = "PADCX-MyHealthCare-Monthly-Assignment"
