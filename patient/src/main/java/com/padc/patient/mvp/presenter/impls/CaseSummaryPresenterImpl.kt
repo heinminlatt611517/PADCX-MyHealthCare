@@ -15,11 +15,13 @@ class CaseSummaryPresenterImpl : CaseSummaryPresenter,AbstractBasePresenter<Case
     override fun onUIReady(lifecycleOwner: LifecycleOwner, patientName: String) {
        mPatientModel.getPatientFromDatabase(patientName)
            .observe(lifecycleOwner, Observer {
-               mView?.displayPatientInfo(it)
+              // mView?.displayPatientInfo(it)
            })
     }
 
-    override fun onTapContinue() {
-        mView?.navigateToSpecialityCaseSummaryScreen()
+    override fun onTapContinue(specialityName: String, patientID: String) {
+       mView?.navigateToSpecialQuestionCaseSummaryScreen(specialityName,patientID)
     }
+
+
 }

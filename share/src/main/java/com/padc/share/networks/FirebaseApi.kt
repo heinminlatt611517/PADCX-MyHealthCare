@@ -24,7 +24,7 @@ interface FirebaseApi {
         onFailure: (String) -> Unit
     )
 
-    fun getPatient(onSuccess: (patients: List<PatientVO>) -> Unit, onFailure: (String) -> Unit)
+    fun getPatient(email : String,onSuccess: (patients:PatientVO) -> Unit, onFailure: (String) -> Unit)
     fun getDoctor(onSuccess: (doctors: List<DoctorVO>) -> Unit, onFailure: (String) -> Unit)
 
 

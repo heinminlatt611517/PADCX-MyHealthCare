@@ -67,8 +67,6 @@ dependencies {
     //GSON
     implementation rootProject.ext.libraries.gson
 
-    //MM Detect
-    implementation rootProject.ext.libraries.mmdetect
 
     //Retrofit
     implementation rootProject.ext.libraries.retrofit
@@ -82,6 +80,12 @@ dependencies {
     //OKHttp
     implementation rootProject.ext.libraries.okhttp
     implementation rootProject.ext.libraries.OkhttpLogInterceptor
+
+    //stepperIndicator
+    implementation rootProject.ext.libraries.stepperIndicator
+
+    //mmTextView
+    implementation rootProject.ext.libraries.mmtextview
 
     // Architecture Components
     // LiveData

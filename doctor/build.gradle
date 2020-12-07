@@ -65,8 +65,9 @@ dependencies {
     //GSON
     implementation rootProject.ext.libraries.gson
 
-    //MM Detect
-    implementation rootProject.ext.libraries.mmdetect
+    //mmTextView
+    implementation rootProject.ext.libraries.mmtextview
+
 
     //Retrofit
     implementation rootProject.ext.libraries.retrofit

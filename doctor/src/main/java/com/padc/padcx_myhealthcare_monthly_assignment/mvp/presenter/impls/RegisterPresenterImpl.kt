@@ -21,19 +21,19 @@ class RegisterPresenterImpl : RegisterPresenter, AbstractBasePresenter<RegisterV
             mView?.showErrorMessage("Please enter all data")
         } else {
 
-            mAuthenticationModel.register(email = doctorVO.email,
-                password = password,
-                userName = doctorVO.name,
-                onSuccess = {
-
-                            mDoctorModel.registerNewDoctor(doctorVO = doctorVO,
-                                onSuccess = {
-                                    mView?.navigateToLoginScreen()
-                                },
-                                onFailure = {})
-                        }, onFailure = {
-                    mView?.showErrorMessage("Register Fail")
-                })
+//            mAuthenticationModel.register(email = doctorVO.email,
+//                password = password,
+//                userName = doctorVO.name,
+//                onSuccess = {
+//
+//                            mDoctorModel.registerNewDoctor(doctorVO = doctorVO,
+//                                onSuccess = {
+//                                    mView?.navigateToLoginScreen()
+//                                },
+//                                onFailure = {})
+//                        }, onFailure = {
+//                    mView?.showErrorMessage("Register Fail")
+//                })
 
 
 

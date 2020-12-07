@@ -1,8 +1,14 @@
 package com.padc.patient.mvp.presenter.impls
 
 import android.content.Context
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
+import com.padc.patient.R
+import com.padc.patient.activities.CaseSummaryActivity
+import com.padc.patient.activities.EmptyCaseSummaryActivity
+import com.padc.patient.dialogs.ConfirmDialogFragment
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.view.HomeView
 import com.padc.share.data.models.PatientModel
@@ -15,44 +21,44 @@ import com.padc.share.mvp.presenter.AbstractBasePresenter
 class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
     private val mPatientModel: PatientModel = PatientModelImpl
-    lateinit var mPatientVO: PatientVO
-    lateinit var mSpecialitiesVO: SpecialitiesVO
+    private  var mSpecialitiesVO: SpecialitiesVO = SpecialitiesVO()
     override fun onUiReady(lifecycleOwner: LifecycleOwner, id: String) {
+
+        mPatientModel.getSpecialities(onSuccess = {}, onError = {})
+
         mPatientModel.getSpecialitiesFromDB()
-            .observe(lifecycleOwner, Observer {
-                mView?.displaySpecialistDoctorLists(it as ArrayList<SpecialitiesVO>)
-            })
+                .observe(lifecycleOwner, Observer {
+                    mView?.displaySpecialistDoctorLists(it)
+                })
 
-        mPatientModel.getRecentDoctorLists(id = id,
-            onSuccess = {
-                mView?.displayRecentDoctorLists(it as ArrayList<DoctorVO>)
-            },
-            onFailure = {
-                mView?.showErrorMessage("Fail to load recent doctor lists!")
-            })
 
-        mPatientModel.getPatientFromDatabase(id)
-            .observe(lifecycleOwner, Observer {
-                mPatientVO = it
-            })
+
+        mPatientModel.getRecentDoctorLists("f4e94ef0-38bc-11eb-864d-8f34a3b15b20",
+                onSuccess = {
+                    mView?.displayRecentDoctorLists(it as ArrayList<DoctorVO>)
+                },
+                onFailure = {
+                    mView?.showErrorMessage("Fail to load recent doctor lists!")
+                })
+
     }
 
 
-    override fun onTapConfirm() {
-        if (mPatientVO.name.isEmpty()) {
-            mView?.navigateToEmptyCaseSummaryScreen(mSpecialitiesVO.name)
-        } else {
-            mView?.navigateToCaseSummaryScreen(mPatientVO,mSpecialitiesVO.name)
-        }
+    override fun onTapConfirm(specialityName : String,patientID : String,dialogFragment: ConfirmDialogFragment) {
+        dialogFragment.startActivity(dialogFragment.context?.let {
+            CaseSummaryActivity.newIntent(
+                it,specialityName,patientID
+            )
+        })
+
     }
 
     override fun onTapRecentDoctorItem(doctorID: String) {
 
     }
 
-    override fun onTapSpecialityDoctorItem(specialitiesVO: SpecialitiesVO) {
-        mSpecialitiesVO = specialitiesVO
-        mView?.showDialog()
+    override fun onTapSpecialityDoctorItem(specialitiesID: String) {
+        mView?.showConfirmDialog(specialitiesID)
     }
 
 

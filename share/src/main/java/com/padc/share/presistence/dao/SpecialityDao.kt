@@ -10,14 +10,14 @@ import com.padc.share.data.vos.SpecialitiesVO
 @Dao
 interface SpecialityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSpecialities(specialities: List<SpecialitiesVO>)
+    fun insertSpecialities(specialities: SpecialitiesVO)
 
-    @Query("select * from specialites")
+    @Query("select * from specialities")
     fun getAllSpecialitiesData(): LiveData<List<SpecialitiesVO>>
 
-    @Query("select * from specialites WHERE sp_id = :id")
+    @Query("select * from specialities WHERE sp_id = :id")
     fun getAllSpecialitiesBy(id: String): LiveData<SpecialitiesVO>
 
-    @Query("DELETE FROM specialites")
+    @Query("DELETE FROM specialities")
     fun deleteSpecialities()
 }

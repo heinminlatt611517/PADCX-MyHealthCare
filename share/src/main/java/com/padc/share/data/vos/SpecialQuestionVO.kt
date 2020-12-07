@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.firebase.firestore.IgnoreExtraProperties
 
-@Entity(tableName = "general_question")
+@Entity(tableName = "special_question")
 @IgnoreExtraProperties
 class SpecialQuestionVO(
     @PrimaryKey

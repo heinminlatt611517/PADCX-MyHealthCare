@@ -30,6 +30,10 @@ interface PatientModel {
         onError: (String) -> Unit
     )
 
+    fun getPatientByEmail( patientId: String,
+                           onSuccess: (PatientVO) -> Unit,
+                           onError: (String) -> Unit)
+
     fun getPatientFromDatabase(patientID : String) : LiveData<PatientVO>
 
 

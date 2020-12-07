@@ -9,6 +9,9 @@ import com.padc.share.networks.CloudFireStoreFirebaseApiImpl
 import com.padc.share.networks.FirebaseApi
 import com.padc.share.networks.auth.AuthManager
 import com.padc.share.networks.auth.FirebaseAuthManager
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.toObservable
+import io.reactivex.schedulers.Schedulers
 
 object PatientModelImpl : PatientModel, BaseModel() {
     override var mFirebaseApi: FirebaseApi = CloudFireStoreFirebaseApiImpl
@@ -31,7 +34,9 @@ object PatientModelImpl : PatientModel, BaseModel() {
         onFailure: (String) -> Unit
     ) {
         mAuthManager.register(email, password, userName, onSuccess = {
-            mFirebaseApi.addNewPatient(PatientVO("",userName, email), onSuccess = {}, onFailure = {})
+            mFirebaseApi.addNewPatient(PatientVO("",userName, email), onSuccess = {
+                mTheDB.patientDao().insertPatient(PatientVO("",userName, email))
+            }, onFailure = {})
         }, onFailure = {
 
         })
@@ -44,12 +49,25 @@ object PatientModelImpl : PatientModel, BaseModel() {
     ) {
         mFirebaseApi.getSpecialities(onSuccess = {
             mTheDB.specialityDao().deleteSpecialities()
-            mTheDB.specialityDao().insertSpecialities(it)
+            it.toObservable()
+                .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                mTheDB.specialityDao().insertSpecialities(it)
+            }
+
         }, onFailure = { onError(it) })
     }
 
+    override fun getPatientByEmail(email: String, onSuccess: (PatientVO) -> Unit, onError: (String) -> Unit) {
+        mFirebaseApi.getPatient(email,
+                onSuccess = {
+                    mTheDB.patientDao().insertPatient(it)
+                }, onFailure = { onError(it) })
+    }
+
     override fun getPatientFromDatabase(patientID: String): LiveData<PatientVO> {
-        return mTheDB.patientDao().getPatientByID(patientID)
+        return mTheDB.patientDao().getPatientByName(patientID)
     }
 
 

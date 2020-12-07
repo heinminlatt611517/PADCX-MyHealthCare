@@ -1,12 +1,15 @@
 package com.padc.patient.mvp.presenter
 
+import android.content.Context
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.LifecycleOwner
 import com.padc.patient.delegates.RecentDoctorItemDelegate
 import com.padc.patient.delegates.SpecialityDoctorItemDelegate
+import com.padc.patient.dialogs.ConfirmDialogFragment
 import com.padc.patient.mvp.view.HomeView
 import com.padc.share.mvp.presenter.BasePresenter
 
 interface HomePresenter : BasePresenter<HomeView>,RecentDoctorItemDelegate ,SpecialityDoctorItemDelegate{
     fun onUiReady(lifecycleOwner: LifecycleOwner,patientName : String)
-    fun onTapConfirm()
+    fun onTapConfirm(specialityName : String,patientID : String,dialogFragment: ConfirmDialogFragment)
 }

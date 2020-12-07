@@ -6,12 +6,12 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 
 
 
-@Entity(tableName = "specialites")
+@Entity(tableName = "specialities")
 @IgnoreExtraProperties
 class SpecialitiesVO(
     @PrimaryKey
     var sp_id: String= "",
     var name: String = "",
-    var photo: String = ""
+    var photo: String? = ""
 
 )

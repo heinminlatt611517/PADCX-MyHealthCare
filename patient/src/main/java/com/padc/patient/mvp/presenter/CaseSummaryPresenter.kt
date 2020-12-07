@@ -6,5 +6,5 @@ import com.padc.share.mvp.presenter.BasePresenter
 
 interface CaseSummaryPresenter : BasePresenter<CaseSummaryView> {
  fun onUIReady(lifecycleOwner: LifecycleOwner,patientName : String)
-    fun onTapContinue()
+    fun onTapContinue(specialityName : String,patientID : String)
 }

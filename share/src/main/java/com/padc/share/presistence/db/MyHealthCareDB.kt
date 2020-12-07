@@ -4,10 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.padc.share.data.vos.DoctorVO
-import com.padc.share.data.vos.GeneralQuestionTemplateVO
-import com.padc.share.data.vos.PatientVO
-import com.padc.share.data.vos.SpecialitiesVO
+import com.padc.share.data.vos.*
 import com.padc.share.presistence.dao.DoctorDao
 import com.padc.share.presistence.dao.GeneralQuestionTemplateDao
 import com.padc.share.presistence.dao.PatientDao
@@ -16,7 +13,7 @@ import com.padc.share.utils.DATABASE_NAME
 
 @Database(
     entities = [SpecialitiesVO::class, PatientVO::class, DoctorVO::class,
-        GeneralQuestionTemplateVO::class],
+        GeneralQuestionTemplateVO::class,SpecialQuestionVO::class],
     version = 3,
     exportSchema = false
 )

@@ -13,7 +13,7 @@ class RecentDoctorAdapter(delegate : RecentDoctorItemDelegate) : BaseRecyclerAda
     val mDelegate  = delegate
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<DoctorVO> {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_recent_doctor, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item_recent_doctor, parent, false)
         return RecentDoctorViewHolder(mDelegate,view)
     }
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mycare_main_navigation"
+    app:startDestination="@+id/navigation_home">
+
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.padc.patient.fragments.HomeFragment"
+        android:label="@string/speciality"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_consultation"
+            app:destination="@id/navigation_consultation" />
+
+        <action
+            android:id="@+id/action_home_to_caseSummary"
+            app:destination="@id/caseSummaryActivity" />
+
+
+        <action
+            android:id="@+id/action_home_to_EmptycaseSummary"
+            app:destination="@id/emptyCaseSummaryActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_consultation"
+        android:name="com.padc.patient.fragments.ConsultationChatFragment"
+        android:label="@string/consultation"
+        tools:layout="@layout/fragment_consultation_chat" >
+        <action
+            android:id="@+id/action_navigation_consultation_to_navigation_account"
+            app:destination="@id/navigation_account" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.padc.patient.fragments.AccountFragment"
+        android:label="@string/account"
+        tools:layout="@layout/fragment_account" />
+
+    <dialog
+        android:id="@+id/confirmDialogFragment"
+        android:name="com.padc.patient.dialogs.ConfirmDialogFragment"
+        android:label="ConfirmDialogFragment" >
+
+        <action
+            android:id="@+id/action_confirm_dialog_to_caseSummary"
+            app:destination="@id/caseSummaryActivity" />
+
+        <action
+            android:id="@+id/action_confirm_dialog_to_EmptycaseSummary"
+            app:destination="@id/emptyCaseSummaryActivity" />
+
+
+
+    </dialog>
+    <activity
+        android:id="@+id/caseSummaryActivity"
+        android:name="com.padc.patient.activities.CaseSummaryActivity"
+        android:label="activity_case_summary"
+        tools:layout="@layout/activity_case_summary" />
+    <activity
+        android:id="@+id/emptyCaseSummaryActivity"
+        android:name="com.padc.patient.activities.EmptyCaseSummaryActivity"
+        android:label="activity_empty_case_summary"
+        tools:layout="@layout/activity_empty_case_summary" />
+
+
+</navigation>

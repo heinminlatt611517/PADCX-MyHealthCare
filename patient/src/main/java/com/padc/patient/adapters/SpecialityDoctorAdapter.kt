@@ -19,7 +19,7 @@ class SpecialityDoctorAdapter(delegate : SpecialityDoctorItemDelegate) : BaseRec
     ): BaseViewHolder<SpecialitiesVO> {
 
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_speciality, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item_speciality, parent, false)
         return SpecialityViewHolder(mDelegate,view)
     }
 }
