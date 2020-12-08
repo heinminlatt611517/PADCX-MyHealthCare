@@ -11,7 +11,15 @@ class ConsultationChatPresenterImpl : ConsultationChatPresenter,AbstractBasePres
 
     private val mPatientModel: PatientModel = PatientModelImpl
 
-    override fun onUiReady(lifecycleOwner: LifecycleOwner) {
+    override fun onUiReady(lifecycleOwner: LifecycleOwner, patientID: String) {
+       mPatientModel.getFinishConsultationByPatientID(patientID,onSuccess = {
+           mView?.displayFinishConsultationChatLists(it)
+       },onFailure = {
+           mView?.showErrorMessage(it)
+       })
+    }
+
+    override fun onTapSendText() {
 
     }
 
@@ -19,7 +27,5 @@ class ConsultationChatPresenterImpl : ConsultationChatPresenter,AbstractBasePres
 
     }
 
-    override fun onTapSendMessage() {
 
-    }
 }

@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.LifecycleOwner
 import com.padc.patient.R
+import com.padc.share.activities.BaseActivity
 
-class EmptyCaseSummaryActivity : AppCompatActivity() {
+class EmptyCaseSummaryActivity : BaseActivity() {
 
     companion object {
 

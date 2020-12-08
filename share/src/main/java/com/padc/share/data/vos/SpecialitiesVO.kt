@@ -8,7 +8,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 
 @Entity(tableName = "specialities")
 @IgnoreExtraProperties
-class SpecialitiesVO(
+data class SpecialitiesVO(
     @PrimaryKey
     var sp_id: String= "",
     var name: String = "",

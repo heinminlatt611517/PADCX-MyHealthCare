@@ -12,10 +12,10 @@ class CaseSummaryPresenterImpl : CaseSummaryPresenter,AbstractBasePresenter<Case
 
     private val mPatientModel: PatientModel = PatientModelImpl
 
-    override fun onUIReady(lifecycleOwner: LifecycleOwner, patientName: String) {
-       mPatientModel.getPatientFromDatabase(patientName)
+    override fun onUIReady(lifecycleOwner: LifecycleOwner, patientID: String) {
+       mPatientModel.getPatientFromDatabase(patientID)
            .observe(lifecycleOwner, Observer {
-              // mView?.displayPatientInfo(it)
+               mView?.displayPatientInfo(it)
            })
     }
 

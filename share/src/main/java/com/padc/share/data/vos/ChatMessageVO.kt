@@ -12,7 +12,7 @@ data class ChatMessageVO (
 )
 
 @IgnoreExtraProperties
-class SenderTypeVO(
+data class SenderTypeVO(
     var id : String = "",
     var name: String = "",
     var photo: String? = "",

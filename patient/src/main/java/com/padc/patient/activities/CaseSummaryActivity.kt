@@ -16,27 +16,28 @@ import com.padc.patient.adapters.SpecialityDoctorAdapter
 import com.padc.patient.mvp.presenter.CaseSummaryPresenter
 import com.padc.patient.mvp.presenter.impls.CaseSummaryPresenterImpl
 import com.padc.patient.mvp.view.CaseSummaryView
+import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.PatientVO
 import kotlinx.android.synthetic.main.activity_case_summary.*
 import kotlinx.android.synthetic.main.activity_case_summary_special_question.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class CaseSummaryActivity : AppCompatActivity(),CaseSummaryView {
+class CaseSummaryActivity : BaseActivity(), CaseSummaryView {
 
     companion object {
 
         private const val NAME_EXTRA = "NAME_EXTRA"
         private const val ID_EXTRA = "ID_EXTRA"
-        fun newIntent(context: Context,specialityName : String,patientID : String) : Intent {
+        fun newIntent(context: Context, specialityName: String, patientID: String): Intent {
             val intent = Intent(context, CaseSummaryActivity::class.java)
-            intent.putExtra(NAME_EXTRA,specialityName)
-            intent.putExtra(ID_EXTRA,patientID)
+            intent.putExtra(NAME_EXTRA, specialityName)
+            intent.putExtra(ID_EXTRA, patientID)
             return intent
 
         }
     }
 
-    private lateinit var mPresenter : CaseSummaryPresenter
+    private lateinit var mPresenter: CaseSummaryPresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,13 +51,15 @@ class CaseSummaryActivity : AppCompatActivity(),CaseSummaryView {
     }
 
     private fun setUpActionsListener() {
-        Log.d("SpecialityName",intent.getStringExtra(NAME_EXTRA).toString())
-       btn_continue.setOnClickListener {
-           intent.getStringExtra(NAME_EXTRA)?.let { it1 ->
-               intent.getStringExtra(ID_EXTRA)?.let { mPresenter.onTapContinue(it1,it) } }
-       }
-    }
+        Log.d("SpecialityName", intent.getStringExtra(NAME_EXTRA).toString())
 
+        Log.d("PatientCaseSummaryID", intent.getStringExtra(ID_EXTRA).toString())
+        btn_continue.setOnClickListener {
+            intent.getStringExtra(NAME_EXTRA)?.let { it1 ->
+                intent.getStringExtra(ID_EXTRA)?.let { mPresenter.onTapContinue(it1, it) }
+            }
+        }
+    }
 
 
     private fun setUpPresenter() {
@@ -65,13 +68,16 @@ class CaseSummaryActivity : AppCompatActivity(),CaseSummaryView {
     }
 
 
-
-
     override fun navigateToSpecialQuestionCaseSummaryScreen(specialityName: String, patientID: String) {
-       startActivity(CaseSummarySpecialQuestionActivity.newIntent(this,specialityName,patientID))
+        startActivity(CaseSummarySpecialQuestionActivity.newIntent(this, specialityName, patientID))
     }
 
     override fun displayPatientInfo(patientVO: PatientVO) {
+        Log.d("PatientData", patientVO.toString())
+        bindData(patientVO)
+    }
+
+    private fun bindData(patientVO: PatientVO) {
 
     }
 

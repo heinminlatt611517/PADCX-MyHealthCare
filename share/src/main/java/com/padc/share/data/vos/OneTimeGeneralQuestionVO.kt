@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.firebase.firestore.IgnoreExtraProperties
 
 @IgnoreExtraProperties
-class OneTimeGeneralQuestionVO(
+data class OneTimeGeneralQuestionVO(
     @PrimaryKey
     var question: String ?= ""
 

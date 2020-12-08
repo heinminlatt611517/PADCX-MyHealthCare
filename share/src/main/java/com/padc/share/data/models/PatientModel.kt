@@ -17,13 +17,7 @@ interface PatientModel {
         onFailure: (String) -> Unit
     )
 
-    fun registerNewPatient(
-        email: String,
-        password: String,
-        userName: String,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
-    )
+    fun registerNewPatient(patientVO: PatientVO ,onSuccess: (patientVO: PatientVO) -> Unit, onFailure: (String) -> Unit)
 
     fun getSpecialities(
         onSuccess: (List<SpecialitiesVO>) -> Unit,
@@ -60,5 +54,9 @@ interface PatientModel {
         onSuccess: (List<SpecialQuestionVO>) -> Unit,
         onFailure: (String) -> Unit
     )
+
+    fun getFinishConsultationByPatientID(patientID: String,
+                                         onSuccess: (consultationVO: List<ConsultationChatVO>) -> Unit,
+                                         onFailure: (String) -> Unit)
 
 }

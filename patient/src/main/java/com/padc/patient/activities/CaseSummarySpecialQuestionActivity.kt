@@ -13,11 +13,12 @@ import com.padc.patient.adapters.SpecialQuestionAdapter
 import com.padc.patient.mvp.presenter.CaseSummarySpecialQuestionPresenter
 import com.padc.patient.mvp.presenter.impls.CaseSummarySpecialQuestionPresenterImpl
 import com.padc.patient.mvp.view.CaseSummarySpecialQuestionView
+import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.SpecialQuestionVO
 import kotlinx.android.synthetic.main.activity_case_summary_special_question.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class CaseSummarySpecialQuestionActivity : AppCompatActivity() ,CaseSummarySpecialQuestionView {
+class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQuestionView {
 
     companion object {
 

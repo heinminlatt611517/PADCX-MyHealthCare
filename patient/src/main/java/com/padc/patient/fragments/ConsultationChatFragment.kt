@@ -1,6 +1,7 @@
 package com.padc.patient.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,11 +54,13 @@ class ConsultationChatFragment : Fragment() ,ConsultationChatView {
 
         setUpPresenter()
         setUpRecyclerView()
+
+        mPresenter.onUiReady(this,"679cb060-3924-11eb-b267-1b2a5e85e1d8")
     }
 
     private fun setUpRecyclerView() {
         rv_consultation_chat.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        mAdapter = ConsultationChatAdapter ()
+        mAdapter = ConsultationChatAdapter (mPresenter)
         rv_consultation_chat.adapter = mAdapter
 
     }
@@ -88,6 +91,7 @@ class ConsultationChatFragment : Fragment() ,ConsultationChatView {
     }
 
     override fun displayFinishConsultationChatLists(lists: List<ConsultationChatVO>) {
+        Log.d("finishLists",lists.size.toString())
         mAdapter.setNewData(lists.toMutableList())
     }
 

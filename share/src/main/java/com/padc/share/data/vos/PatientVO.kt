@@ -12,7 +12,7 @@ import com.padc.share.presistence.typeConverters.OneTimeGeneralQuestionTypeConve
 @TypeConverters(OneTimeGeneralQuestionTypeConverter::class,AddressTypeConverter::class)
 data class PatientVO (
     @PrimaryKey
-    var patientID: String= "",
+    var id: String= "",
     var name: String = "",
     var email: String = "",
     var deviceID: String? = "",

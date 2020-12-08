@@ -16,7 +16,7 @@ data class CheckOutVO (
 )
 
 @IgnoreExtraProperties
-class DeliveryRoutineVO(
+data class DeliveryRoutineVO(
         var id: String= "",
         var delivery_date : String ?= ""
 )

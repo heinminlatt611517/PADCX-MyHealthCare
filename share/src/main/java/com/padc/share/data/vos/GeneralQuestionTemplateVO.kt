@@ -6,7 +6,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 
 @Entity(tableName = "general_question_template")
 @IgnoreExtraProperties
-class GeneralQuestionTemplateVO(
+data class GeneralQuestionTemplateVO(
     @PrimaryKey
     var id: String= "",
     var type: String ?= "",

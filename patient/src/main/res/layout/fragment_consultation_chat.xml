@@ -22,9 +22,7 @@
         android:layout_margin="@dimen/margin_medium_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:id="@+id/rv_consultation_chat"/>
 
-    <include layout="@layout/list_item_consultation_chat"/>
 
 </LinearLayout>
