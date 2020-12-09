@@ -194,69 +194,105 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
+    <org.mmtextview.components.MMTextView
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/margin_medium"
-        android:layout_height="wrap_content">
-        <org.mmtextview.components.MMTextView
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:text="@string/patient_weight"
+        android:textSize="13sp"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/white">
+        <RelativeLayout
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:maxLines="3"
-            android:id="@+id/tv_weight"
-            android:layout_margin="10dp"
-            android:text="@string/patient_weight"/>
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corner_btn_white"
-            android:padding="10dp"
-            android:maxLines="1"
-            android:hint="lb"
-            android:gravity="right"
-            android:textColorHint="@color/black"
-            android:textSize="13sp"
-            android:textColor="@color/black"
-            android:id="@+id/ed_weight"
-            android:layout_margin="10dp"/>
-    </LinearLayout>
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_btn_white"
+                android:padding="10dp"
+                android:maxLines="1"
+                android:textSize="13sp"
+                android:hint="0"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:id="@+id/ed_weight"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/mmhg"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
 
-    <LinearLayout
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <org.mmtextview.components.MMTextView
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/margin_medium"
-        android:layout_height="wrap_content">
-        <org.mmtextview.components.MMTextView
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:text="@string/patient_blood_pressure"
+        android:textSize="13sp"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/white">
+        <RelativeLayout
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:maxLines="3"
-            android:id="@+id/tv_blood_pressure"
-            android:layout_margin="10dp"
-            android:text="@string/patient_blood_pressure"/>
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:maxLines="1"
-            android:textColorHint="@color/black"
-            android:gravity="right"
-            android:background="@drawable/rounded_corner_btn_white"
-            android:textSize="13sp"
-            android:hint="mmHg"
-            android:textColor="@color/black"
-            android:id="@+id/ed_blood_pressure"
-            android:layout_margin="10dp"/>
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_btn_white"
+                android:padding="10dp"
+                android:maxLines="1"
+                android:textSize="13sp"
+                android:hint="0"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:id="@+id/ed_bloodpressure"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/mmhg"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_xlarge"
             android:layout_marginRight="@dimen/margin_medium"
             android:paddingLeft="7dp"
             android:paddingRight="7dp"
@@ -270,7 +306,7 @@
             android:id="@+id/btn_continue"
             app:backgroundTint="@color/light_blue_A700"
             android:text="@string/continue_btn"/>
-    </LinearLayout>
+
 
 
 

@@ -19,8 +19,8 @@ class CaseSummaryPresenterImpl : CaseSummaryPresenter,AbstractBasePresenter<Case
            })
     }
 
-    override fun onTapContinue(specialityName: String, patientID: String) {
-       mView?.navigateToSpecialQuestionCaseSummaryScreen(specialityName,patientID)
+    override fun onTapContinue(specialityName: String) {
+       mView?.navigateToSpecialQuestionCaseSummaryScreen(specialityName)
     }
 
 

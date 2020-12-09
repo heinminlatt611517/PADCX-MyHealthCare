@@ -11,6 +11,10 @@
         android:name="com.padc.patient.fragments.HomeFragment"
         android:label="@string/speciality"
         tools:layout="@layout/fragment_home" >
+
+        <argument android:name="name"
+            app:argType="string"/>
+
         <action
             android:id="@+id/action_navigation_home_to_navigation_consultation"
             app:destination="@id/navigation_consultation" />

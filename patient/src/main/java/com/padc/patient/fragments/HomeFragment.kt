@@ -3,12 +3,13 @@ package com.padc.patient.fragments
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.patient.R
@@ -27,23 +28,32 @@ import com.padc.share.data.vos.SpecialitiesVO
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
+
+private const val PARAM_ID = "PARAM_ID"
+
 class HomeFragment : Fragment(), HomeView {
 
-
-
-    private var patientID : String? = null
 
     private lateinit var mPresenter : HomePresenter
     private lateinit var mSpecialityAdapter : SpecialityDoctorAdapter
     private lateinit var mRecentDoctorAdapter : RecentDoctorAdapter
     private lateinit var mConsultationRequestViewPod : ConsultationRequestViewPod
 
+    private var patientID : String? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            patientID = it.getString(PARAM_ID)
+
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        patientID = arguments?.getString(ID)
-        Log.d("PatientID",patientID.toString())
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -51,11 +61,14 @@ class HomeFragment : Fragment(), HomeView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         setUpPresenter()
         setUpViewPods()
         setUpRecyclerView()
 
-        mPresenter.onUiReady(this,patientID.toString())
+
+
+        mPresenter.onUiReady(this)
 
     }
 
@@ -79,14 +92,14 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     companion object {
-        const val ID = "patient-id"
-        fun newInstance(id: String) : HomeFragment {
-            val bundle = Bundle()
-            bundle.putString(ID, id)
-            val fragment = HomeFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
+        fun newInstance(patientID: String) =
+                HomeFragment().apply {
+                    arguments = Bundle().apply {
+                        putString(PARAM_ID, patientID)
+                    }
+                }
+
+
     }
 
     override fun showConsultationRequestDialogFragment() {
@@ -109,7 +122,6 @@ class HomeFragment : Fragment(), HomeView {
         val confirmDialog = ConfirmDialogFragment.newFragment()
         val bundle = Bundle()
         bundle.putString(BUNDLE_NAME, specialityName)
-        bundle.putString(BUNDLE_PATIENT_ID,"")
         confirmDialog.arguments = bundle
         activity?.supportFragmentManager?.let { confirmDialog.show(it,ConfirmDialogFragment.TAG_ADD_CONFIRM_DIALOG) }
     }
@@ -118,10 +130,12 @@ class HomeFragment : Fragment(), HomeView {
 
     }
 
-
-    override fun navigateToCaseSummaryScreen(patientVO: PatientVO, speciality: String) {
+    override fun navigateToCaseSummaryScreen(speciality: String) {
 
     }
+
+
+
 
     override fun displayPatientData(patientVO: PatientVO) {
         Log.d("PatientData",patientVO.name)

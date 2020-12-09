@@ -5,6 +5,6 @@ import com.padc.share.data.vos.PatientVO
 import com.padc.share.mvp.view.BaseView
 
 interface CaseSummaryView : BaseView {
- fun navigateToSpecialQuestionCaseSummaryScreen(specialityName : String,patientID : String)
+ fun navigateToSpecialQuestionCaseSummaryScreen(specialityName : String)
     fun displayPatientInfo(patientVO: PatientVO)
 }

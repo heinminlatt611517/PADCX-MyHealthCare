@@ -14,6 +14,7 @@ import com.padc.patient.mvp.presenter.CaseSummarySpecialQuestionPresenter
 import com.padc.patient.mvp.presenter.impls.CaseSummarySpecialQuestionPresenterImpl
 import com.padc.patient.mvp.view.CaseSummarySpecialQuestionView
 import com.padc.share.activities.BaseActivity
+import com.padc.share.data.vos.QuestionAnswerVO
 import com.padc.share.data.vos.SpecialQuestionVO
 import kotlinx.android.synthetic.main.activity_case_summary_special_question.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -24,16 +25,18 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
 
         private const val NAME_EXTRA = "NAME_EXTRA"
         private const val ID_EXTRA = "ID_EXTRA"
-        fun newIntent(context: Context,specialityName : String,patientId : String) : Intent {
+        fun newIntent(context: Context,specialityName : String) : Intent {
             val intent= Intent(context, CaseSummarySpecialQuestionActivity::class.java)
             intent.putExtra(NAME_EXTRA,specialityName)
-            intent.putExtra(ID_EXTRA,patientId)
+
             return intent
         }
     }
 
     private lateinit var mSpecialQuestionAdapter : SpecialQuestionAdapter
     private lateinit var mSpecialQuestionPresenter : CaseSummarySpecialQuestionPresenter
+
+    private  var questionAnswerList : ArrayList<QuestionAnswerVO> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +48,6 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
         intent.getStringExtra(NAME_EXTRA)?.let {
             mSpecialQuestionPresenter.onUiReady(it,this)
         }
-
 
     }
 
@@ -67,6 +69,13 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
     override fun displaySpecialQuestionLists(list: List<SpecialQuestionVO>) {
         Log.d("specialQuestionLists",list.size.toString())
         mSpecialQuestionAdapter.setNewData(list.toMutableList())
+
+        for(item in list)
+        {
+            questionAnswerList.add(QuestionAnswerVO(item.id,item.name,""))
+        }
+
+        mSpecialQuestionAdapter.setQuestionAnswerList(questionAnswerList)
     }
 
     override fun showErrorMessage(errorMessage: String) {

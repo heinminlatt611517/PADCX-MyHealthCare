@@ -18,9 +18,8 @@ class MainActivity : BaseActivity() {
     companion object {
 
         private const val ID_EXTRA = "ID_EXTRA"
-        fun newIntent(context: Context,patientID : String) : Intent{
+        fun newIntent(context: Context) : Intent{
             val intent = Intent(context,MainActivity::class.java)
-            intent.putExtra(ID_EXTRA,patientID)
             return intent
         }
     }
@@ -32,7 +31,7 @@ class MainActivity : BaseActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
 
-        Log.d("PatientMainID",intent.getStringExtra(ID_EXTRA).toString())
+
 
     }
 

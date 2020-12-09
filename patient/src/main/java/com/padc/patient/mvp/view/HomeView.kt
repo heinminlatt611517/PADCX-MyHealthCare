@@ -13,7 +13,7 @@ interface HomeView : BaseView {
     fun displayRecentDoctorLists(recentDoctorLists : ArrayList<DoctorVO>)
     fun showConfirmDialog(specialityName : String)
     fun navigateToEmptyCaseSummaryScreen(context: Context,speciality : String)
-    fun navigateToCaseSummaryScreen(patientVO: PatientVO,speciality : String)
+    fun navigateToCaseSummaryScreen(speciality : String)
     fun displayPatientData(patientVO: PatientVO)
 
 }

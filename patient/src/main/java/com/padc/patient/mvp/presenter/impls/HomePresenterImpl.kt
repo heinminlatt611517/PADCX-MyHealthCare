@@ -4,9 +4,11 @@ package com.padc.patient.mvp.presenter.impls
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.padc.patient.activities.CaseSummaryActivity
+import com.padc.patient.activities.EmptyCaseSummaryActivity
 import com.padc.patient.dialogs.ConfirmDialogFragment
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.view.HomeView
+import com.padc.patient.utils.SessionManager
 import com.padc.share.data.models.PatientModel
 import com.padc.share.data.models.impls.PatientModelImpl
 import com.padc.share.data.vos.DoctorVO
@@ -16,7 +18,7 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
     private val mPatientModel: PatientModel = PatientModelImpl
 
-    override fun onUiReady(lifecycleOwner: LifecycleOwner, id: String) {
+    override fun onUiReady(lifecycleOwner: LifecycleOwner) {
 
         mPatientModel.getSpecialities(onSuccess = {}, onError = {})
 
@@ -27,26 +29,47 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
 
 //
-//        mPatientModel.getRecentDoctorLists("",
-//                onSuccess = {
-//                    mView?.displayRecentDoctorLists(it as ArrayList<DoctorVO>)
-//                },
-//                onFailure = {
-//                    mView?.showErrorMessage("Fail to load recent doctor lists!")
-//                })
+        mPatientModel.getRecentDoctorLists(SessionManager.patient_id.toString(),
+                onSuccess = {
+                    mView?.displayRecentDoctorLists(it as ArrayList<DoctorVO>)
+                },
+                onFailure = {
+                    mView?.showErrorMessage("Fail to load recent doctor lists!")
+                })
+
+
 
     }
 
     override fun onTapConfirm(
         specialityName: String,
-        patientID: String,
         dialogFragment: ConfirmDialogFragment
     ) {
-        dialogFragment.startActivity(dialogFragment.context?.let {
-            CaseSummaryActivity.newIntent(
-                it,specialityName,patientID
-            )
-        })
+
+        mPatientModel.getPatientByEmail(SessionManager.patient_email.toString(),
+        onSuccess = { it ->
+
+            it.blood_type?.let {
+                if (it.isBlank()) {
+                    dialogFragment.startActivity(dialogFragment.context?.let { context ->
+                        EmptyCaseSummaryActivity.newIntent(
+                            context,specialityName
+                        )
+                    })
+                    dialogFragment.dismiss()
+                }
+                else{
+                    dialogFragment.startActivity(dialogFragment.context?.let {context ->
+                        CaseSummaryActivity.newIntent(
+                            context,specialityName
+                        )
+                    })
+                    dialogFragment.dismiss()
+                }
+            }
+        },onError = {})
+
+
     }
 
     override fun onTapRecentDoctorItem(doctorID: String) {

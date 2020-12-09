@@ -126,4 +126,8 @@ object PatientModelImpl : PatientModel, BaseModel() {
         mFirebaseApi.getFinishConsultationByPatientID(patientID, onSuccess, onFailure)
     }
 
+    override fun getPatientByEmailFromDB(email: String): LiveData<PatientVO> {
+       return mTheDB.patientDao().getPatientByEmail(email)
+    }
+
 }

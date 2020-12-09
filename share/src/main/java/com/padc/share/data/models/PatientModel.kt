@@ -59,4 +59,6 @@ interface PatientModel {
                                          onSuccess: (consultationVO: List<ConsultationChatVO>) -> Unit,
                                          onFailure: (String) -> Unit)
 
+
+    fun getPatientByEmailFromDB(email: String) : LiveData<PatientVO>
 }

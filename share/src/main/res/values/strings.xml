@@ -31,6 +31,7 @@
     <string name="patient_allergic_reactions_medicine">မတည့်သောဆေး</string>
     <string name="ft">ft</string>
     <string name="lb">lb</string>
+    <string name="answer_hint">ဖြေဆိုပါ</string>
     <string name="mmhg">mmHg</string>
     <string name="see_more">ထပ်ကြည့်မည်</string>
     <string name="send_message">ရေးသားပါ</string>

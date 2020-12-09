@@ -9,5 +9,6 @@ class MyHealthCareApp  : Application()
     override fun onCreate() {
         super.onCreate()
        MyHealthCareDB.getDbInstance(applicationContext)
+
     }
 }

@@ -140,4 +140,8 @@ dependencies {
     implementation rootProject.ext.libraries.firebaseDeepLinkKtx
 
 
+
+
 }
+
+apply plugin: "androidx.navigation.safeargs"

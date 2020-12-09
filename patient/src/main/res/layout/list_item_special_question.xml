@@ -12,14 +12,14 @@
     android:orientation="vertical"
     android:layout_margin="5dp"
     android:layout_height="wrap_content">
-    <org.mmtextview.components.MMTextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/blue_300"
         android:maxLines="3"
-        android:id="@+id/txt_special_questions"
+        android:id="@+id/tv_specialQuestion"
         android:layout_margin="10dp"
         android:text="My Questions ?"/>
     <androidx.appcompat.widget.AppCompatEditText
@@ -28,6 +28,7 @@
         android:background="@drawable/rounded_corner_btn_grey"
         android:padding="10dp"
         android:maxLines="1"
+        android:hint="@string/answer_hint"
         android:textSize="13sp"
         android:textColor="@color/black"
         android:id="@+id/ed_answer"

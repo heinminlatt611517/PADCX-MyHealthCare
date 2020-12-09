@@ -1,61 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@color/grey_100"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activities.EmptyCaseSummaryActivity">
-
-
-    <LinearLayout android:orientation="vertical"
-        android:layout_gravity="center"
-        android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <ScrollView
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/activity_case_summary_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ly_onetime_fil"
                 android:orientation="vertical">
-
-                <include layout="@layout/activity_case_summary_header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-
-                <TextView
-                    android:layout_marginTop="@dimen/margin_medium"
+                <org.mmtextview.components.MMTextView
                     android:layout_width="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/patient_name"
+                    android:text="@string/patient_dateOfbirth"
                     android:textSize="13sp"
                     android:textColor="@color/blue_500"
                     android:textStyle="bold"/>
-                <androidx.cardview.widget.CardView
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="2dp"
-                    android:layout_margin="10dp"
-                    app:cardBackgroundColor="@color/white">
+                    android:layout_height="56dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        app:cardElevation="3dp"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white">
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:spinnerMode="dialog"
+                            android:entries="@array/days"
+                            android:id="@+id/day_spinner"/>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        app:cardElevation="3dp"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white">
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:spinnerMode="dialog"
+                            android:entries="@array/months"
+                            android:id="@+id/month_spinner"/>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        app:cardElevation="3dp"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white">
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:spinnerMode="dialog"
+                            android:entries="@array/years"
+                            android:id="@+id/year_spinner"/>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_corner_btn_white"
-                        android:padding="10dp"
-                        android:maxLines="1"
-                        android:textSize="13sp"
-                        android:textColor="@color/black"
-                        android:id="@+id/ed_name"
-                        android:layout_margin="5dp"/>
-                </androidx.cardview.widget.CardView>
 
-                <TextView
+                <org.mmtextview.components.MMTextView
                     android:layout_width="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_height="wrap_content"
@@ -66,48 +103,40 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="2dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_margin="10dp"
                     app:cardBackgroundColor="@color/white">
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <RelativeLayout
+                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_corner_btn_white"
-                        android:padding="10dp"
-                        android:maxLines="1"
-                        android:textSize="13sp"
-                        android:textColor="@color/black"
-                        android:id="@+id/ed_height"
-                        android:layout_margin="5dp"/>
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_btn_white"
+                            android:padding="10dp"
+                            android:maxLines="1"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:textSize="13sp"
+                            android:textColor="@color/black"
+                            android:id="@+id/ed_height"
+                            android:layout_margin="5dp"/>
+                        <TextView
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/ft"
+                            android:gravity="center"
+                            android:layout_margin="5dp"
+                            android:textSize="20dp"
+                            android:textStyle="bold"/>
+                    </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/patient_blood_pressure"
-                    android:textSize="13sp"
-                    android:textColor="@color/blue_500"
-                    android:textStyle="bold"/>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="2dp"
-                    android:layout_margin="10dp"
-                    app:cardBackgroundColor="@color/white">
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_corner_btn_white"
-                        android:padding="10dp"
-                        android:maxLines="1"
-                        android:textSize="13sp"
-                        android:textColor="@color/black"
-                        android:id="@+id/ed_bloodpressure"
-                        android:layout_margin="5dp"/>
-                </androidx.cardview.widget.CardView>
-
-                <TextView
+                <org.mmtextview.components.MMTextView
                     android:layout_width="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_height="wrap_content"
@@ -118,48 +147,20 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="2dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_margin="10dp"
                     app:cardBackgroundColor="@color/white">
-                    <androidx.appcompat.widget.AppCompatEditText
+
+                    <Spinner
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_corner_btn_white"
-                        android:padding="10dp"
-                        android:maxLines="1"
-                        android:textSize="13sp"
-                        android:textColor="@color/black"
-                        android:id="@+id/ed_bloodtype"
-                        android:layout_margin="5dp"/>
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:entries="@array/bloodType"
+                        android:id="@+id/bloodtype_spinner"/>
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/patient_weight"
-                    android:textSize="13sp"
-                    android:textColor="@color/blue_500"
-                    android:textStyle="bold"/>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="2dp"
-                    android:layout_margin="10dp"
-                    app:cardBackgroundColor="@color/white">
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_corner_btn_white"
-                        android:padding="10dp"
-                        android:maxLines="1"
-                        android:textSize="13sp"
-                        android:textColor="@color/black"
-                        android:id="@+id/ed_weight"
-                        android:layout_margin="5dp"/>
-                </androidx.cardview.widget.CardView>
-
-                <TextView
+                <org.mmtextview.components.MMTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -170,7 +171,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="2dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_margin="10dp"
                     app:cardBackgroundColor="@color/white">
                     <androidx.appcompat.widget.AppCompatEditText
@@ -186,29 +188,142 @@
                         android:maxLength="2000"
                         android:gravity="left"
                         android:textColor="@color/black"
-                        android:id="@+id/ed_comment"
+                        android:id="@+id/ed_allergic_medicine"
                         android:layout_margin="5dp"/>
                 </androidx.cardview.widget.CardView>
 
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="7dp"
-                    android:paddingRight="7dp"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:textColor="@color/white"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
-                    android:background="@drawable/rounded_corner_btn_blue"
-                    android:id="@+id/btn_next"
-                    app:backgroundTint="@color/light_blue_A700"
-                    android:text="@string/continue_btn"/>
             </LinearLayout>
-        </ScrollView>
 
-    </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="3dp"
+                android:visibility="gone"
+                android:id="@+id/card_userinfo"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:layout_margin="6dp"
+                        android:padding="5dp"
+                        android:id="@+id/userinfotext"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <org.mmtextview.components.MMTextView
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="@string/patient_weight"
+                android:textSize="13sp"
+                android:textColor="@color/blue_500"
+                android:textStyle="bold"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white">
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_corner_btn_white"
+                        android:padding="10dp"
+                        android:maxLines="1"
+                        android:textSize="13sp"
+                        android:hint="0"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:id="@+id/ed_weight"
+                        android:layout_margin="5dp"/>
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/lb"
+                        android:gravity="center"
+                        android:layout_margin="5dp"
+                        android:textSize="20dp"
+                        android:textStyle="bold"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
+            <org.mmtextview.components.MMTextView
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="@string/patient_blood_pressure"
+                android:textSize="13sp"
+                android:textColor="@color/blue_500"
+                android:textStyle="bold"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white">
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_corner_btn_white"
+                        android:padding="10dp"
+                        android:maxLines="1"
+                        android:textSize="13sp"
+                        android:hint="0"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:id="@+id/ed_bloodpressure"
+                        android:layout_margin="5dp"/>
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/mmhg"
+                        android:gravity="center"
+                        android:layout_margin="5dp"
+                        android:textSize="20dp"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <org.mmtextview.components.MMTextView
+                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+                android:background="@drawable/rounded_corner_btn_blue"
+                android:id="@+id/btn_next"
+                android:text="@string/continue_btn"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.padc.patient">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".root.PatientApp"
         android:allowBackup="true"
@@ -10,20 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PADCXMyHealthCareMonthlyAssignment.NoActionBar">
-        <activity android:name=".activities.CaseSummarySpecialQuestionActivity"></activity>
-        <activity android:name=".activities.CaseSummaryActivity" />
-        <activity android:name=".activities.EmptyCaseSummaryActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.LoginActivity" >
+        <activity android:name=".activities.SplashScreenActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activities.MainActivity">
 
         </activity>
+        <activity android:name=".activities.CaseSummarySpecialQuestionActivity" />
+        <activity android:name=".activities.CaseSummaryActivity" />
+        <activity android:name=".activities.EmptyCaseSummaryActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.LoginActivity">
+
+        </activity>
+        <activity android:name=".activities.MainActivity"></activity>
 
         <service
             android:name="com.padc.share.services.FCMService"
@@ -33,7 +38,5 @@
             </intent-filter>
         </service>
     </application>
-
-
 
 </manifest>

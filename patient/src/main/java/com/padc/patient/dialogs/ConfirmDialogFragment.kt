@@ -61,13 +61,12 @@ class ConfirmDialogFragment : DialogFragment() {
         val patientID = arguments?.getString(BUNDLE_PATIENT_ID)
 
         Log.d("specialityName",specialityName.toString())
-        Log.d("patientID",patientID.toString())
+
         btn_confirm.setOnClickListener {
-            specialityName?.let { it1 -> patientID?.let { it2 ->
-                mPresenter.onTapConfirm(it1,
-                    it2,this)
-            } }
-            dismiss()
+            specialityName?.let { it1 ->
+                mPresenter.onTapConfirm(it1,this)
+            }
+
         }
     }
 

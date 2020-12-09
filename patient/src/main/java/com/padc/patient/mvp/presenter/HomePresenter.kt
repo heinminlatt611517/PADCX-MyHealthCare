@@ -8,10 +8,9 @@ import com.padc.patient.mvp.view.HomeView
 import com.padc.share.mvp.presenter.BasePresenter
 
 interface HomePresenter : BasePresenter<HomeView>,RecentDoctorItemDelegate ,SpecialityDoctorItemDelegate{
-    fun onUiReady(lifecycleOwner: LifecycleOwner,patientName : String)
+    fun onUiReady(lifecycleOwner: LifecycleOwner)
     fun onTapConfirm(
         specialityName: String,
-        patientID: String,
         dialogFragment: ConfirmDialogFragment
     )
 }
