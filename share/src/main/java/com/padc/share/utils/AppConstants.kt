@@ -21,6 +21,8 @@ const val sharePreferencePatientBloodPressure  = "blod_pressure"
 const val sharePreferencePatientPhoto  = "photo"
 
 
+const val consultation_request ="consultation_request"
+
 //Share Perfernence for doctor
 const val sharePreferenceDoctor  = "doctor"
 const val sharePreferenceDocotrLoginStatus  = "login_status"

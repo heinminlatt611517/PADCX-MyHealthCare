@@ -15,9 +15,6 @@ data class ChatMessageVO (
 data class SenderTypeVO(
     var id : String = "",
     var name: String = "",
-    var photo: String? = "",
-    var age: Int =0,
-    var address: String? ="",
-    var gender: String?= ""
+    var photo: String? = ""
 
 )

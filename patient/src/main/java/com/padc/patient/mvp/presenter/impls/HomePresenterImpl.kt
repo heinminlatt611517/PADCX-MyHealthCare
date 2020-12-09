@@ -80,5 +80,11 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         mView?.showConfirmDialog(specialitiesID)
     }
 
+    override fun onTapStartConsultation() {
+
+        mView?.navigateToChatScreen()
+
+    }
+
 
 }

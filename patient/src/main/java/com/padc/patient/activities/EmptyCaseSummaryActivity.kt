@@ -141,7 +141,7 @@ class EmptyCaseSummaryActivity : BaseActivity(), EmptyCaseSummaryView {
         SessionManager.patient_dateOfBirth = patientVO.dateOfBirth
         SessionManager.patient_height = patientVO.height
         SessionManager.patient_bloodType = patientVO.blood_type
-
+        SessionManager.patient_allegric = patientVO.allergic_reactions
         SessionManager.patient_weight = patientVO.weight
         SessionManager.patient_bloodPressure = patientVO.blood_pressure
 

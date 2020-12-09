@@ -5,6 +5,7 @@ import com.padc.patient.mvp.presenter.CaseSummarySpecialQuestionPresenter
 import com.padc.patient.mvp.view.CaseSummarySpecialQuestionView
 import com.padc.share.data.models.PatientModel
 import com.padc.share.data.models.impls.PatientModelImpl
+import com.padc.share.data.vos.QuestionAnswerVO
 import com.padc.share.mvp.presenter.AbstractBasePresenter
 
 class CaseSummarySpecialQuestionPresenterImpl : CaseSummarySpecialQuestionPresenter,
@@ -21,6 +22,11 @@ class CaseSummarySpecialQuestionPresenterImpl : CaseSummarySpecialQuestionPresen
 
     override fun onTapStartConsultation() {
         mView?.navigateToConfirmCaseSummaryScreen()
+    }
+
+    override fun onAnswerChange(position: Int, questionAnswerVO: QuestionAnswerVO) {
+        mView?.replaceAnswerList(position,questionAnswerVO)
+
     }
 
 }

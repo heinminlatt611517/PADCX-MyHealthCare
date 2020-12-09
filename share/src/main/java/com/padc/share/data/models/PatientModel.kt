@@ -17,18 +17,24 @@ interface PatientModel {
         onFailure: (String) -> Unit
     )
 
-    fun registerNewPatient(patientVO: PatientVO ,onSuccess: (patientVO: PatientVO) -> Unit, onFailure: (String) -> Unit)
+    fun registerNewPatient(
+        patientVO: PatientVO,
+        onSuccess: (patientVO: PatientVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
     fun getSpecialities(
         onSuccess: (List<SpecialitiesVO>) -> Unit,
         onError: (String) -> Unit
     )
 
-    fun getPatientByEmail( patientId: String,
-                           onSuccess: (PatientVO) -> Unit,
-                           onError: (String) -> Unit)
+    fun getPatientByEmail(
+        patientId: String,
+        onSuccess: (PatientVO) -> Unit,
+        onError: (String) -> Unit
+    )
 
-    fun getPatientFromDatabase(patientID : String) : LiveData<PatientVO>
+    fun getPatientFromDatabase(patientID: String): LiveData<PatientVO>
 
 
     fun getSpecialitiesFromDB(): LiveData<List<SpecialitiesVO>>
@@ -55,10 +61,34 @@ interface PatientModel {
         onFailure: (String) -> Unit
     )
 
-    fun getFinishConsultationByPatientID(patientID: String,
-                                         onSuccess: (consultationVO: List<ConsultationChatVO>) -> Unit,
-                                         onFailure: (String) -> Unit)
+    fun getFinishConsultationByPatientID(
+        patientID: String,
+        onSuccess: (consultationVO: List<ConsultationChatVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
 
-    fun getPatientByEmailFromDB(email: String) : LiveData<PatientVO>
+    fun getPatientByEmailFromDB(email: String): LiveData<PatientVO>
+
+    fun getQuestionAnswerFromDB(): LiveData<List<QuestionAnswerVO>>
+
+
+    fun getAllChatMessage(
+        consultationID: String,
+        onSuccess: (messages: List<ChatMessageVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun sendMessage(
+        consultationChatId: String,
+        messageVO: ChatMessageVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getBroadConsultationRequest(
+        consultation_request_id : String,
+        onSuccess: (consultationRequest : ConsultationRequestVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
 }

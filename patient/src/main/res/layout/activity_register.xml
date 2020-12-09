@@ -73,7 +73,7 @@
                 android:id="@+id/ivLogo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/doctor_thumbnail" />
+                app:srcCompat="@drawable/healthcare" />
         </androidx.cardview.widget.CardView>
 
         <Button

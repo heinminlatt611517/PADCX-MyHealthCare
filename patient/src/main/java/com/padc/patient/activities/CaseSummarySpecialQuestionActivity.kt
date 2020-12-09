@@ -16,6 +16,7 @@ import com.padc.patient.mvp.view.CaseSummarySpecialQuestionView
 import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.QuestionAnswerVO
 import com.padc.share.data.vos.SpecialQuestionVO
+import com.padc.share.presistence.db.MyHealthCareDB
 import kotlinx.android.synthetic.main.activity_case_summary_special_question.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -33,6 +34,8 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
         }
     }
 
+    private lateinit var mTheDB : MyHealthCareDB
+
     private lateinit var mSpecialQuestionAdapter : SpecialQuestionAdapter
     private lateinit var mSpecialQuestionPresenter : CaseSummarySpecialQuestionPresenter
 
@@ -41,14 +44,25 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_case_summary_special_question)
+        mTheDB = MyHealthCareDB.getDbInstance(this)
+
         setUpPresenter()
         setUpRecyclerView()
+        setUpActionListener()
 
         Log.d("SpecialityName",intent.getStringExtra(NAME_EXTRA).toString())
         intent.getStringExtra(NAME_EXTRA)?.let {
             mSpecialQuestionPresenter.onUiReady(it,this)
         }
 
+
+
+    }
+
+    private fun setUpActionListener() {
+        btn_confirm.setOnClickListener {
+            mSpecialQuestionPresenter.onTapStartConsultation()
+        }
     }
 
     private fun setUpPresenter() {
@@ -58,12 +72,15 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
 
     private fun setUpRecyclerView() {
         rv_specialquestion.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mSpecialQuestionAdapter = SpecialQuestionAdapter ()
+        mSpecialQuestionAdapter = SpecialQuestionAdapter (mSpecialQuestionPresenter)
         rv_specialquestion.adapter = mSpecialQuestionAdapter
     }
 
     override fun navigateToConfirmCaseSummaryScreen() {
-
+        mTheDB.questionAnswerDao().deleteGeneralQuestion()
+        mTheDB.questionAnswerDao().insertGeneralQuestion(questionAnswerList)
+       startActivity(CaseSummaryConfirmActivity.newIntent(this,intent.getStringExtra("NAME_EXTRA").toString()))
+        this.finish()
     }
 
     override fun displaySpecialQuestionLists(list: List<SpecialQuestionVO>) {
@@ -76,6 +93,11 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
         }
 
         mSpecialQuestionAdapter.setQuestionAnswerList(questionAnswerList)
+    }
+
+    override fun replaceAnswerList(position: Int, questionAnswerVO: QuestionAnswerVO) {
+        questionAnswerList[position] = questionAnswerVO
+
     }
 
     override fun showErrorMessage(errorMessage: String) {

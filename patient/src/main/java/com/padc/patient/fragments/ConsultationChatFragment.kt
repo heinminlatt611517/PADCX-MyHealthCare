@@ -15,6 +15,7 @@ import com.padc.patient.adapters.RecentDoctorAdapter
 import com.padc.patient.mvp.presenter.ConsultationChatPresenter
 import com.padc.patient.mvp.presenter.impls.ConsultationChatPresenterImpl
 import com.padc.patient.mvp.view.ConsultationChatView
+import com.padc.patient.utils.SessionManager
 import com.padc.share.data.vos.ConsultationChatVO
 import kotlinx.android.synthetic.main.fragment_consultation_chat.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -55,7 +56,7 @@ class ConsultationChatFragment : Fragment() ,ConsultationChatView {
         setUpPresenter()
         setUpRecyclerView()
 
-        mPresenter.onUiReady(this,"679cb060-3924-11eb-b267-1b2a5e85e1d8")
+        mPresenter.onUiReady(this,SessionManager.patient_id.toString())
     }
 
     private fun setUpRecyclerView() {

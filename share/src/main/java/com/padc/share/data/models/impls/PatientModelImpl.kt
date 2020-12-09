@@ -107,6 +107,7 @@ object PatientModelImpl : PatientModel, BaseModel() {
                 patientVO = patientVO,
                 dateTime = dateTime,
                 onSuccess = {
+                    onSuccess()
                 },
                 onFailure = {
                 })
@@ -128,6 +129,39 @@ object PatientModelImpl : PatientModel, BaseModel() {
 
     override fun getPatientByEmailFromDB(email: String): LiveData<PatientVO> {
        return mTheDB.patientDao().getPatientByEmail(email)
+    }
+
+    override fun getQuestionAnswerFromDB(): LiveData<List<QuestionAnswerVO>> {
+        return mTheDB.questionAnswerDao().getAllGeneralQuestion()
+    }
+
+    override fun getAllChatMessage(
+        consultationID: String,
+        onSuccess: (messages: List<ChatMessageVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getAllChatMessage(consultationID,onSuccess,onFailure)
+    }
+
+    override fun sendMessage(
+        consultationChatId: String,
+        messageVO: ChatMessageVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.sendMessage(consultationChatId,onSuccess = {
+            onSuccess()
+        },onFailure = {
+            onFailure(it)
+        },chatMessageVO = messageVO)
+    }
+
+    override fun getBroadConsultationRequest(
+        consultation_request_id: String,
+        onSuccess: (consultationRequest: ConsultationRequestVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getBroadConsultationRequest(consultation_request_id,onSuccess,onFailure)
     }
 
 }

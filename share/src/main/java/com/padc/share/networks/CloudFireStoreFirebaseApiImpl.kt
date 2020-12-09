@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import com.padc.share.data.vos.*
+import com.padc.share.utils.consultation_request
 import java.io.ByteArrayOutputStream
 import java.util.*
 import kotlin.collections.ArrayList
@@ -314,13 +315,13 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
     }
 
 
-    override fun getChatMessage(
-            messageId: String,
+    override fun getAllChatMessage(
+            consultationID: String,
             onSuccess: (messages: List<ChatMessageVO>) -> Unit,
             onFailure: (String) -> Unit
     ) {
         database.collection("consultation_chat")
-                .document(messageId)
+                .document(consultationID)
                 .collection("chat_message")
                 .addSnapshotListener { value, error ->
                     error?.let {
@@ -346,18 +347,22 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
     }
 
     override fun sendMessage(
-            messageId: String,
+            consultationID: String,
             chatMessageVO: ChatMessageVO,
             onSuccess: () -> Unit,
             onFailure: (String) -> Unit
     ) {
         database.collection("consultation_chat")
-                .document(messageId)
+                .document(consultationID)
                 .collection("chat_message")
                 .document(chatMessageVO.id)
                 .set(chatMessageVO)
-                .addOnSuccessListener { Log.d("Success", "Successfully added patient") }
-                .addOnFailureListener { Log.d("Failure", "Failed to add patient") }
+                .addOnSuccessListener {
+                    onSuccess()
+                    Log.d("Success", "Successfully added patient") }
+                .addOnFailureListener {
+                    onFailure(it.localizedMessage)
+                    Log.d("Failure", "Failed to add patient") }
 
     }
 
@@ -483,8 +488,26 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         database.collection("consultation_request")
                 .document(id)
                 .set(consultationRequestMap)
-                .addOnSuccessListener { Log.d("Success", "Successfully ") }
-                .addOnFailureListener { Log.d("Failure", "Failed") }
+                .addOnSuccessListener {
+                    onSuccess()
+                    Log.d("Success", "Successfully ")
+                }
+                .addOnFailureListener {
+                    onFailure(it.localizedMessage)
+                    Log.d("Failure", "Failed")
+                }
+
+        database.collection("patients")
+            .document(patientVO.id)
+            .set(patientVO)
+            .addOnSuccessListener {
+                onSuccess()
+                Log.d("Success", "Successfully")
+            }
+            .addOnFailureListener {
+                onFailure(it.localizedMessage)
+                Log.d("Failure", "Failed ")
+            }
     }
 
     override fun addToPreScribeMedicine(
@@ -575,7 +598,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
                                                   onFailure: (String) -> Unit) {
 
         database.collection("consultation_chat")
-                .whereEqualTo("finish_flag",false)
+                .whereEqualTo("finish_flag",true)
                 .addSnapshotListener { value, error ->
                     error?.let {
                         onFailure(it.message ?: "Please check connection")
@@ -605,7 +628,37 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
 
 
     override fun acceptRequest() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun getBroadConsultationRequest(
+        consulation_request_id: String,
+        onSuccess: (consulationRequest: ConsultationRequestVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection("consultation_request")
+            .addSnapshotListener { value, error ->
+                error?.let {
+                    onFailure(it.message ?: "Please check connection")
+                } ?: run {
+                    var consultationVO: ConsultationRequestVO  = ConsultationRequestVO()
+
+                    val result = value?.documents ?: arrayListOf()
+
+                    for (document in result) {
+                        val hashmap = document.data
+                        val Data = Gson().toJson(hashmap)
+                        val docsData = Gson().fromJson<ConsultationRequestVO>(Data, ConsultationRequestVO::class.java)
+
+                        if (docsData.id == consulation_request_id)
+                        {
+                            consultationVO = docsData
+                        }
+
+                    }
+                    onSuccess(consultationVO)
+                }
+            }
     }
 
     override fun getGeneralQuestion(

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.cardview.widget.CardView
 import com.google.android.material.card.MaterialCardView
+import kotlinx.android.synthetic.main.view_pod_consulation_request.view.*
 
 class ConsultationRequestViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -23,11 +24,13 @@ class ConsultationRequestViewPod @JvmOverloads constructor(
     }
 
     private fun setUpListener() {
-
+        tv_startConsultation.setOnClickListener {
+           mDelegate?.onTapStartConsultation()
+        }
     }
 
     interface Delegate {
-
+       fun onTapStartConsultation()
     }
 
 }

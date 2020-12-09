@@ -15,5 +15,6 @@ interface HomeView : BaseView {
     fun navigateToEmptyCaseSummaryScreen(context: Context,speciality : String)
     fun navigateToCaseSummaryScreen(speciality : String)
     fun displayPatientData(patientVO: PatientVO)
+    fun navigateToChatScreen()
 
 }

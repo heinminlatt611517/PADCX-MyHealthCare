@@ -61,14 +61,14 @@ interface FirebaseApi {
             onFailure: (String) -> Unit
     )
 
-    fun getChatMessage(
-            messageId: String,
+    fun getAllChatMessage(
+            consultationID: String,
             onSuccess: (messages: List<ChatMessageVO>) -> Unit,
             onFailure: (String) -> Unit
     )
 
     fun sendMessage(
-            messageId: String,
+            consultationID: String,
             chatMessageVO: ChatMessageVO,
             onSuccess: () -> Unit,
             onFailure: (String) -> Unit
@@ -139,6 +139,12 @@ interface FirebaseApi {
 
 
     fun acceptRequest()
+
+    fun getBroadConsultationRequest(
+        consulation_request_id : String,
+        onSuccess: (consulationRequest : ConsultationRequestVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
 
 }

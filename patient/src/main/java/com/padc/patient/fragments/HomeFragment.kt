@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.patient.R
+import com.padc.patient.activities.ChatActivity
 import com.padc.patient.adapters.RecentDoctorAdapter
 import com.padc.patient.adapters.SpecialityDoctorAdapter
 import com.padc.patient.dialogs.ConfirmDialogFragment
@@ -66,8 +67,6 @@ class HomeFragment : Fragment(), HomeView {
         setUpViewPods()
         setUpRecyclerView()
 
-
-
         mPresenter.onUiReady(this)
 
     }
@@ -84,6 +83,7 @@ class HomeFragment : Fragment(), HomeView {
 
     private fun setUpViewPods() {
         mConsultationRequestViewPod = vp_consulation_request as ConsultationRequestViewPod
+        mConsultationRequestViewPod.setDelegate(mPresenter)
     }
 
     private fun setUpPresenter() {
@@ -112,7 +112,15 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun displayRecentDoctorLists(recentDoctorLists: ArrayList<DoctorVO>) {
-         mRecentDoctorAdapter.setNewData(recentDoctorLists)
+
+        if (recentDoctorLists.isNotEmpty() ){
+            layout_recentDoctor.visibility = View.VISIBLE
+            mRecentDoctorAdapter.setNewData(recentDoctorLists)
+        }
+        else{
+            layout_recentDoctor.visibility = View.GONE
+        }
+
     }
 
     override fun showConfirmDialog(specialityName : String) {
@@ -135,10 +143,12 @@ class HomeFragment : Fragment(), HomeView {
     }
 
 
-
-
     override fun displayPatientData(patientVO: PatientVO) {
         Log.d("PatientData",patientVO.name)
+    }
+
+    override fun navigateToChatScreen() {
+        startActivity(context?.let { ChatActivity.newIntent(it) })
     }
 
     override fun showErrorMessage(errorMessage: String) {
