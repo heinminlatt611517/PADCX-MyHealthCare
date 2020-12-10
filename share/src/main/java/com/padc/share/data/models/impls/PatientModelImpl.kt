@@ -68,15 +68,11 @@ object PatientModelImpl : PatientModel, BaseModel() {
     ) {
         mFirebaseApi.getSpecialities(onSuccess = {
             mTheDB.specialityDao().deleteSpecialities()
-            it.toObservable()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe {
-                        mTheDB.specialityDao().insertSpecialities(it)
-                    }
-
+            mTheDB.specialityDao().insertAllSpecialities(it)
         }, onFailure = { onError(it) })
+
     }
+
 
     override fun getPatientByEmail(email: String, onSuccess: (PatientVO) -> Unit, onError: (String) -> Unit) {
         mFirebaseApi.getPatient(email,

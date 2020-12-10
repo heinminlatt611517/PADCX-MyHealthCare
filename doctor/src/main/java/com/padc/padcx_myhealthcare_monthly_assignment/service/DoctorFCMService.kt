@@ -21,12 +21,12 @@ class DoctorFCMService : FirebaseMessagingService() {
 
         val body = remoteMessage.data["body"]
         val title = remoteMessage.data["title"]
-
-        showNotification(body, title)
+        val requestID = remoteMessage.data["consultationRequestID"]
+        showNotification(body, title,requestID)
     }
 
-    private fun showNotification(body: String?, title: String?) {
-        val intent = Intent(body?.let { MainActivity.newIntent(this, it) })
+    private fun showNotification(body: String?, title: String?,requestID : String?) {
+        val intent = Intent(requestID?.let { MainActivity.newIntent(this, it) })
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent: PendingIntent =
                 PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)

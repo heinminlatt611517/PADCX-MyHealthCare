@@ -7,7 +7,7 @@ import com.padc.share.views.viewHolder.BaseViewHolder
 
 class RecentDoctorViewHolder(private val mDelegate : RecentDoctorItemDelegate,itemView: View) :BaseViewHolder<DoctorVO>(itemView) {
     override fun clickItem(it: View?) {
-        mData?.dr_id?.let { it1 -> mDelegate.onTapRecentDoctorItem(it1) }
+        mData?.id?.let { it1 -> mDelegate.onTapRecentDoctorItem(it1) }
     }
 
     override fun bindData(data: DoctorVO) {

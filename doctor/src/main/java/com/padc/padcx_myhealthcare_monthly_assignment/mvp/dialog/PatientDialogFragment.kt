@@ -10,7 +10,11 @@ import com.padc.padcx_myhealthcare_monthly_assignment.R
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.MainPresenter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls.MainPresenterImpl
 import com.padc.share.utils.ImageUtils
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_patient_dialog.*
+import kotlinx.android.synthetic.main.fragment_patient_dialog.iv_patient
+import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientBirthDate
+import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientName
 
 
 class PatientDialogFragment : DialogFragment() {

@@ -1,11 +1,16 @@
 package com.padc.patient.fragments
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.padc.patient.R
+import com.padc.patient.activities.MainActivity.Companion.newIntent
+import com.padc.patient.activities.SplashScreenActivity
+import com.padc.patient.utils.SessionManager
+import kotlinx.android.synthetic.main.fragment_account.*
 
 
 private const val ARG_PARAM1 = "param1"
@@ -35,6 +40,21 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setUpActionListener()
+
+        etUserName.text = Editable.Factory.getInstance().newEditable( SessionManager.patient_name)
+        etEmail.text = Editable.Factory.getInstance().newEditable(SessionManager.patient_email)
+        et_dateOfBirth.text = Editable.Factory.getInstance().newEditable(SessionManager.patient_dateOfBirth)
+
+    }
+
+    private fun setUpActionListener() {
+        btn_logOut.setOnClickListener {
+            SessionManager.login_status=false
+            startActivity(activity?.let { it -> SplashScreenActivity.newIntent(it) })
+            activity?.finish()
+        }
     }
 
     companion object {

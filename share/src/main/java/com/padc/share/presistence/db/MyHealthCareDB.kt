@@ -11,7 +11,7 @@ import com.padc.share.utils.DATABASE_NAME
 @Database(
     entities = [SpecialitiesVO::class, PatientVO::class, DoctorVO::class,
         GeneralQuestionTemplateVO::class,SpecialQuestionVO::class,QuestionAnswerVO::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 

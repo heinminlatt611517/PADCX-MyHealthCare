@@ -8,36 +8,50 @@ import com.padc.share.data.models.impls.AuthenticationModelImpl
 import com.padc.share.data.models.impls.DoctorModelImpl
 import com.padc.share.data.vos.DoctorVO
 import com.padc.share.mvp.presenter.AbstractBasePresenter
+import java.util.*
 
 class RegisterPresenterImpl : RegisterPresenter, AbstractBasePresenter<RegisterView>() {
 
     private val mAuthenticationModel: AuthenticationModel = AuthenticationModelImpl
 
     private val mDoctorModel: DoctorModel = DoctorModelImpl
+    override fun onTapRegister(
+        username: String,
+        email: String,
+        password: String,
+        token: String,
+        speciality_name: String,
+        phone: String,
+        degree: String
 
+    ) {
+        if(email.isEmpty() || password.isEmpty() || username.isEmpty() || speciality_name.isEmpty() ||
+            phone.isEmpty() || degree.isEmpty()) {
+            mView?.showErrorMessage("Please enter all fields")
+        }
+            else{
+            val doctorVO = DoctorVO(
+                id = UUID.randomUUID().toString(),
+                name = username,
+                email = email,
+                deviceID = token,
+                degree = degree,
+                phone = phone,
+                speciality = speciality_name
+            )
 
-    override fun onTapRegister(doctorVO: DoctorVO, password: String) {
-        if (doctorVO.email.isEmpty() || password.isEmpty() || doctorVO.name.isEmpty()) {
-            mView?.showErrorMessage("Please enter all data")
-        } else {
+            mAuthenticationModel.register(email,  password, username, onSuccess = {
+                mDoctorModel.registerNewDoctor(doctorVO = doctorVO,  onSuccess = {
 
-//            mAuthenticationModel.register(email = doctorVO.email,
-//                password = password,
-//                userName = doctorVO.name,
-//                onSuccess = {
-//
-//                            mDoctorModel.registerNewDoctor(doctorVO = doctorVO,
-//                                onSuccess = {
-//                                    mView?.navigateToLoginScreen()
-//                                },
-//                                onFailure = {})
-//                        }, onFailure = {
-//                    mView?.showErrorMessage("Register Fail")
-//                })
+                    mView?.navigateToLoginScreen()
 
-
-
+                },onFailure = {} )
+            }, onFailure = {
+                mView?.showErrorMessage(it)
+            })
 
         }
-    }
+        }
+
+
 }

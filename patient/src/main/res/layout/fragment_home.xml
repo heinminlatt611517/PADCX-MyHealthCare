@@ -12,7 +12,8 @@
         android:orientation="vertical">
 
         <include layout="@layout/view_pod_consulation_request"
-            android:id="@+id/vp_consulation_request"/>
+            android:id="@+id/vp_consulation_request"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"

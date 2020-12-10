@@ -30,16 +30,13 @@ class LoginActivity : BaseActivity(),LoginView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-
-
-
         setUpPresenter()
         setUpActionListener()
 
     }
 
     private fun setUpActionListener() {
-        btnLogin.setOnClickListener {
+        btn_login.setOnClickListener {
             mPresenter.onTapLogin(etEmail.text.toString(), etPassword.text.toString(),this)
         }
 
@@ -55,7 +52,7 @@ class LoginActivity : BaseActivity(),LoginView {
 
     override fun navigateToRegisterScreen() {
         startActivity(RegisterActivity.newIntent(this))
-        this.finish()
+
     }
 
     override fun navigateToMainScreen(patientVO: PatientVO) {

@@ -8,13 +8,15 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 @IgnoreExtraProperties
 data class DoctorVO (
     @PrimaryKey
-    var dr_id: String= "",
+    var id: String= "",
     var name: String = "",
     var email: String = "",
     var photo: String? = "",
     var age: Int =0,
+    var deviceID: String? = "",
     var degree : String? = "",
     var biography: String?= "",
     var address: String? ="",
+    var phone: String ?= "",
     var speciality : String? =""
 )

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:background="@color/grey_200"
+    android:layout_width="match_parent">
+<LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:background="@color/grey_200"
@@ -60,13 +65,13 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="@dimen/margin_xxlarge"/>
+        android:layout_marginTop="@dimen/margin_large"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_btn_white"
         android:hint="@string/email_hint"
-        android:padding="10dp"
+        android:padding="14dp"
         android:textSize="12sp"
         android:inputType="textEmailAddress"
         android:id="@+id/etEmail"
@@ -80,13 +85,13 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="4dp"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_btn_white"
         android:hint="@string/username"
-        android:padding="10dp"
+        android:padding="14dp"
         android:textSize="12sp"
         android:id="@+id/etUserName"
         android:layout_margin="10dp"/>
@@ -99,24 +104,84 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="4dp"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_btn_white"
         android:hint="@string/password_hint"
-        android:padding="10dp"
+        android:padding="14dp"
         android:textSize="12sp"
         android:inputType="textPassword"
         android:id="@+id/etPassword"
         android:layout_margin="10dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/phone"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="4dp"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_btn_white"
+        android:hint="@string/phone"
+        android:padding="14dp"
+        android:textSize="12sp"
+        android:inputType="number"
+        android:id="@+id/etPhone"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/degree"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="4dp"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_btn_white"
+        android:hint="@string/degree"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:id="@+id/et_degree"
+        android:maxLines="3"
+        android:lines="3"
+        android:textSize="13sp"
+        android:maxLength="2000"
+        android:gravity="left"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:inputType="textMultiLine"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="3dp"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/white">
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:entries="@array/speciality_name_list"
+        android:id="@+id/spinner"/>
+    </androidx.cardview.widget.CardView>
+
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:padding="6dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_margin="10dp"
         android:textColor="@color/white"
         android:id="@+id/btnRegister"
         android:background="@drawable/rounded_corner_btn_blue"
@@ -149,8 +214,9 @@
 
     </LinearLayout>
 
-
 </LinearLayout>
+
+</ScrollView>
 
 
 

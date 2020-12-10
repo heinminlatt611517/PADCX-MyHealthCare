@@ -1,4 +1,4 @@
-package com.padc.patient.activities
+package com.padc.padcx_myhealthcare_monthly_assignment.activities
 
 import android.content.Context
 import android.content.Intent
@@ -7,17 +7,18 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
-import com.padc.patient.R
-import com.padc.patient.utils.SessionManager
+import com.padc.padcx_myhealthcare_monthly_assignment.R
+import com.padc.padcx_myhealthcare_monthly_assignment.utils.SessionManager
+import com.padc.share.activities.BaseActivity
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreenActivity :BaseActivity(){
 
     companion object {
-
         fun newIntent(context: Context) : Intent {
             return Intent(context, SplashScreenActivity::class.java)
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +31,9 @@ class SplashScreenActivity : AppCompatActivity() {
             if(!SessionManager.login_status) {
                 startActivity(LoginActivity.newIntent(this))
             }else{
-                startActivity(MainActivity.newIntent(this))
+                startActivity(MainActivity.newIntent(this,""))
             }
             finish()
         },1800)
-
     }
 }

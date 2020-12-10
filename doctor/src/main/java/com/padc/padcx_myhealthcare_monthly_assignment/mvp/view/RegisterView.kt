@@ -4,4 +4,5 @@ import com.padc.share.mvp.view.BaseView
 
 interface RegisterView : BaseView {
     fun navigateToLoginScreen()
+    
 }

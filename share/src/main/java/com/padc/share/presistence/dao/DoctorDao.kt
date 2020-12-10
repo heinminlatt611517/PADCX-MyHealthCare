@@ -11,11 +11,17 @@ import com.padc.share.data.vos.DoctorVO
 interface DoctorDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDoctor(doctor: DoctorVO)
-
-    @Query("SELECT * FROM Doctor")
-    fun getAllDoctors(): LiveData<List<DoctorVO>>
+    fun insertNewDoctor(doctorVO: DoctorVO)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDoctorList(doctorList: List<DoctorVO>)
+
+    @Query("select * from Doctor")
+    fun getAllDoctorData(): LiveData<List<DoctorVO>>
+
+    @Query("select * from Doctor WHERE email = :email")
+    fun getAllDoctorDataByEmail(email: String): LiveData<DoctorVO>
+
+    @Query("DELETE FROM Doctor")
+    fun deleteAllDoctorData()
 }

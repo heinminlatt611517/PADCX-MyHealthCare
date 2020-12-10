@@ -14,7 +14,9 @@ import com.padc.padcx_myhealthcare_monthly_assignment.mvp.dialog.PatientDialogFr
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.MainPresenter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls.MainPresenterImpl
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.view.MainView
+import com.padc.padcx_myhealthcare_monthly_assignment.utils.SessionManager
 import com.padc.share.activities.BaseActivity
+import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.services.FCMService
 import com.padc.share.utils.ImageUtils
@@ -23,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_patient_dialog.*
 import kotlinx.android.synthetic.main.fragment_patient_dialog.iv_patient
 import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientBirthDate
 import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientName
+import kotlinx.android.synthetic.main.layout_header.*
 
 class MainActivity : BaseActivity() ,MainView{
 
@@ -45,8 +48,21 @@ class MainActivity : BaseActivity() ,MainView{
 
         getFirebaseInstanceID()
         setUpPresenter()
+        setUpActionListener()
 
         mMainPresenter.onUiReady(this,intent.getStringExtra(ID_EXTRA).toString())
+
+        tv_doctorName.text = SessionManager.doctor_name
+    }
+
+    private fun setUpActionListener() {
+        btn_accept.setOnClickListener {
+            mMainPresenter.onTapAccept()
+        }
+
+        btn_skip.setOnClickListener {
+            mMainPresenter.onTapSkip()
+        }
     }
 
     private fun setUpPresenter() {
@@ -66,17 +82,20 @@ class MainActivity : BaseActivity() ,MainView{
         this?.supportFragmentManager?.let { patientDialog.show(it,PatientDialogFragment.TAG_ADD_PATIENT_DIALOG) }
     }
 
-    override fun displayPatientData(patientVO: PatientVO) {
-
+    override fun displayPatientData(consultationRequestVO: ConsultationRequestVO) {
         card.visibility = View.VISIBLE
 
-        tv_patientName.text = patientVO?.name
-        tv_patientBirthDate.text = patientVO?.dateOfBirth
+        tv_patientName.text = consultationRequestVO?.patient_info?.name
+        tv_patientBirthDate.text = consultationRequestVO?.patient_info?.dateOfBirth
         ImageUtils().showImage(
             iv_patient,
-            patientVO?.photo.toString(),
+            consultationRequestVO?.patient_info?.photo.toString(),
             R.drawable.doctor_img
         )
+    }
+
+    override fun navigateToPatientCaseSummary() {
+        startActivity(PatientCaseSummaryActivity.newIntent(this,intent.getStringExtra(ID_EXTRA).toString()))
     }
 
 

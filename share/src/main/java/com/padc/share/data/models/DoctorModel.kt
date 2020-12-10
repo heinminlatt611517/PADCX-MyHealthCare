@@ -1,6 +1,8 @@
 package com.padc.share.data.models
 
 import android.graphics.Bitmap
+import androidx.lifecycle.LiveData
+import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.networks.FirebaseApi
@@ -12,13 +14,7 @@ interface DoctorModel {
 
     fun uploadPhotoToFirebaseStorage(image : Bitmap, onSuccess: (photoUrl : String) -> Unit, onFailure: (String) -> Unit)
 
-    fun registerNewDoctor(
-        email: String,
-        password: String,
-        userName: String,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
-    )
+    fun registerNewDoctor(doctorVO: DoctorVO, onSuccess: () -> Unit, onFailure: (String) -> Unit)
 
     fun getDoctorFromFirebaseAndSaveToDatabase(onSuccess: (doctorList : List<DoctorVO>) -> Unit,onFailure: (String) -> Unit)
 
@@ -27,6 +23,18 @@ interface DoctorModel {
         onSuccess: (patientVO: PatientVO) -> Unit,
         onFailure: (String) -> Unit
     )
+
+    fun getBroadConsultationRequest(
+        consultation_request_id: String,
+        onSuccess: (consultationRequest: ConsultationRequestVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getDoctorByEmail( email : String,
+                          onSuccess: () -> Unit,
+                          onError: (String) -> Unit)
+
+    fun getDoctorByEmailFromDB(email: String) : LiveData<DoctorVO>
 
 
 }

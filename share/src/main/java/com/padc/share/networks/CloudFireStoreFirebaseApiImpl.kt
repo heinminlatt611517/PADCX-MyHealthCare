@@ -54,6 +54,33 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
 
     }
 
+    override fun getDoctorByEmail(
+        email: String,
+        onSuccess: (doctorVO: DoctorVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection("doctors")
+            .whereEqualTo("email", email)
+            .addSnapshotListener { value, error ->
+                error?.let {
+                    onFailure(it.message ?: "Please check connection")
+                } ?: run {
+                    val list: MutableList<DoctorVO> = arrayListOf()
+
+                    val result = value?.documents ?: arrayListOf()
+
+                    for (document in result) {
+                        val hashmap = document.data
+                        hashmap?.put("id", document.id.toString())
+                        val Data = Gson().toJson(hashmap)
+                        val docsData = Gson().fromJson<DoctorVO>(Data, DoctorVO::class.java)
+                        list.add(docsData)
+                    }
+                    onSuccess(list[0])
+                }
+            }
+    }
+
     override fun getPatient(
         email: String,
         onSuccess: (patients: PatientVO) -> Unit,
@@ -104,7 +131,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
     ) {
 
         database.collection("doctors")
-            .document(doctors.dr_id)
+            .document(doctors.id)
             .set(doctors)
             .addOnSuccessListener {
                 Log.d("Success", "Successfully added grocery")
@@ -123,28 +150,19 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
     ) {
 
         database.collection("specialities")
-            .addSnapshotListener { value, error ->
-                error?.let {
-                    onFailure(it.message ?: "Please check connection")
-                } ?: run {
-
-                    val specialityList: MutableList<SpecialitiesVO> = arrayListOf()
-
-                    val result = value?.documents ?: arrayListOf()
-
-                    for (document in result) {
-                        val data = document.data
-                        var speciality = SpecialitiesVO()
-                        speciality.sp_id = data?.get("id") as String
-                        speciality.name = data["name"] as String
-                        speciality.photo = data["photo"] as String
-
-                        specialityList.add(speciality)
-                    }
-
-                    onSuccess(specialityList)
+            .get()
+            .addOnSuccessListener { result ->
+                val list: MutableList<SpecialitiesVO> = arrayListOf()
+                for (document in result) {
+                    val hashmap = document.data
+                    hashmap?.put("id", document.id.toString())
+                    val Data = Gson().toJson(hashmap)
+                    val docsData = Gson().fromJson<SpecialitiesVO>(Data, SpecialitiesVO::class.java)
+                    list.add(docsData)
                 }
+                onSuccess(list)
             }
+
 
     }
 
@@ -261,14 +279,14 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         onFailure: (String) -> Unit
     ) {
         val recentDoctorMap = hashMapOf(
-            "id" to doctorVO.dr_id,
+            "id" to doctorVO.id,
             "name" to doctorVO.name,
             "speciality_name" to doctorVO.speciality
         )
         database.collection("patients")
             .document(patientID)
             .collection("recent_constulation_doctors")
-            .document(doctorVO.dr_id)
+            .document(doctorVO.id)
             .set(recentDoctorMap)
             .addOnSuccessListener { Log.d("Success", "Successfully added patient") }
             .addOnFailureListener { Log.d("Failure", "Failed to add patient") }
@@ -465,7 +483,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             .addOnFailureListener { Log.d("Failure", "Failed") }
 
         database.collection("patients")
-            .document(doctorVO.dr_id)
+            .document(doctorVO.id)
             .collection("recent_constulation_doctors")
             .add(doctorVO)
             .addOnSuccessListener { Log.d("Success", "Successfully ") }
@@ -539,9 +557,9 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             }
         var dataRequest = RequestFCM(
             data = (
-                    Data("", patientVO.id, "", "Title", 0, "")
+                    Data("", patientVO.id, "", "Title", 0, id,"" )
                     ),
-            to = "cVHQVCN7Rp25hCFX4HrDOr:APA91bFNZxb237VR5TDs3FDqIsQn51zSuDXt1gK_hVFXt6sUqD4O1J8JH39-hU5rRJOyzpQ9FfXRIF1_ExhvyOijVNfnPS_e-_HC-P124uQeY0FV2pr9RweEhHtxwunTHqdCYCqe3DNh"
+            to = "fZiHASS0SnCzz_uZipQn9o:APA91bEQStVM08atjWS6-oK7vUmGBbwkS_-OVB2_7pPYzHTD-zCAMBx9-88bzLm1pVKq6d35IzOamsPrY0OWX04fTh6nO4RFXPSjBT-PrEJwWXJXQZnEYA98CXhS4MLj3h89wbfPrGqX"
         )
 
         mPatientModel.sendNotification(dataRequest, onSuccess, onFailure)

@@ -87,4 +87,12 @@
     <string name="dummy_text_consulation_request">ပါမောကွ  ကြီးသည် UK မှ ဂုဏ်ထူးဆောင် မဟာ ပါရ၈ူဘွဲ့ကို ရရှိထားပြီး ယခုအချိန်တွင် စစ်တွေ မြို့နယ် ဆေး ရုံ ကြီးမှာ တာဝန်ယူကုသပေးနေပါသည်</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="register_form">အကောင့် အသစ်ပြုလုပ်ရန်</string>
+    <string name="email_form">အီးမေးလ် လိပ်စာ</string>
+    <string name="email_hint">အီးမေးလ် လိပ်စာ ရိုက်ထည့်ပါ</string>
+    <string name="password">စကားဝှက်</string>
+    <string name="password_hint">စကားဝှက် ရိုက်ထည့်ပါ</string>
+    <string name="username">အမည်</string>
+    <string name="phone">ဖုန်းနံပါတ်ထည့်ပါ</string>
 </resources>

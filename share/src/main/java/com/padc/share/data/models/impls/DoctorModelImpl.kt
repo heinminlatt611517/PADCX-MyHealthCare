@@ -1,8 +1,10 @@
 package com.padc.share.data.models.impls
 
 import android.graphics.Bitmap
+import androidx.lifecycle.LiveData
 import com.padc.share.data.models.BaseModel
 import com.padc.share.data.models.DoctorModel
+import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.networks.CloudFireStoreFirebaseApiImpl
@@ -24,16 +26,20 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
     }
 
     override fun registerNewDoctor(
-        email: String,
-        password: String,
-        userName: String,
+        doctorVO: DoctorVO,
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-       mAuthManager.register(email,password,userName,onSuccess= {
-           mFirebaseApi.addNewDoctor(DoctorVO("",userName,email),onSuccess ={},onFailure = {})
-       },onFailure = {})
+
+        mFirebaseApi.addNewDoctor(
+            doctorVO,
+            onSuccess = {
+                onSuccess()
+            },
+            onFailure = { onFailure(it) })
     }
+
+
 
 
     override fun getDoctorFromFirebaseAndSaveToDatabase(
@@ -53,6 +59,30 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         onFailure: (String) -> Unit
     ) {
         mFirebaseApi.getPatientByID(patientID,onSuccess,onFailure)
+    }
+
+    override fun getBroadConsultationRequest(
+        consultation_request_id: String,
+        onSuccess: (consultationRequest: ConsultationRequestVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        PatientModelImpl.mFirebaseApi.getBroadConsultationRequest(consultation_request_id,onSuccess,onFailure)
+    }
+
+    override fun getDoctorByEmail(
+        email: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mFirebaseApi.getDoctorByEmail(email,
+            onSuccess = {
+                mTheDB.doctorDao().deleteAllDoctorData()
+                mTheDB.doctorDao().insertNewDoctor(it)
+            }, onFailure = { onError(it) })
+    }
+
+    override fun getDoctorByEmailFromDB(email: String): LiveData<DoctorVO> {
+        return mTheDB.doctorDao().getAllDoctorDataByEmail(email)
     }
 
 

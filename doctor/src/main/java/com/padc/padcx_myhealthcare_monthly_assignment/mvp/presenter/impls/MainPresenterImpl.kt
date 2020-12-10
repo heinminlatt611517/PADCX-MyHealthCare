@@ -7,14 +7,15 @@ import com.padc.share.data.models.DoctorModel
 import com.padc.share.data.models.impls.DoctorModelImpl
 import com.padc.share.mvp.presenter.AbstractBasePresenter
 
-class MainPresenterImpl : MainPresenter,AbstractBasePresenter<MainView>() {
-    private val mDoctorModel : DoctorModel = DoctorModelImpl
+class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
+    private val mDoctorModel: DoctorModel = DoctorModelImpl
 
-    override fun onUiReady(lifecycleOwner: LifecycleOwner,patientID : String) {
-        if (patientID != "null")
-            mDoctorModel.getPatientByID(patientID,onSuccess = {
+    override fun onUiReady(lifecycleOwner: LifecycleOwner, requestID: String) {
+        if (requestID != "null") {
+            mDoctorModel.getBroadConsultationRequest(requestID, onSuccess = {
                 mView?.displayPatientData(it)
-            },onFailure = {})
+            }, onFailure = {})
+        }
 
     }
 
@@ -23,7 +24,7 @@ class MainPresenterImpl : MainPresenter,AbstractBasePresenter<MainView>() {
     }
 
     override fun onTapAccept() {
-
+        mView?.navigateToPatientCaseSummary()
     }
 
 

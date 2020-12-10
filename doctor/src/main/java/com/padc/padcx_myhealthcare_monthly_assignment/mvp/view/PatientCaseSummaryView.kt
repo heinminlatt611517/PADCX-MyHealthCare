@@ -4,8 +4,8 @@ import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.mvp.view.BaseView
 
-interface MainView : BaseView {
-  fun showPatientDialog(patientVO: PatientVO)
-  fun displayPatientData(consultationRequestVO: ConsultationRequestVO)
-  fun navigateToPatientCaseSummary()
+interface PatientCaseSummaryView : BaseView {
+
+    fun displayPatientData(consultationRequestVO: ConsultationRequestVO)
+
 }
