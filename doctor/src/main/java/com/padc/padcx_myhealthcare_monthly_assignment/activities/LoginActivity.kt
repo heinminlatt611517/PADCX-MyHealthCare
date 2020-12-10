@@ -67,7 +67,7 @@ class LoginActivity : BaseActivity() ,LoginView{
         SessionManager.doctor_bigraphy = doctorVO.biography
         this.finish()
 
-        startActivity(MainActivity.newIntent(this,""))
+        startActivity(MainActivity.newIntent(this,"null"))
     }
 
     override fun showErrorMessage(errorMessage: String) {

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -19,10 +20,24 @@ class DoctorFCMService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
-        val body = remoteMessage.data["body"]
-        val title = remoteMessage.data["title"]
-        val requestID = remoteMessage.data["consultationRequestID"]
-        showNotification(body, title,requestID)
+
+
+        remoteMessage !! .data.let {
+            if (remoteMessage.data.isNotEmpty()){
+                val body = remoteMessage.data["body"]
+                val title = remoteMessage.data["title"]
+                val requestID = remoteMessage.data["consultationRequestID"]
+                Log . d ("notiStatus", "recieve noti")
+
+                showNotification(body, title,requestID)
+            }
+        }
+
+
+    }
+
+    override fun onNewToken(p0: String) {
+        super.onNewToken(p0)
     }
 
     private fun showNotification(body: String?, title: String?,requestID : String?) {

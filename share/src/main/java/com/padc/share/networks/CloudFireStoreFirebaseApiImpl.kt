@@ -61,23 +61,17 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
     ) {
         database.collection("doctors")
             .whereEqualTo("email", email)
-            .addSnapshotListener { value, error ->
-                error?.let {
-                    onFailure(it.message ?: "Please check connection")
-                } ?: run {
-                    val list: MutableList<DoctorVO> = arrayListOf()
-
-                    val result = value?.documents ?: arrayListOf()
-
-                    for (document in result) {
-                        val hashmap = document.data
-                        hashmap?.put("id", document.id.toString())
-                        val Data = Gson().toJson(hashmap)
-                        val docsData = Gson().fromJson<DoctorVO>(Data, DoctorVO::class.java)
-                        list.add(docsData)
-                    }
-                    onSuccess(list[0])
+            .get()
+            .addOnSuccessListener { result ->
+                val list: MutableList<DoctorVO> = arrayListOf()
+                for (document in result) {
+                    val hashmap = document.data
+                    hashmap?.put("id", document.id.toString())
+                    val Data = Gson().toJson(hashmap)
+                    val docsData = Gson().fromJson<DoctorVO>(Data, DoctorVO::class.java)
+                    list.add(docsData)
                 }
+                onSuccess(list[0])
             }
     }
 
@@ -559,7 +553,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             data = (
                     Data("", patientVO.id, "", "Title", 0, id,"" )
                     ),
-            to = "fZiHASS0SnCzz_uZipQn9o:APA91bEQStVM08atjWS6-oK7vUmGBbwkS_-OVB2_7pPYzHTD-zCAMBx9-88bzLm1pVKq6d35IzOamsPrY0OWX04fTh6nO4RFXPSjBT-PrEJwWXJXQZnEYA98CXhS4MLj3h89wbfPrGqX"
+            to = "cDpxbsPHQyqLkZkC3C_FDI:APA91bEyykJd1hLnBJnQ2NczlMLCYv7Sj2dMlb9aEwHXtAkUukc9pVRivr4WdKmLps5Fzi6YcMbYC6TQM_GUv8mwOBmioWFoH4Qx9GQohvgjsa6ATr2OP6KRZorxS7SbO_HWtmFwdUwG"
         )
 
         mPatientModel.sendNotification(dataRequest, onSuccess, onFailure)

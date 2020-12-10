@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.padc.padcx_myhealthcare_monthly_assignment.R
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.RegisterPresenter
@@ -27,7 +28,7 @@ class RegisterActivity : BaseActivity() ,RegisterView{
 
 
     private lateinit var mPresenter : RegisterPresenter
-    private lateinit var token : String
+    private lateinit var deviceToken : String
     private var specialityName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,17 +59,26 @@ class RegisterActivity : BaseActivity() ,RegisterView{
 
     private fun setUpActionListener() {
 
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
-            Log.d("fbToken", it.token)
-            token =it.token
-        }
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("TOKEN", "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                val token = task.result?.token
+                val msg = "token: $token"
+                Log.d("TOKEN", msg)
+
+                deviceToken = token.toString()
+            })
 
         btnRegister.setOnClickListener {
             mPresenter.onTapRegister(
                 etUserName.text.toString(),
                 etEmail.text.toString(),
                 etPassword.text.toString(),
-                token,
+                deviceToken,
                 specialityName.toString(),
                 etPhone.text.toString(),
                 et_degree.text.toString()

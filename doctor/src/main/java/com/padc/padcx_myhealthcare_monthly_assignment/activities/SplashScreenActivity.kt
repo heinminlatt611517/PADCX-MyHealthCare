@@ -31,7 +31,7 @@ class SplashScreenActivity :BaseActivity(){
             if(!SessionManager.login_status) {
                 startActivity(LoginActivity.newIntent(this))
             }else{
-                startActivity(MainActivity.newIntent(this,""))
+                startActivity(MainActivity.newIntent(this,"null"))
             }
             finish()
         },1800)
