@@ -31,8 +31,9 @@ abstract class BaseModel {
         val retrofit = Retrofit.Builder()
             .baseUrl(FIREBASE_BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+
             .build()
 
 

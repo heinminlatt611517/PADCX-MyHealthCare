@@ -18,12 +18,11 @@
         android:gravity="center"
         android:layout_margin="5dp"
         android:orientation="horizontal">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:id="@+id/img_speciality"
-            android:src="@drawable/ic_baseline_account_circle_24"
-            android:scaleType="fitXY"
+            android:src="@drawable/doctor_img"
             android:layout_margin="5dp"
             android:padding="@dimen/margin_card_medium"/>
         <TextView

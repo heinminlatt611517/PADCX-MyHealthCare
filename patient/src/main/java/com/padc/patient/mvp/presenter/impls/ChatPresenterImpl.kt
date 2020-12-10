@@ -8,6 +8,7 @@ import com.padc.share.data.models.PatientModel
 import com.padc.share.data.models.impls.PatientModelImpl
 import com.padc.share.data.vos.ChatMessageVO
 import com.padc.share.mvp.presenter.AbstractBasePresenter
+import com.padc.share.utils.DateUtils
 
 class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
 
@@ -21,7 +22,8 @@ class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
             mView?.showErrorMessage(it)
         })
 
-        mPatientModel.getAllChatMessage("4317dd50-3a0f-11eb-936d-05c256064aa7", onSuccess = {
+        mPatientModel.getAllChatMessage("4317dd50-3a0f-11eb-936d-05c256064aa7",
+             onSuccess = {
             mView?.displayChatMessage(it)
         }, onFailure = {
             mView?.showErrorMessage(it)
@@ -31,7 +33,8 @@ class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
     }
 
     override fun onTapSend(consultationID: String, message: ChatMessageVO) {
-        mPatientModel.sendMessage(consultationID, message, onSuccess = {}, onFailure = {})
+        mPatientModel.sendMessage(consultationID, message, onSuccess = {
+        }, onFailure = {})
     }
 
     override fun onTapSeeMore() {

@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import com.padc.share.data.models.BaseModel
 import com.padc.share.data.models.DoctorModel
 import com.padc.share.data.vos.DoctorVO
+import com.padc.share.data.vos.PatientVO
 import com.padc.share.networks.CloudFireStoreFirebaseApiImpl
 import com.padc.share.networks.FirebaseApi
 import com.padc.share.networks.auth.AuthManager
@@ -45,5 +46,14 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
 
         })
     }
+
+    override fun getPatientByID(
+        patientID: String,
+        onSuccess: (patientVO: PatientVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getPatientByID(patientID,onSuccess,onFailure)
+    }
+
 
 }

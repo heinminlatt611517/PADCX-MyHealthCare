@@ -21,4 +21,12 @@ interface DoctorModel {
     )
 
     fun getDoctorFromFirebaseAndSaveToDatabase(onSuccess: (doctorList : List<DoctorVO>) -> Unit,onFailure: (String) -> Unit)
+
+    fun getPatientByID(
+        patientID: String,
+        onSuccess: (patientVO: PatientVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+
 }

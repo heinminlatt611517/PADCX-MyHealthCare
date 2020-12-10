@@ -25,4 +25,5 @@ abstract class BaseRecyclerAdapter<T : BaseViewHolder<W>,W> : RecyclerView.Adapt
         notifyDataSetChanged()
     }
 
+
 }

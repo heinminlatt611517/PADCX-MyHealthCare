@@ -15,12 +15,11 @@
         android:padding="5dp"
         android:layout_margin="5dp"
         android:orientation="vertical">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:id="@+id/img_doctor_profile"
             android:src="@drawable/ic_baseline_info_24"
-            android:scaleType="fitXY"
             android:padding="@dimen/margin_card_medium"/>
         <TextView
             android:layout_width="match_parent"

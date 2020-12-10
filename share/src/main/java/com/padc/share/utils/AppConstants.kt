@@ -2,8 +2,11 @@ package com.padc.share.utils
 
 const val DATABASE_NAME="MyHealthCare.DB"
 
-const val FIREBASE_BASE_URL ="https://fcm.googleapis.com/fcm/send/"
+const val FIREBASE_BASE_URL ="https://fcm.googleapis.com/"
 
+const val   PARAM_SEND ="/send"
+
+const val FIREBASE_SERVER_KEY = "AAAAcRawGgs:APA91bHZOlFlEKec7T7Ujos2mzqGRLycHFTSxoMETEEepnWtEICrHWcAfgSQMue2CNQWhjxlqKgztK3zKaB80wREeekYTFBDvltYd23jLzRKbWcViceRw88V1FPF558amqPmpoqRfacF"
 
 //Share Perfrenence for patient
 const val sharePreferencePatient  = "patient"

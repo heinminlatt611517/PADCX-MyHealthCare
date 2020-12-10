@@ -33,10 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:scaleType="fitXY"
                 android:layout_margin="@dimen/margin_small"
                 android:src="@drawable/doctor_img"
                 android:id="@+id/img_userprofile"/>

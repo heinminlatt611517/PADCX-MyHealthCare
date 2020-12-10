@@ -4,12 +4,16 @@ import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import com.padc.share.data.vos.*
 import com.padc.share.networks.FirebaseApi
+import com.padc.share.networks.RequestFCMBody.RequestFCM
 import com.padc.share.networks.auth.AuthManager
 
 interface PatientModel {
 
     var mFirebaseApi: FirebaseApi
     var mAuthManager: AuthManager
+
+
+    fun sendNotification(data: RequestFCM, onSuccess: () -> Unit, onFailure: (String) -> Unit)
 
     fun uploadPhotoToFirebaseStorage(
         image: Bitmap,
@@ -87,8 +91,8 @@ interface PatientModel {
     )
 
     fun getBroadConsultationRequest(
-        consultation_request_id : String,
-        onSuccess: (consultationRequest : ConsultationRequestVO) -> Unit,
+        consultation_request_id: String,
+        onSuccess: (consultationRequest: ConsultationRequestVO) -> Unit,
         onFailure: (String) -> Unit
     )
 }

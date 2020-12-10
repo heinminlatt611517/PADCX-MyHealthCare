@@ -1,14 +1,17 @@
 package com.padc.share.data.models.impls
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.padc.share.data.models.BaseModel
 import com.padc.share.data.models.PatientModel
 import com.padc.share.data.vos.*
 import com.padc.share.networks.CloudFireStoreFirebaseApiImpl
 import com.padc.share.networks.FirebaseApi
+import com.padc.share.networks.RequestFCMBody.RequestFCM
 import com.padc.share.networks.auth.AuthManager
 import com.padc.share.networks.auth.FirebaseAuthManager
+import com.padc.share.utils.FIREBASE_SERVER_KEY
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.toObservable
 import io.reactivex.schedulers.Schedulers
@@ -17,6 +20,14 @@ object PatientModelImpl : PatientModel, BaseModel() {
     override var mFirebaseApi: FirebaseApi = CloudFireStoreFirebaseApiImpl
     override var mAuthManager: AuthManager = FirebaseAuthManager
 
+    override fun sendNotification(data: RequestFCM,onSuccess: () -> Unit,onFailure: (String) -> Unit) {
+        myHealthCareApi.sendNotificationToDoctorByDeviceID(data).
+                subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                Log.d("Notification",it.toString())
+            }
+    }
 
     override fun uploadPhotoToFirebaseStorage(
             image: Bitmap,

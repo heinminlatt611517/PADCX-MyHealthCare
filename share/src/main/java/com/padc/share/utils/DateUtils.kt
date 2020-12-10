@@ -15,4 +15,8 @@ class DateUtils
         val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
         return simpleDateFormat.format(Date())
     }
+
+    fun getCurrentTime() : String{
+       return getCurrentTime()
+   }
 }

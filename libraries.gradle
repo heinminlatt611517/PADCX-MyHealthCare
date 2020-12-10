@@ -35,6 +35,7 @@ ext {
     mmDetectVersion = "1.02"
     stepperIndicatorVersion = "1.0.7"
     mmTextVersion = "1.5"
+    circleImageVersion = "3.1.0"
 
     libraries = [
             ktx                     : "androidx.core:core-ktx:$ktxVersion",
@@ -96,7 +97,8 @@ ext {
             mmdetect                : "com.github.mgkaung692018:myanmar_font_detect:$mmDetectVersion",
             firebase_cloud_messaging : "com.google.firebase:firebase-messaging:$fcm_version",
             stepperIndicator        :  "com.github.badoualy:stepper-indicator:$stepperIndicatorVersion",
-            mmtextview : "org.mmtextview:mmtextview:$mmTextVersion"
+            mmtextview : "org.mmtextview:mmtextview:$mmTextVersion",
+            circleImageView : "de.hdodenhof:circleimageview:$circleImageVersion"
 
     ]
 }
