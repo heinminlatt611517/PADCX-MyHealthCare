@@ -19,6 +19,6 @@ class PatientCaseSummaryPresenterImpl : PatientCaseSummaryPresenter,AbstractBase
     }
 
     override fun onTapStartConsultation() {
-
+       mView?.navigateToChatScreen()
     }
 }

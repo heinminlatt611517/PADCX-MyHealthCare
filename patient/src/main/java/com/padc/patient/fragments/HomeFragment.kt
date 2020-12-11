@@ -148,7 +148,7 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun navigateToChatScreen() {
-        startActivity(context?.let { ChatActivity.newIntent(it) })
+        startActivity(context?.let { ChatActivity.newIntent(it,"") })
     }
 
     override fun showErrorMessage(errorMessage: String) {

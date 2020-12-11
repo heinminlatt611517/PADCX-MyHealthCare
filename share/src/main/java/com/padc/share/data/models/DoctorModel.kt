@@ -2,6 +2,7 @@ package com.padc.share.data.models
 
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
+import com.padc.share.data.vos.ChatMessageVO
 import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
@@ -35,6 +36,19 @@ interface DoctorModel {
                           onError: (String) -> Unit)
 
     fun getDoctorByEmailFromDB(email: String) : LiveData<DoctorVO>
+
+    fun getAllChatMessage(
+        consultationID: String,
+        onSuccess: (messages: List<ChatMessageVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun sendMessage(
+        consultationChatId: String,
+        messageVO: ChatMessageVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    )
 
 
 }

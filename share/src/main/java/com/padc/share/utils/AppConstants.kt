@@ -40,3 +40,4 @@ const val sharePreferenceDoctorSpecialityName = "doctor_speciality_name"
 const val sharePreferenceDoctorDegree  = "doctor_degree"
 const val sharePreferenceDoctorBiography  = "doctor_biography"
 
+

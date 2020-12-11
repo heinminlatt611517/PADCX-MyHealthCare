@@ -23,10 +23,10 @@ class PatientCaseSummaryActivity : BaseActivity(),PatientCaseSummaryView {
     companion object {
 
         private const val ID_EXTRA = "ID_EXTRA"
-        fun newIntent(context: Context, patientID : String) : Intent {
+        fun newIntent(context: Context, requestID : String) : Intent {
             val intent = Intent(context,
                 PatientCaseSummaryActivity::class.java)
-            intent.putExtra(ID_EXTRA,patientID)
+            intent.putExtra(ID_EXTRA,requestID)
             return intent
         }
 
@@ -49,7 +49,7 @@ class PatientCaseSummaryActivity : BaseActivity(),PatientCaseSummaryView {
 
     private fun setUpActionListener() {
         btn_start_consultation.setOnClickListener {
-
+           mPresenter.onTapStartConsultation()
         }
     }
 
@@ -72,6 +72,10 @@ class PatientCaseSummaryActivity : BaseActivity(),PatientCaseSummaryView {
 
         bindRequestPatientData(consultationRequestVO)
 
+    }
+
+    override fun navigateToChatScreen() {
+        startActivity(ChatActivity.newIntent(this,"",intent.getStringExtra(ID_EXTRA).toString()))
     }
 
     private fun bindRequestPatientData(consultationRequestVO: ConsultationRequestVO) {

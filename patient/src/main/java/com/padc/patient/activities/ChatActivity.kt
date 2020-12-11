@@ -29,9 +29,16 @@ class ChatActivity : BaseActivity(), ChatView {
 
 
     companion object {
-        fun newIntent(context: Context): Intent {
-            return Intent(context, ChatActivity::class.java)
+        const val PARAM_CONSULTATION_CHAT_ID = " chat id"
+        fun newIntent(
+            context: Context,
+            consultation_chat_id : String
+        ) : Intent {
+            val intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra(PARAM_CONSULTATION_CHAT_ID, consultation_chat_id)
+            return intent
         }
+
     }
 
     private lateinit var mChatPresenter: ChatPresenter
@@ -62,8 +69,8 @@ class ChatActivity : BaseActivity(), ChatView {
     }
 
     private fun setUpActionsListener() {
-        iv_sendText.setOnClickListener {
-            mChatPresenter.onTapSend("", ChatMessageVO())
+        iv_attach.setOnClickListener {
+            mChatPresenter.onTapAttach()
         }
 
         iv_sendText.setOnClickListener {
@@ -133,7 +140,7 @@ class ChatActivity : BaseActivity(), ChatView {
     }
 
     override fun showErrorMessage(errorMessage: String) {
-
+       showErrorMessage(errorMessage)
     }
 
     override fun getLifeCycleOwner(): LifecycleOwner = this

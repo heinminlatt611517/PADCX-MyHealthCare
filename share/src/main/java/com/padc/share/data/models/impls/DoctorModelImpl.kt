@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import com.padc.share.data.models.BaseModel
 import com.padc.share.data.models.DoctorModel
+import com.padc.share.data.vos.ChatMessageVO
 import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
@@ -83,6 +84,27 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
 
     override fun getDoctorByEmailFromDB(email: String): LiveData<DoctorVO> {
         return mTheDB.doctorDao().getAllDoctorDataByEmail(email)
+    }
+
+    override fun getAllChatMessage(
+        consultationID: String,
+        onSuccess: (messages: List<ChatMessageVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        PatientModelImpl.mFirebaseApi.getAllChatMessage(consultationID,onSuccess,onFailure)
+    }
+
+    override fun sendMessage(
+        consultationChatId: String,
+        messageVO: ChatMessageVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        PatientModelImpl.mFirebaseApi.sendMessage(consultationChatId,onSuccess = {
+            onSuccess()
+        },onFailure = {
+            onFailure(it)
+        },chatMessageVO = messageVO)
     }
 
 
