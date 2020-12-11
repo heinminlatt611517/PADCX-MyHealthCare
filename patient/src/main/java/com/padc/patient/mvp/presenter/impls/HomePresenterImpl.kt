@@ -1,6 +1,8 @@
 package com.padc.patient.mvp.presenter.impls
 
 
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.padc.patient.activities.CaseSummaryActivity
@@ -11,6 +13,7 @@ import com.padc.patient.mvp.view.HomeView
 import com.padc.patient.utils.SessionManager
 import com.padc.share.data.models.PatientModel
 import com.padc.share.data.models.impls.PatientModelImpl
+import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
 import com.padc.share.mvp.presenter.AbstractBasePresenter
 
@@ -28,7 +31,7 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
                 })
 
 
-//
+
         mPatientModel.getRecentDoctorLists(SessionManager.patient_id.toString(),
                 onSuccess = {
                     mView?.displayRecentDoctorLists(it as ArrayList<DoctorVO>)
@@ -37,6 +40,16 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
                     mView?.showErrorMessage("Fail to load recent doctor lists!")
                 })
 
+
+        mPatientModel.getConsultationAccepts(SessionManager.patient_id.toString(), onSuccess = {}, onError = {})
+
+        mPatientModel.getConsultationAcceptsFromDB()
+            .observe(lifecycleOwner, Observer {
+                var data =it.filter{ it ->
+                    it.consultation_id.toString().isNotEmpty()
+                }
+                mView?.displayConsultationRequestList(data)
+            })
 
 
     }
@@ -72,6 +85,15 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
     }
 
+    override fun onCompleteStatusType(
+        context: Context,
+        consultation_chat_id: String,
+        consultationRequestVO: ConsultationRequestVO
+    ) {
+        mPatientModel.joinedChatRoom(consultation_chat_id,consultationRequestVO,
+            onSuccess = {}, onError = {})
+    }
+
     override fun onTapRecentDoctorItem(doctorID: String) {
 
     }
@@ -80,11 +102,12 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         mView?.showConfirmDialog(specialitiesID)
     }
 
-    override fun onTapStartConsultation() {
-
-        mView?.navigateToChatScreen()
-
+    override fun onTapStartConsultation(
+        consultationChatId: String,
+        consultationRequestVO: ConsultationRequestVO
+    ) {
+        Log.d("ConsultationId",consultationChatId)
+        mView?.navigateToChatScreen(consultationChatId , consultationRequestVO)
     }
-
 
 }

@@ -65,13 +65,6 @@ class PatientDialogFragment : DialogFragment() {
     }
 
     private fun setUpActionsListener() {
-        btn_skip.setOnClickListener {
-            mMainPresenter.onTapSkip()
-        }
-
-        btn_accept.setOnClickListener {
-            mMainPresenter.onTapAccept()
-        }
     }
 
     private fun setUpPresenter() {

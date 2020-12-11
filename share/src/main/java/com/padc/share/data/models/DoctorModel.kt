@@ -2,10 +2,7 @@ package com.padc.share.data.models
 
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
-import com.padc.share.data.vos.ChatMessageVO
-import com.padc.share.data.vos.ConsultationRequestVO
-import com.padc.share.data.vos.DoctorVO
-import com.padc.share.data.vos.PatientVO
+import com.padc.share.data.vos.*
 import com.padc.share.networks.FirebaseApi
 import com.padc.share.networks.auth.AuthManager
 
@@ -50,5 +47,40 @@ interface DoctorModel {
         onFailure: (String) -> Unit
     )
 
+
+    fun startConsultation(
+        consultationId: String,
+        dateTime: String,
+        questionAnswerList: List<QuestionAnswerVO>,
+        patientVO: PatientVO,
+        doctorVO: DoctorVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun acceptRequest(
+        status: String,
+        consultationId: String,
+        questionAnswerList: List<QuestionAnswerVO>,
+        patientVO: PatientVO,
+        doctorVO: DoctorVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getConsultedPatient(doctorId: String ,
+                            onSuccess: () -> Unit,
+                            onError: (String) -> Unit)
+
+    fun  getConsultedPatientFromDB(doctorId : String) : LiveData<List<ConsultedPatientVO>>
+
+    fun getBrodcastConsultationRequestsFromDB(speciality: String) : LiveData<List<ConsultationRequestVO>>
+
+    fun getBrodcastConsultationRequests(speciality: String ,
+                                        onSuccess: () -> Unit,
+                                        onError: (String) -> Unit)
+
+    fun getConsultationByDoctorId(doctorId: String, onSuccess: () -> Unit, onError: (String) -> Unit)
+    fun getConsultationByDoctorIdFromDB(doctorId : String) : LiveData<List<ConsultationChatVO>>
 
 }

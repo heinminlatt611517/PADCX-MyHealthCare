@@ -21,6 +21,7 @@ class SpecialityViewHolder(private val mDelegate : SpecialityDoctorItemDelegate,
             data?.photo?.let{
                 ImageUtils().showImage(itemView.img_speciality,it,  R.drawable.speciality_thumbnail)
             }
+
         }
 
     }

@@ -27,6 +27,7 @@
             android:textStyle="bold"
             android:layout_margin="@dimen/margin_small"
             android:textSize="@dimen/text_regular"
+            android:id="@+id/txt_consulation"
             android:text="@string/consultation_request_message"/>
 
         <LinearLayout
@@ -58,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/margin_small"
-                    android:id="@+id/txt_specialityname"
+                    android:id="@+id/tv_specialityName"
                     android:textSize="12sp"
                     android:text="အရေပြားနှင့် အလှပရေးရာ"/>
             </LinearLayout>
@@ -69,6 +70,7 @@
             android:textColor="@color/black"
             android:maxLines="2"
             android:ellipsize="end"
+            android:id="@+id/txt_doctor_bigoraphy"
             android:textStyle="bold"
             android:layout_margin="@dimen/margin_small"
             android:textSize="12sp"

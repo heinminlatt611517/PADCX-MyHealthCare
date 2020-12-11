@@ -28,7 +28,7 @@ class LoginActivity : BaseActivity() ,LoginView{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        getFirebaseInstanceID()
         setUpPresenter()
         setUpActionListener()
 
@@ -65,9 +65,10 @@ class LoginActivity : BaseActivity() ,LoginView{
         SessionManager.doctor_phone = doctorVO.phone
         SessionManager.doctor_degree = doctorVO.degree
         SessionManager.doctor_bigraphy = doctorVO.biography
-        this.finish()
+
 
         startActivity(MainActivity.newIntent(this,"null"))
+        this.finish()
     }
 
     override fun showErrorMessage(errorMessage: String) {

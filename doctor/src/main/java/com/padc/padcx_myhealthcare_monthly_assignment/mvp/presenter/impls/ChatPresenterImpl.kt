@@ -12,13 +12,13 @@ class ChatPresenterImpl : ChatPresenter,AbstractBasePresenter<ChatView>() {
 
     private val mDoctorModel : DoctorModel = DoctorModelImpl
 
-    override fun onUiReady(lifecycleOwner: LifecycleOwner, consultationID: String,requestID : String) {
-        mDoctorModel.getBroadConsultationRequest(requestID,onSuccess = {
+    override fun onUiReady(lifecycleOwner: LifecycleOwner, consultationID: String) {
+        mDoctorModel.getBroadConsultationRequest(consultationID,onSuccess = {
             mView?.displayPatientRequestData(it)
         },onFailure = {})
 
 
-        mDoctorModel.getAllChatMessage("c08e9900-3b08-11eb-9d22-4d096b6a3638",
+        mDoctorModel.getAllChatMessage(consultationID,
             onSuccess = {
                 mView?.displayChatMessage(it)
             }, onFailure = {

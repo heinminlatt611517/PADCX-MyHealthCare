@@ -2,6 +2,7 @@ package com.padc.patient.mvp.view
 
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
+import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.data.vos.SpecialitiesVO
@@ -15,6 +16,7 @@ interface HomeView : BaseView {
     fun navigateToEmptyCaseSummaryScreen(context: Context,speciality : String)
     fun navigateToCaseSummaryScreen(speciality : String)
     fun displayPatientData(patientVO: PatientVO)
-    fun navigateToChatScreen()
+    fun navigateToChatScreen(consultation_chat_id : String,consultationRequestVO: ConsultationRequestVO)
+    fun displayConsultationRequestList(consultationRequestVO: List<ConsultationRequestVO>)
 
 }

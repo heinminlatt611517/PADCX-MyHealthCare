@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.patient.R
 import com.padc.patient.activities.ChatActivity
+import com.padc.patient.adapters.ConsultationAcceptAdapter
 import com.padc.patient.adapters.RecentDoctorAdapter
 import com.padc.patient.adapters.SpecialityDoctorAdapter
 import com.padc.patient.dialogs.ConfirmDialogFragment
@@ -23,6 +24,7 @@ import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.presenter.impls.HomePresenterImpl
 import com.padc.patient.mvp.view.HomeView
 import com.padc.patient.views.viewPods.ConsultationRequestViewPod
+import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.data.vos.SpecialitiesVO
@@ -34,11 +36,24 @@ private const val PARAM_ID = "PARAM_ID"
 
 class HomeFragment : Fragment(), HomeView {
 
+    companion object {
+        fun newInstance(patientID: String) =
+            HomeFragment().apply {
+                arguments = Bundle().apply {
+                    putString(PARAM_ID, patientID)
+                }
+            }
+
+
+    }
 
     private lateinit var mPresenter : HomePresenter
     private lateinit var mSpecialityAdapter : SpecialityDoctorAdapter
     private lateinit var mRecentDoctorAdapter : RecentDoctorAdapter
     private lateinit var mConsultationRequestViewPod : ConsultationRequestViewPod
+
+    private lateinit var mConsultationAcceptAdapter : ConsultationAcceptAdapter
+
 
     private var patientID : String? = null
 
@@ -72,9 +87,17 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     private fun setUpRecyclerView() {
+
+
+        rv_consultation.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        mConsultationAcceptAdapter = ConsultationAcceptAdapter (mPresenter)
+        rv_consultation.adapter = mConsultationAcceptAdapter
+
+
         rc_recent_doctor.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mRecentDoctorAdapter = RecentDoctorAdapter (mPresenter)
         rc_recent_doctor.adapter = mRecentDoctorAdapter
+
 
         rc_speciality.layoutManager = GridLayoutManager(activity ,2)
         mSpecialityAdapter = SpecialityDoctorAdapter(mPresenter)
@@ -83,7 +106,7 @@ class HomeFragment : Fragment(), HomeView {
 
     private fun setUpViewPods() {
         mConsultationRequestViewPod = vp_consulation_request as ConsultationRequestViewPod
-        mConsultationRequestViewPod.setDelegate(mPresenter)
+
     }
 
     private fun setUpPresenter() {
@@ -91,16 +114,6 @@ class HomeFragment : Fragment(), HomeView {
         mPresenter.initPresenter(this)
     }
 
-    companion object {
-        fun newInstance(patientID: String) =
-                HomeFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(PARAM_ID, patientID)
-                    }
-                }
-
-
-    }
 
     override fun showConsultationRequestDialogFragment() {
 
@@ -147,9 +160,21 @@ class HomeFragment : Fragment(), HomeView {
         Log.d("PatientData",patientVO.name)
     }
 
-    override fun navigateToChatScreen() {
-        startActivity(context?.let { ChatActivity.newIntent(it,"") })
+    override fun navigateToChatScreen(
+        consultation_chat_id: String,
+        consultationRequestVO: ConsultationRequestVO
+    ) {
+        activity?.let{
+            mPresenter.onCompleteStatusType(it,consultation_chat_id,consultationRequestVO)
+            it.startActivity(ChatActivity.newIntent(it, consultation_chat_id))
+        }
     }
+
+    override fun displayConsultationRequestList(consultationRequestVO: List<ConsultationRequestVO>) {
+        Log.d("RequestListSize",consultationRequestVO.size.toString())
+        mConsultationAcceptAdapter.setNewData(consultationRequestVO.toMutableList())
+    }
+
 
     override fun showErrorMessage(errorMessage: String) {
 

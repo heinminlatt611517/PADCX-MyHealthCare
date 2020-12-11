@@ -22,7 +22,7 @@ class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
             mView?.showErrorMessage(it)
         })
 
-        mPatientModel.getAllChatMessage("4317dd50-3a0f-11eb-936d-05c256064aa7",
+        mPatientModel.getAllChatMessage(consultationID,
              onSuccess = {
             mView?.displayChatMessage(it)
         }, onFailure = {

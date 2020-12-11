@@ -29,15 +29,12 @@ class ChatActivity : BaseActivity(), ChatView {
 
     companion object {
         const val PARAM_CONSULTATION_CHAT_ID = " chat id"
-        const val PARAM_CONSULTATION_REQUEST_ID = " chat id"
         fun newIntent(
             context: Context,
-            consultation_chat_id: String,
-            request_id: String
+            consultation_chat_id: String
         ): Intent {
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra(PARAM_CONSULTATION_CHAT_ID, consultation_chat_id)
-            intent.putExtra(PARAM_CONSULTATION_REQUEST_ID, request_id)
             return intent
         }
 
@@ -54,10 +51,7 @@ class ChatActivity : BaseActivity(), ChatView {
         setUpRecyclerView()
         setUpActionsListener()
 
-        mChatPresenter.onUiReady(
-            this, intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
-            intent.getStringExtra(PARAM_CONSULTATION_REQUEST_ID).toString()
-        )
+        mChatPresenter.onUiReady(this, intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString())
 
     }
 
@@ -77,7 +71,7 @@ class ChatActivity : BaseActivity(), ChatView {
         iv_sendText.setOnClickListener {
             if (!ed_text_message.text?.equals("")!!) {
                 mChatPresenter.onTapSend(
-                    "c08e9900-3b08-11eb-9d22-4d096b6a3638",
+                    intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
                     message = ChatMessageVO(
                         UUID.randomUUID().toString(),
                         "", ed_text_message.text.toString(), "",

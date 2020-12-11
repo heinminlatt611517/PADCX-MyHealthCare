@@ -95,4 +95,15 @@ interface PatientModel {
         onSuccess: (consultationRequest: ConsultationRequestVO) -> Unit,
         onFailure: (String) -> Unit
     )
+
+    fun joinedChatRoom(consultation_chat_id: String, consultationRequestVO: ConsultationRequestVO,
+                              onSuccess: () -> Unit,
+                              onError: (String) -> Unit)
+
+    fun  getConsultationAccepts(
+        patientId: String,
+        onSuccess: (List<ConsultationRequestVO>) -> Unit,
+        onError: (String) -> Unit)
+
+    fun  getConsultationAcceptsFromDB() : LiveData<List<ConsultationRequestVO>>
 }

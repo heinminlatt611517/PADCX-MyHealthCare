@@ -4,18 +4,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="speciality_name_list">
-        <item>နှလုံး အထူးကု </item>
-        <item>သွားနှင့် ခံတွင်း </item>
-        <item>အရေပြားနှင့် အလှပရေးရာ </item>
-        <item>နား ၊ နားခေါင်း ၊ လည်ချောင်း </item>
-        <item>အစာအိမ်နှင့် အူလမ်းကြောင်း</item>
-        <item>အသည်းအထူးကု</item>
-        <item>ဦးနှောက်နှင့် အာရုံကြော </item>
-        <item>သားဖွား ၊ မီးယပ် </item>
-        <item>အရိုးအကြော </item>
-        <item>ကလေးကျန်းမာရေး </item>
-        <item>ဓာတ်မှန် </item>
-        <item>ခွဲစိတ် </item>
+        <item>ဦးနှောက်အာရုံကြောအထူးကု</item>
+        <item>အစာအိမ်နဲ့အူလမ်းကြောင်း</item>
+        <item>နှလုံးအထူးကု</item>
+        <item>သွေးရောဂါအထူးကု</item>
+        <item>အရေပြားအထူးကု</item>
+        <item>အရိုးအကြော</item>
+        <item>စိတ်ကျန်းမာရေးအထူးကု</item>
+        <item>သွားဘက်ဆိုင်ရာ</item>
     </string-array>
 
 </resources>

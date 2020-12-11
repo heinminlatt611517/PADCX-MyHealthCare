@@ -97,6 +97,7 @@ interface FirebaseApi {
     fun checkoutMedicine(checkOutVO: CheckOutVO, onSuccess: () -> Unit, onFailure: (String) -> Unit)
 
     fun startConsultation(
+        consulationId: String,
         dateTime: String, questionAnswerList: List<QuestionAnswerVO>,
         patientVO: PatientVO,
         doctorVO: DoctorVO,
@@ -152,8 +153,28 @@ interface FirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun getBroadcastConsultationRequestByPatient(
+        patientId :String,
+        onSuccess: (consulationRequest : List<ConsultationRequestVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
-    fun acceptRequest()
+    fun getBroadcastConsultationRequestBySpeciality(
+        speciality : String,
+        onSuccess: (list : List<ConsultationRequestVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun acceptRequest(
+        status : String,
+        consulationId: String,
+        questionAnswerList: List<QuestionAnswerVO>,
+        patientVO: PatientVO,
+        doctorVO: DoctorVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    )
+
 
     fun getBroadConsultationRequest(
         consulation_request_id: String,
@@ -161,5 +182,10 @@ interface FirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun getConsultatedPatient(doctorId : String,onSuccess: (List<ConsultedPatientVO>) -> Unit,onFailure: (String) -> Unit)
+    fun addConsultatedPatient(doctorId: String ,patientId : String,onSuccess: () -> Unit,onFailure: (String) -> Unit)
 
+    fun startConsultationChatPatient(consulationChatId: String, consultationRequestVO: ConsultationRequestVO ,onSuccess: () -> Unit,onFailure: (String) -> Unit)
+
+    fun getConsulationChatForDoctor(doctorId: String ,onSuccess: (List<ConsultationChatVO>) -> Unit,onFailure: (String) -> Unit)
 }

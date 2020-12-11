@@ -10,8 +10,9 @@ import com.padc.share.utils.DATABASE_NAME
 
 @Database(
     entities = [SpecialitiesVO::class, PatientVO::class, DoctorVO::class,
-        GeneralQuestionTemplateVO::class,SpecialQuestionVO::class,QuestionAnswerVO::class],
-    version = 2,
+        GeneralQuestionTemplateVO::class,SpecialQuestionVO::class,QuestionAnswerVO::class,ConsultationRequestVO::class
+    ,ConsultedPatientVO::class,ConsultationChatVO::class],
+    version = 3,
     exportSchema = false
 )
 
@@ -41,5 +42,8 @@ abstract class MyHealthCareDB : RoomDatabase() {
     abstract fun specialityDao() : SpecialityDao
     abstract fun generalQuestionTemplateDao() : GeneralQuestionTemplateDao
     abstract fun questionAnswerDao(): QuestionAnswerDao
+    abstract fun consultationRequestDao() : ConsultationRequestDao
+    abstract fun consultedPatientDao () : ConsultedPatientDao
+    abstract fun consultationChatDao () : ConsultationChatDao
 
 }

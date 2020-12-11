@@ -55,8 +55,7 @@ class ChatActivity : BaseActivity(), ChatView {
         setUpActionsListener()
         setUpRecyclerView()
 
-        mChatPresenter.onUiReady(this,
-            "1deb148d-0eed-411c-a63f-9d500808cd93")
+        mChatPresenter.onUiReady(this, intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString())
     }
 
     private fun setUpRecyclerView() {
@@ -75,7 +74,7 @@ class ChatActivity : BaseActivity(), ChatView {
 
         iv_sendText.setOnClickListener {
             if (!ed_text_message.text?.equals("")!!) {
-                mChatPresenter.onTapSend("4317dd50-3a0f-11eb-936d-05c256064aa7",
+                mChatPresenter.onTapSend( intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
                         message = ChatMessageVO(UUID.randomUUID().toString(),
                                 "", ed_text_message.text.toString(), "",
                                 SenderTypeVO(UUID.randomUUID().toString(),

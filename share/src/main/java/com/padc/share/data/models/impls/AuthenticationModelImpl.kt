@@ -26,5 +26,13 @@ object AuthenticationModelImpl : AuthenticationModel {
         mAuthManager.register(email,password,userName,onSuccess,onFailure)
     }
 
+    override fun updateProfile(
+        photoUrl: String,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mAuthManager.updateProfile(photoUrl, onSuccess, onFailure)
+    }
+
 
 }

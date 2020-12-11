@@ -171,4 +171,35 @@ object PatientModelImpl : PatientModel, BaseModel() {
         mFirebaseApi.getBroadConsultationRequest(consultation_request_id,onSuccess,onFailure)
     }
 
+    override fun joinedChatRoom(
+        consultation_chat_id: String,
+        consultationRequestVO: ConsultationRequestVO,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mFirebaseApi.startConsultationChatPatient(
+            consultation_chat_id,
+            consultationRequestVO,
+            onSuccess = {}, onFailure =
+            { onError(it) })
+    }
+
+    override fun getConsultationAccepts(
+        patientId: String,
+        onSuccess: (List<ConsultationRequestVO>) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mFirebaseApi.getBroadcastConsultationRequestByPatient(
+            patientId,
+            onSuccess = {
+                mTheDB.consultationRequestDao().deleteAllConsultationRequestData()
+                mTheDB.consultationRequestDao().insertConsultationRequestData(it)
+            }, onFailure =
+            { onError(it) })
+    }
+
+    override fun getConsultationAcceptsFromDB(): LiveData<List<ConsultationRequestVO>> {
+        return mTheDB.consultationRequestDao().getConsultationAcceptData("accept")
+    }
+
 }

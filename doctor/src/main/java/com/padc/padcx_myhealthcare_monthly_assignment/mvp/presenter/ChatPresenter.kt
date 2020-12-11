@@ -7,7 +7,7 @@ import com.padc.share.mvp.presenter.BasePresenter
 
 interface ChatPresenter : BasePresenter<ChatView> {
 
-    fun onUiReady(lifecycleOwner: LifecycleOwner, consultationID: String,requestID : String)
+    fun onUiReady(lifecycleOwner: LifecycleOwner, consultationID: String)
     fun onTapSend(consultationID : String,message : ChatMessageVO)
     fun onTapAttach()
     fun onTapSeeMore()

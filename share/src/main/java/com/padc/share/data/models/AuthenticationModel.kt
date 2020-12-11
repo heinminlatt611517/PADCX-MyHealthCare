@@ -14,6 +14,10 @@ interface AuthenticationModel {
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     )
-
+    fun updateProfile(
+        photoUrl : String,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    )
 
 }

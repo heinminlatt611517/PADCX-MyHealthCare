@@ -4,10 +4,7 @@ import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import com.padc.share.data.models.BaseModel
 import com.padc.share.data.models.DoctorModel
-import com.padc.share.data.vos.ChatMessageVO
-import com.padc.share.data.vos.ConsultationRequestVO
-import com.padc.share.data.vos.DoctorVO
-import com.padc.share.data.vos.PatientVO
+import com.padc.share.data.vos.*
 import com.padc.share.networks.CloudFireStoreFirebaseApiImpl
 import com.padc.share.networks.FirebaseApi
 import com.padc.share.networks.auth.AuthManager
@@ -105,6 +102,81 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         },onFailure = {
             onFailure(it)
         },chatMessageVO = messageVO)
+    }
+
+    override fun startConsultation(
+        consultationId: String,
+        dateTime: String,
+        questionAnswerList: List<QuestionAnswerVO>,
+        patientVO: PatientVO,
+        doctorVO: DoctorVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.startConsultation(consultationId, dateTime, questionAnswerList, patientVO, doctorVO,
+            onSuccess = {}, onFailure = { onFailure(it) })
+    }
+
+    override fun acceptRequest(
+        status: String,
+        consultationId: String,
+        questionAnswerList: List<QuestionAnswerVO>,
+        patientVO: PatientVO,
+        doctorVO: DoctorVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.acceptRequest(status,consultationId,  questionAnswerList, patientVO, doctorVO,
+            onSuccess = {}, onFailure = { onFailure(it) })
+    }
+
+    override fun getConsultedPatient(
+        doctorId: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mFirebaseApi.getConsultatedPatient(doctorId,onSuccess = {
+            mTheDB.consultedPatientDao().deleteConsultedPatient()
+            mTheDB.consultedPatientDao().insertConsultedPatient(it)
+        }, onFailure= {})
+    }
+
+    override fun getConsultedPatientFromDB(doctorId: String): LiveData<List<ConsultedPatientVO>> {
+        return mTheDB.consultedPatientDao().getConsultedPatient()
+    }
+
+    override fun getBrodcastConsultationRequestsFromDB(speciality: String): LiveData<List<ConsultationRequestVO>> {
+        return mTheDB.consultationRequestDao().getAllConsultationRequestDataBySpeciality(speciality)
+    }
+
+    override fun getBrodcastConsultationRequests(
+        speciality: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mFirebaseApi.getBroadcastConsultationRequestBySpeciality(speciality,
+            onSuccess = {
+                mTheDB.consultationRequestDao().deleteAllConsultationRequestData()
+                mTheDB.consultationRequestDao().insertConsultationRequestData(it)
+
+            }, onFailure = { onError(it) })
+    }
+
+    override fun getConsultationByDoctorId(
+        doctorId: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mFirebaseApi.getConsulationChatForDoctor(doctorId,
+            onSuccess = {
+                mTheDB.consultationChatDao().deleteAllConsultationChatData()
+                mTheDB.consultationChatDao().insertConsultationChatData(it)
+
+            }, onFailure = { onError(it) })
+    }
+
+    override fun getConsultationByDoctorIdFromDB(doctorId: String): LiveData<List<ConsultationChatVO>> {
+        return mTheDB.consultationChatDao().getAllConsultationChatDataByDoctorId(doctorId)
     }
 
 

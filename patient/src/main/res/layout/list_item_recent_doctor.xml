@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView android:elevation="@dimen/margin_card_medium"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
+    android:layout_width="140dp"
     app:cardCornerRadius="@dimen/card_cornor_radius"
     app:cardBackgroundColor="@color/white"
     app:cardElevation="@dimen/card_evaluation"
     android:layout_margin="5dp"
-    android:layout_height="220dp"
+    android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -18,8 +18,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:id="@+id/img_doctor_profile"
-            android:src="@drawable/ic_baseline_info_24"
+            android:id="@+id/iv_doctor"
+            android:src="@drawable/doctor_img"
             android:padding="@dimen/margin_card_medium"/>
         <TextView
             android:layout_width="match_parent"
@@ -27,6 +27,7 @@
             android:textColor="@color/black"
             android:layout_margin="@dimen/margin_small"
             android:maxLines="2"
+            android:gravity="center"
             android:ellipsize="end"
             android:id="@+id/tv_doctorName"
             android:textSize="@dimen/text_small"
@@ -38,7 +39,8 @@
             android:layout_margin="@dimen/margin_small"
             android:textSize="@dimen/text_small"
             android:maxLines="2"
-            android:id="@+id/tv_specialityName"
+            android:gravity="center"
+            android:id="@+id/tv_doctor_specialityName"
             android:ellipsize="end"
             android:text="အရေပြားနှင့် အလှပရေးရာ"/>
     </LinearLayout>

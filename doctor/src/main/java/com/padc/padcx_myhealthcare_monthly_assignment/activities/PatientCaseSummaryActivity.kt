@@ -34,22 +34,29 @@ class PatientCaseSummaryActivity : BaseActivity(),PatientCaseSummaryView {
 
     private lateinit var mAdapter : QuestionAnswerAdapter
     private lateinit var mPresenter : PatientCaseSummaryPresenter
+    private lateinit var mConsultationRequestVO: ConsultationRequestVO
+
+    private lateinit var consultation_request_id: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient_case_summary)
 
+        consultation_request_id = intent.getStringExtra(ID_EXTRA).toString()
+
         setUpPresenter()
         setUpRecyclerView()
         setUpActionListener()
 
-        mPresenter.onUiReady(this,intent.getStringExtra(ID_EXTRA).toString())
+        mPresenter.onUiReady(this,consultation_request_id)
 
     }
 
     private fun setUpActionListener() {
         btn_start_consultation.setOnClickListener {
-           mPresenter.onTapStartConsultation()
+            if(mConsultationRequestVO != null) {
+                mPresenter.onTapStartConsultation(mConsultationRequestVO)
+            }
         }
     }
 
@@ -67,15 +74,16 @@ class PatientCaseSummaryActivity : BaseActivity(),PatientCaseSummaryView {
 
     override fun displayPatientData(consultationRequestVO: ConsultationRequestVO) {
         Log.d("PatientData",consultationRequestVO.toString())
-
+        bindRequestPatientData(consultationRequestVO)
+        mConsultationRequestVO = consultationRequestVO
         mAdapter.setNewData(consultationRequestVO.case_summary.toMutableList())
 
-        bindRequestPatientData(consultationRequestVO)
+
 
     }
 
     override fun navigateToChatScreen() {
-        startActivity(ChatActivity.newIntent(this,"",intent.getStringExtra(ID_EXTRA).toString()))
+        startActivity(ChatActivity.newIntent(this,consultation_request_id))
     }
 
     private fun bindRequestPatientData(consultationRequestVO: ConsultationRequestVO) {
@@ -86,10 +94,11 @@ class PatientCaseSummaryActivity : BaseActivity(),PatientCaseSummaryView {
         pweight?.text = consultationRequestVO.patient_info?.weight + " lb"
         pbloodpressure?.text = consultationRequestVO.patient_info?.blood_pressure + " mmHg"
         p_allegir?.text = consultationRequestVO.patient_info?.allergic_reactions
+
     }
 
     override fun showErrorMessage(errorMessage: String) {
-
+       showSnackbar(errorMessage)
     }
 
     override fun getLifeCycleOwner(): LifecycleOwner = this

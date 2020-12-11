@@ -4,7 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.cardview.widget.CardView
 import com.google.android.material.card.MaterialCardView
-import kotlinx.android.synthetic.main.view_pod_consulation_request.view.*
+import kotlinx.android.synthetic.main.item_accept_consulation_request.view.*
+
 
 class ConsultationRequestViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
