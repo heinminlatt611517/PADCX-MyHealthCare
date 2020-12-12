@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.list_item_speciality.view.*
 
 class RecentDoctorViewHolder(private val mDelegate : RecentDoctorItemDelegate,itemView: View) :BaseViewHolder<DoctorVO>(itemView) {
     override fun clickItem(it: View?) {
-        mData?.id?.let { it1 -> mDelegate.onTapRecentDoctorItem(it1) }
+        mData?.let { it1 -> mDelegate.onTapRecentDoctorItem(it1) }
     }
 
     override fun bindData(data: DoctorVO) {

@@ -85,16 +85,16 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
     }
 
-    override fun onCompleteStatusType(
+    override fun onCompleteStatus(
         context: Context,
         consultation_chat_id: String,
         consultationRequestVO: ConsultationRequestVO
     ) {
-        mPatientModel.joinedChatRoom(consultation_chat_id,consultationRequestVO,
+        mPatientModel.navigateToChatRoom(consultation_chat_id,consultationRequestVO,
             onSuccess = {}, onError = {})
     }
 
-    override fun onTapRecentDoctorItem(doctorID: String) {
+    override fun onTapRecentDoctorItem(doctorVO: DoctorVO) {
 
     }
 

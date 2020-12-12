@@ -165,7 +165,7 @@ class HomeFragment : Fragment(), HomeView {
         consultationRequestVO: ConsultationRequestVO
     ) {
         activity?.let{
-            mPresenter.onCompleteStatusType(it,consultation_chat_id,consultationRequestVO)
+            mPresenter.onCompleteStatus(it,consultation_chat_id,consultationRequestVO)
             it.startActivity(ChatActivity.newIntent(it, consultation_chat_id))
         }
     }

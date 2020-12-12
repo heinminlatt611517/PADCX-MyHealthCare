@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FieldValue
 import com.padc.padcx_myhealthcare_monthly_assignment.R
 import com.padc.padcx_myhealthcare_monthly_assignment.adapter.ChatMessageAdapter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.ChatPresenter

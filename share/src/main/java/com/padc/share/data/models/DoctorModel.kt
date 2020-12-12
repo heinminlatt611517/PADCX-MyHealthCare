@@ -83,4 +83,11 @@ interface DoctorModel {
     fun getConsultationByDoctorId(doctorId: String, onSuccess: () -> Unit, onError: (String) -> Unit)
     fun getConsultationByDoctorIdFromDB(doctorId : String) : LiveData<List<ConsultationChatVO>>
 
+
+    fun getMedicineBySpeciality(
+        speciality: String,
+        onSuccess: (medicine: List<MedicineVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
 }

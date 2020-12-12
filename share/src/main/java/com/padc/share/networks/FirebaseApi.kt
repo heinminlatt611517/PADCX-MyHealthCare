@@ -182,8 +182,8 @@ interface FirebaseApi {
         onFailure: (String) -> Unit
     )
 
-    fun getConsultatedPatient(doctorId : String,onSuccess: (List<ConsultedPatientVO>) -> Unit,onFailure: (String) -> Unit)
-    fun addConsultatedPatient(doctorId: String ,patientId : String,onSuccess: () -> Unit,onFailure: (String) -> Unit)
+    fun getConsultationPatient(doctorId : String,onSuccess: (List<ConsultedPatientVO>) -> Unit,onFailure: (String) -> Unit)
+    fun addConsultationPatient(doctorId: String ,patientId : String,onSuccess: () -> Unit,onFailure: (String) -> Unit)
 
     fun startConsultationChatPatient(consulationChatId: String, consultationRequestVO: ConsultationRequestVO ,onSuccess: () -> Unit,onFailure: (String) -> Unit)
 

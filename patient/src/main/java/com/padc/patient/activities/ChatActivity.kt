@@ -1,6 +1,5 @@
 package com.padc.patient.activities
 
-import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -11,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FieldValue
 import com.padc.patient.R
 import com.padc.patient.adapters.ChatMessageAdapter
 import com.padc.patient.mvp.presenter.ChatPresenter
@@ -20,9 +20,7 @@ import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.ChatMessageVO
 import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.SenderTypeVO
-import com.padc.share.utils.DateUtils
 import kotlinx.android.synthetic.main.activity_chat.*
-import java.time.LocalDateTime
 import java.util.*
 
 class ChatActivity : BaseActivity(), ChatView {
@@ -78,7 +76,8 @@ class ChatActivity : BaseActivity(), ChatView {
                         message = ChatMessageVO(UUID.randomUUID().toString(),
                                 "", ed_text_message.text.toString(), "",
                                 SenderTypeVO(UUID.randomUUID().toString(),
-                                        "patient","")))
+                                        "patient","")
+                       ))
                 ed_text_message.text = Editable.Factory.getInstance().newEditable("")
 
             }

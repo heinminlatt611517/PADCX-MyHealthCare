@@ -17,6 +17,7 @@ import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.QuestionAnswerVO
 import com.padc.share.data.vos.SpecialQuestionVO
 import com.padc.share.presistence.db.MyHealthCareDB
+import kotlinx.android.synthetic.main.activity_case_summary_header.*
 import kotlinx.android.synthetic.main.activity_case_summary_special_question.*
 import kotlinx.android.synthetic.main.fragment_home.*
 

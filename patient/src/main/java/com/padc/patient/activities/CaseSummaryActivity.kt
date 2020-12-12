@@ -21,6 +21,7 @@ import com.padc.patient.utils.SessionManager
 import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.PatientVO
 import kotlinx.android.synthetic.main.activity_case_summary.*
+import kotlinx.android.synthetic.main.activity_case_summary_header.*
 import kotlinx.android.synthetic.main.activity_case_summary_special_question.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -51,6 +52,8 @@ class CaseSummaryActivity : BaseActivity(), CaseSummaryView {
         //intent.getStringExtra(ID_EXTRA)?.let { mPresenter.onUIReady(this, it) }
 
         mPresenter.onUIReady(this,SessionManager.patient_id.toString())
+
+
     }
 
     private fun setUpActionsListener() {

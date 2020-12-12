@@ -2,6 +2,12 @@
     <string name="app_name">MyCare-doctor</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_txt_prescription_medicine">ဆေးညွန်းပြီး ​ဆွေး​နွေးမှုကို ပြီးဆုံးမယ်</string>
+    <string name="str_txt_find">ရှာမည်</string>
+    <string name="day">နေ့</string>
+    <string name="number">အ​ရေအတွက်</string>
+    <string name="note">မှတ်ချက်</string>
+    <string name="insert_medicine">ထည့်မယ်</string>
 
     <string-array name="speciality_name_list">
         <item>ဦးနှောက်အာရုံကြောအထူးကု</item>

@@ -135,7 +135,7 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         onSuccess: () -> Unit,
         onError: (String) -> Unit
     ) {
-        mFirebaseApi.getConsultatedPatient(doctorId,onSuccess = {
+        mFirebaseApi.getConsultationPatient(doctorId,onSuccess = {
             mTheDB.consultedPatientDao().deleteConsultedPatient()
             mTheDB.consultedPatientDao().insertConsultedPatient(it)
         }, onFailure= {})
@@ -177,6 +177,14 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
 
     override fun getConsultationByDoctorIdFromDB(doctorId: String): LiveData<List<ConsultationChatVO>> {
         return mTheDB.consultationChatDao().getAllConsultationChatDataByDoctorId(doctorId)
+    }
+
+    override fun getMedicineBySpeciality(
+        speciality: String,
+        onSuccess: (medicine: List<MedicineVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getMedicineBySpeciality(speciality,onSuccess,onFailure)
     }
 
 

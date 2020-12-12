@@ -18,5 +18,5 @@ interface HomePresenter : BasePresenter<HomeView>,RecentDoctorItemDelegate ,Spec
         dialogFragment: ConfirmDialogFragment
     )
 
-    fun onCompleteStatusType(context: Context, consultation_chat_id : String, consultationRequestVO: ConsultationRequestVO)
+    fun onCompleteStatus(context: Context, consultation_chat_id : String, consultationRequestVO: ConsultationRequestVO)
 }

@@ -3,6 +3,8 @@ package com.padc.share.networks
 import android.content.ContentValues
 import android.graphics.Bitmap
 import android.util.Log
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -364,6 +366,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         database.collection("consultation_chat")
             .document(consultationID)
             .collection("chat_message")
+            .orderBy("timestamp")
             .addSnapshotListener { value, error ->
                 error?.let {
                     onFailure(it.message ?: "Please check connection")
@@ -393,6 +396,15 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
+
+        val messasgeMap = hashMapOf(
+            "sendAt" to chatMessageVO.sendAt,
+            "messageText" to chatMessageVO.messageText,
+            "senderType" to chatMessageVO.senderType,
+            "timestamp" to FieldValue.serverTimestamp()
+        )
+
+
         database.collection("consultation_chat")
             .document(consultationID)
             .collection("chat_message")
@@ -540,6 +552,15 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             .set(consultationRequestMap)
             .addOnSuccessListener { Log.d("Success", "Successfully ") }
             .addOnFailureListener { Log.d("Failure", "Failed") }
+
+        var dataRequest = RequestFCM(
+            data = (
+                    Data("", "Direct Request", "", "Title", 0, id,"" )
+                    ),
+            to = doctorVO.deviceID.toString()
+        )
+
+        mPatientModel.sendNotification(dataRequest, onSuccess, onFailure)
     }
 
 
@@ -588,9 +609,9 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
 
         var dataRequest = RequestFCM(
             data = (
-                    Data("", patientVO.id, "", "Title", 0, id,"" )
+                    Data("","Request Doctor By Speciality", "", "Title", 0, id,"" )
                     ),
-            to = "dlP_amPeRB2lZH9q3ph92_:APA91bGLJ_DoAD2jsrU7sqCQ0zkonhuvPpNra5plTM5ieFuyY0o7OVE_5h5pftwDfD9G2sOKrDjdBTKT-_fgjgcGImMZBLiXlzLeUqFO_wjo2hRUU9yIBrAKuACcfA7ZkIND_SC36Z5X"
+            to = "fqOlIX8vSR-hCop6QJgb2y:APA91bFWmyfaLSmEVJkbKuJoJW4dAZD3jUJFSGkr9Dbh2UXPymYJvh2PSaBiASx2pXZon9NR4a2N08GovRUmTSBC418zhfgflHtBZUnF1xCzXAllaHFHu242FIcy8a46wYs6S8tFrB8B"
         )
 
         mPatientModel.sendNotification(dataRequest, onSuccess, onFailure)
@@ -650,6 +671,19 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             })
 
         addAndUpdateRecentDoctor(patientVO.id, doctorVO, onSuccess, onFailure)
+
+        val consulted_patient_id = UUID.randomUUID().toString()
+        val consultedPatientMap = hashMapOf(
+            "id" to consulted_patient_id,
+            "patient_id" to patientVO.id
+        )
+        database.collection("$doctors/${doctorVO.id}/$consulted_patient")
+            .document(consulted_patient_id)
+            .set(consultedPatientMap)
+            .addOnSuccessListener { Log.d("Success", "Successfully ") }
+            .addOnFailureListener { Log.d("Failure", "Failed") }
+
+
 
     }
 
@@ -831,7 +865,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             }
     }
 
-    override fun getConsultatedPatient(
+    override fun getConsultationPatient(
         doctorId: String,
         onSuccess: (List<ConsultedPatientVO>) -> Unit,
         onFailure: (String) -> Unit
@@ -857,7 +891,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             }
     }
 
-    override fun addConsultatedPatient(
+    override fun addConsultationPatient(
         doctorId: String,
         patientId: String,
         onSuccess: () -> Unit,
