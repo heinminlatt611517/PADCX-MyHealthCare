@@ -172,6 +172,8 @@
             android:text="@string/cosultation_request_history"
             android:textSize="14sp"
             android:visibility="gone"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:id="@+id/tv_consultationRecord"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/margin_medium_2"/>
         <androidx.recyclerview.widget.RecyclerView
@@ -180,6 +182,31 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_medium"
             android:id="@+id/rv_consulation_accept"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="visible"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:id="@+id/empty_view"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/no_record_img"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="12sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/grey_900"
+            android:text="ရက်ချိန်းယူမှု မှတ်တမ်းများမရှိ​သေးပါ"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 </LinearLayout>

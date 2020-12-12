@@ -15,12 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginTop="10dp"
             android:layout_width="130dp"
             android:layout_height="140dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/doctor_img"/>
+            android:src="@drawable/img_doctor"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

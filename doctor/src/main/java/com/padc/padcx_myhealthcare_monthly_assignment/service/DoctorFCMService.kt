@@ -13,7 +13,9 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.padc.padcx_myhealthcare_monthly_assignment.activities.LoginActivity
 import com.padc.padcx_myhealthcare_monthly_assignment.activities.MainActivity
+import com.padc.padcx_myhealthcare_monthly_assignment.activities.SplashScreenActivity
 import com.padc.share.R
 
 class DoctorFCMService : FirebaseMessagingService() {
@@ -21,15 +23,14 @@ class DoctorFCMService : FirebaseMessagingService() {
         super.onMessageReceived(remoteMessage)
 
 
-
         remoteMessage !! .data.let {
             if (remoteMessage.data.isNotEmpty()){
                 val body = remoteMessage.data["body"]
                 val title = remoteMessage.data["title"]
-                val requestID = remoteMessage.data["consultationRequestID"]
+               // val requestID = remoteMessage.data["consultationRequestID"]
                 Log . d ("notiStatus", "recieve noti")
 
-                showNotification(body, title,requestID)
+                showNotification(body, title,"")
             }
         }
 
@@ -41,7 +42,7 @@ class DoctorFCMService : FirebaseMessagingService() {
     }
 
     private fun showNotification(body: String?, title: String?,requestID : String?) {
-        val intent = Intent(requestID?.let { MainActivity.newIntent(this, it) })
+        val intent = Intent(requestID?.let { SplashScreenActivity.newIntent(this) })
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent: PendingIntent =
                 PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)

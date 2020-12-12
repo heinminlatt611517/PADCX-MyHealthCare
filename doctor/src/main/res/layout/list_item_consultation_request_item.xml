@@ -41,10 +41,10 @@
                 android:layout_marginLeft="@dimen/margin_card_medium_2"
                 android:background="@drawable/rounded_corner_btn_orange"
                 android:gravity="center"
-                android:padding="@dimen/margin_medium"
+                android:padding="@dimen/margin_small"
                 android:text="@string/new_patient"
                 android:textColor="@color/white"
-                android:textSize="12dp" />
+                android:textSize="8dp" />
 
         </LinearLayout>
 

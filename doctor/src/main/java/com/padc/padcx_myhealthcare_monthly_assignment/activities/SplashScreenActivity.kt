@@ -2,7 +2,6 @@ package com.padc.padcx_myhealthcare_monthly_assignment.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.Window
@@ -19,21 +18,23 @@ class SplashScreenActivity :BaseActivity(){
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.requestFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
         setContentView(R.layout.activity_splash_screen)
 
 
         Handler().postDelayed({
-            if(!SessionManager.login_status) {
+            if (!SessionManager.login_status) {
                 startActivity(LoginActivity.newIntent(this))
-            }else{
-                startActivity(MainActivity.newIntent(this,"null"))
+            } else {
+                startActivity(MainActivity.newIntent(this, "null"))
             }
             finish()
-        },1800)
+        }, 1800)
     }
 }

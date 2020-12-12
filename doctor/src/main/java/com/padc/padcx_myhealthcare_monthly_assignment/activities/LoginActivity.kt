@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.padc.padcx_myhealthcare_monthly_assignment.R
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.LoginPresenter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls.LoginPresenterImpl
@@ -18,8 +21,11 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : BaseActivity() ,LoginView{
 
     companion object {
+
         fun newIntent(context: Context) : Intent {
-            return Intent(context, LoginActivity::class.java)
+
+            return  Intent(context, LoginActivity::class.java)
+
         }
     }
 
@@ -28,10 +34,25 @@ class LoginActivity : BaseActivity() ,LoginView{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        getFirebaseInstanceID()
+
         setUpPresenter()
         setUpActionListener()
 
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("TOKEN", "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                val token = task.result?.token
+
+                // Log and toast
+                val msg = "token: $token"
+                Log.e("TOKEN", msg)
+                //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            })
     }
 
     private fun setUpActionListener() {

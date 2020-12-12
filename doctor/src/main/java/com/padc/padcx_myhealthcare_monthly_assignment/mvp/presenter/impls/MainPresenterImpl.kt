@@ -32,26 +32,35 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
         mDoctorModel.getBrodcastConsultationRequestsFromDB(SessionManager.doctor_speciality.toString())
             .observe(lifecycleOwner, Observer { consultationRequest ->
                 consultationRequest?.let {
-                    val data=  consultationRequest.filter {
-                        it.status.toString() == "accept"
+                    val data = consultationRequest.filter {
+                        it.status.toString() == "none"
                     }
-                    mView?.displayConsultationRequestLists(data) }
+                    mView?.displayConsultationRequestLists(data)
+                }
             })
 
-        mDoctorModel.getConsultationByDoctorId(SessionManager.doctor_id.toString(), onSuccess = {}, onError = {})
+        mDoctorModel.getConsultationByDoctorId(
+            SessionManager.doctor_id.toString(),
+            onSuccess = {},
+            onError = {})
 
         mDoctorModel.getConsultationByDoctorIdFromDB(SessionManager.doctor_id.toString())
             .observe(lifecycleOwner, Observer { data ->
                 data?.let {
-                    mView?.displayConsultationAcceptList(data) }
+                    mView?.displayConsultationAcceptList(data)
+                }
             })
 
-        mDoctorModel.getConsultedPatient(SessionManager.doctor_id.toString(),onSuccess = {}, onError = {})
+        mDoctorModel.getConsultedPatient(
+            SessionManager.doctor_id.toString(),
+            onSuccess = {},
+            onError = {})
 
         mDoctorModel.getConsultedPatientFromDB(SessionManager.doctor_id.toString())
             .observe(lifecycleOwner, Observer { data ->
                 data?.let {
-                    mView?.displayConsultedPatient(data) }
+                    mView?.displayConsultedPatient(data)
+                }
             })
 
     }
@@ -86,7 +95,6 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
 
 
     override fun onTapAccept(consultationRequestVO: ConsultationRequestVO) {
-
 
 
         var doctorVo = DoctorVO(

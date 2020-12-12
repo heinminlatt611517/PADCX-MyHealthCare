@@ -46,7 +46,7 @@ class ProfileActivity : BaseActivity() ,ProfileView {
 
         etUserName.text = Editable.Factory.getInstance().newEditable( SessionManager.doctor_name)
         etEmail.text = Editable.Factory.getInstance().newEditable(SessionManager.doctor_email)
-
+        et_speciality.text = Editable.Factory.getInstance().newEditable(SessionManager.doctor_speciality)
     }
 
     private fun setUpActionsListener() {
@@ -67,7 +67,7 @@ class ProfileActivity : BaseActivity() ,ProfileView {
     }
 
     override fun editProfileImage() {
-
+      openGallery()
     }
 
     override fun saveUserData() {
@@ -81,6 +81,13 @@ class ProfileActivity : BaseActivity() ,ProfileView {
 
     override fun getLifeCycleOwner(): LifecycleOwner = this
 
+
+    private fun openGallery() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"),PICK_IMAGE_REQUEST)
+    }
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

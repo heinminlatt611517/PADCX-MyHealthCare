@@ -111,6 +111,7 @@ class MainActivity : BaseActivity() ,MainView{
     override fun displayConsultationRequestLists(list: List<ConsultationRequestVO>) {
         Log.d("RequestList",list.size.toString())
        mConsultationRequestAdapter.setNewData(list.toMutableList())
+
     }
 
     override fun displayConsultationRequestPatient(consultationRequestVO: ConsultationRequestVO) {
@@ -134,6 +135,15 @@ class MainActivity : BaseActivity() ,MainView{
     override fun displayConsultationAcceptList(list: List<ConsultationChatVO>) {
         Log.d("ConsultedAcceptLists",list.size.toString())
         mConsultationAcceptAdapter.setNewData(list.toMutableList())
+
+        if(list?.size == 0) {
+            empty_view.visibility =View.VISIBLE
+            tv_consultationRecord.visibility = View.GONE
+        }else
+        {
+            empty_view.visibility =View.GONE
+            tv_consultationRecord.visibility = View.VISIBLE
+        }
     }
 
     override fun navigateToPatientCaseSummary(consultation_request_id: String) {
