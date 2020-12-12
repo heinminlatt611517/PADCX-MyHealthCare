@@ -1,10 +1,8 @@
-package com.padc.patient.mvp.view
+package com.padc.padcx_myhealthcare_monthly_assignment.mvp.view
 
 import com.padc.share.mvp.view.BaseView
 
-
 interface ProfileView : BaseView {
-    fun saveUserData()
-    fun cancelUserData()
     fun editProfileImage()
+    fun saveUserData()
 }

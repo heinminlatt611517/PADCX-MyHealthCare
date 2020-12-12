@@ -14,4 +14,5 @@ interface MainView : BaseView {
   fun displayConsultedPatient(list : List<ConsultedPatientVO>)
   fun navigateToChatScreen(consultation_chat_id : String)
   fun displayConsultationRequestPatient(consultationRequestVO: ConsultationRequestVO)
+  fun navigateToSettingScreen()
 }

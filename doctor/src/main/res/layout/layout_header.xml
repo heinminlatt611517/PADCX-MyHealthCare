@@ -26,4 +26,15 @@
         android:textSize="18dp"
         android:layout_marginLeft="@dimen/margin_large"/>
 
+    <ImageView
+        android:id="@+id/iv_setting"
+        app:layout_constraintTop_toTopOf="@+id/iv_doctor_top"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_margin="@dimen/margin_medium"
+        android:src="@drawable/ic_baseline_settings_24"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_doctor_top"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

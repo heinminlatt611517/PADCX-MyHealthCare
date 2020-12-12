@@ -56,7 +56,11 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
 
     }
 
-    override fun onTapAcceptMain(consultationRequestVO: ConsultationRequestVO) {
+    override fun onTapSetting() {
+        mView?.navigateToSettingScreen()
+    }
+//
+//    override fun onTapAcceptMain(consultationRequestVO: ConsultationRequestVO) {
 //        var doctorVo = DoctorVO(
 //            id = SessionManager.doctor_id.toString(),
 //            deviceID = SessionManager.doctor_device_id.toString(),
@@ -78,7 +82,8 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
 //
 //
 //            }, onFailure = {})
-    }
+//    }
+
 
     override fun onTapAccept(consultationRequestVO: ConsultationRequestVO) {
 

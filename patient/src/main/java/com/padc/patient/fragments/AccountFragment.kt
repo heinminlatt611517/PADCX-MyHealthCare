@@ -102,15 +102,15 @@ class AccountFragment : Fragment() ,ProfileView{
         fun newInstance() = AccountFragment().apply {}
     }
 
-    override fun onTapSaveUserData() {
+    override fun saveUserData() {
 
     }
 
-    override fun onTapCancelUserData() {
+    override fun cancelUserData() {
 
     }
 
-    override fun onTapEditProfileImage() {
+    override fun editProfileImage() {
         openGallery()
     }
 

@@ -9,6 +9,6 @@ import com.padc.share.mvp.view.BaseView
 
 interface MainPresenter : BasePresenter<MainView> ,ConsultationRequestItemDelegate{
     fun onUiReady(lifecycleOwner: LifecycleOwner,requestID : String)
-    fun onTapAcceptMain(consultationRequestVO: ConsultationRequestVO)
+    fun onTapSetting()
 
 }

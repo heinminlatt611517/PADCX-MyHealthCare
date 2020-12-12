@@ -81,8 +81,12 @@ class MainActivity : BaseActivity() ,MainView{
 
     private fun setUpActionListener() {
        btnAccept.setOnClickListener {
-           mMainPresenter.onTapAcceptMain(mConsultationRequestVO)
+
        }
+
+        iv_setting.setOnClickListener {
+            mMainPresenter.onTapSetting()
+        }
     }
 
 
@@ -120,6 +124,11 @@ class MainActivity : BaseActivity() ,MainView{
             consultationRequestVO?.patient_info?.photo.toString(),
             R.drawable.doctor_img
         )
+    }
+
+    override fun navigateToSettingScreen() {
+        startActivity(ProfileActivity.newIntent(this))
+        finish()
     }
 
     override fun displayConsultationAcceptList(list: List<ConsultationChatVO>) {
