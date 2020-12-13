@@ -8,8 +8,9 @@ import com.padc.share.presistence.typeConverters.RoutineTypeConverter
 @IgnoreExtraProperties
 data class PrescriptionVO(
     var id: String= "",
-    var total_price : Int =0,
-    var name : String = "",
+    var count : Int =0,
+    var price : Int =0,
+    var medicine : String = "",
     var routineVO: ArrayList<RoutineVO> = arrayListOf()
 )
 

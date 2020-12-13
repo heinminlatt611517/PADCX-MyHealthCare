@@ -187,5 +187,13 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         mFirebaseApi.getMedicineBySpeciality(speciality,onSuccess,onFailure)
     }
 
+    override fun getRelatedQuestionBySpeciality(
+        speciality: String,
+        onSuccess: (List<RelatedQuestionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getRelatedQuestionBySpeciality(speciality,onSuccess,onFailure)
+    }
+
 
 }

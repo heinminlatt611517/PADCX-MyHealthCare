@@ -2,15 +2,13 @@ package com.padc.padcx_myhealthcare_monthly_assignment.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.padcx_myhealthcare_monthly_assignment.R
-import com.padc.padcx_myhealthcare_monthly_assignment.adapter.PrescribeMedicineAdapter
-import com.padc.padcx_myhealthcare_monthly_assignment.adapter.QuestionAnswerAdapter
+import com.padc.padcx_myhealthcare_monthly_assignment.adapter.MedicineAdapter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.dialog.PrescribeMedicineDialogFragment
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.dialog.PrescribeMedicineDialogFragment.Companion.BUNDLE_MEDICINE_ID
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.dialog.PrescribeMedicineDialogFragment.Companion.BUNDLE_NAME
@@ -20,7 +18,6 @@ import com.padc.padcx_myhealthcare_monthly_assignment.mvp.view.PrescribeMedicine
 import com.padc.padcx_myhealthcare_monthly_assignment.utils.SessionManager
 import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.MedicineVO
-import kotlinx.android.synthetic.main.activity_patient_case_summary.*
 import kotlinx.android.synthetic.main.activity_prescribe_medicine.*
 
 class PrescribeMedicineActivity : BaseActivity(),PrescribeMedicineView {
@@ -33,7 +30,8 @@ class PrescribeMedicineActivity : BaseActivity(),PrescribeMedicineView {
     }
 
     private lateinit var mPresenter : PrescribeMedicinePresenter
-    private lateinit var mPrescribeMedicineAdapter: PrescribeMedicineAdapter
+    private lateinit var mMedicineAdapter: MedicineAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +55,8 @@ class PrescribeMedicineActivity : BaseActivity(),PrescribeMedicineView {
 
         rv_prescribeMedicine?.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mPrescribeMedicineAdapter = PrescribeMedicineAdapter(mPresenter)
-        rv_prescribeMedicine?.adapter = mPrescribeMedicineAdapter
+        mMedicineAdapter = MedicineAdapter(mPresenter)
+        rv_prescribeMedicine?.adapter = mMedicineAdapter
 
     }
 
@@ -69,7 +67,7 @@ class PrescribeMedicineActivity : BaseActivity(),PrescribeMedicineView {
 
     override fun displayMedicineLists(lists: List<MedicineVO>) {
         Log.d("medicineLists",lists.size.toString())
-        mPrescribeMedicineAdapter.setNewData(lists.toMutableList())
+        mMedicineAdapter.setNewData(lists.toMutableList())
     }
 
     override fun showPrescribeMedicineDialog(medicineVO: MedicineVO) {

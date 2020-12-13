@@ -96,16 +96,19 @@ interface PatientModel {
         onFailure: (String) -> Unit
     )
 
-    fun navigateToChatRoom(consultation_chat_id: String, consultationRequestVO: ConsultationRequestVO,
-                              onSuccess: () -> Unit,
-                              onError: (String) -> Unit)
+    fun navigateToChatRoom(
+        consultation_chat_id: String, consultationRequestVO: ConsultationRequestVO,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    )
 
-    fun  getConsultationAccepts(
+    fun getConsultationAccepts(
         patientId: String,
         onSuccess: (List<ConsultationRequestVO>) -> Unit,
-        onError: (String) -> Unit)
+        onError: (String) -> Unit
+    )
 
-    fun  getConsultationAcceptsFromDB() : LiveData<List<ConsultationRequestVO>>
+    fun getConsultationAcceptsFromDB(): LiveData<List<ConsultationRequestVO>>
 
     fun sendDirectRequest(
         speciality: String,
@@ -115,5 +118,19 @@ interface PatientModel {
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     )
+
+    fun getPatientByID(
+        patientID: String,
+        onSuccess: (patientVO: PatientVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getPrescriptionByID(
+        consulationId: String,
+        onSuccess: (List<PrescriptionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun checkoutMedicine(checkOutVO: CheckOutVO, onSuccess: () -> Unit, onFailure: (String) -> Unit)
 
 }

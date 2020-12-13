@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PADCXMyHealthCareMonthlyAssignment.NoActionBar">
-        <activity android:name=".activities.RequestPatientDataActivity"></activity>
+        <activity android:name=".activities.GeneralQuestionActivity"></activity>
+        <activity android:name=".activities.OrderPrescriptionActivity" />
+        <activity android:name=".activities.RequestPatientDataActivity" />
         <activity android:name=".activities.ChatActivity" />
         <activity android:name=".activities.CaseSummaryConfirmActivity" />
         <activity android:name=".activities.SplashScreenActivity">

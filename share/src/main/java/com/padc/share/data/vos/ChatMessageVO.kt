@@ -10,8 +10,8 @@ data class ChatMessageVO(
     var sendAt: String= "",
     var messageText: String= "",
     var messageImage: String = "",
-    var senderType: SenderTypeVO ? = null,
-    var updateTimeStance: Date? = null
+    var senderType: SenderTypeVO ? = null
+
 )
 
 

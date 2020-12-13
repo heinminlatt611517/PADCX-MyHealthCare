@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/margin_medium"
+    android:layout_marginRight="@dimen/margin_medium"
+    android:layout_marginTop="@dimen/margin_medium"
+    android:layout_marginBottom="@dimen/margin_large"
+    tools:context=".activities.OrderPrescriptionActivity">
+
+
+    <androidx.cardview.widget.CardView
+        app:cardElevation="5dp"
+        app:cardCornerRadius="20dp"
+        android:orientation="vertical"
+        android:elevation="5dp"
+        app:cardUseCompatPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/top"
+        >
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:background="@color/blue_800"
+                >
+                <org.mmtextview.components.MMTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:textStyle="bold"
+                    android:text="@string/medicine_info"/>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium_3">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rv_prescribeMedicine"/>
+
+                <org.mmtextview.components.MMTextView
+                    android:id="@+id/tv_divider"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_prescribeMedicine"
+                    android:layout_width="match_parent"
+                    android:background="@color/grey_300"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    android:id="@+id/tv_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_divider"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="@string/totalMMk"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+
+                <TextView
+                    android:id="@+id/tv_medicineTotalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_divider"
+                    android:text="10000"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        app:cardElevation="5dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="5dp"
+        android:layout_marginTop="@dimen/margin_medium_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintTop_toBottomOf="@+id/top"
+        android:id="@+id/bottom"
+        >
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:background="@color/blue_800"
+                >
+                <org.mmtextview.components.MMTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:textStyle="bold"
+                    android:text="@string/address"/>
+
+            </LinearLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_address"
+                android:visibility="gone"
+                android:layout_margin="@dimen/margin_medium_3"
+                >
+                <org.mmtextview.components.MMTextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:text="@string/choose_address"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_fullAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv1"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    app:layout_constraintTop_toBottomOf="@+id/rv_fullAddress"
+                    android:layout_width="match_parent"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:strokeColor="@color/grey_600"
+                    app:strokeWidth="0.5dp"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_add_circle_outline_24"/>
+
+                        <org.mmtextview.components.MMTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/new_address"
+                            android:layout_margin="5dp" />
+
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:id="@+id/layout_address"
+                android:visibility="visible"
+                android:layout_margin="@dimen/margin_medium_3"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:padding="@dimen/margin_medium"
+                    >
+
+                    <org.mmtextview.components.MMTextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/state"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                    <org.mmtextview.components.MMTextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/township"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:weightSum="2"
+                    android:id="@+id/card_layout"
+                    app:layout_constraintTop_toBottomOf="@+id/layout"
+                    android:orientation="horizontal">
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        app:cardElevation="3dp"
+                        app:strokeColor="@color/grey_600"
+                        app:strokeWidth="0.5dp"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/white">
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:spinnerMode="dialog"
+                            android:entries="@array/states"
+                            android:id="@+id/state_spinner"/>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        app:cardElevation="3dp"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="@color/grey_600"
+                        app:strokeWidth="0.5dp"
+                        app:cardBackgroundColor="@color/white">
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:spinnerMode="dialog"
+                            android:entries="@array/townships"
+                            android:id="@+id/township_spinner"/>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+
+                <org.mmtextview.components.MMTextView
+                    android:id="@+id/tv_fullAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/full_address"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@+id/card_layout"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    app:layout_constraintTop_toBottomOf="@+id/tv_fullAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_margin="10dp"
+                    app:strokeColor="@color/grey_600"
+                    app:strokeWidth="0.5dp"
+                    app:cardBackgroundColor="@color/white"
+                   >
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_corner_btn_white"
+                        android:padding="10dp"
+                        android:maxLines="3"
+                        android:lines="5"
+                        android:hint="@string/enter_full_address"
+                        android:scrollbars="none"
+                        android:textSize="13sp"
+                        android:maxLength="2000"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:id="@+id/ed_fullAddress"
+                        android:layout_margin="5dp"
+                        tools:ignore="RtlCompat" />
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom"
+        android:layout_marginTop="@dimen/margin_medium_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/order"
+        app:cornerRadius="14dp"
+        android:layout_marginBottom="@dimen/margin_medium_3"
+        app:backgroundTint="@color/blue_800"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

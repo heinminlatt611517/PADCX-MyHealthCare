@@ -10,7 +10,7 @@ import com.padc.share.presistence.typeConverters.OneTimeGeneralQuestionTypeConve
 @Entity(tableName = "Patient")
 @IgnoreExtraProperties
 @TypeConverters(OneTimeGeneralQuestionTypeConverter::class,AddressTypeConverter::class)
-data class PatientVO (
+data class PatientVO(
     @PrimaryKey
     var id: String= "",
     var name: String = "",
@@ -24,6 +24,6 @@ data class PatientVO (
     var height: String? = "",
     var dateOfBirth: String= "",
     var allergic_reactions: String? = "",
-    var oneTimeGeneralQuestionVO: ArrayList<OneTimeGeneralQuestionVO> = arrayListOf()
+    var one_time_general_question: ArrayList<OneTimeGeneralQuestionVO> = arrayListOf()
 
 )

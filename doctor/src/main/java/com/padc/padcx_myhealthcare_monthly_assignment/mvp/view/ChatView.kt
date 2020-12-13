@@ -10,4 +10,8 @@ interface ChatView : BaseView{
 
     fun displayPatientRequestData(data : ConsultationRequestVO)
 
+    fun navigateToPrescribeMedicineScreen()
+
+    fun navigateToGeneralQuestionScreen()
+
 }

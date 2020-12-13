@@ -7,5 +7,6 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 data class AddressVO (
     var state: String= "",
     var street: String = "",
-    var township : String = ""
+    var township : String = "",
+    var fullAddress : String = ""
 )

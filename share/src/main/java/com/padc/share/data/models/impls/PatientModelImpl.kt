@@ -235,4 +235,28 @@ object PatientModelImpl : PatientModel, BaseModel() {
         )
     }
 
+    override fun getPatientByID(
+        patientID: String,
+        onSuccess: (patientVO: PatientVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getPatientByID(patientID,onSuccess,onFailure)
+    }
+
+    override fun getPrescriptionByID(
+        consulationId: String,
+        onSuccess: (List<PrescriptionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getPrescriptionByID(consulationId,onSuccess,onFailure)
+    }
+
+    override fun checkoutMedicine(
+        checkOutVO: CheckOutVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.checkoutMedicine(checkOutVO,onSuccess,onFailure)
+    }
+
 }

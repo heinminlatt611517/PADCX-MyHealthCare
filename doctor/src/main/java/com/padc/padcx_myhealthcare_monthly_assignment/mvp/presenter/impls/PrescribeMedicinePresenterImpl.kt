@@ -17,7 +17,9 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter , AbstractBase
 
         mDoctorModel.getMedicineBySpeciality(speciality,onSuccess = {
             mView?.displayMedicineLists(it)
-        },onFailure = {})
+        },onFailure = {
+            mView?.showErrorMessage(it)
+        })
 
     }
 

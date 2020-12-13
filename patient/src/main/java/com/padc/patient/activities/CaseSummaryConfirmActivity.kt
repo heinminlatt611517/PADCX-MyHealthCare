@@ -2,7 +2,6 @@ package com.padc.patient.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
@@ -18,7 +17,6 @@ import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.data.vos.QuestionAnswerVO
 import kotlinx.android.synthetic.main.activity_case_summary_confirm_layout.*
-import kotlinx.android.synthetic.main.activity_empty_case_summary.*
 
 class CaseSummaryConfirmActivity : BaseActivity(), CaseSummaryConfirmView {
 

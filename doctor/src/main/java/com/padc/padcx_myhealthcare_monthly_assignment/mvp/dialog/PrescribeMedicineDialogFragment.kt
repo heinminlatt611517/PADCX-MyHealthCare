@@ -1,5 +1,7 @@
 package com.padc.padcx_myhealthcare_monthly_assignment.mvp.dialog
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_patient_dialog.*
 import kotlinx.android.synthetic.main.fragment_patient_dialog.iv_patient
 import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientBirthDate
 import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientName
-import kotlinx.android.synthetic.main.list_item_prescribe_medicine.*
 import kotlinx.android.synthetic.main.prescribe_medicine_dialog.*
 
 
@@ -68,6 +69,16 @@ class PrescribeMedicineDialogFragment : DialogFragment() {
 
     private fun setUpPresenter() {
         mPresenter = ViewModelProviders.of(this).get(PrescribeMedicinePresenterImpl::class.java)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.FILL_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        dialog?.window?.setBackgroundDrawable( ColorDrawable(Color.TRANSPARENT))
     }
 
 

@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PADCXMyHealthCareMonthlyAssignment">
-        <activity android:name=".activities.PrescribeMedicineActivity"></activity>
+        <activity android:name=".activities.GeneralQuestionActivity"></activity>
+        <activity android:name=".activities.PrescribeMedicineActivity" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.ChatActivity" />
         <activity android:name=".activities.SplashScreenActivity">

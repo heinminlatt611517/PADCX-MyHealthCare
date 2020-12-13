@@ -42,11 +42,11 @@ class ChatPresenterImpl : ChatPresenter,AbstractBasePresenter<ChatView>() {
     }
 
     override fun onTapQuestion() {
-
+      mView?.navigateToGeneralQuestionScreen()
     }
 
     override fun onTapPrescribeMedicine() {
-
+        mView?.navigateToPrescribeMedicineScreen()
     }
 
     override fun onTapMedicineHistory() {

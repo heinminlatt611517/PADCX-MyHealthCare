@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">MyCare-patient</string>
+    <string name="totalMMk">Total(MMK)</string>
+    <string name="enter_full_address">Enter Full Address</string>
+    <string name="delivery_fee">Delivery Fee</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="paymenet_desc">ငွေ​ပေး​ချေမှု အတည်ပြုပြီး ​နောက်တစ်ရက်မှ စတင်၍ ​ဆေးများကို လိုက်လံပို့​ဆောင်မည်ဖြစ်ပါသည်။</string>
+    <string name="made_payment">ငွေ​ပေး​ချေမည်</string>
 
 
     <string-array name="stepLabels">
@@ -13,6 +19,33 @@
         <item>B သွေး</item>
         <item>O သွေး</item>
     </string-array>
+
+    <string-array name="states">
+        <item>Yangon</item>
+        <item>Mandalay</item>
+        <item>Kachin</item>
+        <item>Shan</item>
+        <item>Mon</item>
+        <item>Kayin</item>
+        <item>Chin</item>
+        <item>Bago</item>
+        <item>Sagaing</item>
+        <item>Tanintharyi</item>
+    </string-array>
+
+    <string-array name="townships">
+        <item>Ahlone</item>
+        <item>Hlaing</item>
+        <item>Maubin</item>
+        <item>Taungoo</item>
+        <item>Falam</item>
+        <item>Taunggyi</item>
+        <item>Myeik</item>
+        <item>Hpapun</item>
+        <item>Mawlamyine</item>
+        <item>Mogoke</item>
+    </string-array>
+
 
     <string-array name="days">
         <item>1</item>

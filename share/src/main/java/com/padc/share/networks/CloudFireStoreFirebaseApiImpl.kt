@@ -14,10 +14,7 @@ import com.padc.share.data.models.impls.PatientModelImpl
 import com.padc.share.data.vos.*
 import com.padc.share.networks.RequestFCMBody.Data
 import com.padc.share.networks.RequestFCMBody.RequestFCM
-import com.padc.share.utils.FIREBASE_SERVER_KEY
-import com.padc.share.utils.consultation_request
-import com.padc.share.utils.consulted_patient
-import com.padc.share.utils.doctors
+import com.padc.share.utils.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 import kotlin.collections.ArrayList
@@ -249,6 +246,39 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
 
     }
 
+    override fun getPrescriptionByID(
+        consulationId: String,
+        onSuccess: (List<PrescriptionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection("consultation_chat")
+            .document(consulationId)
+            .collection("prescription")
+            .addSnapshotListener { value, error ->
+                error?.let {
+                    onFailure(it.message ?: "Please check connection")
+                } ?: run {
+
+                    val dataLists: MutableList<PrescriptionVO> = arrayListOf()
+
+                    val result = value?.documents ?: arrayListOf()
+
+                    for (document in result) {
+                        val data = document.data
+                        data?.put("id", document.id)
+                        val dataJson = Gson().toJson(data)
+                        val docsData = Gson().fromJson<PrescriptionVO>(
+                            dataJson,
+                            PrescriptionVO::class.java
+                        )
+                        dataLists.add(docsData)
+                    }
+
+                    onSuccess(dataLists)
+                }
+            }
+    }
+
     override fun getPatientByID(
         patientID: String,
         onSuccess: (patientVO: PatientVO) -> Unit,
@@ -266,7 +296,10 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
                     val docsData = Gson().fromJson<PatientVO>(Data, PatientVO::class.java)
                     list.add(docsData)
                 }
-                onSuccess(list[0])
+
+                    onSuccess(list[0])
+
+
             }
     }
 
@@ -366,7 +399,6 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         database.collection("consultation_chat")
             .document(consultationID)
             .collection("chat_message")
-            .orderBy("timestamp")
             .addSnapshotListener { value, error ->
                 error?.let {
                     onFailure(it.message ?: "Please check connection")
@@ -960,6 +992,24 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             }
     }
 
+    override fun preScribeMedicine(
+        consulationId: String,
+        prescriptionVO: PrescriptionVO,
+        onSuccess: () -> Unit,
+        onFailure: String
+    ) {
+        val id = UUID.randomUUID().toString()
+        val prescriptionVOMap = hashMapOf(
+            "medicine_name" to prescriptionVO.medicine,
+            "id" to id)
+
+        database.collection("$consultation_chat/$consulationId/$prescription")
+            .document(id)
+            .set(prescriptionVOMap)
+            .addOnSuccessListener { Log.d("Success", "Successfully ") }
+            .addOnFailureListener { Log.d("Failure", "Failed") }
+    }
+
     override fun getGeneralQuestion(
         onSuccess: (List<QuestionAnswerVO>) -> Unit,
         onFailure: (String) -> Unit
@@ -997,4 +1047,5 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
                 }
             }
     }
+
 }

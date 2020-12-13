@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatEditText android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/rounded_corner_btn_white"
+    android:maxLines="3"
+    android:lines="5"
+    android:gravity="center"
+    android:editable="false"
+    android:scrollbars="none"
+    android:textSize="13sp"
+    android:maxLength="2000"
+    android:text="@string/question"
+    android:textColor="@color/black"
+    android:id="@+id/ed_general_question"
+    tools:ignore="RtlCompat"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -9,9 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:ems="18"
+        android:lines="2"
+        android:paddingTop="@dimen/margin_medium"
         android:text="Paracetamol"
         android:layout_margin="@dimen/margin_small"
-        android:textSize="@dimen/text_heading_1x"
+        android:textSize="16dp"
         android:layout_alignParentStart="true"
         />
 
@@ -23,5 +26,10 @@
          android:src="@drawable/ic_baseline_add_circle_24"
          android:layout_margin="@dimen/margin_medium"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey_600"/>
 
 </RelativeLayout>

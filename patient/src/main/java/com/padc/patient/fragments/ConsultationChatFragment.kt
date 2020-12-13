@@ -10,8 +10,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.patient.R
+import com.padc.patient.activities.OrderPrescriptionActivity
 import com.padc.patient.adapters.ConsultationChatAdapter
 import com.padc.patient.adapters.RecentDoctorAdapter
+import com.padc.patient.dialogs.ConfirmDialogFragment
+import com.padc.patient.dialogs.PaymentPrescriptionDialogFragment
 import com.padc.patient.mvp.presenter.ConsultationChatPresenter
 import com.padc.patient.mvp.presenter.impls.ConsultationChatPresenterImpl
 import com.padc.patient.mvp.view.ConsultationChatView
@@ -55,8 +58,15 @@ class ConsultationChatFragment : Fragment() ,ConsultationChatView {
 
         setUpPresenter()
         setUpRecyclerView()
+        setUpActionListener()
 
         mPresenter.onUiReady(this,SessionManager.patient_id.toString())
+    }
+
+    private fun setUpActionListener() {
+       btn_click.setOnClickListener {
+           startActivity(context?.let { it1 -> OrderPrescriptionActivity.newIntent(it1) })
+       }
     }
 
     private fun setUpRecyclerView() {

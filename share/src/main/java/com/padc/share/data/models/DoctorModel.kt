@@ -90,4 +90,10 @@ interface DoctorModel {
         onFailure: (String) -> Unit
     )
 
+    fun getRelatedQuestionBySpeciality(
+        speciality: String,
+        onSuccess: (List<RelatedQuestionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
 }

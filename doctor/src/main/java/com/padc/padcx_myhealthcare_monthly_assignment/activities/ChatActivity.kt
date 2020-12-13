@@ -94,11 +94,12 @@ class ChatActivity : BaseActivity(), ChatView {
 
 
         btn_question.setOnClickListener {
-
+           mChatPresenter.onTapQuestion()
         }
 
-        btn_PrescribeMedicine.setOnClickListener {
 
+        btn_PrescribeMedicine.setOnClickListener {
+           mChatPresenter.onTapPrescribeMedicine()
         }
 
         btn_medicineHistory.setOnClickListener {
@@ -137,6 +138,14 @@ class ChatActivity : BaseActivity(), ChatView {
         bindData(data)
     }
 
+    override fun navigateToPrescribeMedicineScreen() {
+        startActivity(PrescribeMedicineActivity.newIntent(this))
+    }
+
+    override fun navigateToGeneralQuestionScreen() {
+        startActivity(GeneralQuestionActivity.newIntent(this,intent.getStringExtra(
+            PARAM_CONSULTATION_CHAT_ID).toString()))
+    }
 
 
     private fun bindData(data: ConsultationRequestVO) {
