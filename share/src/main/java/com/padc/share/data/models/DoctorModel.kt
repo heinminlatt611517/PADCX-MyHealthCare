@@ -8,13 +8,20 @@ import com.padc.share.networks.auth.AuthManager
 
 interface DoctorModel {
     var mAuthManager: AuthManager
-    var mFirebaseApi : FirebaseApi
+    var mFirebaseApi: FirebaseApi
 
-    fun uploadPhotoToFirebaseStorage(image : Bitmap, onSuccess: (photoUrl : String) -> Unit, onFailure: (String) -> Unit)
+    fun uploadPhotoToFirebaseStorage(
+        image: Bitmap,
+        onSuccess: (photoUrl: String) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
     fun registerNewDoctor(doctorVO: DoctorVO, onSuccess: () -> Unit, onFailure: (String) -> Unit)
 
-    fun getDoctorFromFirebaseAndSaveToDatabase(onSuccess: (doctorList : List<DoctorVO>) -> Unit,onFailure: (String) -> Unit)
+    fun getDoctorFromFirebaseAndSaveToDatabase(
+        onSuccess: (doctorList: List<DoctorVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
     fun getPatientByID(
         patientID: String,
@@ -28,11 +35,13 @@ interface DoctorModel {
         onFailure: (String) -> Unit
     )
 
-    fun getDoctorByEmail( email : String,
-                          onSuccess: () -> Unit,
-                          onError: (String) -> Unit)
+    fun getDoctorByEmail(
+        email: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    )
 
-    fun getDoctorByEmailFromDB(email: String) : LiveData<DoctorVO>
+    fun getDoctorByEmailFromDB(email: String): LiveData<DoctorVO>
 
     fun getAllChatMessage(
         consultationID: String,
@@ -68,20 +77,29 @@ interface DoctorModel {
         onFailure: (String) -> Unit
     )
 
-    fun getConsultedPatient(doctorId: String ,
-                            onSuccess: () -> Unit,
-                            onError: (String) -> Unit)
+    fun getConsultedPatient(
+        doctorId: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    )
 
-    fun  getConsultedPatientFromDB(doctorId : String) : LiveData<List<ConsultedPatientVO>>
+    fun getConsultedPatientFromDB(doctorId: String): LiveData<List<ConsultedPatientVO>>
 
-    fun getBrodcastConsultationRequestsFromDB(speciality: String) : LiveData<List<ConsultationRequestVO>>
+    fun getBrodcastConsultationRequestsFromDB(speciality: String): LiveData<List<ConsultationRequestVO>>
 
-    fun getBrodcastConsultationRequests(speciality: String ,
-                                        onSuccess: () -> Unit,
-                                        onError: (String) -> Unit)
+    fun getBrodcastConsultationRequests(
+        speciality: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    )
 
-    fun getConsultationByDoctorId(doctorId: String, onSuccess: () -> Unit, onError: (String) -> Unit)
-    fun getConsultationByDoctorIdFromDB(doctorId : String) : LiveData<List<ConsultationChatVO>>
+    fun getConsultationByDoctorId(
+        doctorId: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    )
+
+    fun getConsultationByDoctorIdFromDB(doctorId: String): LiveData<List<ConsultationChatVO>>
 
 
     fun getMedicineBySpeciality(
@@ -94,6 +112,13 @@ interface DoctorModel {
         speciality: String,
         onSuccess: (List<RelatedQuestionVO>) -> Unit,
         onFailure: (String) -> Unit
+    )
+
+    fun finishConsultation(
+        consultationChatVO: ConsultationChatVO,
+        prescriptionList: List<PrescriptionVO>,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
     )
 
 }

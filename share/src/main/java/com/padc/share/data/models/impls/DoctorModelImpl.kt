@@ -195,5 +195,14 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         mFirebaseApi.getRelatedQuestionBySpeciality(speciality,onSuccess,onFailure)
     }
 
+    override fun finishConsultation(
+        consultationChatVO: ConsultationChatVO,
+        prescriptionList: List<PrescriptionVO>,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mFirebaseApi.finishConsultation(consultationChatVO,prescriptionList,onSuccess,onError)
+    }
+
 
 }

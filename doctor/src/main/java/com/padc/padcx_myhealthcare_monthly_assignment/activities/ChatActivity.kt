@@ -139,7 +139,8 @@ class ChatActivity : BaseActivity(), ChatView {
     }
 
     override fun navigateToPrescribeMedicineScreen() {
-        startActivity(PrescribeMedicineActivity.newIntent(this))
+        startActivity(PrescribeMedicineActivity.newIntent(this,intent.getStringExtra(
+            PARAM_CONSULTATION_CHAT_ID).toString()))
     }
 
     override fun navigateToGeneralQuestionScreen() {

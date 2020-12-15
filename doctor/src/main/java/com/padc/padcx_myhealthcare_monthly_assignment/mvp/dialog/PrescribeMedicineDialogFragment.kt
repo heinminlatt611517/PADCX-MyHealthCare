@@ -6,19 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.chip.Chip
 import com.padc.padcx_myhealthcare_monthly_assignment.R
-import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.MainPresenter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.PrescribeMedicinePresenter
-import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls.MainPresenterImpl
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls.PrescribeMedicinePresenterImpl
-import com.padc.share.utils.ImageUtils
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_patient_dialog.*
-import kotlinx.android.synthetic.main.fragment_patient_dialog.iv_patient
-import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientBirthDate
-import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientName
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.prescribe_medicine_dialog.*
 
 
@@ -38,7 +34,10 @@ class PrescribeMedicineDialogFragment : DialogFragment() {
         }
     }
 
+    private var routine: String? = null
     private lateinit var mPresenter: PrescribeMedicinePresenter
+    private val  medicineCountLists = mutableListOf<String>()
+    private val medicineTypeLists = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,17 +52,71 @@ class PrescribeMedicineDialogFragment : DialogFragment() {
 
         setUpPresenter()
         setUpActionsListener()
+        setUpItemSelectedListener()
         init()
     }
 
+    private fun setUpItemSelectedListener() {
+        routine_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                routine = parent.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
     private fun init() {
-        tv_medicineName.text = arguments?.getString(BUNDLE_NAME)
+//        tv_medicineName.text = arguments?.getString(BUNDLE_NAME)
     }
 
     private fun setUpActionsListener() {
 
-        btn_insert_medicine.setOnClickListener {
+        for (index in 0 until chip_group_amount.childCount) {
+            val chip:Chip = chip_group_amount.getChildAt(index) as Chip
 
+            // Set the chip checked change listener
+            chip.setOnCheckedChangeListener{view, isChecked ->
+                if (isChecked){
+                    medicineCountLists.add(view.text.toString())
+                }else{
+                    medicineCountLists.remove(view.text.toString())
+                }
+
+                if (medicineCountLists.isNotEmpty()){
+                   mPresenter.addMedicineCount(medicineCountLists.toString())
+
+                }
+            }
+        }
+
+        for (index in 0 until chip_group_medicine.childCount) {
+            val chip:Chip = chip_group_medicine.getChildAt(index) as Chip
+
+            // Set the chip checked change listener
+            chip.setOnCheckedChangeListener{view, isChecked ->
+                if (isChecked){
+                    medicineTypeLists.add(view.text.toString())
+                }else{
+                    medicineTypeLists.remove(view.text.toString())
+                }
+
+                if (medicineTypeLists.isNotEmpty()){
+                    mPresenter.addMedicineType(medicineTypeLists.toString())
+
+                }
+            }
+        }
+
+        btn_insert_medicine.setOnClickListener {
+            mPresenter.addToPrescriptionLists(arguments?.getString(BUNDLE_NAME).toString(),ed_amount.text.toString(),
+            ed_day.text.toString(),routine.toString(),ed_comment.text.toString(),medicineTypeLists.toString(),medicineCountLists.toString())
+           dismiss()
         }
     }
 

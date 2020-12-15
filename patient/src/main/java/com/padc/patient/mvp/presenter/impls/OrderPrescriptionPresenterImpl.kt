@@ -28,6 +28,7 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
         })
 
 
+
         mPatientModel.getPrescriptionByID(consultationID,onSuccess = {
             mView?.displayPrescribeMedicineLists(it)
            mPrescriptionDataLists.value = it
@@ -40,7 +41,6 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
     }
 
     override fun onTapMadePayment(patientVO: PatientVO) {
-
        mPatientModel.registerNewPatient(patientVO = patientVO,onSuccess = {
            mView?.showPaymentDialog()
        },onFailure = {})

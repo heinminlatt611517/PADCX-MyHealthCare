@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="390dp"
     android:layout_height="wrap_content"
-    android:layout_margin="30dp"
+    >
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="390dp"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="15dp"
-    android:background="@android:color/transparent"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
         android:layout_margin="@dimen/margin_medium"
         android:orientation="vertical">
 
         <org.mmtextview.components.MMTextView
-            android:id="@+id/tv_medicineName"
+            android:id="@+id/tv_medicine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
@@ -70,7 +72,7 @@
                     android:gravity="center">
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/ed_number"
+                        android:id="@+id/ed_amount"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_corner_btn_white"
@@ -95,7 +97,7 @@
                 </RelativeLayout>
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/ed_conut"
+                    android:id="@+id/ed_day"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -123,7 +125,7 @@
                     app:strokeWidth="0.1dp">
 
                     <Spinner
-                        android:id="@+id/township_spinner"
+                        android:id="@+id/routine_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
@@ -140,8 +142,8 @@
             android:id="@+id/middleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium_3"
             android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_medium"
             app:layout_constraintTop_toBottomOf="@+id/topLayout">
 
             <org.mmtextview.components.MMTextView
@@ -155,43 +157,63 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="3">
+                >
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_morning"
-                    android:layout_width="0dp"
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/morning"
-                    android:textAlignment="center"
-                    android:textColor="@color/grey_600"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/grey_400"
-                    app:chipStrokeWidth="1dp" />
+                    app:singleSelection="false"
+                    app:selectionRequired="true"
+                    android:layout_gravity="center"
+                    android:id="@+id/chip_group_amount"
+                    >
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_day"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/day"
-                    android:textAlignment="center"
-                    android:textColor="@color/grey_600"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/grey_400"
-                    app:chipStrokeWidth="1dp" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_morning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/morning"
+                        android:textAlignment="center"
+                        android:textColor="@color/grey_600"
+                        app:chipBackgroundColor="@drawable/chip_selector"
+                        app:chipStrokeColor="@color/grey_400"
+                        app:chipStrokeWidth="1dp"
+                        app:checkedIconEnabled="true"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"/>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_night"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/night"
-                    android:textAlignment="center"
-                    android:textColor="@color/grey_600"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/grey_400"
-                    app:chipStrokeWidth="1dp" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_day"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/day"
+                        android:layout_marginRight="@dimen/margin_small"
+                        android:textAlignment="center"
+                        android:textColor="@color/grey_600"
+                        app:chipBackgroundColor="@drawable/chip_selector"
+                        app:chipStrokeColor="@color/grey_400"
+                        app:chipStrokeWidth="1dp"
+                        app:checkedIconEnabled="true"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_night"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/night"
+                        android:textAlignment="center"
+                        android:textColor="@color/grey_600"
+                        android:layout_marginRight="@dimen/margin_small"
+                        app:chipBackgroundColor="@drawable/chip_selector"
+                        app:chipStrokeColor="@color/grey_400"
+                        app:chipStrokeWidth="1dp"
+                        app:checkedIconEnabled="true"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+
             </LinearLayout>
 
         </LinearLayout>
@@ -200,48 +222,57 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium_3"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/middleLayout">
+           >
 
             <org.mmtextview.components.MMTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_medium_3"
                 android:layout_marginBottom="@dimen/margin_medium"
-                android:text="@string/count" />
+                android:text="@string/medicine_label" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                >
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true"
+                    android:layout_gravity="center"
+                    android:id="@+id/chip_group_medicine"
+                    >
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_beforeEat"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:gravity="left"
                     android:text="@string/before_eating"
-                    android:textAlignment="center"
                     android:textColor="@color/grey_600"
-                    app:chipBackgroundColor="@color/white"
+                    android:textSize="12dp"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    app:chipBackgroundColor="@drawable/chip_selector"
                     app:chipStrokeColor="@color/grey_400"
                     app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_afterEat"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/after_eating"
-                    android:textAlignment="center"
+                    android:gravity="right"
+                    android:textSize="12dp"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:textColor="@color/grey_600"
-                    app:chipBackgroundColor="@color/white"
+                    app:chipBackgroundColor="@drawable/chip_selector"
                     app:chipStrokeColor="@color/grey_400"
                     app:chipStrokeWidth="1dp" />
 
+                </com.google.android.material.chip.ChipGroup>
 
             </LinearLayout>
 
@@ -249,12 +280,12 @@
             <org.mmtextview.components.MMTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium_3"
                 android:layout_marginBottom="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:text="@string/note" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/ed_medicineNote"
+                android:id="@+id/ed_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_corner_btn_white"
@@ -272,7 +303,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_xxlarge"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:text="@string/insert_medicine"
                 app:backgroundTint="@color/blue_800"
                 app:cornerRadius="15dp" />
@@ -283,4 +314,4 @@
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
 
-
+</LinearLayout>

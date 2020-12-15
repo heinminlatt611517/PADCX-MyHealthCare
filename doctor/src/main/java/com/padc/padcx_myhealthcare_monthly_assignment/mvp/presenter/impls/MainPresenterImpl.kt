@@ -33,7 +33,7 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
             .observe(lifecycleOwner, Observer { consultationRequest ->
                 consultationRequest?.let {
                     val data = consultationRequest.filter {
-                        it.status.toString() == "none"
+                        it.status.toString() == "accept"
                     }
                     mView?.displayConsultationRequestLists(data)
                 }

@@ -44,5 +44,7 @@ const val doctors ="doctors"
 const val consulted_patient ="consulted_patient"
 const val prescription = "prescription"
 const val consultation_chat = "consultation_chat"
+const val patients = "patients"
+const val recent_doctors ="recent_consultation_doctors"
 
 

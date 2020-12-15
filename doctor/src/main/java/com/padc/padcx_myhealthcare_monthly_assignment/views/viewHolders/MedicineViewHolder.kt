@@ -25,6 +25,18 @@ class MedicineViewHolder(private val mDelegate : PrescribeMedicineItemDelegate, 
 
         data?.let {
              itemView.tv_medicine_name.text = data.name
+            if (!data.isSelect){
+                itemView.iv_add_medicine.visibility = View.VISIBLE
+                itemView.iv_remove_medicine.visibility = View.GONE
+            }
+            else{
+                itemView.iv_add_medicine.visibility = View.GONE
+                itemView.iv_remove_medicine.visibility = View.VISIBLE
+            }
+        }
+
+        itemView.iv_remove_medicine.setOnClickListener {
+           mDelegate.onTapRemoveMedicine(data)
         }
 
         itemView.iv_add_medicine.setOnClickListener {

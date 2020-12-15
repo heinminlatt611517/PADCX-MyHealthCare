@@ -10,7 +10,7 @@ import com.padc.share.presistence.typeConverters.PatientTypeConverter
 import com.padc.share.presistence.typeConverters.PrescriptionTypeConverter
 
 @Entity(tableName = "consultation_chat")
-@TypeConverters(GeneralQuestionTypeConverter::class,PatientTypeConverter::class,DoctorTypeConverter::class,PrescriptionTypeConverter::class)
+@TypeConverters(GeneralQuestionTypeConverter::class,PatientTypeConverter::class,DoctorTypeConverter::class)
 @IgnoreExtraProperties
 data class ConsultationChatVO(
     @PrimaryKey
@@ -21,6 +21,7 @@ data class ConsultationChatVO(
     var patient_id : String = "",
     var patient_info : PatientVO ? =null ,
     var doctor_info : DoctorVO ? = null,
-    var case_summary : ArrayList<QuestionAnswerVO>? = arrayListOf(),
-    var prescription : ArrayList<PrescriptionVO> ? = arrayListOf()
+    var medical_record : String ?= "",
+    var case_summary : ArrayList<QuestionAnswerVO>? = arrayListOf()
+
 )

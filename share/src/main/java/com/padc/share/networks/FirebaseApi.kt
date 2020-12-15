@@ -139,15 +139,15 @@ interface FirebaseApi {
         onFailure: (String) -> Unit
     )
 
-    fun finishConsultation(
-        patientVO: PatientVO,
-        doctorVO: DoctorVO,
-        documentID: String,
-        prescriptionListVO: ArrayList<PrescriptionVO>,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
-
-    )
+//    fun finishConsultation(
+//        patientVO: PatientVO,
+//        doctorVO: DoctorVO,
+//        documentID: String,
+//        prescriptionListVO: ArrayList<PrescriptionVO>,
+//        onSuccess: () -> Unit,
+//        onFailure: (String) -> Unit
+//
+//    )
 
     fun getConsultationByPatientID(
         patientId: String,
@@ -221,5 +221,14 @@ interface FirebaseApi {
         consulationId: String,
         prescriptionVO: PrescriptionVO,
         onSuccess: () -> Unit,
-        onFailure: (String))
+        onFailure: (String)
+    )
+
+    fun finishConsultation(
+        consultationChatVO: ConsultationChatVO,
+        prescriptionList: List<PrescriptionVO>,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    )
+
 }
