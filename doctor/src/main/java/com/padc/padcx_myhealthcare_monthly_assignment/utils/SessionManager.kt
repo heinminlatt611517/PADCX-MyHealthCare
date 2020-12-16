@@ -108,5 +108,13 @@ object SessionManager {
             it.putString(sharePreferenceDoctorPhone, value)
         }
 
+    var consultation_chat_id : String?
+
+        get() = preferences.getString(sharePreferenceConsultationID, "")
+
+        set(value) = preferences.edit {
+            it.putString(sharePreferenceConsultationID, value)
+        }
+
 
 }

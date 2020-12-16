@@ -10,4 +10,6 @@ interface OrderPrescriptionView : BaseView {
     fun showPaymentDialog()
     fun displayFullAddress(fullAddress : String)
     fun displayPrescribeMedicineLists(medicineLists : List<PrescriptionVO>)
+    fun showEmptyAddressView()
+    fun showRecyclerAddressView()
 }

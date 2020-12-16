@@ -26,9 +26,16 @@ import kotlinx.android.synthetic.main.activity_order_prescription.*
 class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
 
     companion object {
-        fun newIntent(context: Context): Intent {
-            return Intent(context, OrderPrescriptionActivity::class.java)
+        const val PARAM_CONSULTATION_CHAT_ID = " chat id"
+        fun newIntent(
+            context: Context,
+            consultation_chat_id : String
+        ) : Intent {
+            val intent = Intent(context, OrderPrescriptionActivity::class.java)
+            intent.putExtra(PARAM_CONSULTATION_CHAT_ID, consultation_chat_id)
+            return intent
         }
+
     }
 
     private var state: String? = null
@@ -51,7 +58,7 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
         mPresenter.onUiReady(
             this,
             SessionManager.patient_email.toString(),
-            "1fb9d2a0-3d4d-11eb-b835-31c15ed724eb"
+            intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString()
         )
 
     }
@@ -88,6 +95,15 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
     }
 
     private fun setUpActionListener() {
+
+
+        card_add_address.setOnClickListener {
+            layout_address.visibility = View.VISIBLE
+            recycler_address.visibility = View.GONE
+        }
+
+
+
         btn_order.setOnClickListener {
 
             val addressLists : ArrayList<AddressVO> = arrayListOf()
@@ -173,6 +189,16 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
     override fun displayPrescribeMedicineLists(medicineLists: List<PrescriptionVO>) {
         Log.d("medicineLists", medicineLists.size.toString())
         mPrescribeMedicineAdapter.setNewData(medicineLists.toMutableList())
+    }
+
+    override fun showEmptyAddressView() {
+        layout_address.visibility = View.VISIBLE
+        recycler_address.visibility = View.GONE
+    }
+
+    override fun showRecyclerAddressView() {
+       recycler_address.visibility = View.VISIBLE
+        layout_address.visibility = View.GONE
     }
 
     override fun showErrorMessage(errorMessage: String) {

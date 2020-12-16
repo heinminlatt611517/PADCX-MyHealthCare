@@ -12,15 +12,17 @@ import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.firestore.FieldValue
 import com.padc.padcx_myhealthcare_monthly_assignment.R
 import com.padc.padcx_myhealthcare_monthly_assignment.adapter.ChatMessageAdapter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.ChatPresenter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls.ChatPresenterImpl
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.view.ChatView
+import com.padc.padcx_myhealthcare_monthly_assignment.utils.SessionManager
+import com.padc.padcx_myhealthcare_monthly_assignment.views.viewPods.RecommendMedicineViewPod
 import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.ChatMessageVO
 import com.padc.share.data.vos.ConsultationRequestVO
+import com.padc.share.data.vos.PrescriptionVO
 import com.padc.share.data.vos.SenderTypeVO
 import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
@@ -43,6 +45,7 @@ class ChatActivity : BaseActivity(), ChatView {
 
     private lateinit var mChatPresenter: ChatPresenter
     private lateinit var mChatMessageAdapter: ChatMessageAdapter
+    private lateinit var mRecommendMedicineViewPod : RecommendMedicineViewPod
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +78,7 @@ class ChatActivity : BaseActivity(), ChatView {
                     intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
                     message = ChatMessageVO(
                         UUID.randomUUID().toString(),
-                        "", ed_text_message.text.toString(), "",
+                        com.padc.share.utils.DateUtils().getCurrentDateTime(), ed_text_message.text.toString(), "",
                         SenderTypeVO(
                             UUID.randomUUID().toString(),
                             "doctor", ""
@@ -120,6 +123,10 @@ class ChatActivity : BaseActivity(), ChatView {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mChatMessageAdapter = ChatMessageAdapter()
         rv_chatMessage?.adapter = mChatMessageAdapter
+
+
+
+
     }
 
     private fun setUpPresenter() {
@@ -147,6 +154,17 @@ class ChatActivity : BaseActivity(), ChatView {
         startActivity(GeneralQuestionActivity.newIntent(this,intent.getStringExtra(
             PARAM_CONSULTATION_CHAT_ID).toString()))
     }
+
+    override fun displayPrescriptionLists(lists: List<PrescriptionVO>) {
+        Log.d("prescriptionLists",lists.size.toString())
+        if (lists.isNotEmpty()){
+            recommend_medicine_view_pod.visibility = View.VISIBLE
+            mRecommendMedicineViewPod = recommend_medicine_view_pod as RecommendMedicineViewPod
+
+            mRecommendMedicineViewPod.setPrescriptionData(lists, SessionManager.doctor_photo.toString())
+        }
+    }
+
 
 
     private fun bindData(data: ConsultationRequestVO) {

@@ -15,7 +15,10 @@ import com.padc.share.data.models.PatientModel
 import com.padc.share.data.models.impls.PatientModelImpl
 import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
+import com.padc.share.data.vos.PatientVO
+import com.padc.share.data.vos.QuestionAnswerVO
 import com.padc.share.mvp.presenter.AbstractBasePresenter
+import com.padc.share.utils.DateUtils
 
 class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
@@ -26,26 +29,29 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         mPatientModel.getSpecialities(onSuccess = {}, onError = {})
 
         mPatientModel.getSpecialitiesFromDB()
-                .observe(lifecycleOwner, Observer {
-                    mView?.displaySpecialistDoctorLists(it)
-                })
+            .observe(lifecycleOwner, Observer {
+                mView?.displaySpecialistDoctorLists(it)
+            })
 
 
 
         mPatientModel.getRecentDoctorLists(SessionManager.patient_id.toString(),
-                onSuccess = {
-                    mView?.displayRecentDoctorLists(it as ArrayList<DoctorVO>)
-                },
-                onFailure = {
-                    mView?.showErrorMessage("Fail to load recent doctor lists!")
-                })
+            onSuccess = {
+                mView?.displayRecentDoctorLists(it as ArrayList<DoctorVO>)
+            },
+            onFailure = {
+                mView?.showErrorMessage("Fail to load recent doctor lists!")
+            })
 
 
-        mPatientModel.getConsultationAccepts(SessionManager.patient_id.toString(), onSuccess = {}, onError = {})
+        mPatientModel.getConsultationAccepts(
+            SessionManager.patient_id.toString(),
+            onSuccess = {},
+            onError = {})
 
         mPatientModel.getConsultationAcceptsFromDB()
             .observe(lifecycleOwner, Observer {
-                var data =it.filter{ it ->
+                var data = it.filter { it ->
                     it.consultation_id.toString().isNotEmpty()
                 }
                 mView?.displayConsultationRequestList(data)
@@ -60,27 +66,26 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
     ) {
 
         mPatientModel.getPatientByEmail(SessionManager.patient_email.toString(),
-        onSuccess = { it ->
+            onSuccess = { it ->
 
-            it.blood_type?.let {
-                if (it.isBlank()) {
-                    dialogFragment.startActivity(dialogFragment.context?.let { context ->
-                        EmptyCaseSummaryActivity.newIntent(
-                            context,specialityName
-                        )
-                    })
-                    dialogFragment.dismiss()
+                it.blood_type?.let {
+                    if (it.isBlank()) {
+                        dialogFragment.startActivity(dialogFragment.context?.let { context ->
+                            EmptyCaseSummaryActivity.newIntent(
+                                context, specialityName
+                            )
+                        })
+                        dialogFragment.dismiss()
+                    } else {
+                        dialogFragment.startActivity(dialogFragment.context?.let { context ->
+                            CaseSummaryActivity.newIntent(
+                                context, specialityName
+                            )
+                        })
+                        dialogFragment.dismiss()
+                    }
                 }
-                else{
-                    dialogFragment.startActivity(dialogFragment.context?.let {context ->
-                        CaseSummaryActivity.newIntent(
-                            context,specialityName
-                        )
-                    })
-                    dialogFragment.dismiss()
-                }
-            }
-        },onError = {})
+            }, onError = {})
 
 
     }
@@ -90,12 +95,30 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         consultation_chat_id: String,
         consultationRequestVO: ConsultationRequestVO
     ) {
-        mPatientModel.navigateToChatRoom(consultation_chat_id,consultationRequestVO,
+        mPatientModel.navigateToChatRoom(consultation_chat_id, consultationRequestVO,
             onSuccess = {}, onError = {})
     }
 
-    override fun onTapRecentDoctorItem(doctorVO: DoctorVO) {
+    override fun onTapConfirmDirectRequest(
+        specialityName: String,
+        dataTime: String,
+        questionAnswerLists: QuestionAnswerVO,
+        patientVO: PatientVO,
+        doctorVO: DoctorVO
+    ) {
+//        mPatientModel.sendDirectRequest(
+//            specialityName, dataTime, questionAnswerLists, patientVO,
+//            doctorVO,onSuccess = {
+//
+//            },onFailure = {
+//                mView?.showErrorMessage(it)
+//            }
+//        )
+    }
 
+
+    override fun onTapRecentDoctorItem(doctorVO: DoctorVO) {
+        mView?.showRecentDoctorDialog(doctorVO)
     }
 
     override fun onTapSpecialityDoctorItem(specialitiesID: String) {
@@ -106,8 +129,8 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         consultationChatId: String,
         consultationRequestVO: ConsultationRequestVO
     ) {
-        Log.d("ConsultationId",consultationChatId)
-        mView?.navigateToChatScreen(consultationChatId , consultationRequestVO)
+        Log.d("ConsultationId", consultationChatId)
+        mView?.navigateToChatScreen(consultationChatId, consultationRequestVO)
     }
 
 }

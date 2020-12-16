@@ -12,4 +12,5 @@ interface PrescribeMedicineView : BaseView {
     fun navigateToSplashScreen()
     fun displayPatientRequestData(data : ConsultationRequestVO)
     fun displayPrescriptionLists(prescriptionVO: PrescriptionVO )
+    fun navigateToChatScreen()
 }

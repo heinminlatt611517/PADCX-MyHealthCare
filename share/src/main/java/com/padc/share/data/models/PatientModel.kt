@@ -27,6 +27,12 @@ interface PatientModel {
         onFailure: (String) -> Unit
     )
 
+    fun getPrescription(
+        consultationId: String,
+        onSuccess: (List<PrescriptionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
     fun getSpecialities(
         onSuccess: (List<SpecialitiesVO>) -> Unit,
         onError: (String) -> Unit

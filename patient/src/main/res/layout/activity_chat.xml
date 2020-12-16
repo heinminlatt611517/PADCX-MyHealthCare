@@ -316,6 +316,13 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:id="@+id/rv_chatMessage"/>
 
+                <include layout="@layout/recommend_mecidine_for_chat_viewpod"
+                    android:id="@+id/prescribe_medicine_view_pod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:visibility="gone"/>
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

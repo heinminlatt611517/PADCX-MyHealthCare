@@ -204,5 +204,14 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         mFirebaseApi.finishConsultation(consultationChatVO,prescriptionList,onSuccess,onError)
     }
 
+    override fun getPrescription(
+        consultationId: String,
+        onSuccess: (List<PrescriptionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getPrescription(consultationId,onSuccess,onFailure)
+    }
+
+
 
 }

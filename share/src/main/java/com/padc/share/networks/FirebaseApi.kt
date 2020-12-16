@@ -231,4 +231,12 @@ interface FirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun getPrescription(
+        consultationId: String,
+        onSuccess: (List<PrescriptionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun updatePatientAddress(patients: PatientVO,addressLists : List<AddressVO>, onSuccess: () -> Unit, onFailure: (String) -> Unit)
+
 }

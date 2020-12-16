@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
@@ -16,10 +17,14 @@ import com.padc.patient.adapters.ChatMessageAdapter
 import com.padc.patient.mvp.presenter.ChatPresenter
 import com.padc.patient.mvp.presenter.impls.ChatPresenterImpl
 import com.padc.patient.mvp.view.ChatView
+import com.padc.patient.utils.SessionManager
+import com.padc.patient.views.viewPods.RecommendMedicineViewPod
 import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.ChatMessageVO
 import com.padc.share.data.vos.ConsultationRequestVO
+import com.padc.share.data.vos.PrescriptionVO
 import com.padc.share.data.vos.SenderTypeVO
+import com.padc.share.utils.DateUtils
 import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
 
@@ -41,7 +46,7 @@ class ChatActivity : BaseActivity(), ChatView {
 
     private lateinit var mChatPresenter: ChatPresenter
     private lateinit var mChatMessageAdapter : ChatMessageAdapter
-
+    private lateinit var mRecommendMedicineViewPod : RecommendMedicineViewPod
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -74,7 +79,7 @@ class ChatActivity : BaseActivity(), ChatView {
             if (!ed_text_message.text?.equals("")!!) {
                 mChatPresenter.onTapSend( intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
                         message = ChatMessageVO(UUID.randomUUID().toString(),
-                                "", ed_text_message.text.toString(), "",
+                            DateUtils().getCurrentDateTime(), ed_text_message.text.toString(), "",
                                 SenderTypeVO(UUID.randomUUID().toString(),
                                         "patient","")
                        ))
@@ -115,6 +120,21 @@ class ChatActivity : BaseActivity(), ChatView {
 
     override fun displayPatientRequestData(data: ConsultationRequestVO) {
         bindPatientData(data)
+    }
+
+    override fun navigateToOrderPrescriptionScreen() {
+        startActivity(OrderPrescriptionActivity.newIntent(this,intent.getStringExtra(
+            PARAM_CONSULTATION_CHAT_ID).toString()))
+    }
+
+    override fun displayPrescriptionLists(lists: List<PrescriptionVO>) {
+       if (lists.isNotEmpty()){
+           prescribe_medicine_view_pod.visibility = View.VISIBLE
+           mRecommendMedicineViewPod = prescribe_medicine_view_pod as RecommendMedicineViewPod
+
+           mRecommendMedicineViewPod.setDelegate(mChatPresenter)
+           mRecommendMedicineViewPod.setPrescriptionData(lists, SessionManager.patient_photo.toString())
+       }
     }
 
     private fun bindPatientData(data: ConsultationRequestVO) {

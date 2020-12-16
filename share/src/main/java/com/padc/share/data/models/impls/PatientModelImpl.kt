@@ -52,6 +52,14 @@ object PatientModelImpl : PatientModel, BaseModel() {
             onFailure = { onFailure(it) })
     }
 
+    override fun getPrescription(
+        consultationId: String,
+        onSuccess: (List<PrescriptionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getPrescription(consultationId,onSuccess,onFailure)
+    }
+
 //    override fun registerNewPatient(
 //            email: String,
 //            password: String,

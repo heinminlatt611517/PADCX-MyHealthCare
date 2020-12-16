@@ -1,5 +1,6 @@
 package com.padc.patient.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.padc.patient.R

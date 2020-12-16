@@ -22,6 +22,7 @@ data class ConsultationChatVO(
     var patient_info : PatientVO ? =null ,
     var doctor_info : DoctorVO ? = null,
     var medical_record : String ?= "",
+    var start_consultation_date : String ?= "",
     var case_summary : ArrayList<QuestionAnswerVO>? = arrayListOf()
 
 )

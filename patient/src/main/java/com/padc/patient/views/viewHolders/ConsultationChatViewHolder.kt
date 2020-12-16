@@ -23,6 +23,7 @@ class ConsultationChatViewHolder(private val mDelegate: ConsultationChatItemDele
         data?.let {
             itemView.tv_doctor_name.text = data.doctor_info?.name
             itemView.tv_doctor_speciality.text = data.doctor_info?.speciality
+            itemView.tv_consultation_chatDate.text = data.start_consultation_date
 
             data?.doctor_info?.photo?.let {
                 ImageUtils().showImage(itemView.iv_doctor, it, R.drawable.speciality_thumbnail)

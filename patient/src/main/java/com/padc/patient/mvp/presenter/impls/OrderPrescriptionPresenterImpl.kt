@@ -19,10 +19,29 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
     private val mPatientModel: PatientModel = PatientModelImpl
     private val mPrescriptionDataLists = MutableLiveData<List<PrescriptionVO>>()
     private val mPatientFullAddress = MutableLiveData<String>()
+
+    private val mAddressLists : ArrayList<AddressVO> = arrayListOf()
     override fun onUiReady(lifecycleOwner: LifecycleOwner, patientID: String,consultationID : String) {
 
         mPatientModel.getPatientByEmail(patientID,onSuccess = {
-            mView?.displayPatientAddress(it.address)
+            mAddressLists.addAll(it.address)
+
+            if (mAddressLists.isNotEmpty()){
+                mAddressLists.forEach {
+                    it.isSelect = true
+                }
+                mView?.displayPatientAddress(mAddressLists)
+            }
+            else{
+                mAddressLists.forEach {
+                    it.isSelect= false
+                }
+                mView?.displayPatientAddress(mAddressLists)
+            }
+
+
+
+
         },onError = {
 
         })
@@ -64,6 +83,14 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
 
     override fun onTapAddress(fullAddress: String) {
        mPatientFullAddress.value = fullAddress
+    }
+
+    override fun showEmptyAddressView() {
+        mView?.showEmptyAddressView()
+    }
+
+    override fun showRecyclerAddressView() {
+        mView?.showRecyclerAddressView()
     }
 
 

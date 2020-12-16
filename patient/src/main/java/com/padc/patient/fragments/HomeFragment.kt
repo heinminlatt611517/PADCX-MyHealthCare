@@ -1,5 +1,6 @@
 package com.padc.patient.fragments
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.padc.patient.R
 import com.padc.patient.activities.ChatActivity
 import com.padc.patient.adapters.ConsultationAcceptAdapter
@@ -23,13 +25,13 @@ import com.padc.patient.dialogs.ConfirmDialogFragment.Companion.BUNDLE_PATIENT_I
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.presenter.impls.HomePresenterImpl
 import com.padc.patient.mvp.view.HomeView
+import com.padc.patient.utils.SessionManager
 import com.padc.patient.views.viewPods.ConsultationRequestViewPod
-import com.padc.share.data.vos.ConsultationRequestVO
-import com.padc.share.data.vos.DoctorVO
-import com.padc.share.data.vos.PatientVO
-import com.padc.share.data.vos.SpecialitiesVO
+import com.padc.share.data.vos.*
+import com.padc.share.utils.DateUtils
+import kotlinx.android.synthetic.main.confirm_dialog_layout.*
+import kotlinx.android.synthetic.main.confirm_dialog_layout.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
-
 
 
 private const val PARAM_ID = "PARAM_ID"
@@ -47,15 +49,15 @@ class HomeFragment : Fragment(), HomeView {
 
     }
 
-    private lateinit var mPresenter : HomePresenter
-    private lateinit var mSpecialityAdapter : SpecialityDoctorAdapter
-    private lateinit var mRecentDoctorAdapter : RecentDoctorAdapter
-    private lateinit var mConsultationRequestViewPod : ConsultationRequestViewPod
+    private lateinit var mPresenter: HomePresenter
+    private lateinit var mSpecialityAdapter: SpecialityDoctorAdapter
+    private lateinit var mRecentDoctorAdapter: RecentDoctorAdapter
+    private lateinit var mConsultationRequestViewPod: ConsultationRequestViewPod
 
-    private lateinit var mConsultationAcceptAdapter : ConsultationAcceptAdapter
+    private lateinit var mConsultationAcceptAdapter: ConsultationAcceptAdapter
 
 
-    private var patientID : String? = null
+    private var patientID: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,17 +91,19 @@ class HomeFragment : Fragment(), HomeView {
     private fun setUpRecyclerView() {
 
 
-        rv_consultation.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        mConsultationAcceptAdapter = ConsultationAcceptAdapter (mPresenter)
+        rv_consultation.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        mConsultationAcceptAdapter = ConsultationAcceptAdapter(mPresenter)
         rv_consultation.adapter = mConsultationAcceptAdapter
 
 
-        rc_recent_doctor.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        mRecentDoctorAdapter = RecentDoctorAdapter (mPresenter)
+        rc_recent_doctor.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        mRecentDoctorAdapter = RecentDoctorAdapter(mPresenter)
         rc_recent_doctor.adapter = mRecentDoctorAdapter
 
 
-        rc_speciality.layoutManager = GridLayoutManager(activity ,2)
+        rc_speciality.layoutManager = GridLayoutManager(activity, 2)
         mSpecialityAdapter = SpecialityDoctorAdapter(mPresenter)
         rc_speciality.adapter = mSpecialityAdapter
     }
@@ -121,33 +125,37 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun displaySpecialistDoctorLists(specialistDoctorLists: List<SpecialitiesVO>) {
         Log.d("SpecialityLists", specialistDoctorLists.size.toString())
-         mSpecialityAdapter.setNewData(specialistDoctorLists.toMutableList())
+        mSpecialityAdapter.setNewData(specialistDoctorLists.toMutableList())
     }
 
     override fun displayRecentDoctorLists(recentDoctorLists: ArrayList<DoctorVO>) {
 
-        if (recentDoctorLists.isNotEmpty() ){
+        if (recentDoctorLists.isNotEmpty()) {
             layout_recentDoctor.visibility = View.VISIBLE
             mRecentDoctorAdapter.setNewData(recentDoctorLists)
-        }
-        else{
+        } else {
             layout_recentDoctor.visibility = View.GONE
         }
 
     }
 
-    override fun showConfirmDialog(specialityName : String) {
+    override fun showConfirmDialog(specialityName: String) {
 
-        Log.d("SpecialityName",specialityName)
+        Log.d("SpecialityName", specialityName)
 
         val confirmDialog = ConfirmDialogFragment.newFragment()
         val bundle = Bundle()
         bundle.putString(BUNDLE_NAME, specialityName)
         confirmDialog.arguments = bundle
-        activity?.supportFragmentManager?.let { confirmDialog.show(it,ConfirmDialogFragment.TAG_ADD_CONFIRM_DIALOG) }
+        activity?.supportFragmentManager?.let {
+            confirmDialog.show(
+                it,
+                ConfirmDialogFragment.TAG_ADD_CONFIRM_DIALOG
+            )
+        }
     }
 
-    override fun navigateToEmptyCaseSummaryScreen(context: Context,speciality: String) {
+    override fun navigateToEmptyCaseSummaryScreen(context: Context, speciality: String) {
 
     }
 
@@ -157,22 +165,87 @@ class HomeFragment : Fragment(), HomeView {
 
 
     override fun displayPatientData(patientVO: PatientVO) {
-        Log.d("PatientData",patientVO.name)
+        Log.d("PatientData", patientVO.name)
     }
 
     override fun navigateToChatScreen(
         consultation_chat_id: String,
         consultationRequestVO: ConsultationRequestVO
     ) {
-        activity?.let{
-            mPresenter.onCompleteStatus(it,consultation_chat_id,consultationRequestVO)
+        activity?.let {
+            mPresenter.onCompleteStatus(it, consultation_chat_id, consultationRequestVO)
             it.startActivity(ChatActivity.newIntent(it, consultation_chat_id))
         }
     }
 
     override fun displayConsultationRequestList(consultationRequestVO: List<ConsultationRequestVO>) {
-        Log.d("RequestListSize",consultationRequestVO.size.toString())
+        Log.d("RequestListSize", consultationRequestVO.size.toString())
         mConsultationAcceptAdapter.setNewData(consultationRequestVO.toMutableList())
+    }
+
+    override fun showRecentDoctorDialog(doctorVO: DoctorVO) {
+        val view = layoutInflater.inflate(R.layout.confirm_dialog_layout, null)
+        val dialog = context?.let { Dialog(it) }
+
+        consultation_request_name_id?.text =
+            doctorVO.name + resources.getString(R.string.consultation_request_message)
+
+        dialog?.apply {
+            setCancelable(false)
+            setContentView(view)
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
+
+
+        view.btn_cancle.setOnClickListener {
+            dialog?.dismiss()
+        }
+
+        view.btn_confirm.setOnClickListener {
+
+            val patientVO = PatientVO(
+                SessionManager.patient_id.toString(),
+                SessionManager.patient_name.toString(),
+                SessionManager.patient_email.toString(),
+                SessionManager.patient_device_id,
+                SessionManager.patient_photo,
+                SessionManager.patient_bloodType,
+                SessionManager.patient_bloodPressure,
+                arrayListOf(),
+                SessionManager.patient_weight,
+                SessionManager.patient_height,
+                SessionManager.patient_dateOfBirth.toString(),
+                SessionManager.patient_allegric,
+                arrayListOf()
+            )
+
+            val doctorVo = DoctorVO(
+                doctorVO.id,
+                doctorVO.name,
+                doctorVO.email,
+                doctorVO.photo,
+                doctorVO.age,
+                doctorVO.deviceID,
+                doctorVO.degree,
+                doctorVO.biography,
+                doctorVO.address,
+                doctorVO.phone,
+                doctorVO.speciality
+            )
+
+
+            mPresenter.onTapConfirmDirectRequest(
+                doctorVO.speciality.toString(), DateUtils().getCurrentDate(),
+                QuestionAnswerVO(), patientVO, doctorVo
+            )
+
+            dialog?.dismiss()
+
+        }
+
+
+        dialog?.show()
     }
 
 
@@ -181,7 +254,6 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun getLifeCycleOwner(): LifecycleOwner = this
-
 
 
 }

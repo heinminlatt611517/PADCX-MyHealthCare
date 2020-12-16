@@ -121,4 +121,11 @@ interface DoctorModel {
         onError: (String) -> Unit
     )
 
+
+    fun getPrescription(
+        consultationId: String,
+        onSuccess: (List<PrescriptionVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
 }

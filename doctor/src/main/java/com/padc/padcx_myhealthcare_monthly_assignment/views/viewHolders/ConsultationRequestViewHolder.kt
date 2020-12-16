@@ -24,7 +24,6 @@ class ConsultationRequestViewHolder(var consulted_patient :List<ConsultedPatient
         data?.let {
 
 
-
             ImageUtils().showImage(itemView.iv_patient,data.patient_info?.photo.toString(), R.drawable.doctor_thumbnail)
             itemView.tv_patientName.text = data.patient_info?.name
             itemView.tv_patientBirthDate.text = data.patient_info?.dateOfBirth

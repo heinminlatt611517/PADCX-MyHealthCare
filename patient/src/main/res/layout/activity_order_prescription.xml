@@ -169,6 +169,7 @@
                     app:cardCornerRadius="15dp"
                     app:strokeColor="@color/grey_600"
                     app:strokeWidth="0.5dp"
+                    android:id="@+id/card_add_address"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginBottom="@dimen/margin_medium"
                     android:layout_height="wrap_content">
@@ -204,7 +205,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:id="@+id/layout_address"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_margin="@dimen/margin_medium_3"
                 >
 
@@ -350,6 +351,7 @@
         android:layout_marginBottom="@dimen/margin_medium_3"
         app:backgroundTint="@color/blue_800"
         />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

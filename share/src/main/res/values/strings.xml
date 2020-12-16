@@ -30,6 +30,7 @@
     <string name="patient_reaction_alert_hint">မတည့်သောဆေးရှိလျင်ရေးသားပေးပါ</string>
     <string name="patient_allergic_reactions_medicine">မတည့်သောဆေး</string>
     <string name="ft">ft</string>
+    <string name="postpone">အချိန်ရွေးမည်</string>
     <string name="lb">lb</string>
     <string name="answer_hint">ဖြေဆိုပါ</string>
     <string name="mmhg">mmHg</string>

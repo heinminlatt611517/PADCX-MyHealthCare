@@ -64,9 +64,7 @@ class ConsultationChatFragment : Fragment() ,ConsultationChatView {
     }
 
     private fun setUpActionListener() {
-       btn_click.setOnClickListener {
-           startActivity(context?.let { it1 -> OrderPrescriptionActivity.newIntent(it1) })
-       }
+
     }
 
     private fun setUpRecyclerView() {

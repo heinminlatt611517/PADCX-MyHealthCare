@@ -20,8 +20,7 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
 
     private val mDoctorModel: DoctorModel = DoctorModelImpl
 
-    private val mMedicineCount = MutableLiveData<List<String>>()
-    private val mMedicineType = MutableLiveData<List<String>>()
+    private val mPrescriptionLists = MutableLiveData<List<PrescriptionVO>>()
 
 
 
@@ -47,25 +46,20 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
 
     override fun onTapStopConsultation(consultationVO : ConsultationChatVO) {
 
-
         if (prescriptionLists.isNotEmpty()){
             mDoctorModel.finishConsultation(consultationVO, prescriptionLists, onSuccess = {
-                prescriptionLists.clear()
-                medicineLists.forEach {
-                    it.isSelect = false
-                }
-                mView?.navigateToSplashScreen()
+                mView?.navigateToChatScreen()
             }, onError = {})
         }
 
     }
 
     override fun addMedicineCount(data: String) {
-        mMedicineCount.value = listOf(data)
+
     }
 
     override fun addMedicineType(data: String) {
-        mMedicineType.value = listOf(data)
+
     }
 
     override fun addToPrescriptionLists(

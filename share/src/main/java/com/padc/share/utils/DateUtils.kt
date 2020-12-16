@@ -16,6 +16,10 @@ class DateUtils
         return simpleDateFormat.format(Date())
     }
 
+    fun getCurrentDateTime() : String{
+        return SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(Date())
+    }
+
     fun getCurrentTime() : String{
        return getCurrentTime()
    }

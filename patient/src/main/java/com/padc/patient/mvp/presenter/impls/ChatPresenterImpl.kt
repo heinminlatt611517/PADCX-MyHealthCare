@@ -29,6 +29,12 @@ class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
             mView?.showErrorMessage(it)
         })
 
+        mPatientModel.getPrescription(consultationID,onSuccess = {
+            mView?.displayPrescriptionLists(it)
+        },onFailure = {
+            mView?.showErrorMessage(it)
+        })
+
 
     }
 
@@ -43,5 +49,9 @@ class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
 
     override fun onTapAttach() {
 
+    }
+
+    override fun onTapOrderPrescription() {
+        mView?.navigateToOrderPrescriptionScreen()
     }
 }

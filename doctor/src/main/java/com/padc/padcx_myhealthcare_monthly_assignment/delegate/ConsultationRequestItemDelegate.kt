@@ -5,4 +5,9 @@ import com.padc.share.data.vos.ConsultationRequestVO
 interface ConsultationRequestItemDelegate {
     fun onTapAccept(consultationRequestVO: ConsultationRequestVO)
     fun onTapSkip(consultationRequestVO: ConsultationRequestVO)
+
+    fun onTapNext(consultationRequestVO: ConsultationRequestVO)
+    fun onTapPostpone(consultationRequestVO: ConsultationRequestVO)
+    fun onTapPostponeTime(postPoneTime : String, consultationRequestVO: ConsultationRequestVO)
+
 }

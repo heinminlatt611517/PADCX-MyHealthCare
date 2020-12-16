@@ -8,6 +8,7 @@
     <string name="number">အ​ရေအတွက်</string>
     <string name="note">မှတ်ချက်</string>
     <string name="insert_medicine">ထည့်မယ်</string>
+    <string name="medicine_recommendation">Medicine Recommendation</string>
 
     <string-array name="speciality_name_list">
         <item>ဦးနှောက်အာရုံကြော</item>

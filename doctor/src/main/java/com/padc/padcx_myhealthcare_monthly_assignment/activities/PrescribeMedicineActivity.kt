@@ -24,6 +24,7 @@ import com.padc.padcx_myhealthcare_monthly_assignment.mvp.view.PrescribeMedicine
 import com.padc.padcx_myhealthcare_monthly_assignment.utils.SessionManager
 import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.*
+import com.padc.share.utils.DateUtils
 import kotlinx.android.synthetic.main.activity_prescribe_medicine.*
 import kotlinx.android.synthetic.main.list_item_medicine.*
 import kotlinx.android.synthetic.main.list_item_medicine.view.*
@@ -90,7 +91,7 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
             val consultationChatVO = ConsultationChatVO(
                 consultationID.toString(), SessionManager.doctor_id, "",
                 true, mConsultationRequestVO.patient_info.id, mConsultationRequestVO.patient_info,doctorVO,
-                "",mConsultationRequestVO.case_summary
+                "",DateUtils().getCurrentDate(),mConsultationRequestVO.case_summary
             )
 
             mPresenter.onTapStopConsultation(consultationChatVO)
@@ -134,6 +135,11 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
     override fun displayPrescriptionLists(prescriptionVO: PrescriptionVO) {
 
         Log.d("plists", prescriptionLists.size.toString())
+    }
+
+    override fun navigateToChatScreen() {
+        startActivity(ChatActivity.newIntent(this,intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString()))
+        finish()
     }
 
 

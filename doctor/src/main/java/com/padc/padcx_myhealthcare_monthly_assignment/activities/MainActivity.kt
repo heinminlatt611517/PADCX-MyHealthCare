@@ -80,9 +80,7 @@ class MainActivity : BaseActivity() ,MainView{
 
 
     private fun setUpActionListener() {
-       btnAccept.setOnClickListener {
 
-       }
 
         iv_setting.setOnClickListener {
             mMainPresenter.onTapSetting()
@@ -129,7 +127,7 @@ class MainActivity : BaseActivity() ,MainView{
 
     override fun navigateToSettingScreen() {
         startActivity(ProfileActivity.newIntent(this))
-        finish()
+
     }
 
     override fun displayConsultationAcceptList(list: List<ConsultationChatVO>) {
@@ -147,6 +145,7 @@ class MainActivity : BaseActivity() ,MainView{
     }
 
     override fun navigateToPatientCaseSummary(consultation_request_id: String) {
+        SessionManager.consultation_chat_id = consultation_request_id
         startActivity(PatientCaseSummaryActivity.newIntent(this,consultation_request_id))
     }
 

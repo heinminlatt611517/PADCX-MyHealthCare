@@ -22,14 +22,14 @@
             android:textColor="@android:color/black"
             android:text="26/11/2020"/>
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_doctor"
             android:layout_width="80dp"
             android:layout_height="80dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_consultation_chatDate"
             android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/speciality_thumbnail"/>
+            android:src="@drawable/img_doctor"/>
 
         <TextView
             app:layout_constraintTop_toTopOf="@+id/iv_doctor"
@@ -37,6 +37,7 @@
             android:textColor="@color/black"
             android:text="Doctor Name"
             android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/margin_medium_3"
             android:textSize="16dp"
             android:id="@+id/tv_doctor_name"
             android:paddingTop="@dimen/margin_medium_2"
@@ -48,6 +49,7 @@
             app:layout_constraintStart_toEndOf="@+id/iv_doctor"
             android:text="Doctor speciality"
             android:textStyle="normal"
+            android:layout_marginLeft="@dimen/margin_medium_3"
             android:layout_width="wrap_content"
             android:paddingBottom="@dimen/margin_medium_2"
             android:layout_height="wrap_content"/>

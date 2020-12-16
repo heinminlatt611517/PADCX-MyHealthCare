@@ -29,11 +29,12 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
             onError = {})
 
 
+
         mDoctorModel.getBrodcastConsultationRequestsFromDB(SessionManager.doctor_speciality.toString())
             .observe(lifecycleOwner, Observer { consultationRequest ->
                 consultationRequest?.let {
                     val data = consultationRequest.filter {
-                        it.status.toString() == "accept"
+                        it.status.toString() == "none"
                     }
                     mView?.displayConsultationRequestLists(data)
                 }
@@ -107,6 +108,7 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
             biography = SessionManager.doctor_bigraphy,
             photo = SessionManager.doctor_photo,
             speciality = SessionManager.doctor_speciality
+
         )
         mDoctorModel.acceptRequest(
             "accept",
@@ -120,6 +122,21 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
     }
 
     override fun onTapSkip(consultationRequestVO: ConsultationRequestVO) {
+
+    }
+
+    override fun onTapNext(consultationRequestVO: ConsultationRequestVO) {
+
+    }
+
+    override fun onTapPostpone(consultationRequestVO: ConsultationRequestVO) {
+
+    }
+
+    override fun onTapPostponeTime(
+        postPoneTime: String,
+        consultationRequestVO: ConsultationRequestVO
+    ) {
 
     }
 

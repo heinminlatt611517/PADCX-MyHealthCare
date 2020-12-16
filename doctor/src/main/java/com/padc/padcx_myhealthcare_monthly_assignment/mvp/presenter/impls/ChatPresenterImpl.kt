@@ -25,6 +25,13 @@ class ChatPresenterImpl : ChatPresenter,AbstractBasePresenter<ChatView>() {
                 mView?.showErrorMessage(it)
             })
 
+
+       mDoctorModel.getPrescription(consultationID,onSuccess = {
+           mView?.displayPrescriptionLists(it)
+       },onFailure = {
+           mView?.showErrorMessage(it)
+       })
+
     }
 
 

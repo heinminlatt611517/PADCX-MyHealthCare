@@ -19,4 +19,6 @@ data class DoctorVO (
     var address: String? ="",
     var phone: String ?= "",
     var speciality : String? =""
+
+
 )
