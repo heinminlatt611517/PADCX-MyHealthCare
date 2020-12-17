@@ -120,10 +120,16 @@ interface PatientModel {
 
     fun sendDirectRequest(
         speciality: String,
-        dateTime: String, questionAnswerList: QuestionAnswerVO,
+        dateTime: String, questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
         doctorVO: DoctorVO,
         onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun getBroadConsultationRequestByDoctorSpeciality(
+        speciality: String,
+        onSuccess: (consulationRequest: ConsultationRequestVO) -> Unit,
         onFailure: (String) -> Unit
     )
 
@@ -144,4 +150,10 @@ interface PatientModel {
     fun getConsultationChat(consulationId:  String,  onSuccess: () -> Unit, onError: (String) -> Unit)
 
     fun getConsultationChatFromDB(consulationId : String) : LiveData<ConsultationChatVO>
+
+    fun getBroadcastConsultationRequestBySpeciality(
+        speciality: String,
+        onSuccess: (list: List<ConsultationRequestVO>) -> Unit,
+        onFailure: (String) -> Unit
+    )
 }

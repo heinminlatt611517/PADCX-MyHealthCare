@@ -111,32 +111,30 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
 
 
     override fun onTapAccept(consultationRequestVO: ConsultationRequestVO) {
-        acceptRequest("accept", 2,consultationRequestVO)
+        acceptRequest("accept", 1,consultationRequestVO)
 
     }
 
     override fun onTapSkip(consultationRequestVO: ConsultationRequestVO) {
-//        mDoctorModel.deleteConsultationRequestById(consultationRequestVO.id)
-//            .observe(mOwner, Observer { consultationRequest ->
-//                consultationRequest?.let {
-//                    mView?.displayConsultationRequestLists(consultationRequest) }
-//            })
+        mDoctorModel.deleteConsultationRequestById(consultationRequestVO.id,consultationRequestVO.doctor_info.speciality.toString())
+            .observe(mOwner, Observer { consultationRequest ->
+                consultationRequest?.let {
+                    mView?.displayConsultationRequestLists(consultationRequest) }
+            })
     }
 
     override fun onTapNext(consultationRequestVO: ConsultationRequestVO) {
-
+        mDoctorModel.deleteConsultationRequestById(consultationRequestVO.id,consultationRequestVO.doctor_info.speciality.toString())
+                .observe(mOwner, Observer { consultationRequest ->
+                    consultationRequest?.let {
+                        mView?.displayConsultationRequestLists(consultationRequest) }
+                })
     }
 
     override fun onTapPostpone(consultationRequestVO: ConsultationRequestVO) {
         mView?.displayPostPoneDialog(consultationRequestVO)
     }
 
-    override fun onTapPostponeTime(
-        postPoneTime: String,
-        consultationRequestVO: ConsultationRequestVO
-    ) {
-        acceptRequest("postpone $postPoneTime",1, consultationRequestVO)
-    }
 
     override fun onTapMedicalRecord(data: ConsultationChatVO) {
 
@@ -177,7 +175,7 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
 
 
 
-        if(type == 2) {
+        if(type == 1) {
             mView?.navigateToPatientCaseSummary(consultationRequestVO.id)
         }else{
 

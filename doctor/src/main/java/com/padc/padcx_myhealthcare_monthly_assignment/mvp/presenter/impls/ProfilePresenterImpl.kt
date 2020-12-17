@@ -36,7 +36,6 @@ class ProfilePresenterImpl : ProfilePresenter,AbstractBasePresenter<ProfileView>
 
     override fun updateUserData(
         bitmap: Bitmap,
-        specialityName: String,
         speciality: String,
         phone: String,
         degree: String,
@@ -68,7 +67,7 @@ class ProfilePresenterImpl : ProfilePresenter,AbstractBasePresenter<ProfileView>
                     experience = experience,
                     gender = gender
                 )
-
+                mDoctorModel.upDateDoctorInfo(doctorVO,onSuccess = {}, onError = {})
             },
             onFailure = {
                 mView?.showErrorMessage("Profile Update Failed")

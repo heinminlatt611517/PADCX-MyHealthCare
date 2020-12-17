@@ -11,7 +11,7 @@ interface ProfilePresenter : BasePresenter<ProfileView> {
     fun onTapEditProfile()
 
     fun updateUserData(bitmap: Bitmap,
-                       specialityName : String,speciality : String,
+                       speciality : String,
                        phone : String, degree : String,
                        biography : String, address : String,
                        experience : String, dateOfBirth : String,

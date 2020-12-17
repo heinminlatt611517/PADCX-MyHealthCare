@@ -142,6 +142,7 @@ dependencies {
     //circleImageView
     implementation rootProject.ext.libraries.circleImageView
 
+    implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
 
 }
 

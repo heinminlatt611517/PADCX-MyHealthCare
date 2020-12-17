@@ -154,5 +154,7 @@ interface DoctorModel {
 
     fun getConsultationChatFromDB(consulationId : String) : LiveData<ConsultationChatVO>
 
-    fun deleteConsultationRequestById(consulationId : String)  : LiveData<List<ConsultationRequestVO>>
+    fun deleteConsultationRequestById(consulationId : String,speciality: String)  : LiveData<List<ConsultationRequestVO>>
+
+    fun upDateDoctorInfo(doctorVO: DoctorVO, onSuccess: () -> Unit, onError: (String) -> Unit)
 }

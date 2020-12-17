@@ -2,11 +2,14 @@ package com.padc.patient.activities
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
+import com.kofigyan.stateprogressbar.StateProgressBar
 import com.padc.patient.R
 import com.padc.patient.mvp.presenter.EmptyCaseSummaryPresenter
 import com.padc.patient.mvp.presenter.impls.EmptyCaseSummaryPresenterImpl
@@ -15,6 +18,7 @@ import com.padc.patient.utils.SessionManager
 import com.padc.share.activities.BaseActivity
 import com.padc.share.data.vos.PatientVO
 import kotlinx.android.synthetic.main.activity_empty_case_summary.*
+
 
 class EmptyCaseSummaryActivity : BaseActivity(), EmptyCaseSummaryView {
 
@@ -33,9 +37,12 @@ class EmptyCaseSummaryActivity : BaseActivity(), EmptyCaseSummaryView {
     private var day: String? = null
     private var bloodType: String? = null
 
+    var descriptionData =
+        arrayOf("အထွေထွေမေးခွန်းများ", "ရောဂါဆိုင်ရာမေးခွန်းများ")
 
     private lateinit var mPresenter: EmptyCaseSummaryPresenter
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_empty_case_summary)
@@ -43,6 +50,12 @@ class EmptyCaseSummaryActivity : BaseActivity(), EmptyCaseSummaryView {
         setUpPresenter()
         setUpItemSelectedListener()
         setUpActionListener()
+
+        val stateProgressBar =
+            findViewById<View>(R.id.state_progress_bar) as StateProgressBar
+        stateProgressBar.setStateDescriptionData(descriptionData)
+
+
     }
 
     private fun setUpActionListener() {

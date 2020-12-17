@@ -116,7 +116,7 @@ interface FirebaseApi {
 
     fun sendDirectRequest(
         speciality: String,
-        dateTime: String, questionAnswerList: QuestionAnswerVO,
+        dateTime: String, questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
         doctorVO: DoctorVO,
         onSuccess: () -> Unit,
@@ -130,6 +130,8 @@ interface FirebaseApi {
         dateTime: String,
         onSuccess: () -> Unit, onFailure: (String) -> Unit
     )
+
+
 
 
     fun addToPreScribeMedicine(
@@ -191,6 +193,12 @@ interface FirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun getBroadConsultationRequestByDoctorSpeciality(
+        speciality: String,
+        onSuccess: (consulationRequest: ConsultationRequestVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
     fun getConsultationPatient(
         doctorId: String,
         onSuccess: (List<ConsultedPatientVO>) -> Unit,
@@ -247,4 +255,8 @@ interface FirebaseApi {
     )
 
     fun getConsulationChatById(consulationId : String ,onSuccess: (List<ConsultationChatVO>) -> Unit,onFailure: (String) -> Unit)
+
+    fun updateDoctorData(doctorVO: DoctorVO ,onSuccess: () -> Unit,
+                         onFailure: (String) -> Unit
+    )
 }

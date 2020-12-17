@@ -15,7 +15,6 @@ class ImageUtils{
         Glide.with(imageView.context)
                 .load( imageUrl)
                 .placeholder(thumbnail)
-               .apply(RequestOptions().circleCrop())
                 .into(imageView)
     }
 
@@ -25,7 +24,6 @@ class ImageUtils{
             .asBitmap()
             .load(filePath ?: imageUrl)
             .placeholder(R.drawable.doctor)
-            .apply(RequestOptions().circleCrop())
             .into(imageView)
     }
 }

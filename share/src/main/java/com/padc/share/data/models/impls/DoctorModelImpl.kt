@@ -248,9 +248,13 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         return mTheDB.consultationChatDao().getAllConsultationChatDataBy(consulationId)
     }
 
-    override fun deleteConsultationRequestById(consulationId: String): LiveData<List<ConsultationRequestVO>> {
+    override fun deleteConsultationRequestById(consulationId: String,speciality: String): LiveData<List<ConsultationRequestVO>> {
         mTheDB.consultationRequestDao().deleteAllConsultationRequestDataById(consulationId)
         return mTheDB.consultationRequestDao().getAllConsultationRequestDataBySpeciality("dentist")
+    }
+
+    override fun upDateDoctorInfo(doctorVO: DoctorVO, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        mFirebaseApi.updateDoctorData(doctorVO, onSuccess = {}, onFailure = { onError(it) })
     }
 
 

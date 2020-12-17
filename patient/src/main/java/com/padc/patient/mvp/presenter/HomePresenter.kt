@@ -1,5 +1,6 @@
 package com.padc.patient.mvp.presenter
 
+import android.app.Dialog
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.padc.patient.delegates.ConsultationAcceptDelegate
@@ -7,7 +8,6 @@ import com.padc.patient.delegates.RecentDoctorItemDelegate
 import com.padc.patient.delegates.SpecialityDoctorItemDelegate
 import com.padc.patient.dialogs.ConfirmDialogFragment
 import com.padc.patient.mvp.view.HomeView
-import com.padc.patient.views.viewPods.ConsultationRequestViewPod
 import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
@@ -31,8 +31,9 @@ interface HomePresenter : BasePresenter<HomeView>, RecentDoctorItemDelegate,
     fun onTapConfirmDirectRequest(
         specialityName: String,
         dataTime: String,
-        questionAnswerLists: QuestionAnswerVO,
+        questionAnswerLists: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
         doctorVO: DoctorVO
+
     )
 }

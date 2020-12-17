@@ -150,8 +150,8 @@ class MainActivity : BaseActivity() ,MainView{
                 else -> am_pm = "AM"
             }
 
-            val h = if (hour < 10) "0" + hour else hour
-            val min = if (minute < 10) "0" + minute else minute
+            val h = if (hour < 10) "0$hour" else hour
+            val min = if (minute < 10) "0$minute" else minute
             msg = " $h : $min $am_pm"
 
         }
@@ -162,7 +162,7 @@ class MainActivity : BaseActivity() ,MainView{
         }
 
         view.confirm.setOnClickListener {
-            msg?.let{mMainPresenter.onTapPostponeTime(it,consultationRequestVO)}
+
             dialog?.dismiss()
         }
         dialog?.show()

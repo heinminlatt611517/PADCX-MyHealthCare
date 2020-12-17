@@ -5,9 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kofigyan.stateprogressbar.StateProgressBar
 import com.padc.patient.R
 import com.padc.patient.adapters.SpecialQuestionAdapter
 import com.padc.patient.mvp.presenter.CaseSummarySpecialQuestionPresenter
@@ -35,6 +37,11 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
         }
     }
 
+    var descriptionData =
+        arrayOf("အထွေထွေမေးခွန်းများ", "ရောဂါဆိုင်ရာမေးခွန်းများ")
+
+
+
     private lateinit var mTheDB : MyHealthCareDB
 
     private lateinit var mSpecialQuestionAdapter : SpecialQuestionAdapter
@@ -56,7 +63,9 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
             mSpecialQuestionPresenter.onUiReady(it,this)
         }
 
-
+        val stateProgressBar =
+            findViewById<View>(R.id.state_progress_bar) as StateProgressBar
+        stateProgressBar.setStateDescriptionData(descriptionData)
 
     }
 

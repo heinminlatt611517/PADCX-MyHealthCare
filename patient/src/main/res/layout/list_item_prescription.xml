@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_medium"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_medicineName"
+        android:textSize="16sp"
+        android:textColor="#424656"
+        android:text="Paracetamol"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:weightSum="2">
+
+    <org.mmtextview.components.MMTextView
+        android:id="@+id/tv_amount_label"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="@string/amount"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#424656" />
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_amount"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:weightSum="2">
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_number_label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/number"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656" />
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:weightSum="2">
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_time_label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/delay_time"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656" />
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:weightSum="2">
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_time_count_label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/count"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656" />
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_time_count"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:weightSum="2">
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_repeat_label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Repeat"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656" />
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_repeat"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656"
+           />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:weightSum="2">
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_comment_label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/comment"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656" />
+
+        <org.mmtextview.components.MMTextView
+            android:id="@+id/tv_comment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#424656"
+            />
+
+    </LinearLayout>
+
+<View
+    android:layout_marginTop="@dimen/margin_medium_3"
+    android:layout_width="match_parent"
+    android:background="@color/grey_600"
+    android:layout_height="1dp"/>
+
+</LinearLayout>

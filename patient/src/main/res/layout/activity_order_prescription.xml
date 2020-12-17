@@ -18,6 +18,18 @@
     android:layout_marginBottom="@dimen/margin_large"
     tools:context=".activities.OrderPrescriptionActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        app:titleTextColor="@color/black"
+        app:title="@string/prescription_title"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        android:theme ="?attr/actionBarTheme"
+        android:layout_height="?actionBarSize"
+        android:id="@+id/toolbar"/>
+
     <androidx.cardview.widget.CardView
         app:cardElevation="5dp"
         app:cardCornerRadius="20dp"
@@ -26,7 +38,8 @@
         app:cardUseCompatPadding="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginTop="@dimen/margin_medium"
         android:id="@+id/top"
         >
         <LinearLayout

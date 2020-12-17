@@ -62,6 +62,10 @@ class ProfileActivity : BaseActivity() ,ProfileView {
             mPresenter.onTapEditProfile()
         }
 
+        iv_back.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 
     private fun setUpPresenter() {

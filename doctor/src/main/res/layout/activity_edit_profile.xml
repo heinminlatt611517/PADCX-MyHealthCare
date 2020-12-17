@@ -14,11 +14,11 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
+            android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
             android:layout_marginLeft="15dp"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:id="@+id/tex_back"
+            android:id="@+id/tv_back"
             android:text="@string/profilelabel"/>
     </androidx.cardview.widget.CardView>
     <RelativeLayout
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/img_profile"
+                        android:id="@+id/iv_main_profile"
                         android:layout_width="170dp"
                         android:layout_height="150dp"
                         android:layout_centerInParent="true"
@@ -93,7 +93,7 @@
                             android:textSize="12sp"
                             android:singleLine="true"
                             android:inputType="phone"
-                            android:id="@+id/ePphone"
+                            android:id="@+id/et_phone"
                             android:layout_margin="5dp"/>
                     </androidx.cardview.widget.CardView>
 
@@ -121,7 +121,7 @@
                             android:background="@drawable/rounded_corner_btn_white"
                             android:hint="@string/experience"
                             android:padding="10dp"
-                            android:id="@+id/eexperience"
+                            android:id="@+id/et_experience"
                             android:textSize="13sp"
                             android:inputType="phone"
                             android:layout_margin="5dp"/>
@@ -150,7 +150,7 @@
                             android:hint="@string/address"
                             android:padding="10dp"
                             android:scrollbars="vertical"
-                            android:id="@+id/eaddress"
+                            android:id="@+id/et_address"
                             android:maxLines="3"
                             android:lines="3"
                             android:textSize="13sp"
@@ -242,14 +242,14 @@
                         app:cardCornerRadius="10dp"
                         app:cardBackgroundColor="@color/white">
                         <RadioGroup
-                            android:id="@+id/eradio_group"
+                            android:id="@+id/gender_radio_group"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="5dp">
 
                             <RadioButton
-                                android:id="@+id/emale"
+                                android:id="@+id/male"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="အမျိုးသား"
@@ -257,7 +257,7 @@
 
                             <RadioButton
                                 android:layout_marginLeft="20dp"
-                                android:id="@+id/efemale"
+                                android:id="@+id/female"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="အမျိုးသမီး"
@@ -287,7 +287,7 @@
                             android:hint="@string/degree"
                             android:padding="10dp"
                             android:scrollbars="vertical"
-                            android:id="@+id/e_degree"
+                            android:id="@+id/et_degree"
                             android:maxLines="3"
                             android:lines="3"
                             android:textSize="13sp"
@@ -320,7 +320,7 @@
                             android:background="@drawable/rounded_corner_btn_white"
                             android:hint="@string/biography"
                             android:padding="10dp"
-                            android:id="@+id/ebiography"
+                            android:id="@+id/et_biography"
                             android:textSize="13sp"
                             android:maxLines="5"
                             android:lines="5"

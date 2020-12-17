@@ -10,10 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import com.padc.patient.R
 import com.padc.patient.activities.ChatActivity
 import com.padc.patient.adapters.ConsultationAcceptAdapter
@@ -21,7 +19,6 @@ import com.padc.patient.adapters.RecentDoctorAdapter
 import com.padc.patient.adapters.SpecialityDoctorAdapter
 import com.padc.patient.dialogs.ConfirmDialogFragment
 import com.padc.patient.dialogs.ConfirmDialogFragment.Companion.BUNDLE_NAME
-import com.padc.patient.dialogs.ConfirmDialogFragment.Companion.BUNDLE_PATIENT_ID
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.presenter.impls.HomePresenterImpl
 import com.padc.patient.mvp.view.HomeView
@@ -29,12 +26,9 @@ import com.padc.patient.utils.SessionManager
 import com.padc.patient.views.viewPods.ConsultationRequestViewPod
 import com.padc.share.data.vos.*
 import com.padc.share.utils.DateUtils
-import kotlinx.android.synthetic.main.confirm_dialog_layout.*
-import kotlinx.android.synthetic.main.confirm_dialog_layout.view.*
 import kotlinx.android.synthetic.main.confirm_dialog_layout.view.btn_cancle
 import kotlinx.android.synthetic.main.confirm_dialog_layout.view.btn_confirm
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.recent_doctor_confirm_dialog.*
 import kotlinx.android.synthetic.main.recent_doctor_confirm_dialog.view.*
 
 
@@ -60,7 +54,7 @@ class HomeFragment : Fragment(), HomeView {
 
     private lateinit var mConsultationAcceptAdapter: ConsultationAcceptAdapter
 
-
+   private var dialog : Dialog? = null
     private var patientID: String? = null
 
 
@@ -187,66 +181,50 @@ class HomeFragment : Fragment(), HomeView {
         mConsultationAcceptAdapter.setNewData(consultationRequestVO.toMutableList())
     }
 
-    override fun showRecentDoctorDialog(doctorVO: DoctorVO) {
+
+
+    override fun showRecentDoctorDialog(doctorVO: DoctorVO,consultationRequestVO: ConsultationRequestVO) {
         val view = layoutInflater.inflate(R.layout.recent_doctor_confirm_dialog, null)
-        val dialog = context?.let { Dialog(it) }
+        dialog = context?.let { Dialog(it) }
 
         view.tv_doctorSpeciality?.text = doctorVO.speciality + resources.getString(R.string.consultation_request_message)
 
         dialog?.apply {
-            setCancelable(false)
+            setCancelable(true)
             setContentView(view)
             window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
 
 
-        view.btn_cancle.setOnClickListener {
+        view.btn_cancel.setOnClickListener {
             dialog?.dismiss()
         }
 
-        view.btn_confirm.setOnClickListener {
+        view.btnConfirm.setOnClickListener {
 
-            val patientVO = PatientVO(
-                SessionManager.patient_id.toString(),
-                SessionManager.patient_name.toString(),
-                SessionManager.patient_email.toString(),
-                SessionManager.patient_device_id,
-                SessionManager.patient_photo,
-                SessionManager.patient_bloodType,
-                SessionManager.patient_bloodPressure,
-                arrayListOf(),
-                SessionManager.patient_weight,
-                SessionManager.patient_height,
-                SessionManager.patient_dateOfBirth.toString(),
-                SessionManager.patient_allegric,
-                arrayListOf()
-            )
-
-            val doctorVo = DoctorVO(
-                doctorVO.id,
-                doctorVO.name,
-                doctorVO.email,
-                doctorVO.photo,
-                doctorVO.age,
-                doctorVO.deviceID,
-                doctorVO.degree,
-                doctorVO.biography,
-                doctorVO.address,
-                doctorVO.phone,
-                doctorVO.speciality
-            )
+                mPresenter.onTapConfirmDirectRequest(
+                    doctorVO.speciality.toString(), DateUtils().getCurrentDate(),
+                    consultationRequestVO.case_summary, consultationRequestVO.patient_info, consultationRequestVO.doctor_info
+                )
 
 
-            mPresenter.onTapConfirmDirectRequest(
-                doctorVO.speciality.toString(), DateUtils().getCurrentDate(),
-                QuestionAnswerVO(), patientVO, doctorVo
-            )
-
+//            val patientVO = PatientVO(
+//                SessionManager.patient_id.toString(),
+//                SessionManager.patient_name.toString(),
+//                SessionManager.patient_email.toString(),
+//                SessionManager.patient_device_id,
+//                SessionManager.patient_photo,
+//                SessionManager.patient_bloodType,
+//                SessionManager.patient_bloodPressure,
+//                arrayListOf(),
+//                SessionManager.patient_weight,
+//                SessionManager.patient_height,
+//                SessionManager.patient_dateOfBirth.toString(),
+//                SessionManager.patient_allegric,
+//                arrayListOf()
+//            )
             dialog?.dismiss()
-
         }
-
-
         dialog?.show()
     }
 
@@ -257,5 +235,13 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun getLifeCycleOwner(): LifecycleOwner = this
 
+    override fun onResume() {
+        super.onResume()
+        dialog?.let {
+            if (dialog!!.isShowing){
+                dialog!!.dismiss()
+            }
+        }
+    }
 
 }

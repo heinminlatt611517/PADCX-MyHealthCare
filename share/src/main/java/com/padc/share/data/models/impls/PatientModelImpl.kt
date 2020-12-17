@@ -11,9 +11,7 @@ import com.padc.share.networks.FirebaseApi
 import com.padc.share.networks.RequestFCMBody.RequestFCM
 import com.padc.share.networks.auth.AuthManager
 import com.padc.share.networks.auth.FirebaseAuthManager
-import com.padc.share.utils.FIREBASE_SERVER_KEY
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.toObservable
 import io.reactivex.schedulers.Schedulers
 
 object PatientModelImpl : PatientModel, BaseModel() {
@@ -226,7 +224,7 @@ object PatientModelImpl : PatientModel, BaseModel() {
     override fun sendDirectRequest(
         speciality: String,
         dateTime: String,
-        questionAnswerList: QuestionAnswerVO,
+        questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
         doctorVO: DoctorVO,
         onSuccess: () -> Unit,
@@ -241,6 +239,14 @@ object PatientModelImpl : PatientModel, BaseModel() {
             onSuccess,
             onFailure
         )
+    }
+
+    override fun getBroadConsultationRequestByDoctorSpeciality(
+        speciality: String,
+        onSuccess: (consulationRequest: ConsultationRequestVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getBroadConsultationRequestByDoctorSpeciality(speciality,onSuccess,onFailure)
     }
 
     override fun getPatientByID(
@@ -277,6 +283,14 @@ object PatientModelImpl : PatientModel, BaseModel() {
 
     override fun getConsultationChatFromDB(consulationId: String): LiveData<ConsultationChatVO> {
         return mTheDB.consultationChatDao().getAllConsultationChatDataBy(consulationId)
+    }
+
+    override fun getBroadcastConsultationRequestBySpeciality(
+        speciality: String,
+        onSuccess: (list: List<ConsultationRequestVO>) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getBroadcastConsultationRequestBySpeciality(speciality,onSuccess,onFailure)
     }
 
 }

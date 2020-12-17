@@ -8,6 +8,6 @@ interface ConsultationRequestItemDelegate {
 
     fun onTapNext(consultationRequestVO: ConsultationRequestVO)
     fun onTapPostpone(consultationRequestVO: ConsultationRequestVO)
-    fun onTapPostponeTime(postPoneTime : String, consultationRequestVO: ConsultationRequestVO)
+
 
 }

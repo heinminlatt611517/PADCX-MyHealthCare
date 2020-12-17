@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kofigyan.stateprogressbar.StateProgressBar
 import com.padc.patient.R
 import com.padc.patient.adapters.RecentDoctorAdapter
 import com.padc.patient.adapters.SpecialQuestionAdapter
@@ -38,7 +40,8 @@ class CaseSummaryActivity : BaseActivity(), CaseSummaryView {
 
         }
     }
-
+    var descriptionData =
+        arrayOf("အထွေထွေမေးခွန်းများ", "ရောဂါဆိုင်ရာမေးခွန်းများ")
     private lateinit var mPresenter: CaseSummaryPresenter
 
 
@@ -52,7 +55,9 @@ class CaseSummaryActivity : BaseActivity(), CaseSummaryView {
         //intent.getStringExtra(ID_EXTRA)?.let { mPresenter.onUIReady(this, it) }
 
         mPresenter.onUIReady(this,SessionManager.patient_id.toString())
-
+        val stateProgressBar =
+            findViewById<View>(R.id.state_progress_bar) as StateProgressBar
+        stateProgressBar.setStateDescriptionData(descriptionData)
 
     }
 

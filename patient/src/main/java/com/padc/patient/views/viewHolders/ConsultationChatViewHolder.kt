@@ -34,7 +34,7 @@ class ConsultationChatViewHolder(private val mDelegate: ConsultationChatItemDele
             }
 
             itemView.iv_prescriptionMedicine.setOnClickListener {
-                mDelegate.onTapMedicineInfo()
+                mDelegate.onTapMedicineInfo(data.id)
             }
         }
     }

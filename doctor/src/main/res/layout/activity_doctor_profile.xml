@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:id="@+id/stxt_back"
-            android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
+            android:id="@+id/iv_back"
+            android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
             android:layout_margin="15dp"
             android:text="ပရိုဖိုင်"
             android:textSize="18sp"/>
@@ -43,7 +43,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="@dimen/margin_medium">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="5dp"
@@ -57,7 +58,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginEnd="311dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/sample_doctor"
+                    android:src="@drawable/doctor_img"
                     android:layout_margin="10dp"/>
 
                 <LinearLayout
@@ -69,29 +70,29 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="#424656"
-                        android:text=""
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:text="Doctor"
                         android:id="@+id/tv_doctorName"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
+                        android:textStyle="normal"
                         android:text="123456678"
                         android:textColor="@color/doctor_profile_text_color"
                         android:id="@+id/tv_doctorPhone"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
+                        android:textStyle="normal"
                         android:textColor="@color/doctor_profile_text_color"
                         android:text="Speciality Name"
                         android:id="@+id/tv_doctorSpeciality"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_marginLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -116,7 +117,6 @@
                     android:padding="5dp"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_marginLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -140,7 +140,6 @@
                     android:padding="5dp"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_marginLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -165,7 +164,6 @@
             </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -174,8 +172,6 @@
                 android:layout_width="0dp"
                 android:padding="6dp"
                 android:textSize="@dimen/doctor_profile_text_size"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="10dp"
                 android:textColor="@color/doctor_profile_text_color"
                 android:text="@string/address"
                 android:layout_weight="1"
@@ -195,19 +191,17 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:padding="12dp"
-                android:layout_margin="10dp"
                 android:textColor="@color/white"
                 android:text="@string/degree"
                 android:textSize="12sp"
                 app:cornerRadius="12dp"
+                android:layout_marginTop="@dimen/margin_medium"
                 app:backgroundTint="@color/blue_800"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:padding="6dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:id="@+id/tv_doctor_degree"
                 android:textSize="@dimen/doctor_profile_text_size"
                 android:textColor="@color/doctor_profile_text_color"
@@ -216,7 +210,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:padding="12dp"
-                android:layout_margin="10dp"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:textColor="@color/white"
                 android:text="@string/biography"
                 app:backgroundTint="@color/blue_800"
@@ -229,8 +223,6 @@
                 android:padding="6dp"
                 android:textSize="@dimen/doctor_profile_text_size"
                 android:textColor="@color/doctor_profile_text_color"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:id="@+id/tv_doctor_biography"
                 android:layout_height="wrap_content"/>
 
@@ -241,8 +233,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:textColor="#000000"
                     android:textStyle="bold"
                     android:id="@+id/btnLogout"
@@ -252,15 +242,12 @@
                 <View
                     android:layout_width="126dp"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_below="@+id/btnLogout"
                     android:background="@color/black"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:textColor="#000000"
                     android:textStyle="bold"
                     android:layout_alignParentRight="true"
@@ -273,7 +260,6 @@
                     android:layout_height="1dp"
                     android:layout_below="@+id/forgetpassword"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
                     android:background="@color/black"/>
             </RelativeLayout>
         </LinearLayout>

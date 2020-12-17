@@ -2,10 +2,7 @@ package com.padc.patient.mvp.view
 
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
-import com.padc.share.data.vos.ConsultationRequestVO
-import com.padc.share.data.vos.DoctorVO
-import com.padc.share.data.vos.PatientVO
-import com.padc.share.data.vos.SpecialitiesVO
+import com.padc.share.data.vos.*
 import com.padc.share.mvp.view.BaseView
 
 interface HomeView : BaseView {
@@ -19,5 +16,5 @@ interface HomeView : BaseView {
     fun navigateToChatScreen(consultation_chat_id : String,consultationRequestVO: ConsultationRequestVO)
     fun displayConsultationRequestList(consultationRequestVO: List<ConsultationRequestVO>)
 
-    fun showRecentDoctorDialog(doctorVO: DoctorVO)
+    fun showRecentDoctorDialog(doctorVO: DoctorVO,consultationRequestVO: ConsultationRequestVO)
 }

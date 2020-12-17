@@ -1,6 +1,7 @@
 package com.padc.patient.mvp.presenter.impls
 
 
+import android.app.Dialog
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
@@ -18,7 +19,6 @@ import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.data.vos.QuestionAnswerVO
 import com.padc.share.mvp.presenter.AbstractBasePresenter
-import com.padc.share.utils.DateUtils
 
 class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
@@ -102,23 +102,29 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
     override fun onTapConfirmDirectRequest(
         specialityName: String,
         dataTime: String,
-        questionAnswerLists: QuestionAnswerVO,
+        questionAnswerLists: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
         doctorVO: DoctorVO
+
     ) {
-//        mPatientModel.sendDirectRequest(
-//            specialityName, dataTime, questionAnswerLists, patientVO,
-//            doctorVO,onSuccess = {
-//
-//            },onFailure = {
-//                mView?.showErrorMessage(it)
-//            }
-//        )
+        mPatientModel.sendDirectRequest(
+            specialityName, dataTime, questionAnswerLists, patientVO,
+            doctorVO, onSuccess = {
+            }, onFailure = {
+                mView?.showErrorMessage(it)
+            }
+        )
     }
 
 
     override fun onTapRecentDoctorItem(doctorVO: DoctorVO) {
-        mView?.showRecentDoctorDialog(doctorVO)
+
+        mPatientModel.getBroadConsultationRequestByDoctorSpeciality(doctorVO.speciality.toString(),onSuccess = {
+            mView?.showRecentDoctorDialog(it.doctor_info,it)
+        },onFailure = {
+            mView?.showErrorMessage(it)
+        })
+
     }
 
     override fun onTapSpecialityDoctorItem(specialitiesID: String) {

@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:timePickerMode="spinner"/>
 
-            <mk.zawuni.zawgyiuni_detect.mmfont.components.MMButton
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:layout_gravity="center"
-                android:background="@drawable/rounded_corner_btn_blue"
+                app:backgroundTint="@color/blue_800"
                 android:id="@+id/confirm"
                 android:layout_marginBottom="15dp"
                 android:text="@string/choose"/>

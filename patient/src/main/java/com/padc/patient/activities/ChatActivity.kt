@@ -73,7 +73,7 @@ class ChatActivity : BaseActivity(), ChatView {
         }
 
         iv_sendText.setOnClickListener {
-            if (!ed_text_message.text?.equals("")!!) {
+            if (ed_text_message.text.toString() != "") {
                 mChatPresenter.onTapSend( intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
                         message = ChatMessageVO(UUID.randomUUID().toString(),
                             DateUtils().getCurrentDateTime(), ed_text_message.text.toString(), "",
