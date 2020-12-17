@@ -116,5 +116,36 @@ object SessionManager {
             it.putString(sharePreferenceConsultationID, value)
         }
 
+    var doctor_dateofBirth : String?
+
+        get() = preferences.getString(sharePreferenceDoctorDATEOFBIRTH, "")
+
+        set(value) = preferences.edit {
+            it.putString(sharePreferenceDoctorDATEOFBIRTH, value)
+        }
+
+    var doctor_experience : String?
+
+        get() = preferences.getString(sharePreferenceDoctorEXPERIENCE, "")
+
+        set(value) = preferences.edit {
+            it.putString(sharePreferenceDoctorEXPERIENCE, value)
+        }
+
+    var doctor_address : String?
+
+        get() = preferences.getString(sharePreferenceDoctorAdress, "")
+
+        set(value) = preferences.edit {
+            it.putString(sharePreferenceDoctorAdress, value)
+        }
+
+    var doctor_gender : String?
+
+        get() = preferences.getString(sharePreferenceDoctorGENDER, "")
+
+        set(value) = preferences.edit {
+            it.putString(sharePreferenceDoctorGENDER, value)
+        }
 
 }

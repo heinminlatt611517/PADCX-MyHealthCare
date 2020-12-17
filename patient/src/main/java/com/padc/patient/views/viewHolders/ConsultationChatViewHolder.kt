@@ -26,7 +26,7 @@ class ConsultationChatViewHolder(private val mDelegate: ConsultationChatItemDele
             itemView.tv_consultation_chatDate.text = data.start_consultation_date
 
             data?.doctor_info?.photo?.let {
-                ImageUtils().showImage(itemView.iv_doctor, it, R.drawable.speciality_thumbnail)
+                ImageUtils().showImage(itemView.iv_doctor, it, R.drawable.sample_doctor)
             }
 
             itemView.iv_send.setOnClickListener {

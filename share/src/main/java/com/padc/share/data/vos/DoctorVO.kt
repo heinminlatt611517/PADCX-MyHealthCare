@@ -18,7 +18,10 @@ data class DoctorVO (
     var biography: String?= "",
     var address: String? ="",
     var phone: String ?= "",
-    var speciality : String? =""
+    var speciality : String? ="",
+    var dateofBirth : String ?= "",
+    var gender : String ?="",
+    var experience : String ?=""
 
 
 )

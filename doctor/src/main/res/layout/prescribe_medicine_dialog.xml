@@ -75,7 +75,7 @@
                         android:id="@+id/ed_amount"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_corner_btn_white"
+                        android:background="@drawable/rounded_corner_btn_grey"
                         android:hint="0"
                         android:inputType="number"
                         android:maxLines="1"
@@ -103,7 +103,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/rounded_corner_btn_white"
+                    android:background="@drawable/rounded_corner_btn_grey"
                     android:hint="1"
                     android:inputType="number"
                     android:maxLines="1"
@@ -170,7 +170,7 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_morning"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="@string/morning"
                         android:textAlignment="center"
@@ -183,7 +183,7 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_day"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/day"
@@ -198,7 +198,7 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_night"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/night"
@@ -288,7 +288,7 @@
                 android:id="@+id/ed_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_corner_btn_white"
+                android:background="@drawable/rounded_corner_btn_grey"
                 android:gravity="left"
                 android:lines="5"
                 android:maxLength="2000"

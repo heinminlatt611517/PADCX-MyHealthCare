@@ -33,7 +33,7 @@ class LoginActivity : BaseActivity() ,LoginView{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_doctor_login)
 
         setUpPresenter()
         setUpActionListener()
@@ -86,6 +86,11 @@ class LoginActivity : BaseActivity() ,LoginView{
         SessionManager.doctor_phone = doctorVO.phone
         SessionManager.doctor_degree = doctorVO.degree
         SessionManager.doctor_bigraphy = doctorVO.biography
+        SessionManager.doctor_dateofBirth = doctorVO.dateofBirth
+        SessionManager.doctor_experience = doctorVO.experience
+        SessionManager.doctor_gender = doctorVO.gender
+        SessionManager.doctor_address = doctorVO.address
+
 
 
         startActivity(MainActivity.newIntent(this,"null"))

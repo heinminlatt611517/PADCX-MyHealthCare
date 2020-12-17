@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.tasks.OnCompleteListener
@@ -16,7 +18,15 @@ import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.RegisterPres
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls.RegisterPresenterImpl
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.view.RegisterView
 import com.padc.share.activities.BaseActivity
+import kotlinx.android.synthetic.main.activity_doctor_register.*
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.btnRegister
+import kotlinx.android.synthetic.main.activity_register.etEmail
+import kotlinx.android.synthetic.main.activity_register.etPassword
+import kotlinx.android.synthetic.main.activity_register.etPhone
+import kotlinx.android.synthetic.main.activity_register.etUserName
+import kotlinx.android.synthetic.main.activity_register.et_degree
+import kotlinx.android.synthetic.main.activity_register.spinner
 
 class RegisterActivity : BaseActivity() ,RegisterView{
 
@@ -31,9 +41,14 @@ class RegisterActivity : BaseActivity() ,RegisterView{
     private lateinit var deviceToken : String
     private var specialityName: String? = null
 
+    private var year: String? = null
+    private var month: String? = null
+    private var day: String? = null
+    private var gender: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_doctor_register)
 
         setUpPresenter()
         setUpSpinnerItemSelectedListeners()
@@ -55,6 +70,45 @@ class RegisterActivity : BaseActivity() ,RegisterView{
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+
+
+        year_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+            ) {
+                year = parent.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+        month_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+            ) {
+                month = parent.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+        day_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+            ) {
+                day = parent.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
     }
 
     private fun setUpActionListener() {
@@ -73,15 +127,27 @@ class RegisterActivity : BaseActivity() ,RegisterView{
                 deviceToken = token.toString()
             })
 
+
+        gradio_group.setOnCheckedChangeListener(
+                RadioGroup.OnCheckedChangeListener { group, checkedId ->
+                    val radio: RadioButton = findViewById(checkedId)
+                    gender = radio.text.toString()
+                })
+
         btnRegister.setOnClickListener {
-            mPresenter.onTapRegister(
-                etUserName.text.toString(),
-                etEmail.text.toString(),
-                etPassword.text.toString(),
-                deviceToken,
-                specialityName.toString(),
-                etPhone.text.toString(),
-                et_degree.text.toString()
+            mPresenter.onTapRegister(this,
+                    edUserName.text.toString(),
+                    edEmail.text.toString(),
+                    edPassword.text.toString(),
+                    deviceToken,
+                    specialityName.toString(),
+                    edPhone.text.toString(),
+                    ed_degree.text.toString(),
+                    ed_biography.text.toString(),
+                    ed_address.text.toString(),
+                    ed_experience.text.toString(),
+                    "$day $month $year",
+                    gender.toString()
             )
         }
     }

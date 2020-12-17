@@ -22,7 +22,7 @@ class RecentDoctorViewHolder(private val mDelegate : RecentDoctorItemDelegate,it
             itemView.tv_doctorName.text = data?.name
             itemView.tv_doctor_specialityName.text = data?.speciality
             data?.photo?.let {
-                ImageUtils().showImage(itemView.iv_doctor, it, R.drawable.doctor)
+                ImageUtils().showImage(itemView.iv_doctor, it, R.drawable.sample_doctor)
             }
         }
     }

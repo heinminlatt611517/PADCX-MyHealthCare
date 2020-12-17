@@ -43,6 +43,8 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
         }
     }
 
+    private lateinit var list : List<MedicineVO>
+
     private lateinit var mPresenter: PrescribeMedicinePresenter
     private lateinit var mMedicineAdapter: MedicineAdapter
 
@@ -114,6 +116,7 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
     override fun displayMedicineLists(lists: List<MedicineVO>) {
 
         Log.d("medicineLists", lists.size.toString())
+        this.list = lists
         mMedicineAdapter.setNewData(lists.toMutableList())
     }
 

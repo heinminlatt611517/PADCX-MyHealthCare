@@ -19,9 +19,13 @@ import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.ProfilePrese
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls.ProfilePresenterImpl
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.view.ProfileView
 import com.padc.padcx_myhealthcare_monthly_assignment.utils.SessionManager
+import com.padc.padcx_myhealthcare_monthly_assignment.utils.SessionManager.doctor_degree
 import com.padc.share.activities.BaseActivity
+import com.padc.share.data.vos.DoctorVO
 import com.padc.share.utils.ImageUtils
+import kotlinx.android.synthetic.main.activity_doctor_profile.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.activity_profile.account_btngroup
 import java.io.IOException
 
 class ProfileActivity : BaseActivity() ,ProfileView {
@@ -35,30 +39,29 @@ class ProfileActivity : BaseActivity() ,ProfileView {
 
 
     private lateinit var mPresenter : ProfilePresenter
-    private  var bitmap : Bitmap? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_doctor_profile)
 
         setUpPresenter()
         setUpActionsListener()
 
+        mPresenter.onUiReady(this)
 
-        etUserName.text = Editable.Factory.getInstance().newEditable( SessionManager.doctor_name)
-        etEmail.text = Editable.Factory.getInstance().newEditable(SessionManager.doctor_email)
-        et_speciality.text = Editable.Factory.getInstance().newEditable(SessionManager.doctor_speciality)
     }
 
     private fun setUpActionsListener() {
-        btn_logOut.setOnClickListener {
+        btnLogout.setOnClickListener {
             SessionManager.login_status=false
             startActivity(SplashScreenActivity.newIntent(this))
             finish()
         }
 
-        iv_profile.setOnClickListener{
-            mPresenter?.onTapEditProfileImage()
+        iv_edit.setOnClickListener {
+            mPresenter.onTapEditProfile()
         }
+
     }
 
     private fun setUpPresenter() {
@@ -66,12 +69,43 @@ class ProfileActivity : BaseActivity() ,ProfileView {
         mPresenter.initPresenter(this)
     }
 
-    override fun editProfileImage() {
-      openGallery()
+
+    override fun displayDoctorData(doctorVO: DoctorVO) {
+        doctorVO?.let {
+            SessionManager.doctor_name = doctorVO.name
+            SessionManager.doctor_id = doctorVO.id
+            SessionManager.doctor_device_id = doctorVO.deviceID
+            SessionManager.doctor_email = doctorVO.email.toString()
+            SessionManager.doctor_photo = doctorVO.photo.toString()
+            SessionManager.doctor_speciality = doctorVO.speciality.toString()
+            SessionManager.doctor_phone = doctorVO.phone
+            SessionManager.doctor_degree = doctorVO.degree
+            SessionManager.doctor_bigraphy = doctorVO.biography
+            SessionManager.doctor_dateofBirth = doctorVO.dateofBirth
+            SessionManager.doctor_experience = doctorVO.experience
+            SessionManager.doctor_gender = doctorVO.gender
+            SessionManager.doctor_address = doctorVO.address
+        }
+
+        ImageUtils().showImage(img_profile, doctorVO.photo.toString(),R.drawable.doctor_img)
+
+        tv_doctorName.text = Editable.Factory.getInstance().newEditable( SessionManager.doctor_name)
+        tv_doctorPhone.text = Editable.Factory.getInstance().newEditable(SessionManager.doctor_phone)
+        tv_doctorSpeciality.text = Editable.Factory.getInstance().newEditable(SessionManager.doctor_speciality)
+        tv_doctor_dateOfBirth.text =  " : " +Editable.Factory.getInstance().newEditable(SessionManager.doctor_dateofBirth)
+        tv_doctor_gender.text = " : " + Editable.Factory.getInstance().newEditable(SessionManager.doctor_gender)
+        tv_doctor_address.text = " : " +Editable.Factory.getInstance().newEditable(SessionManager.doctor_address)
+        tv_doctor_degree.text = Editable.Factory.getInstance().newEditable(SessionManager.doctor_degree)
+        tv_doctor_biography.text = Editable.Factory.getInstance().newEditable(SessionManager.doctor_bigraphy)
+        tv_doctor_experience.text = " : " + Editable.Factory.getInstance().newEditable(SessionManager.doctor_experience)
     }
 
-    override fun saveUserData() {
+    override fun hideProgressDialog() {
 
+    }
+
+    override fun navigateToEditProfileScreen() {
+       startActivity(EditProfileActivity.newIntent(this))
     }
 
 
@@ -81,40 +115,5 @@ class ProfileActivity : BaseActivity() ,ProfileView {
 
     override fun getLifeCycleOwner(): LifecycleOwner = this
 
-
-    private fun openGallery() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"),PICK_IMAGE_REQUEST)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.P)
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
-            if (data == null || data.data == null) {
-                return
-            }
-            val filePath = data.data
-            try {
-                filePath?.let {
-                    if (Build.VERSION.SDK_INT >= 29) {
-                        val source: ImageDecoder.Source = ImageDecoder.createSource(contentResolver!!, filePath)
-                        bitmap = ImageDecoder.decodeBitmap(source)
-                        account_btngroup.visibility = View.VISIBLE
-                        ImageUtils().showImageProfile(iv_profile.context,iv_profile,null,filePath)
-                    } else {
-                        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                        ImageUtils().showImageProfile(iv_profile.context,iv_profile,null,filePath)
-                        account_btngroup.visibility = View.GONE
-                    }
-                }
-
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
 
 }

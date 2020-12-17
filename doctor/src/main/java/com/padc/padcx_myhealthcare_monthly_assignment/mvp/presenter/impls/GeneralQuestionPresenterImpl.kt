@@ -10,6 +10,7 @@ import com.padc.share.data.vos.ChatMessageVO
 import com.padc.share.data.vos.RelatedQuestionVO
 import com.padc.share.data.vos.SenderTypeVO
 import com.padc.share.mvp.presenter.AbstractBasePresenter
+import com.padc.share.utils.DateUtils
 import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
 
@@ -32,7 +33,7 @@ class GeneralQuestionPresenterImpl : GeneralQuestionPresenter,AbstractBasePresen
 
         val message =  ChatMessageVO(
             UUID.randomUUID().toString(),
-            "",question, "",
+            DateUtils().getCurrentDateTime(),question, "",
             SenderTypeVO(
                 UUID.randomUUID().toString(),
                 "doctor", ""

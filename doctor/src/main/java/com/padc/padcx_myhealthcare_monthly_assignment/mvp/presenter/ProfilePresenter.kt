@@ -7,7 +7,13 @@ import com.padc.share.mvp.presenter.BasePresenter
 
 interface ProfilePresenter : BasePresenter<ProfileView> {
     fun onUiReady(lifecycleOwner: LifecycleOwner)
-    fun updateUserProfile(bitmap: Bitmap)
-    fun onTapCancelUserData()
-    fun onTapEditProfileImage()
+
+    fun onTapEditProfile()
+
+    fun updateUserData(bitmap: Bitmap,
+                       specialityName : String,speciality : String,
+                       phone : String, degree : String,
+                       biography : String, address : String,
+                       experience : String, dateOfBirth : String,
+                       gender: String)
 }

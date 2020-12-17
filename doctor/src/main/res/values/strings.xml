@@ -9,7 +9,12 @@
     <string name="note">မှတ်ချက်</string>
     <string name="insert_medicine">ထည့်မယ်</string>
     <string name="medicine_recommendation">Medicine Recommendation</string>
-
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register">Register</string>
+    <string name="male">အမျိုးသား</string>
+    <string name="female">အမျိုးသမီး</string>
+    <string name="already_an_account">Already an account?.</string>
     <string-array name="speciality_name_list">
         <item>ဦးနှောက်အာရုံကြောအထူးကု</item>
         <item>အစာအိမ်နဲ့အူလမ်းကြောင်း</item>

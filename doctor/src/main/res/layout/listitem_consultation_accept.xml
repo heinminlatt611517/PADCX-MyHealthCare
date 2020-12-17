@@ -27,7 +27,7 @@
                  android:layout_marginRight="10dp"
                  android:layout_height="60dp"
                  android:id="@+id/iv_patient"
-                 android:src="@drawable/doctor"/>
+                 android:src="@drawable/sample_patient"/>
              <LinearLayout
                  android:layout_gravity="center"
                  android:gravity="center"
@@ -54,18 +54,17 @@
                      android:textColor="@color/black"/>
              </LinearLayout>
          </LinearLayout>
-         <TextView
+         <com.google.android.material.button.MaterialButton
              android:layout_alignParentRight="true"
              android:layout_centerInParent="true"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:gravity="left"
              android:text="@string/send"
              android:textStyle="bold"
-             android:padding="10dp"
              android:layout_marginRight="10dp"
-             android:background="@drawable/rounded_corner_blue"
              android:id="@+id/txt_send_message"
+             app:cornerRadius="12dp"
+             app:backgroundTint="#0058c4"
              android:textSize="10sp"
              android:textColor="@color/white"/>
      </RelativeLayout>
@@ -90,7 +89,7 @@
              android:layout_gravity="center"
              android:gravity="center"
              android:textSize="12sp"
-             android:textColor="@color/blue_900"
+             android:textColor="#0058c4"
              android:id="@+id/txt_consulated_history"
              android:text="@string/medicine_history"
              android:layout_height="wrap_content"/>
@@ -103,7 +102,7 @@
              android:layout_width="0dp"
              android:layout_weight="1"
              android:layout_margin="5dp"
-             android:textColor="@color/blue_900"
+             android:textColor="#0058c4"
              android:id="@+id/txt_prescription"
              android:text="@string/prescription"
              android:layout_gravity="center"
@@ -119,7 +118,7 @@
              android:layout_width="0dp"
              android:layout_weight="1"
              android:layout_margin="5dp"
-             android:textColor="@color/blue_900"
+             android:textColor="#0058c4"
              android:id="@+id/txt_comment"
              android:textSize="12sp"
              android:layout_gravity="center"

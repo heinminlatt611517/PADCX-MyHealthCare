@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/grey_200"
+    android:background="#cee7f5"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -45,7 +45,7 @@
             android:text="Create your \naccount"
             android:layout_width="match_parent"
             android:layout_marginLeft="15dp"
-            android:textColor="@color/light_blue_A700"
+            android:textColor="@color/blue_800"
             android:layout_marginTop="@dimen/margin_medium"
             android:textSize="26dp"
             android:layout_height="wrap_content"/>

@@ -16,6 +16,7 @@ import com.padc.share.mvp.presenter.AbstractBasePresenter
 class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
     private val mDoctorModel: DoctorModel = DoctorModelImpl
 
+    lateinit var mOwner: LifecycleOwner
     override fun onUiReady(lifecycleOwner: LifecycleOwner, requestID: String) {
 //        if (requestID != "null") {
 //            mDoctorModel.getBroadConsultationRequest(requestID, onSuccess = {
@@ -23,6 +24,7 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
 //            }, onFailure = {})
 //
 //        }
+        mOwner = lifecycleOwner
 
         mDoctorModel.getBrodcastConsultationRequests(
             SessionManager.doctor_speciality.toString(),
@@ -114,7 +116,11 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
     }
 
     override fun onTapSkip(consultationRequestVO: ConsultationRequestVO) {
-
+//        mDoctorModel.deleteConsultationRequestById(consultationRequestVO.id)
+//            .observe(mOwner, Observer { consultationRequest ->
+//                consultationRequest?.let {
+//                    mView?.displayConsultationRequestLists(consultationRequest) }
+//            })
     }
 
     override fun onTapNext(consultationRequestVO: ConsultationRequestVO) {

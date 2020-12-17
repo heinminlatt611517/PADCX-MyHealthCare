@@ -8,6 +8,7 @@ import com.padc.share.mvp.presenter.BasePresenter
 import com.padc.share.mvp.view.BaseView
 
 interface RegisterPresenter : BasePresenter<RegisterView> {
-    fun onTapRegister(username: String, email: String, password: String, token : String, speciality_name: String,
-                       phone: String, degree: String)
+    fun onTapRegister(context: Context, username: String, email: String, password: String, token : String, speciality_name: String,
+                       phone: String, degree: String, biography : String,
+                      address: String, experience: String, dateOfBirth :String, gender : String )
 }

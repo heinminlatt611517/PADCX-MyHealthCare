@@ -6,6 +6,8 @@
     <string name="subtotal">Subtotal</string>
     <string name="paymenet_desc">ငွေ​ပေး​ချေမှု အတည်ပြုပြီး ​နောက်တစ်ရက်မှ စတင်၍ ​ဆေးများကို လိုက်လံပို့​ဆောင်မည်ဖြစ်ပါသည်။</string>
     <string name="made_payment">ငွေ​ပေး​ချေမည်</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register">Register</string>
 
 
     <string-array name="stepLabels">

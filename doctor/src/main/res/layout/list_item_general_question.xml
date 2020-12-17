@@ -14,4 +14,5 @@
     android:textColor="@color/black"
     android:id="@+id/ed_general_question"
     tools:ignore="RtlCompat"
+    android:layout_marginBottom="@dimen/margin_medium"
     xmlns:android="http://schemas.android.com/apk/res/android" />
