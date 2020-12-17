@@ -5,6 +5,6 @@ import com.padc.share.mvp.view.BaseView
 
 interface ConsultationChatView : BaseView {
     fun navigateToMedicineCaseSummary()
-    fun navigateToChatScreen()
+    fun navigateToChatScreen(consultationChatID : String)
     fun displayFinishConsultationChatLists(lists : List<ConsultationChatVO>)
 }

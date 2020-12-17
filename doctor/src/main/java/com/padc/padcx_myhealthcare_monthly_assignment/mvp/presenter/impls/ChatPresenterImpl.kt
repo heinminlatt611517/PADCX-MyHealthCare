@@ -1,6 +1,7 @@
 package com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls
 
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.ChatPresenter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.view.ChatView
 import com.padc.share.data.models.DoctorModel
@@ -13,9 +14,16 @@ class ChatPresenterImpl : ChatPresenter,AbstractBasePresenter<ChatView>() {
     private val mDoctorModel : DoctorModel = DoctorModelImpl
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner, consultationID: String) {
-        mDoctorModel.getBroadConsultationRequest(consultationID,onSuccess = {
-            mView?.displayPatientRequestData(it)
-        },onFailure = {})
+
+
+        mDoctorModel.getConsultationChat(consultationID,onSuccess = {}, onError = {})
+
+        mDoctorModel.getConsultationChatFromDB(consultationID)
+                .observe(lifecycleOwner, Observer { data ->
+                    data?.let {
+                        mView?.displayPatientRequestData(data)
+                    }
+                })
 
 
         mDoctorModel.getAllChatMessage(consultationID,

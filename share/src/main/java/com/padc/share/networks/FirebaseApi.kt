@@ -239,4 +239,12 @@ interface FirebaseApi {
 
     fun updatePatientAddress(patients: PatientVO,addressLists : List<AddressVO>, onSuccess: () -> Unit, onFailure: (String) -> Unit)
 
+
+    fun getBroadcastConsultationRequest(
+            consulation_request_id : String,
+            onSuccess: (consulationRequest : ConsultationRequestVO) -> Unit,
+            onFailure: (String) -> Unit
+    )
+
+    fun getConsulationChatById(consulationId : String ,onSuccess: (List<ConsultationChatVO>) -> Unit,onFailure: (String) -> Unit)
 }

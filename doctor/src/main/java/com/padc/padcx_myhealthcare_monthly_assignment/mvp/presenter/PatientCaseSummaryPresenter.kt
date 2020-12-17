@@ -9,5 +9,5 @@ interface PatientCaseSummaryPresenter : BasePresenter<PatientCaseSummaryView> {
 
     fun onUiReady(lifecycleOwner: LifecycleOwner,requestID : String)
     fun onTapStartConsultation(consultationRequestVO : ConsultationRequestVO)
-
+    fun onUiReadyConsultation( consulationRequestId : String ,  owner: LifecycleOwner)
 }

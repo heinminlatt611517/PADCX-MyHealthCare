@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.padc.patient.mvp.presenter.OrderPrescriptionPresenter
 import com.padc.patient.mvp.view.OrderPrescriptionView
+import com.padc.patient.utils.SessionManager
 import com.padc.share.data.models.PatientModel
 import com.padc.share.data.models.impls.PatientModelImpl
 import com.padc.share.data.vos.*
@@ -34,11 +35,10 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
             }
             else{
                 mAddressLists.forEach {
-                    it.isSelect= false
+                    it.isSelect = false
                 }
                 mView?.displayPatientAddress(mAddressLists)
             }
-
 
 
 
@@ -59,13 +59,35 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
 
     }
 
-    override fun onTapMadePayment(patientVO: PatientVO) {
-       mPatientModel.registerNewPatient(patientVO = patientVO,onSuccess = {
-           mView?.showPaymentDialog()
-       },onFailure = {})
+    override fun onTapMadePayment(addressLists: List<AddressVO>) {
 
+        mAddressLists.addAll(addressLists)
 
+        val patientVO = PatientVO(
+                SessionManager.patient_id.toString(),
+                SessionManager.patient_name.toString(),
+                SessionManager.patient_email.toString(),
+                SessionManager.patient_device_id,
+                SessionManager.patient_photo,
+                SessionManager.patient_bloodType,
+                SessionManager.patient_bloodPressure,
+                mAddressLists,
+                SessionManager.patient_weight,
+                SessionManager.patient_height,
+                SessionManager.patient_dateOfBirth.toString(),
+                SessionManager.patient_allegric,
+                arrayListOf()
+
+        )
+
+        mPatientModel.registerNewPatient(patientVO = patientVO,onSuccess = {
+            mView?.showPaymentDialog()
+        },onFailure = {})
     }
+
+
+
+
 
     override fun checkOutMedicine(checkOutVO: CheckOutVO) {
         mPatientModel.checkoutMedicine(checkOutVO,onSuccess = {},onFailure = {

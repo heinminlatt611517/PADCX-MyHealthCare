@@ -7,5 +7,5 @@ import com.padc.share.mvp.view.BaseView
 interface PatientCaseSummaryView : BaseView {
 
     fun displayPatientData(consultationRequestVO: ConsultationRequestVO)
-    fun navigateToChatScreen()
+    fun navigateToChatScreen(consultationID : String,consultationRequestID : String)
 }

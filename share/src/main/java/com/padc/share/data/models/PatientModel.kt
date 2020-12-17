@@ -44,6 +44,8 @@ interface PatientModel {
         onError: (String) -> Unit
     )
 
+
+
     fun getPatientFromDatabase(patientID: String): LiveData<PatientVO>
 
 
@@ -139,4 +141,7 @@ interface PatientModel {
 
     fun checkoutMedicine(checkOutVO: CheckOutVO, onSuccess: () -> Unit, onFailure: (String) -> Unit)
 
+    fun getConsultationChat(consulationId:  String,  onSuccess: () -> Unit, onError: (String) -> Unit)
+
+    fun getConsultationChatFromDB(consulationId : String) : LiveData<ConsultationChatVO>
 }

@@ -30,8 +30,6 @@ interface ConsultationRequestDao {
     @Query("DELETE FROM consultation_request where id =  :id")
     fun deleteAllConsultationRequestDataById(id : String)
 
-    @Query("UPDATE consultation_request SET patient_type_status=:status WHERE id = :consultation_request_id")
-    fun updatePatientTypeStatus(status: String, consultation_request_id : String)
 
     @Query("select * from consultation_request where status = :accept")
     fun getConsultationAcceptData(accept : String): LiveData<List<ConsultationRequestVO>>

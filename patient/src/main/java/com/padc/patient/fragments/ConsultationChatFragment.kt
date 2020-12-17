@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.patient.R
+import com.padc.patient.activities.ChatActivity
 import com.padc.patient.activities.OrderPrescriptionActivity
 import com.padc.patient.adapters.ConsultationChatAdapter
 import com.padc.patient.adapters.RecentDoctorAdapter
@@ -95,9 +96,11 @@ class ConsultationChatFragment : Fragment() ,ConsultationChatView {
 
     }
 
-    override fun navigateToChatScreen() {
-
+    override fun navigateToChatScreen(consultationChatID: String) {
+        startActivity(context?.let { ChatActivity.newIntent(it,consultationChatID) })
     }
+
+
 
     override fun displayFinishConsultationChatLists(lists: List<ConsultationChatVO>) {
         Log.d("finishLists",lists.size.toString())

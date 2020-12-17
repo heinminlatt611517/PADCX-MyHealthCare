@@ -26,18 +26,20 @@ class PatientAddressViewHolder(private val mDelegate: PatientAddressItemDelegate
         data?.let {
             itemView.ed_patient_address.text =
                 Editable.Factory.getInstance().newEditable(data.fullAddress)
+
+            if (!data.isSelect){
+                mDelegate.showEmptyAddressView()
+            }
+            else{
+                mDelegate.showRecyclerAddressView()
+            }
         }
 
         itemView.ed_patient_address.setOnClickListener {
             mDelegate.onTapAddress(data.fullAddress)
         }
 
-        if (!data.isSelect){
-            mDelegate.showEmptyAddressView()
-        }
-        else{
-            mDelegate.showRecyclerAddressView()
-        }
+
 
 
 

@@ -19,9 +19,10 @@ class ConsultationChatPresenterImpl : ConsultationChatPresenter,AbstractBasePres
        })
     }
 
-    override fun onTapSendText() {
-
+    override fun onTapSendText(consultationChatID: String) {
+        mView?.navigateToChatScreen(consultationChatID)
     }
+
 
     override fun onTapMedicineInfo() {
 

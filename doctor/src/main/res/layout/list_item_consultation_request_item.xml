@@ -34,7 +34,7 @@
                 android:text="@string/consulation_request"/>
 
             <TextView
-                android:id="@+id/tv_patient_desc"
+                android:id="@+id/tv_patientType"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

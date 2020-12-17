@@ -51,7 +51,7 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
     private val medicineCountLists = mutableListOf<String>()
     private val medicineTypeLists = mutableListOf<String>()
 
-    private lateinit var mConsultationRequestVO: ConsultationRequestVO
+    private lateinit var mConsultationChatVO: ConsultationChatVO
 
     private var routine: String? = null
     private var consultationID: String? = null
@@ -87,14 +87,13 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
                 SessionManager.doctor_speciality
 
             )
-
             val consultationChatVO = ConsultationChatVO(
                 consultationID.toString(), SessionManager.doctor_id, "",
-                true, mConsultationRequestVO.patient_info.id, mConsultationRequestVO.patient_info,doctorVO,
-                "",DateUtils().getCurrentDate(),mConsultationRequestVO.case_summary
+                true,mConsultationChatVO.patient_id, mConsultationChatVO.patient_info,mConsultationChatVO.doctor_info,
+                "",DateUtils().getCurrentDate(),mConsultationChatVO.case_summary
             )
 
-            mPresenter.onTapStopConsultation(consultationChatVO)
+            mPresenter.onTapStopConsultation(mConsultationChatVO)
         }
     }
 
@@ -128,9 +127,11 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
         finish()
     }
 
-    override fun displayPatientRequestData(data: ConsultationRequestVO) {
-        mConsultationRequestVO = data
+    override fun displayPatientRequestData(data: ConsultationChatVO) {
+        mConsultationChatVO = data
     }
+
+
 
     override fun displayPrescriptionLists(prescriptionVO: PrescriptionVO) {
 

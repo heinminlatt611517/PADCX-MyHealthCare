@@ -22,15 +22,17 @@ import com.padc.share.data.vos.AddressVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.data.vos.PrescriptionVO
 import kotlinx.android.synthetic.main.activity_order_prescription.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
 
     companion object {
         const val PARAM_CONSULTATION_CHAT_ID = " chat id"
         fun newIntent(
-            context: Context,
-            consultation_chat_id : String
-        ) : Intent {
+                context: Context,
+                consultation_chat_id: String
+        ): Intent {
             val intent = Intent(context, OrderPrescriptionActivity::class.java)
             intent.putExtra(PARAM_CONSULTATION_CHAT_ID, consultation_chat_id)
             return intent
@@ -56,9 +58,9 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
         setUpActionListener()
 
         mPresenter.onUiReady(
-            this,
-            SessionManager.patient_email.toString(),
-            intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString()
+                this,
+                SessionManager.patient_email.toString(),
+                intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString()
         )
 
     }
@@ -67,10 +69,10 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
 
         state_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
             ) {
                 state = parent.getItemAtPosition(position).toString()
             }
@@ -81,10 +83,10 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
 
         township_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
             ) {
                 township = parent.getItemAtPosition(position).toString()
             }
@@ -102,8 +104,6 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
             recycler_address.visibility = View.GONE
         }
 
-
-
         btn_order.setOnClickListener {
 
             val addressLists : ArrayList<AddressVO> = arrayListOf()
@@ -111,34 +111,54 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
             addressLists.add(patientAddress)
 
             val patientVO = PatientVO(
-                SessionManager.patient_id.toString(),
-                SessionManager.patient_name.toString(),
-                SessionManager.patient_email.toString(),
-                SessionManager.patient_device_id,
-                SessionManager.patient_photo,
-                SessionManager.patient_bloodType,
-                SessionManager.patient_bloodPressure,
-                addressLists,
-                SessionManager.patient_weight,
-                SessionManager.patient_height,
-                SessionManager.patient_dateOfBirth.toString(),
-                SessionManager.patient_allegric,
-                arrayListOf()
+                    SessionManager.patient_id.toString(),
+                    SessionManager.patient_name.toString(),
+                    SessionManager.patient_email.toString(),
+                    SessionManager.patient_device_id,
+                    SessionManager.patient_photo,
+                    SessionManager.patient_bloodType,
+                    SessionManager.patient_bloodPressure,
+                    addressLists,
+                    SessionManager.patient_weight,
+                    SessionManager.patient_height,
+                    SessionManager.patient_dateOfBirth.toString(),
+                    SessionManager.patient_allegric,
+                    arrayListOf()
 
             )
 
-            mPresenter.onTapMadePayment(patientVO)
+            mPresenter.onTapMadePayment(addressLists)
         }
+
+
+        btn_order_recycler.setOnClickListener {
+            val paymentDialog = PaymentPrescriptionDialogFragment.newFragment()
+            val bundle = Bundle()
+            paymentDialog.arguments = bundle
+            bundle.putString(
+                    PaymentPrescriptionDialogFragment.BITMAP_ADDRESS,
+                    patientFullAddress
+            )
+            paymentDialog.arguments = bundle
+            supportFragmentManager?.let {
+                paymentDialog.show(
+                        it,
+                        PaymentPrescriptionDialogFragment.TAG_ADD_PAYMENT_PRESCRIPTION_DIALOG
+                )
+            }
+        }
+
+
     }
 
     private fun setUpRecyclerView() {
         rv_fullAddress.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mPatientAddressAdapter = PatientAddressAdapter(mPresenter)
         rv_fullAddress.adapter = mPatientAddressAdapter
 
         rv_prescribeMedicine.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mPrescribeMedicineAdapter = PrescribeMedicineAdapter()
         rv_prescribeMedicine.adapter = mPrescribeMedicineAdapter
     }
@@ -150,13 +170,18 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
 
     override fun displayPatientAddress(addressLists: List<AddressVO>) {
         Log.d("addressLists", addressLists.size.toString())
-        if (addressLists.isEmpty()) {
-            layout_address.visibility = View.VISIBLE
-        } else {
-            recycler_address.visibility = View.VISIBLE
-            layout_address.visibility = View.GONE
+
+            if (addressLists.isNotEmpty()){
+                recycler_address.visibility = View.VISIBLE
+                layout_address.visibility = View.GONE
+            }
+        else{
+                recycler_address.visibility = View.GONE
+                layout_address.visibility = View.VISIBLE
+            }
             mPatientAddressAdapter.setNewData(addressLists.toMutableList())
-        }
+
+
     }
 
     override fun showPaymentDialog() {
@@ -165,16 +190,16 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
         val bundle = Bundle()
         paymentDialog.arguments = bundle
         bundle.putString(
-            PaymentPrescriptionDialogFragment.BITMAP_ADDRESS,
-            ed_fullAddress.text.toString()
+                PaymentPrescriptionDialogFragment.BITMAP_ADDRESS,
+                ed_fullAddress.text.toString()
         )
 
         paymentDialog.arguments = bundle
 
         supportFragmentManager?.let {
             paymentDialog.show(
-                it,
-                PaymentPrescriptionDialogFragment.TAG_ADD_PAYMENT_PRESCRIPTION_DIALOG
+                    it,
+                    PaymentPrescriptionDialogFragment.TAG_ADD_PAYMENT_PRESCRIPTION_DIALOG
             )
         }
 
@@ -197,9 +222,10 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
     }
 
     override fun showRecyclerAddressView() {
-       recycler_address.visibility = View.VISIBLE
+        recycler_address.visibility = View.VISIBLE
         layout_address.visibility = View.GONE
     }
+
 
     override fun showErrorMessage(errorMessage: String) {
         showSnackbar(errorMessage)

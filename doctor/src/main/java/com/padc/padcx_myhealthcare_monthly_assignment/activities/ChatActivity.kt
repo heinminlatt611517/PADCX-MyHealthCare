@@ -20,10 +20,7 @@ import com.padc.padcx_myhealthcare_monthly_assignment.mvp.view.ChatView
 import com.padc.padcx_myhealthcare_monthly_assignment.utils.SessionManager
 import com.padc.padcx_myhealthcare_monthly_assignment.views.viewPods.RecommendMedicineViewPod
 import com.padc.share.activities.BaseActivity
-import com.padc.share.data.vos.ChatMessageVO
-import com.padc.share.data.vos.ConsultationRequestVO
-import com.padc.share.data.vos.PrescriptionVO
-import com.padc.share.data.vos.SenderTypeVO
+import com.padc.share.data.vos.*
 import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
 
@@ -33,8 +30,9 @@ class ChatActivity : BaseActivity(), ChatView {
     companion object {
         const val PARAM_CONSULTATION_CHAT_ID = " chat id"
         fun newIntent(
-            context: Context,
-            consultation_chat_id: String
+                context: Context,
+                consultation_chat_id: String
+
         ): Intent {
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra(PARAM_CONSULTATION_CHAT_ID, consultation_chat_id)
@@ -45,7 +43,7 @@ class ChatActivity : BaseActivity(), ChatView {
 
     private lateinit var mChatPresenter: ChatPresenter
     private lateinit var mChatMessageAdapter: ChatMessageAdapter
-    private lateinit var mRecommendMedicineViewPod : RecommendMedicineViewPod
+    private lateinit var mRecommendMedicineViewPod: RecommendMedicineViewPod
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,15 +73,15 @@ class ChatActivity : BaseActivity(), ChatView {
         iv_sendText.setOnClickListener {
             if (!ed_text_message.text?.equals("")!!) {
                 mChatPresenter.onTapSend(
-                    intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
-                    message = ChatMessageVO(
-                        UUID.randomUUID().toString(),
-                        com.padc.share.utils.DateUtils().getCurrentDateTime(), ed_text_message.text.toString(), "",
-                        SenderTypeVO(
-                            UUID.randomUUID().toString(),
-                            "doctor", ""
+                        intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
+                        message = ChatMessageVO(
+                                UUID.randomUUID().toString(),
+                                com.padc.share.utils.DateUtils().getCurrentDateTime(), ed_text_message.text.toString(), "",
+                                SenderTypeVO(
+                                        UUID.randomUUID().toString(),
+                                        "doctor", ""
+                                )
                         )
-                    )
                 )
                 ed_text_message.text = Editable.Factory.getInstance().newEditable("")
 
@@ -97,12 +95,12 @@ class ChatActivity : BaseActivity(), ChatView {
 
 
         btn_question.setOnClickListener {
-           mChatPresenter.onTapQuestion()
+            mChatPresenter.onTapQuestion()
         }
 
 
         btn_PrescribeMedicine.setOnClickListener {
-           mChatPresenter.onTapPrescribeMedicine()
+            mChatPresenter.onTapPrescribeMedicine()
         }
 
         btn_medicineHistory.setOnClickListener {
@@ -114,17 +112,15 @@ class ChatActivity : BaseActivity(), ChatView {
 
     fun hideKeyboard(view: View) {
         val inputMethodManager: InputMethodManager =
-            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun setUpRecyclerView() {
         rv_chatMessage?.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mChatMessageAdapter = ChatMessageAdapter()
         rv_chatMessage?.adapter = mChatMessageAdapter
-
-
 
 
     }
@@ -141,23 +137,23 @@ class ChatActivity : BaseActivity(), ChatView {
         mChatMessageAdapter.setNewData(messageLists.toMutableList())
     }
 
-    override fun displayPatientRequestData(data: ConsultationRequestVO) {
+    override fun displayPatientRequestData(data: ConsultationChatVO) {
         bindData(data)
     }
 
     override fun navigateToPrescribeMedicineScreen() {
-        startActivity(PrescribeMedicineActivity.newIntent(this,intent.getStringExtra(
-            PARAM_CONSULTATION_CHAT_ID).toString()))
+        startActivity(PrescribeMedicineActivity.newIntent(this, intent.getStringExtra(
+                PARAM_CONSULTATION_CHAT_ID).toString()))
     }
 
     override fun navigateToGeneralQuestionScreen() {
-        startActivity(GeneralQuestionActivity.newIntent(this,intent.getStringExtra(
-            PARAM_CONSULTATION_CHAT_ID).toString()))
+        startActivity(GeneralQuestionActivity.newIntent(this, intent.getStringExtra(
+                PARAM_CONSULTATION_CHAT_ID).toString()))
     }
 
     override fun displayPrescriptionLists(lists: List<PrescriptionVO>) {
-        Log.d("prescriptionLists",lists.size.toString())
-        if (lists.isNotEmpty()){
+        Log.d("prescriptionLists", lists.size.toString())
+        if (lists.isNotEmpty()) {
             recommend_medicine_view_pod.visibility = View.VISIBLE
             mRecommendMedicineViewPod = recommend_medicine_view_pod as RecommendMedicineViewPod
 
@@ -166,8 +162,7 @@ class ChatActivity : BaseActivity(), ChatView {
     }
 
 
-
-    private fun bindData(data: ConsultationRequestVO) {
+    private fun bindData(data: ConsultationChatVO) {
         tv_patientName.text = data.patient_info?.name
         pname.text = data.patient_info?.name
         pdateofBirth.text = data.patient_info?.dateOfBirth
@@ -177,12 +172,12 @@ class ChatActivity : BaseActivity(), ChatView {
         pweight.text = data.patient_info?.weight
         pbloodpressure.text = data.patient_info?.blood_pressure
 
-        if (data.case_summary.size > 0) {
-            txt_question1.text = data.case_summary[0].question
-            txt_answer1.text = data.case_summary[0].answer
+        data.case_summary?.let {
+            txt_question1.text = data.case_summary?.get(0)?.question
+            txt_answer1.text = data.case_summary?.get(0)?.answer
 
-            txt_question2.text = data.case_summary[1].question
-            txt_answer2.text = data.case_summary[1].answer
+            txt_question2.text = data.case_summary?.get(1)?.question
+            txt_answer2.text = data.case_summary?.get(1)?.answer
         }
 
         tv_patientName.text = data.patient_info?.name

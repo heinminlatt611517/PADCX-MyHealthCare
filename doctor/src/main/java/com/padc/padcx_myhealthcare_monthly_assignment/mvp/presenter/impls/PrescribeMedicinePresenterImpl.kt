@@ -1,9 +1,8 @@
 package com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.impls
 
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.presenter.PrescribeMedicinePresenter
 import com.padc.padcx_myhealthcare_monthly_assignment.mvp.view.PrescribeMedicineView
 import com.padc.padcx_myhealthcare_monthly_assignment.utils.SessionManager
@@ -29,6 +28,19 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner, speciality: String,consultationID: String) {
 
+
+        mDoctorModel.getConsultationChat(consultationID,onSuccess = {}, onError = {})
+
+       mDoctorModel.getConsultationChatFromDB(consultationID)
+
+        mDoctorModel.getConsultationChatFromDB(consultationID)
+                .observe(lifecycleOwner, Observer {
+                    it?.let {
+                        mView?.displayPatientRequestData(it)
+                    }
+                })
+
+
         mDoctorModel.getMedicineBySpeciality(speciality, onSuccess = {
             medicineLists.addAll(it)
                     mView?.displayMedicineLists(medicineLists)
@@ -37,9 +49,8 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
             mView?.showErrorMessage(it)
         })
 
-        mDoctorModel.getBroadConsultationRequest(consultationID,onSuccess = {
-            mView?.displayPatientRequestData(it)
-        },onFailure = {})
+
+
 
     }
 

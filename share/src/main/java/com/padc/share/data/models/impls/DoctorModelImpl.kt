@@ -64,7 +64,7 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         onSuccess: (consultationRequest: ConsultationRequestVO) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        PatientModelImpl.mFirebaseApi.getBroadConsultationRequest(consultation_request_id,onSuccess,onFailure)
+        mFirebaseApi.getBroadConsultationRequest(consultation_request_id,onSuccess,onFailure)
     }
 
     override fun getDoctorByEmail(
@@ -141,6 +141,10 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         }, onFailure= {})
     }
 
+    override fun getConsultationPatient(doctorId: String, onSuccess: (List<ConsultedPatientVO>) -> Unit, onFailure: (String) -> Unit) {
+        mFirebaseApi.getConsultationPatient(doctorId,onSuccess,onFailure)
+    }
+
     override fun getConsultedPatientFromDB(doctorId: String): LiveData<List<ConsultedPatientVO>> {
         return mTheDB.consultedPatientDao().getConsultedPatient()
     }
@@ -212,6 +216,37 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         mFirebaseApi.getPrescription(consultationId,onSuccess,onFailure)
     }
 
+    override fun getConsultationChatForDoctor(doctorId: String, onSuccess: (List<ConsultationChatVO>) -> Unit, onFailure: (String) -> Unit) {
+        mFirebaseApi.getConsulationChatForDoctor(doctorId,onSuccess,onFailure)
+    }
+
+    override fun getConsultationByConsulationRequestId(consultation_request_id: String, onSuccess: (consultationRequestVO: ConsultationRequestVO) -> Unit, onError: (String) -> Unit) {
+        mFirebaseApi.getBroadcastConsultationRequest(consultation_request_id,
+                onSuccess = {
+                    mTheDB.consultationRequestDao().deleteAllConsultationRequestData()
+                    mTheDB.consultationRequestDao().insertConsultationRequest(it)
+                }, onFailure = { onError(it) })
+    }
+
+    override fun getConsultationByConsulationRequestIdFromDB(consultation_request_id: String): LiveData<ConsultationRequestVO> {
+        return mTheDB.consultationRequestDao().getConsultationRequestByConsultationRequestId(consultation_request_id)
+    }
+
+    override fun getBroadcastConsultationRequest(consulation_request_id: String, onSuccess: (consulationRequest: ConsultationRequestVO) -> Unit, onFailure: (String) -> Unit) {
+        mFirebaseApi.getBroadConsultationRequest(consulation_request_id,onSuccess,onFailure)
+    }
+
+    override fun getConsultationChat(consulationId: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        mFirebaseApi.getConsulationChatById(consulationId,
+                onSuccess = {
+                    mTheDB.consultationChatDao().deleteAllConsultationChatData()
+                    mTheDB.consultationChatDao().insertConsultationChatData(it)
+                }, onFailure = { onError(it) })
+    }
+
+    override fun getConsultationChatFromDB(consulationId: String): LiveData<ConsultationChatVO> {
+        return mTheDB.consultationChatDao().getAllConsultationChatDataBy(consulationId)
+    }
 
 
 }

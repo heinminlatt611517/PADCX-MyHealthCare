@@ -14,7 +14,7 @@ import com.padc.share.presistence.typeConverters.PrescriptionTypeConverter
 @IgnoreExtraProperties
 data class ConsultationChatVO(
     @PrimaryKey
-    var id: String= "",
+    var id : String= "",
     var doctor_id : String ? ="",
     var doctor_case_summary : String? = "",
     var finish_flag : Boolean? = null,

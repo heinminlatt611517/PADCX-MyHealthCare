@@ -20,10 +20,7 @@ import com.padc.patient.mvp.view.ChatView
 import com.padc.patient.utils.SessionManager
 import com.padc.patient.views.viewPods.RecommendMedicineViewPod
 import com.padc.share.activities.BaseActivity
-import com.padc.share.data.vos.ChatMessageVO
-import com.padc.share.data.vos.ConsultationRequestVO
-import com.padc.share.data.vos.PrescriptionVO
-import com.padc.share.data.vos.SenderTypeVO
+import com.padc.share.data.vos.*
 import com.padc.share.utils.DateUtils
 import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
@@ -118,9 +115,11 @@ class ChatActivity : BaseActivity(), ChatView {
         this.finish()
     }
 
-    override fun displayPatientRequestData(data: ConsultationRequestVO) {
+    override fun displayPatientRequestData(data: ConsultationChatVO) {
         bindPatientData(data)
     }
+
+
 
     override fun navigateToOrderPrescriptionScreen() {
         startActivity(OrderPrescriptionActivity.newIntent(this,intent.getStringExtra(
@@ -137,7 +136,7 @@ class ChatActivity : BaseActivity(), ChatView {
        }
     }
 
-    private fun bindPatientData(data: ConsultationRequestVO) {
+    private fun bindPatientData(data: ConsultationChatVO) {
         pname.text = data.patient_info?.name
         pdateofBirth.text = data.patient_info?.dateOfBirth
         pheight.text = data.patient_info?.height
@@ -146,12 +145,12 @@ class ChatActivity : BaseActivity(), ChatView {
         pweight.text = data.patient_info?.weight
         pbloodpressure.text = data.patient_info?.blood_pressure
 
-        if (data.case_summary.size > 0) {
-            txt_question1.text = data.case_summary[0].question
-            txt_answer1.text = data.case_summary[0].answer
+       data?.let {
+            txt_question1.text = data.case_summary?.get(0)?.question
+            txt_answer1.text = data.case_summary?.get(0)?.answer
 
-            txt_question2.text = data.case_summary[1].question
-            txt_answer2.text = data.case_summary[1].answer
+            txt_question2.text = data.case_summary?.get(1)?.question
+            txt_answer2.text = data.case_summary?.get(1)?.answer
         }
 
 

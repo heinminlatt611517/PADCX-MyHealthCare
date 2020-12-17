@@ -18,7 +18,6 @@
     android:layout_marginBottom="@dimen/margin_large"
     tools:context=".activities.OrderPrescriptionActivity">
 
-
     <androidx.cardview.widget.CardView
         app:cardElevation="5dp"
         app:cardCornerRadius="20dp"
@@ -144,7 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/recycler_address"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_margin="@dimen/margin_medium_3"
                 >
                 <org.mmtextview.components.MMTextView
@@ -196,6 +195,18 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_order_recycler"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_add_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order"
+                    app:cornerRadius="14dp"
+                    android:layout_marginTop="@dimen/margin_medium_3"
+                    app:backgroundTint="@color/blue_800"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -203,7 +214,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/layout_address"
                 android:visibility="gone"
                 android:layout_margin="@dimen/margin_medium_3"
@@ -312,8 +323,9 @@
                     android:layout_margin="10dp"
                     app:strokeColor="@color/grey_600"
                     app:strokeWidth="0.5dp"
+                    android:id="@+id/card_address_layout"
                     app:cardBackgroundColor="@color/white"
-                   >
+                    >
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -333,25 +345,23 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_order"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_address_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium_3"
+                    android:text="@string/order"
+                    app:cornerRadius="14dp"
+                    app:backgroundTint="@color/blue_800"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_order"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottom"
-        android:layout_marginTop="@dimen/margin_medium_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/order"
-        app:cornerRadius="14dp"
-        android:layout_marginBottom="@dimen/margin_medium_3"
-        app:backgroundTint="@color/blue_800"
-        />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

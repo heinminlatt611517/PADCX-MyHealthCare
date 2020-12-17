@@ -82,9 +82,12 @@ class PatientCaseSummaryActivity : BaseActivity(),PatientCaseSummaryView {
 
     }
 
-    override fun navigateToChatScreen() {
-        startActivity(ChatActivity.newIntent(this,consultation_request_id))
+    override fun navigateToChatScreen(consultationID: String, consultationRequestID: String) {
+        startActivity(ChatActivity.newIntent(this,consultationID))
     }
+
+
+
 
     private fun bindRequestPatientData(consultationRequestVO: ConsultationRequestVO) {
         pname?.text = consultationRequestVO.patient_info?.name

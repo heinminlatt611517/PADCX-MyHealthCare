@@ -16,11 +16,14 @@ class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner, consultationID: String) {
 
-        mPatientModel.getBroadConsultationRequest(consultationID, onSuccess = {
-            mView?.displayPatientRequestData(it)
-        }, onFailure = {
-            mView?.showErrorMessage(it)
-        })
+        mPatientModel.getConsultationChat(consultationID,onSuccess = {}, onError = {})
+
+        mPatientModel.getConsultationChatFromDB(consultationID)
+                .observe(lifecycleOwner, Observer { data ->
+                    data?.let {
+                        mView?.displayPatientRequestData(data)
+                    }
+                })
 
         mPatientModel.getAllChatMessage(consultationID,
              onSuccess = {

@@ -1,6 +1,6 @@
 package com.padc.patient.delegates
 
 interface ConsultationChatItemDelegate {
-    fun onTapSendText()
+    fun onTapSendText(consultationChatID : String)
     fun onTapMedicineInfo()
 }

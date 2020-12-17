@@ -22,7 +22,6 @@ data class ConsultationRequestVO (
     var id: String= "",
     var speciality : String ?= "",
     var date_time : String ?=null ,
-    var patient_type_status : String ?= "new",
     var status : String ? = "none",
     var patient_info : PatientVO ,
     var doctor_info : DoctorVO ,

@@ -29,11 +29,11 @@ class ConsultationChatViewHolder(private val mDelegate: ConsultationChatItemDele
                 ImageUtils().showImage(itemView.iv_doctor, it, R.drawable.speciality_thumbnail)
             }
 
-            itemView.layout_sendText.setOnClickListener {
-                mDelegate.onTapSendText()
+            itemView.iv_send.setOnClickListener {
+                mDelegate.onTapSendText(data.id)
             }
 
-            itemView.layout_medicine_info.setOnClickListener {
+            itemView.iv_prescriptionMedicine.setOnClickListener {
                 mDelegate.onTapMedicineInfo()
             }
         }

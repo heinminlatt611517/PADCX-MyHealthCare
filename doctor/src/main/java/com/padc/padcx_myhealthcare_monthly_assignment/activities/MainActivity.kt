@@ -1,10 +1,12 @@
 package com.padc.padcx_myhealthcare_monthly_assignment.activities
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TimePicker
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +35,7 @@ import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientBirthDat
 import kotlinx.android.synthetic.main.fragment_patient_dialog.tv_patientName
 import kotlinx.android.synthetic.main.layout_header.*
 import kotlinx.android.synthetic.main.list_item_consultation_request_item.*
+import kotlinx.android.synthetic.main.postpone_dialog.view.*
 
 class MainActivity : BaseActivity() ,MainView{
 
@@ -73,7 +76,7 @@ class MainActivity : BaseActivity() ,MainView{
         rv_consultationRequest.adapter = mConsultationRequestAdapter
 
         rv_consulation_accept.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mConsultationAcceptAdapter = ConsultationAcceptAdapter ()
+        mConsultationAcceptAdapter = ConsultationAcceptAdapter (mMainPresenter)
         rv_consulation_accept.adapter = mConsultationAcceptAdapter
     }
 
@@ -130,6 +133,41 @@ class MainActivity : BaseActivity() ,MainView{
 
     }
 
+    override fun displayPostPoneDialog(consultationRequestVO: ConsultationRequestVO) {
+        val view = layoutInflater.inflate(R.layout.postpone_dialog, null)
+        val dialog = this?.let { Dialog(it) }
+        val timePicker = view?.findViewById<TimePicker>(R.id.timePicker)
+        var msg : String =""
+        timePicker?.setOnTimeChangedListener { _, hour, minute -> var hour = hour
+            var am_pm = ""
+            when {hour == 0 -> { hour += 12
+                am_pm = "AM"
+            }
+                hour == 12 -> am_pm = "PM"
+                hour > 12 -> { hour -= 12
+                    am_pm = "PM"
+                }
+                else -> am_pm = "AM"
+            }
+
+            val h = if (hour < 10) "0" + hour else hour
+            val min = if (minute < 10) "0" + minute else minute
+            msg = " $h : $min $am_pm"
+
+        }
+        dialog?.apply {
+            setCancelable(true)
+            setContentView(view)
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
+        view.confirm.setOnClickListener {
+            msg?.let{mMainPresenter.onTapPostponeTime(it,consultationRequestVO)}
+            dialog?.dismiss()
+        }
+        dialog?.show()
+    }
+
     override fun displayConsultationAcceptList(list: List<ConsultationChatVO>) {
         Log.d("ConsultedAcceptLists",list.size.toString())
         mConsultationAcceptAdapter.setNewData(list.toMutableList())
@@ -142,6 +180,8 @@ class MainActivity : BaseActivity() ,MainView{
             empty_view.visibility =View.GONE
             tv_consultationRecord.visibility = View.VISIBLE
         }
+
+
     }
 
     override fun navigateToPatientCaseSummary(consultation_request_id: String) {
@@ -156,7 +196,7 @@ class MainActivity : BaseActivity() ,MainView{
     }
 
     override fun navigateToChatScreen(consultation_chat_id: String) {
-
+       startActivity(ChatActivity.newIntent(this,consultation_chat_id))
     }
 
 

@@ -31,7 +31,11 @@ import com.padc.share.data.vos.*
 import com.padc.share.utils.DateUtils
 import kotlinx.android.synthetic.main.confirm_dialog_layout.*
 import kotlinx.android.synthetic.main.confirm_dialog_layout.view.*
+import kotlinx.android.synthetic.main.confirm_dialog_layout.view.btn_cancle
+import kotlinx.android.synthetic.main.confirm_dialog_layout.view.btn_confirm
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.recent_doctor_confirm_dialog.*
+import kotlinx.android.synthetic.main.recent_doctor_confirm_dialog.view.*
 
 
 private const val PARAM_ID = "PARAM_ID"
@@ -184,18 +188,16 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun showRecentDoctorDialog(doctorVO: DoctorVO) {
-        val view = layoutInflater.inflate(R.layout.confirm_dialog_layout, null)
+        val view = layoutInflater.inflate(R.layout.recent_doctor_confirm_dialog, null)
         val dialog = context?.let { Dialog(it) }
 
-        consultation_request_name_id?.text =
-            doctorVO.name + resources.getString(R.string.consultation_request_message)
+        view.tv_doctorSpeciality?.text = doctorVO.speciality + resources.getString(R.string.consultation_request_message)
 
         dialog?.apply {
             setCancelable(false)
             setContentView(view)
             window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
-
 
 
         view.btn_cancle.setOnClickListener {

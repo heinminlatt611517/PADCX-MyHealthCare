@@ -82,12 +82,10 @@ class PaymentPrescriptionDialogFragment : DialogFragment() {
 
     private fun setUpActionsListener() {
         btn_madePayment.setOnClickListener {
-
             val checkOutVO = CheckOutVO(UUID.randomUUID().toString(),"",0,
                 PatientVO(), DoctorVO(), DeliveryRoutineVO(),prescribeMedicineLists)
-
             mPresenter.checkOutMedicine(checkOutVO)
-
+            dismiss()
         }
     }
 

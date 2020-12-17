@@ -1,5 +1,6 @@
 package com.padc.padcx_myhealthcare_monthly_assignment.mvp.view
 
+import com.padc.share.data.vos.ConsultationChatVO
 import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.MedicineVO
 import com.padc.share.data.vos.PrescriptionVO
@@ -10,7 +11,7 @@ interface PrescribeMedicineView : BaseView {
     fun showPrescribeMedicineDialog(medicineVO: MedicineVO)
     fun showText(text : String)
     fun navigateToSplashScreen()
-    fun displayPatientRequestData(data : ConsultationRequestVO)
+    fun displayPatientRequestData(data : ConsultationChatVO)
     fun displayPrescriptionLists(prescriptionVO: PrescriptionVO )
     fun navigateToChatScreen()
 }
