@@ -13,6 +13,8 @@ import com.padc.patient.R
 import com.padc.patient.adapters.PatientAddressAdapter
 import com.padc.patient.adapters.PrescribeMedicineAdapter
 import com.padc.patient.dialogs.PaymentPrescriptionDialogFragment
+import com.padc.patient.dialogs.PaymentPrescriptionDialogFragment.Companion.BITMAP_ADDRESS
+import com.padc.patient.dialogs.PaymentPrescriptionDialogFragment.Companion.SUB_TOTAL
 import com.padc.patient.mvp.presenter.OrderPrescriptionPresenter
 import com.padc.patient.mvp.presenter.impls.OrderPrescriptionPresenterImpl
 import com.padc.patient.mvp.view.OrderPrescriptionView
@@ -43,11 +45,13 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
     private var state: String? = null
     private var township: String? = null
 
+    var medicinePrice : Int = 0
+
 
     private lateinit var mPresenter: OrderPrescriptionPresenter
     private lateinit var mPatientAddressAdapter: PatientAddressAdapter
     private lateinit var mPrescribeMedicineAdapter: PrescribeMedicineAdapter
-    private var patientFullAddress: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_prescription)
@@ -136,9 +140,7 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
             val bundle = Bundle()
             paymentDialog.arguments = bundle
             bundle.putString(
-                    PaymentPrescriptionDialogFragment.BITMAP_ADDRESS,
-                    patientFullAddress
-            )
+                    PaymentPrescriptionDialogFragment.BITMAP_ADDRESS,ed_fullAddress.text.toString())
             paymentDialog.arguments = bundle
             supportFragmentManager?.let {
                 paymentDialog.show(
@@ -189,10 +191,7 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
         val paymentDialog = PaymentPrescriptionDialogFragment.newFragment()
         val bundle = Bundle()
         paymentDialog.arguments = bundle
-        bundle.putString(
-                PaymentPrescriptionDialogFragment.BITMAP_ADDRESS,
-                ed_fullAddress.text.toString()
-        )
+        bundle.putString(BITMAP_ADDRESS, ed_fullAddress.text.toString())
 
         paymentDialog.arguments = bundle
 
@@ -207,14 +206,27 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
 
     override fun displayFullAddress(fullAddress: String) {
         Log.d("fullAddress", fullAddress)
-        patientFullAddress = fullAddress
+
 
     }
 
     override fun displayPrescribeMedicineLists(medicineLists: List<PrescriptionVO>) {
         Log.d("medicineLists", medicineLists.size.toString())
         mPrescribeMedicineAdapter.setNewData(medicineLists.toMutableList())
-    }
+
+
+        for (i in medicineLists){
+            medicinePrice += i.price.toInt()
+
+        }
+
+        tv_medicineTotalAmount.text = medicinePrice.toString()
+
+
+        }
+
+
+
 
     override fun showEmptyAddressView() {
         layout_address.visibility = View.VISIBLE

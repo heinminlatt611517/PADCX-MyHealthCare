@@ -13,7 +13,7 @@ import com.padc.share.mvp.presenter.BasePresenter
 interface OrderPrescriptionPresenter : BasePresenter<OrderPrescriptionView> ,PatientAddressItemDelegate{
     fun onUiReady(lifecycleOwner: LifecycleOwner,patientID : String,consultationID : String)
     fun onTapMadePayment(addressLists : List<AddressVO>)
-    fun checkOutMedicine(checkOutVO: CheckOutVO)
+    fun checkOutMedicine(totalPrice : String,prescribeMedicineLists : ArrayList<PrescriptionVO>,consultationID :String)
     fun getPrescriptionLists() : LiveData<List<PrescriptionVO>>
 
     fun getPatientFullAddress() : LiveData<String>

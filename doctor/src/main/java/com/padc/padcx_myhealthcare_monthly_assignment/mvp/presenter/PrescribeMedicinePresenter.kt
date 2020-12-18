@@ -25,5 +25,9 @@ interface PrescribeMedicinePresenter : BasePresenter<PrescribeMedicineView>,
         count : String
     )
 
+    fun addToPrescribeMedicineLists(
+        prescriptionVO: PrescriptionVO
+    )
+
 
 }

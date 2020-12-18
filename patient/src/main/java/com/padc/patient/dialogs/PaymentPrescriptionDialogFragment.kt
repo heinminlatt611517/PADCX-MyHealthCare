@@ -1,9 +1,6 @@
 package com.padc.patient.dialogs
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +8,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide.init
 import com.padc.patient.R
 import com.padc.patient.adapters.PrescribeMedicineAdapter
-import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.presenter.OrderPrescriptionPresenter
-import com.padc.patient.mvp.presenter.impls.HomePresenterImpl
 import com.padc.patient.mvp.presenter.impls.OrderPrescriptionPresenterImpl
 import com.padc.share.data.vos.*
 import kotlinx.android.synthetic.main.activity_order_prescription.*
@@ -37,7 +31,11 @@ class PaymentPrescriptionDialogFragment : DialogFragment() {
         const val BUNDLE_AMOUNT = "BUNDLE_AMOUNT"
         const val BITMAP_IMAGE = "BITMAP_IMAGE"
         const val BITMAP_ADDRESS = "BITMAP_ADDRESS"
+        const val CONSULTATION_CHAT_ID = "CONSULTATION_CHAT_ID"
+        const val SUB_TOTAL = "SUB_TOTAL"
 
+        var medicinePrice: Int = 0
+        var deliveryFee: Int = 3000
         fun newFragment(): PaymentPrescriptionDialogFragment {
             return PaymentPrescriptionDialogFragment()
         }
@@ -76,15 +74,19 @@ class PaymentPrescriptionDialogFragment : DialogFragment() {
         rv_prescribeMedicine.adapter = mPrescribeMedicineAdapter
     }
 
-    private fun init(){
-        ed_patientFullAddress.text =  arguments?.getString(BITMAP_ADDRESS)
+    private fun init() {
+        ed_patientFullAddress.text = arguments?.getString(BITMAP_ADDRESS)
+
     }
 
     private fun setUpActionsListener() {
         btn_madePayment.setOnClickListener {
-            val checkOutVO = CheckOutVO(UUID.randomUUID().toString(),"",0,
-                PatientVO(), DoctorVO(), DeliveryRoutineVO(),prescribeMedicineLists)
-            mPresenter.checkOutMedicine(checkOutVO)
+
+            mPresenter.checkOutMedicine(
+                txt_totalAmountValue.text.toString(),
+                prescribeMedicineLists,
+                arguments?.getString(CONSULTATION_CHAT_ID).toString()
+            )
             dismiss()
         }
     }
@@ -98,14 +100,23 @@ class PaymentPrescriptionDialogFragment : DialogFragment() {
             .observe(this, Observer {
                 mPrescribeMedicineAdapter.setNewData(it.toMutableList())
                 prescribeMedicineLists.addAll(it)
+
+                for (i in it) {
+                    medicinePrice += i.price.toInt()
+                }
+
+                tv_medicineSubTotal.text = medicinePrice.toString()
+                medicinePrice = 0
+                txt_totalAmountValue.text = (medicinePrice + deliveryFee).toString()
+
             })
 
         mPresenter.getPatientFullAddress()
             .observe(this, Observer {
-                 if (it.isNotEmpty()){
-                     ed_patientFullAddress.text = it
+                if (it.isNotEmpty()) {
+                    ed_patientFullAddress.text = it
 
-                 }
+                }
 
             })
     }
@@ -114,7 +125,8 @@ class PaymentPrescriptionDialogFragment : DialogFragment() {
         super.onStart()
         dialog?.window?.setLayout(
             ViewGroup.LayoutParams.FILL_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT)
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }

@@ -116,19 +116,19 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
     }
 
     override fun onTapSkip(consultationRequestVO: ConsultationRequestVO) {
-        mDoctorModel.deleteConsultationRequestById(consultationRequestVO.id,consultationRequestVO.doctor_info.speciality.toString())
-            .observe(mOwner, Observer { consultationRequest ->
-                consultationRequest?.let {
-                    mView?.displayConsultationRequestLists(consultationRequest) }
-            })
+//        mDoctorModel.deleteConsultationRequestById(consultationRequestVO.id,consultationRequestVO.doctor_info.speciality.toString())
+//            .observe(mOwner, Observer { consultationRequest ->
+//                consultationRequest?.let {
+//                    mView?.displayConsultationRequestLists(consultationRequest) }
+//            })
     }
 
     override fun onTapNext(consultationRequestVO: ConsultationRequestVO) {
-        mDoctorModel.deleteConsultationRequestById(consultationRequestVO.id,consultationRequestVO.doctor_info.speciality.toString())
-                .observe(mOwner, Observer { consultationRequest ->
-                    consultationRequest?.let {
-                        mView?.displayConsultationRequestLists(consultationRequest) }
-                })
+//        mDoctorModel.deleteConsultationRequestById(consultationRequestVO.id,consultationRequestVO.doctor_info.speciality.toString())
+//                .observe(mOwner, Observer { consultationRequest ->
+//                    consultationRequest?.let {
+//                        mView?.displayConsultationRequestLists(consultationRequest) }
+//                })
     }
 
     override fun onTapPostpone(consultationRequestVO: ConsultationRequestVO) {

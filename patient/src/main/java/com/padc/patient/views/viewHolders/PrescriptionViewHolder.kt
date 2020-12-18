@@ -27,8 +27,12 @@ class PrescriptionViewHolder(itemView: View) :
 
         data?.let {
            itemView.tv_medicineName.text = data.medicine
-            itemView.tv_time_count.text = data.count.toString()
-
+            itemView.tv_time_count.text = data.routineVO[0].times
+            itemView.tv_repeat.text = data.routineVO[0].repeat
+            itemView.tv_comment.text = data.routineVO[0].comment
+            itemView.tv_day_time.text =  data.routineVO[0].days
+            itemView.tv_number.text = data.count+" Tablet"
+            itemView.tv_amount.text = data.routineVO[0].amount+" mg"
         }
     }
 }

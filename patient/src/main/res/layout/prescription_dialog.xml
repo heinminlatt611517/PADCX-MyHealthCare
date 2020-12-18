@@ -8,62 +8,69 @@
         android:layout_margin="@dimen/margin_medium"
         android:orientation="vertical">
 
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/top"
-            android:layout_width="390dp"
-            android:layout_height="wrap_content"
-            android:elevation="5dp"
-            android:orientation="vertical"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp"
-            android:layout_margin="@dimen/margin_small"
-            app:layout_constraintTop_toTopOf="parent">
-
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn1"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/top"
+        android:layout_width="390dp"
         android:layout_height="wrap_content"
-        android:text="@string/medicine_info"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/black"
-        app:cornerRadius="14dp"
-        android:layout_marginTop="@dimen/margin_medium_3"
-        android:layout_marginLeft="@dimen/margin_medium_3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:elevation="5dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        android:layout_margin="@dimen/margin_small"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_prescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_medium_3"
-        android:layout_marginRight="@dimen/margin_medium_3"
-        android:layout_marginTop="@dimen/margin_medium"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medicine_info"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/black"
+                app:cornerRadius="14dp"
+                android:layout_marginTop="@dimen/margin_medium_3"
+                android:layout_marginLeft="@dimen/margin_medium_3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_prescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_medium_3"
+                android:layout_marginRight="@dimen/margin_medium_3"
+                android:layout_marginTop="@dimen/margin_medium"/>
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_close"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_large"
-        android:layout_marginRight="@dimen/margin_large"
-        android:layout_gravity="center"
-        android:text="@string/close"
-        app:cornerRadius="14dp"
-        app:backgroundTint="@color/blue_800"
-        android:layout_marginTop="@dimen/margin_xlarge"
-        android:layout_marginBottom="@dimen/margin_xlarge"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_close"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_large"
+                android:layout_gravity="center"
+                android:text="@string/close"
+                app:cornerRadius="14dp"
+                app:backgroundTint="@color/blue_800"
+                android:layout_marginTop="@dimen/margin_xlarge"
+                android:layout_marginBottom="@dimen/margin_xlarge"/>
 
-</LinearLayout>
+        </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.core.widget.NestedScrollView>
+
 
     </LinearLayout>
 

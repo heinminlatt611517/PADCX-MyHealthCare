@@ -82,39 +82,55 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
         type : String,
         count : String
     ) {
-        val routineLists: ArrayList<RoutineVO> = arrayListOf()
-
-
-        val routineVO = RoutineVO(
-            UUID.randomUUID().toString(),
-            day + spinnerItem,
-            count,
-            type,
-            comment
-        )
-        routineLists.add(routineVO)
-
-        val prescriptionVO =
-            PrescriptionVO(UUID.randomUUID().toString(), 0, 0, medicine, routineLists)
-
-        prescriptionLists.add(prescriptionVO)
-
-        mDoctorModel.getMedicineBySpeciality(SessionManager.doctor_speciality.toString(), onSuccess = {
-
-                medicineLists.forEach {medicineVO ->
-                        if (medicine == medicineVO.name){
-                            medicineVO.isSelect = true
-                        }
-
-                    mView?.displayMedicineLists(medicineLists)
-                }
-        }, onFailure = {
-            mView?.showErrorMessage(it)
-        })
+//        val routineLists: ArrayList<RoutineVO> = arrayListOf()
+//
+//
+//        val routineVO = RoutineVO(
+//            UUID.randomUUID().toString(),
+//            day + spinnerItem,
+//            count,
+//            type,
+//            comment
+//        )
+//        routineLists.add(routineVO)
+//
+//       val prescriptionVO =
+//            PrescriptionVO(UUID.randomUUID().toString(), 0, 0, medicine, routineLists)
+//
+//        prescriptionLists.add(prescriptionVO)
+//
+//        mDoctorModel.getMedicineBySpeciality(SessionManager.doctor_speciality.toString(), onSuccess = {
+//
+//                medicineLists.forEach {medicineVO ->
+//                        if (medicine == medicineVO.name){
+//                            medicineVO.isSelect = true
+//                        }
+//
+//                    mView?.displayMedicineLists(medicineLists)
+//                }
+//        }, onFailure = {
+//            mView?.showErrorMessage(it)
+//        })
 
     }
 
+    override fun addToPrescribeMedicineLists(prescriptionVO: PrescriptionVO) {
+        prescriptionLists.add(prescriptionVO)
 
+
+        mDoctorModel.getMedicineBySpeciality(SessionManager.doctor_speciality.toString(), onSuccess = {
+
+            medicineLists.forEach {medicineVO ->
+                if (prescriptionVO.medicine == medicineVO.name){
+                    medicineVO.isSelect = true
+                }
+
+                mView?.displayMedicineLists(medicineLists)
+            }
+        }, onFailure = {
+            mView?.showErrorMessage(it)
+        })
+    }
 
 
     override fun onTapAddMedicine(medicineVO: MedicineVO) {

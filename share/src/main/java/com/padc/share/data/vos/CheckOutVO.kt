@@ -4,15 +4,15 @@ import androidx.room.PrimaryKey
 import com.google.firebase.firestore.IgnoreExtraProperties
 
 @IgnoreExtraProperties
-data class CheckOutVO (
+data class CheckOutVO(
     @PrimaryKey
     var id: String= "",
     var delivery_address: String = "",
-    var total_price : Int? =0,
+    var total_price: String ="",
     var patientVO: PatientVO ?=null,
     var doctorVO: DoctorVO ?=null,
-    var delivery_routine : DeliveryRoutineVO ?= null,
-    var prescription : ArrayList<PrescriptionVO> ? = arrayListOf()
+    var delivery_routine: DeliveryRoutineVO ?= null,
+    var prescription: ArrayList<PrescriptionVO> = arrayListOf()
 )
 
 @IgnoreExtraProperties

@@ -3,6 +3,7 @@ package com.padc.patient.mvp.presenter.impls
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.padc.patient.mvp.presenter.OrderPrescriptionPresenter
 import com.padc.patient.mvp.view.OrderPrescriptionView
 import com.padc.patient.utils.SessionManager
@@ -10,10 +11,8 @@ import com.padc.share.data.models.PatientModel
 import com.padc.share.data.models.impls.PatientModelImpl
 import com.padc.share.data.vos.*
 import com.padc.share.mvp.presenter.AbstractBasePresenter
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.Observables
-import io.reactivex.rxkotlin.toObservable
-import io.reactivex.schedulers.Schedulers
+import java.util.*
+import kotlin.collections.ArrayList
 
 class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePresenter<OrderPrescriptionView>() {
 
@@ -22,8 +21,11 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
     private val mPatientFullAddress = MutableLiveData<String>()
 
     private val mAddressLists : ArrayList<AddressVO> = arrayListOf()
+    lateinit var mOwner: LifecycleOwner
+    lateinit var mConsultatioId : String
     override fun onUiReady(lifecycleOwner: LifecycleOwner, patientID: String,consultationID : String) {
-
+        mConsultatioId = consultationID
+        mOwner = lifecycleOwner
         mPatientModel.getPatientByEmail(patientID,onSuccess = {
             mAddressLists.addAll(it.address)
 
@@ -59,7 +61,7 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
 
     }
 
-    override fun onTapMadePayment(addressLists: List<AddressVO>) {
+    override fun onTapMadePayment(addressLists: List<AddressVO> ) {
 
         mAddressLists.addAll(addressLists)
 
@@ -88,11 +90,41 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
 
 
 
+    override fun checkOutMedicine(totalPrice : String,prescriptionVO: ArrayList<PrescriptionVO>,consultationID :String) {
 
-    override fun checkOutMedicine(checkOutVO: CheckOutVO) {
-        mPatientModel.checkoutMedicine(checkOutVO,onSuccess = {},onFailure = {
-            mView?.showErrorMessage(it)
-        })
+        mPatientModel.getConsultationChat(mConsultatioId,onSuccess = {}, onError = {})
+
+        val patientVO = PatientVO(
+            SessionManager.patient_id.toString(),
+            SessionManager.patient_name.toString(),
+            SessionManager.patient_email.toString(),
+            SessionManager.patient_device_id,
+            SessionManager.patient_photo,
+            SessionManager.patient_bloodType,
+            SessionManager.patient_bloodPressure,
+            mAddressLists,
+            SessionManager.patient_weight,
+            SessionManager.patient_height,
+            SessionManager.patient_dateOfBirth.toString(),
+            SessionManager.patient_allegric,
+            arrayListOf()
+        )
+        
+        mPatientModel.getConsultationChatFromDB(mConsultatioId)
+            .observe(mOwner, Observer { data ->
+                data?.let {
+
+                    val checkOutVO = CheckOutVO(UUID.randomUUID().toString(),"",totalPrice,
+                    patientVO,it.doctor_info, DeliveryRoutineVO(),prescriptionVO
+                    )
+
+                    mPatientModel.checkoutMedicine(checkOutVO,onSuccess = {},onFailure = {
+                        mView?.showErrorMessage(it)
+                    })
+                }
+            })
+
+
     }
 
     override fun getPrescriptionLists(): LiveData<List<PrescriptionVO>> {

@@ -59,7 +59,9 @@ class EditProfileActivity : BaseActivity() ,ProfileView{
         setUpActionListener()
         setUpItemSelectedListener()
 
-        ImageUtils().showImage(img_profile, SessionManager.doctor_photo.toString(),R.drawable.doctor_img)
+        ImageUtils().showImage(iv_main_profile, SessionManager.doctor_photo.toString(),R.drawable.doctor_img)
+
+        mPresenter.onUiReady(this)
     }
 
     private fun setUpActionListener() {
@@ -195,7 +197,7 @@ class EditProfileActivity : BaseActivity() ,ProfileView{
         et_degree.text =    Editable.Factory.getInstance().newEditable(doctorVO.degree)
         et_biography.text =    Editable.Factory.getInstance().newEditable(doctorVO.biography)
         et_address.text =    Editable.Factory.getInstance().newEditable(doctorVO.address)
-        ed_experience.text =  Editable.Factory.getInstance().newEditable(doctorVO.experience)
+        et_experience.text =  Editable.Factory.getInstance().newEditable(doctorVO.experience)
     }
 
 

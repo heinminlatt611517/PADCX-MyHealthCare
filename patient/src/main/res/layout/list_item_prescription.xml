@@ -84,7 +84,7 @@
             android:textColor="#424656" />
 
         <org.mmtextview.components.MMTextView
-            android:id="@+id/tv_time"
+            android:id="@+id/tv_day_time"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"

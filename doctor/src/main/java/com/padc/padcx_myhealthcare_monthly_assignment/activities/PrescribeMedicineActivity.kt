@@ -3,10 +3,15 @@ package com.padc.padcx_myhealthcare_monthly_assignment.activities
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -30,6 +35,10 @@ import kotlinx.android.synthetic.main.list_item_medicine.*
 import kotlinx.android.synthetic.main.list_item_medicine.view.*
 import kotlinx.android.synthetic.main.prescribe_medicine_dialog.*
 import kotlinx.android.synthetic.main.prescribe_medicine_dialog.view.*
+import kotlinx.android.synthetic.main.prescribe_medicine_dialog.view.ed_day
+import kotlinx.android.synthetic.main.prescribe_medicine_routine_dialog.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
 
@@ -154,89 +163,289 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
     override fun getLifeCycleOwner(): LifecycleOwner = this
 
     override fun showPrescribeMedicineDialog(medicineVO: MedicineVO) {
-        Log.d("medicine", medicineVO.name.toString())
 
-//        val prescribeMedicineDialog = PrescribeMedicineDialogFragment.newFragment()
-//        val bundle = Bundle()
-//        bundle.putString(BUNDLE_NAME, medicineVO.name)
-//        bundle.putString(BUNDLE_MEDICINE_ID, medicineVO.id)
-//
-//        prescribeMedicineDialog.arguments = bundle
-//        supportFragmentManager?.let { prescribeMedicineDialog.show(it,PrescribeMedicineDialogFragment.TAG_ADD_PRESCRIBE_DIALOG) }
-        val view = layoutInflater.inflate(R.layout.prescribe_medicine_dialog, null)
+        var morningstatus =true
+        var afternoonstatus =true
+        var nightstatus =true
+
+        var number =1
+        var daycount : Int = 0
+        var tabcount : String = "1"
+        var eatingtime : String =""
+        var daystemp : String =""
+        var count =0
+
+
+        val view = layoutInflater.inflate(R.layout.prescribe_medicine_routine_dialog, null)
+        val tabAccount = view?.findViewById<TextView>(R.id.tv_tabcount)
+        val comment = view?.findViewById<EditText>(R.id.tv_comment)
+         
+
         val dialog = this?.let { Dialog(it) }
 
         dialog?.apply {
-            setCancelable(false)
+            setCancelable(true)
             setContentView(view)
             window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
 
-        view.tv_medicine.text = medicineVO.name
+        view.txt_medicine_name.text  =  medicineVO.name
+        tabAccount?.text =  tabcount
 
-        for (index in 0 until view.chip_group_amount.childCount) {
-            val chip: Chip = view.chip_group_amount.getChildAt(index) as Chip
+        view.tv_morning.setOnClickListener {
 
-            // Set the chip checked change listener
-            chip.setOnCheckedChangeListener { view, isChecked ->
-                if (isChecked) {
-                    medicineCountLists.add(view.text.toString())
-                } else {
-                    medicineCountLists.remove(view.text.toString())
-                }
+            morningstatus = if(morningstatus) {
+                view.tv_morning.setBackgroundResource(R.drawable.rounded_corner_bluecolor)
+                view.tv_morning.setTextColor(Color.WHITE)
+                count++
+                false
+            }else{
+                view.tv_morning.setBackgroundResource(R.drawable.bg_rounded_border_grey)
+                view.tv_morning.setTextColor(Color.BLACK)
+                count--
+                true
+            }
 
-                if (medicineCountLists.isNotEmpty()) {
-                    mPresenter.addMedicineCount(medicineCountLists.toString())
-
-                }
+            if(count > -1)
+            {
+                var result = number * daycount * count
+                tabAccount?.text = result.toString()
+                tabcount = result.toString()
             }
         }
 
-        for (index in 0 until view.chip_group_medicine.childCount) {
-            val chip: Chip = view.chip_group_medicine.getChildAt(index) as Chip
-
-            // Set the chip checked change listener
-            chip.setOnCheckedChangeListener { view, isChecked ->
-                if (isChecked) {
-                    medicineTypeLists.add(view.text.toString())
-                } else {
-                    medicineTypeLists.remove(view.text.toString())
-                }
-
-                if (medicineTypeLists.isNotEmpty()) {
-                    mPresenter.addMedicineType(medicineTypeLists.toString())
-
-                }
+        view.tv_afternoon.setOnClickListener {
+            afternoonstatus = if(afternoonstatus) {
+                view.tv_afternoon.setBackgroundResource(R.drawable.rounded_corner_bluecolor)
+                view.tv_afternoon.setTextColor(Color.WHITE)
+                count++
+                false
+            }else{
+                view.tv_afternoon.setBackgroundResource(R.drawable.bg_rounded_border_grey)
+                view.tv_afternoon.setTextColor(Color.BLACK)
+                count--
+                true
+            }
+            if(count > -1)
+            {
+                var result = number * daycount * count
+                tabAccount?.text = result.toString()
+                tabcount = result.toString()
             }
         }
 
-        view.routine_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        view.tv_night.setOnClickListener {
+            nightstatus = if(nightstatus) {
+                view.tv_night.setBackgroundResource(R.drawable.rounded_corner_bluecolor)
+                view.tv_night.setTextColor(Color.WHITE)
+                count++
+                false
+            }else{
+                view.tv_night.setBackgroundResource(R.drawable.bg_rounded_border_grey)
+                view.tv_night.setTextColor(Color.BLACK)
+                count--
+                true
+            }
+            if(count > -1)
+            {
+                var result = number * daycount * count
+                tabAccount?.text = result.toString()
+                tabcount = result.toString()
+            }
+        }
+
+        view.tv_before_eating.setOnClickListener {
+            view.tv_before_eating.setBackgroundResource(R.drawable.rounded_corner_bluecolor)
+            view.tv_before_eating.setTextColor(Color.WHITE)
+            view.tv_after_eating.setBackgroundResource(R.drawable.bg_rounded_border_grey)
+            view.tv_after_eating.setTextColor(Color.BLACK)
+            eatingtime= "အစားမစားမှီသောက်ရန်"
+        }
+
+        view.tv_after_eating.setOnClickListener {
+            view.tv_after_eating.setBackgroundResource(R.drawable.rounded_corner_bluecolor)
+            view.tv_after_eating.setTextColor(Color.WHITE)
+            view.tv_before_eating.setBackgroundResource(R.drawable.bg_rounded_border_grey)
+            view.tv_before_eating.setTextColor(Color.BLACK)
+            eatingtime = "အစားစားပြီးမှ သောက်ရန်"
+        }
+
+        view.day_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View,
                 position: Int,
                 id: Long
             ) {
-                routine = parent.getItemAtPosition(position).toString()
+                var day = parent.getItemAtPosition(position).toString()
+                if(day == "Days")
+                {
+                    daycount =1
+                    daystemp= " Days"
+                }else{
+                    daycount = 7
+                    daystemp=" Week"
+                }
+
+                var result = number * daycount * count
+                tabAccount?.text = result.toString()
+                tabcount = result.toString()
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        view.btn_insert_medicine.setOnClickListener {
-            mPresenter.addToPrescriptionLists(
-                medicineVO.name.toString(),
-                view.ed_amount.text.toString(),
-                view.ed_day.text.toString(),
-                routine.toString(),
-                view.ed_comment.text.toString(),
-                medicineTypeLists.toString(),
-                medicineCountLists.toString()
+        view.ed_day.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                var data= s.toString()
+                if(data.isNotEmpty())
+                {
+                    number = data.toInt()
+                    var result = number * daycount * count
+                    view.tv_tabcount.text = result.toString()
+                    tabcount = result.toString()
+                }
+            }
+        })
+
+
+
+        view.confirm.setOnClickListener {
+            // prescription list add
+            var days : String =""
+            if(morningstatus)
+            {
+                days += " မနက် ၊ "
+            }
+            if(afternoonstatus)
+            {
+                days += "နေ့  ၊  "
+            }
+            if(nightstatus)
+            {
+                days += "ည"
+            }
+
+            var medicaltime : String =""
+            val routineLists: ArrayList<RoutineVO> = arrayListOf()
+
+            var routineVO = RoutineVO(
+                id= "0",
+                amount = medicineVO.price.toString(),
+                days = view.ed_day.text.toString() + daystemp,
+                comment = comment?.text.toString(),
+                quantity = tabcount,
+                times = days,
+                repeat = eatingtime
             )
-            dialog?.dismiss()
+            routineLists.add(routineVO)
+
+            var prescriptionVO = PrescriptionVO(
+                id = UUID.randomUUID().toString(),
+                count = tabcount,
+                price =  medicineVO.price.toString(),
+                medicine = medicineVO.name.toString(),
+                routineVO= routineLists
+            )
+            if(comment?.text.toString().isNotEmpty()) {
+                mPresenter.addToPrescribeMedicineLists(prescriptionVO)
+                dialog?.dismiss()
+            }else{
+                Toast.makeText(this,"Please enter all field",Toast.LENGTH_SHORT).show()
+            }
         }
 
         dialog?.show()
 
     }
+
+
+    //        Log.d("medicine", medicineVO.name.toString())
+//
+//        val view = layoutInflater.inflate(R.layout.prescribe_medicine_dialog, null)
+//        val dialog = this?.let { Dialog(it) }
+//
+//        dialog?.apply {
+//            setCancelable(false)
+//            setContentView(view)
+//            window?.setBackgroundDrawableResource(android.R.color.transparent)
+//        }
+//
+//        view.tv_medicine.text = medicineVO.name
+//
+//        for (index in 0 until view.chip_group_amount.childCount) {
+//            val chip: Chip = view.chip_group_amount.getChildAt(index) as Chip
+//
+//            // Set the chip checked change listener
+//            chip.setOnCheckedChangeListener { view, isChecked ->
+//                if (isChecked) {
+//                    medicineCountLists.add(view.text.toString())
+//                } else {
+//                    medicineCountLists.remove(view.text.toString())
+//                }
+//
+//                if (medicineCountLists.isNotEmpty()) {
+//                    mPresenter.addMedicineCount(medicineCountLists.toString())
+//
+//                }
+//            }
+//        }
+//
+//        for (index in 0 until view.chip_group_medicine.childCount) {
+//            val chip: Chip = view.chip_group_medicine.getChildAt(index) as Chip
+//
+//            // Set the chip checked change listener
+//            chip.setOnCheckedChangeListener { view, isChecked ->
+//                if (isChecked) {
+//                    medicineTypeLists.add(view.text.toString())
+//                } else {
+//                    medicineTypeLists.remove(view.text.toString())
+//                }
+//
+//                if (medicineTypeLists.isNotEmpty()) {
+//                    mPresenter.addMedicineType(medicineTypeLists.toString())
+//
+//                }
+//            }
+//        }
+//
+//        view.routine_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>,
+//                view: View,
+//                position: Int,
+//                id: Long
+//            ) {
+//                routine = parent.getItemAtPosition(position).toString()
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>) {}
+//        }
+//
+//        view.btn_insert_medicine.setOnClickListener {
+//            mPresenter.addToPrescriptionLists(
+//                medicineVO.name.toString(),
+//                view.ed_amount.text.toString(),
+//                view.ed_day.text.toString(),
+//                routine.toString(),
+//                view.ed_comment.text.toString(),
+//                medicineTypeLists.toString(),
+//                medicineCountLists.toString()
+//            )
+//            dialog?.dismiss()
+//        }
+//
+//        dialog?.show()
+
+
+
+
+
+
 }
