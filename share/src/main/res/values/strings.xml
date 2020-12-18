@@ -187,5 +187,8 @@
         <item>2019</item>
         <item>2020</item>
     </string-array>
-
+    <string name="start_discuss_date">ဆွေးနွေးမှု ပြုလုပ်သည့် ရက်စွဲ</string>
+    <string name="medical_record">ဆေးကုသမှုမှတ်တမ်း</string>
+    <string name="medical_record_hint">ဆေးကုသမှု မှတ်တမ်းရေးသားရန်</string>
+    <string name="know">OK</string>
 </resources>

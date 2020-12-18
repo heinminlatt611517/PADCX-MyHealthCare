@@ -51,7 +51,7 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
             return intent
         }
     }
-
+    private  var filterlist : ArrayList<MedicineVO> = arrayListOf()
     private lateinit var list : List<MedicineVO>
 
     private lateinit var mPresenter: PrescribeMedicinePresenter
@@ -82,6 +82,19 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
 
 
     private fun setUpActionListener() {
+
+        ed_search.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                filter(s.toString())
+            }
+        })
+
+
+
+
         btn_prescribeAndStop.setOnClickListener {
 
             val doctorVO = DoctorVO(
@@ -106,6 +119,24 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
 
             mPresenter.onTapStopConsultation(mConsultationChatVO)
         }
+    }
+
+    fun filter(text : String)
+    {
+        filterlist.clear()
+        list?.let{
+
+            for( item in list)
+            {
+                var st = item.name.toString().toLowerCase()
+                if(st.contains(text))
+                {
+                    filterlist.add(item)
+                }
+            }
+            mMedicineAdapter.setMedicineList(filterlist)
+        }
+
     }
 
     private fun setUpRecyclerView() {

@@ -104,7 +104,7 @@ class ChatActivity : BaseActivity(), ChatView {
         }
 
         btn_medicineHistory.setOnClickListener {
-
+           mChatPresenter.onTapMedicineHistory()
         }
 
 
@@ -159,6 +159,10 @@ class ChatActivity : BaseActivity(), ChatView {
 
             mRecommendMedicineViewPod.setPrescriptionData(lists, SessionManager.doctor_photo.toString())
         }
+    }
+
+    override fun navigateToMedicalCommentScreen() {
+        startActivity(MedicalCommentActivity.newIntent(this,intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString()))
     }
 
 

@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PADCXMyHealthCareMonthlyAssignment">
-        <activity android:name=".activities.EditProfileActivity"></activity>
+        <activity android:name=".activities.MedicalCommentActivity"></activity>
+        <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.GeneralQuestionActivity" />
         <activity android:name=".activities.PrescribeMedicineActivity" />
         <activity android:name=".activities.ProfileActivity" />

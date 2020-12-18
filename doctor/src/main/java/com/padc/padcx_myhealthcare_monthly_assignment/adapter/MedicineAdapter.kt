@@ -13,6 +13,12 @@ class MedicineAdapter(delegate : PrescribeMedicineItemDelegate) : BaseRecyclerAd
 
     var mDelegate  = delegate
 
+    fun setMedicineList(list : ArrayList<MedicineVO>)
+    {
+        mData = list
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

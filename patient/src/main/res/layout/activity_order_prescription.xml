@@ -98,7 +98,7 @@
 
                 <TextView
                     android:id="@+id/tv_medicineTotalAmount"
-                    android:layout_width="33dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:text="10000"

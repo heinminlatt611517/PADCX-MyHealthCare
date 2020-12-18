@@ -12,6 +12,6 @@ interface OrderPrescriptionView : BaseView {
     fun displayPrescribeMedicineLists(medicineLists : List<PrescriptionVO>)
     fun showEmptyAddressView()
     fun showRecyclerAddressView()
-
+    fun selectedRecyclerAddress(address: AddressVO, previousPosition: Int)
 
 }

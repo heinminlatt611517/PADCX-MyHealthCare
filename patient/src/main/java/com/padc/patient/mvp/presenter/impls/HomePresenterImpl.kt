@@ -110,6 +110,7 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         mPatientModel.sendDirectRequest(
             specialityName, dataTime, questionAnswerLists, patientVO,
             doctorVO, onSuccess = {
+
             }, onFailure = {
                 mView?.showErrorMessage(it)
             }

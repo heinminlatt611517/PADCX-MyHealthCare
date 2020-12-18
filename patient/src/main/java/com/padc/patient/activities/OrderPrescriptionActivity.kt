@@ -44,8 +44,10 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
 
     private var state: String? = null
     private var township: String? = null
-
     var medicinePrice : Int = 0
+    private lateinit var mAddress: String
+    private var mPreviousPosition : Int = -1
+    private lateinit var mAddressLists : List<AddressVO>
 
 
     private lateinit var mPresenter: OrderPrescriptionPresenter
@@ -156,7 +158,7 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
     private fun setUpRecyclerView() {
         rv_fullAddress.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mPatientAddressAdapter = PatientAddressAdapter(mPresenter)
+        mPatientAddressAdapter = PatientAddressAdapter(mPresenter,mPreviousPosition)
         rv_fullAddress.adapter = mPatientAddressAdapter
 
         rv_prescribeMedicine.layoutManager =
@@ -172,6 +174,9 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
 
     override fun displayPatientAddress(addressLists: List<AddressVO>) {
         Log.d("addressLists", addressLists.size.toString())
+        if (addressLists.isNotEmpty()){
+            mAddressLists = addressLists
+        }
 
             if (addressLists.isNotEmpty()){
                 recycler_address.visibility = View.VISIBLE
@@ -214,14 +219,10 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
         Log.d("medicineLists", medicineLists.size.toString())
         mPrescribeMedicineAdapter.setNewData(medicineLists.toMutableList())
 
-
         for (i in medicineLists){
             medicinePrice += i.price.toInt()
-
         }
-
         tv_medicineTotalAmount.text = medicinePrice.toString()
-
 
         }
 
@@ -236,6 +237,17 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
     override fun showRecyclerAddressView() {
         recycler_address.visibility = View.VISIBLE
         layout_address.visibility = View.GONE
+    }
+
+    override fun selectedRecyclerAddress(address: AddressVO, previousPosition: Int) {
+        mAddress = address.fullAddress
+        mPreviousPosition = previousPosition
+        mPatientAddressAdapter = PatientAddressAdapter(mPresenter, previousPosition)
+        mAddressLists?.let {
+            mPatientAddressAdapter.setNewData(mAddressLists.toMutableList())
+            rv_fullAddress?.adapter = mPatientAddressAdapter
+        }
+
     }
 
 

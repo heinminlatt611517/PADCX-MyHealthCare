@@ -18,4 +18,5 @@ interface ChatView : BaseView{
 
     fun displayPrescriptionLists(lists : List<PrescriptionVO>)
 
+    fun navigateToMedicalCommentScreen()
 }

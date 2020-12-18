@@ -89,6 +89,8 @@ interface DoctorModel {
             onFailure: (String) -> Unit
     )
 
+    fun  getConsultedPatientFromDB() : LiveData<List<ConsultedPatientVO>>
+
     fun getConsultedPatientFromDB(doctorId: String): LiveData<List<ConsultedPatientVO>>
 
     fun getBrodcastConsultationRequestsFromDB(speciality: String): LiveData<List<ConsultationRequestVO>>
@@ -157,4 +159,6 @@ interface DoctorModel {
     fun deleteConsultationRequestById(consulationId : String,speciality: String)  : LiveData<List<ConsultationRequestVO>>
 
     fun upDateDoctorInfo(doctorVO: DoctorVO, onSuccess: () -> Unit, onError: (String) -> Unit)
+
+    fun saveMedicalRecord( consultationChatVO: ConsultationChatVO, onSuccess: () -> Unit, onError: (String) -> Unit)
 }

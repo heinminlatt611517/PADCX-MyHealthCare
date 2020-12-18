@@ -18,20 +18,23 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
 
     lateinit var mOwner: LifecycleOwner
     override fun onUiReady(lifecycleOwner: LifecycleOwner, requestID: String) {
-//        if (requestID != "null") {
-//            mDoctorModel.getBroadConsultationRequest(requestID, onSuccess = {
-//             mView?.displayConsultationRequestPatient(it)
-//            }, onFailure = {})
-//
-//        }
+
         mOwner = lifecycleOwner
+
+        mDoctorModel.getConsultedPatient(SessionManager.doctor_id.toString(),onSuccess = {}, onError = {})
+
+        mDoctorModel.getConsultedPatientFromDB()
+            .observe(lifecycleOwner, Observer { data ->
+                data?.let {
+                    mView?.displayConsultedPatient(data) }
+            })
+
+
 
         mDoctorModel.getBrodcastConsultationRequests(
             SessionManager.doctor_speciality.toString(),
             onSuccess = {},
             onError = {})
-
-
 
         mDoctorModel.getBrodcastConsultationRequestsFromDB(SessionManager.doctor_speciality.toString())
             .observe(lifecycleOwner, Observer { consultationRequest ->
@@ -72,12 +75,6 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
             mView?.displayConsultationAcceptList(it)
         },onFailure = {})
 
-        mDoctorModel.getConsultationPatient(SessionManager.doctor_id.toString(),
-        onSuccess = {
-            mView?.displayConsultedPatient(it)
-        },onFailure = {
-
-        })
 
     }
 

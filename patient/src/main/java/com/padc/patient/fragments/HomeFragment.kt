@@ -184,6 +184,7 @@ class HomeFragment : Fragment(), HomeView {
 
 
     override fun showRecentDoctorDialog(doctorVO: DoctorVO,consultationRequestVO: ConsultationRequestVO) {
+
         val view = layoutInflater.inflate(R.layout.recent_doctor_confirm_dialog, null)
         dialog = context?.let { Dialog(it) }
 
@@ -195,7 +196,6 @@ class HomeFragment : Fragment(), HomeView {
             window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
 
-
         view.btn_cancel.setOnClickListener {
             dialog?.dismiss()
         }
@@ -206,42 +206,21 @@ class HomeFragment : Fragment(), HomeView {
                     doctorVO.speciality.toString(), DateUtils().getCurrentDate(),
                     consultationRequestVO.case_summary, consultationRequestVO.patient_info, consultationRequestVO.doctor_info
                 )
-
-
-//            val patientVO = PatientVO(
-//                SessionManager.patient_id.toString(),
-//                SessionManager.patient_name.toString(),
-//                SessionManager.patient_email.toString(),
-//                SessionManager.patient_device_id,
-//                SessionManager.patient_photo,
-//                SessionManager.patient_bloodType,
-//                SessionManager.patient_bloodPressure,
-//                arrayListOf(),
-//                SessionManager.patient_weight,
-//                SessionManager.patient_height,
-//                SessionManager.patient_dateOfBirth.toString(),
-//                SessionManager.patient_allegric,
-//                arrayListOf()
-//            )
             dialog?.dismiss()
         }
+
         dialog?.show()
     }
 
 
     override fun showErrorMessage(errorMessage: String) {
-
     }
 
     override fun getLifeCycleOwner(): LifecycleOwner = this
 
     override fun onResume() {
         super.onResume()
-        dialog?.let {
-            if (dialog!!.isShowing){
-                dialog!!.dismiss()
-            }
-        }
+
     }
 
 }

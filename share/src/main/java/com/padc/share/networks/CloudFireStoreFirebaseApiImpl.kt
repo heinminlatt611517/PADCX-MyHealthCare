@@ -554,6 +554,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             "id" to consulted_patient_id,
             "patient_id" to patientVO.id
         )
+
         database.collection("$doctors/${doctorVO.id}/$consulted_patient")
             .document(consulted_patient_id)
             .set(consultedPatientMap)
@@ -561,8 +562,6 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             .addOnFailureListener { Log.d("Failure", "Failed") }
 
     }
-
-
 
     override fun sendBroadCastConsultationRequest(
         speciality: String,
@@ -644,6 +643,18 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             .addOnSuccessListener {
                 onSuccess()
                 Log.d("Success", "Successfully ") }
+            .addOnFailureListener { Log.d("Failure", "Failed") }
+
+        val consulted_patient_id = UUID.randomUUID().toString()
+        val consultedPatientMap = hashMapOf(
+            "id" to consulted_patient_id,
+            "patient_id" to patientVO.id
+        )
+
+        database.collection("$doctors/${doctorVO.id}/$consulted_patient")
+            .document(consulted_patient_id)
+            .set(consultedPatientMap)
+            .addOnSuccessListener { Log.d("Success", "Successfully ") }
             .addOnFailureListener { Log.d("Failure", "Failed") }
 
         var dataRequest = RequestFCM(
@@ -1109,7 +1120,8 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             "case_summary" to consultationChatVO.case_summary,
             "patient_info" to consultationChatVO.patient_info,
             "medical_record" to consultationChatVO.medical_record,
-            "doctor_info" to consultationChatVO.doctor_info
+            "doctor_info" to consultationChatVO.doctor_info,
+            "start_consultation_date" to consultationChatVO.start_consultation_date
         )
 
         database.collection("$consultation_chat")
@@ -1252,6 +1264,20 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
                     Log.d("Success", "Successfully") }
                 .addOnFailureListener {
                     Log.d("Failure", "Failed ") }
+    }
+
+    override fun saveMedicalRecord(
+        consultationChatVO: ConsultationChatVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection(consultation_chat)
+            .document(consultationChatVO.id)
+            .set(consultationChatVO)
+            .addOnSuccessListener {
+                onSuccess()
+                Log.d("Success", "Successfully ") }
+            .addOnFailureListener { Log.d("Failure", "Failed") }
     }
 
     override fun getGeneralQuestion(

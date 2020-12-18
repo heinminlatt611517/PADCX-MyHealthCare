@@ -12,5 +12,7 @@ data class AddressVO(
         var township: String = "",
         var fullAddress: String = "",
         @Exclude
-        var isSelect: Boolean = false
+        var isSelect: Boolean = false,
+        @Exclude
+        var isAlreadySelect: Boolean = false
 )

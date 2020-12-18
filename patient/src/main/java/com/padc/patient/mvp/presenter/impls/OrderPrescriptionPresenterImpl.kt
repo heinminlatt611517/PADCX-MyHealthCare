@@ -28,21 +28,7 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
         mOwner = lifecycleOwner
         mPatientModel.getPatientByEmail(patientID,onSuccess = {
             mAddressLists.addAll(it.address)
-
-            if (mAddressLists.isNotEmpty()){
-                mAddressLists.forEach {
-                    it.isSelect = true
-                }
                 mView?.displayPatientAddress(mAddressLists)
-            }
-            else{
-                mAddressLists.forEach {
-                    it.isSelect = false
-                }
-                mView?.displayPatientAddress(mAddressLists)
-            }
-
-
 
         },onError = {
 
@@ -109,7 +95,7 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
             SessionManager.patient_allegric,
             arrayListOf()
         )
-        
+
         mPatientModel.getConsultationChatFromDB(mConsultatioId)
             .observe(mOwner, Observer { data ->
                 data?.let {
@@ -135,10 +121,11 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
         return mPatientFullAddress
     }
 
-    override fun onTapAddress(fullAddress: String) {
-       mPatientFullAddress.value = fullAddress
-    }
+    override fun onTapAddress(address: AddressVO, previousPosition: Int) {
+        mPatientFullAddress.value = address.fullAddress
+        mView?.selectedRecyclerAddress(address,previousPosition)
 
+    }
     override fun showEmptyAddressView() {
         mView?.showEmptyAddressView()
     }

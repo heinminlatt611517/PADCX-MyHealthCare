@@ -12,7 +12,7 @@ import com.padc.share.data.vos.AddressVO
 import com.padc.share.mvp.view.BaseView
 import com.padc.share.views.viewHolder.BaseViewHolder
 
-class PatientAddressAdapter(delegate : PatientAddressItemDelegate) : BaseRecyclerAdapter<BaseViewHolder<AddressVO>,AddressVO>() {
+class PatientAddressAdapter(delegate : PatientAddressItemDelegate,var previousPosition : Int) : BaseRecyclerAdapter<BaseViewHolder<AddressVO>,AddressVO>() {
 
     val  mDelegate  = delegate
 
@@ -20,6 +20,6 @@ class PatientAddressAdapter(delegate : PatientAddressItemDelegate) : BaseRecycle
 
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.list_item_patient_adderss, parent, false)
-        return PatientAddressViewHolder(mDelegate,view)
+        return PatientAddressViewHolder(previousPosition,mDelegate,view)
     }
 }

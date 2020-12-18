@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+<com.google.android.material.card.MaterialCardView xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="3dp"
+    app:cardElevation="1dp"
     app:cardCornerRadius="10dp"
     android:layout_margin="10dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/grey_200"
+    android:id="@+id/card_address"
     app:cardBackgroundColor="@color/white"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_btn_white"
-        android:padding="10dp"
+        android:padding="8dp"
         android:maxLines="3"
         android:lines="5"
         android:editable="false"
@@ -24,6 +27,6 @@
         android:text="Address"
         android:textColor="@color/black"
         android:id="@+id/ed_patient_address"
-        android:layout_margin="5dp"
+        android:layout_margin="3dp"
         tools:ignore="RtlCompat" />
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

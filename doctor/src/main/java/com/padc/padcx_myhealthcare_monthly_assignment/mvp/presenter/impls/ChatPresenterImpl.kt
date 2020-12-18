@@ -65,6 +65,6 @@ class ChatPresenterImpl : ChatPresenter,AbstractBasePresenter<ChatView>() {
     }
 
     override fun onTapMedicineHistory() {
-
+        mView?.navigateToMedicalCommentScreen()
     }
 }

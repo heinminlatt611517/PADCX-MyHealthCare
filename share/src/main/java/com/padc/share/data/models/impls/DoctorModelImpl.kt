@@ -145,6 +145,10 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
         mFirebaseApi.getConsultationPatient(doctorId,onSuccess,onFailure)
     }
 
+    override fun getConsultedPatientFromDB(): LiveData<List<ConsultedPatientVO>> {
+        return mTheDB.consultedPatientDao().getConsultedPatient()
+    }
+
     override fun getConsultedPatientFromDB(doctorId: String): LiveData<List<ConsultedPatientVO>> {
         return mTheDB.consultedPatientDao().getConsultedPatient()
     }
@@ -255,6 +259,14 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
 
     override fun upDateDoctorInfo(doctorVO: DoctorVO, onSuccess: () -> Unit, onError: (String) -> Unit) {
         mFirebaseApi.updateDoctorData(doctorVO, onSuccess = {}, onFailure = { onError(it) })
+    }
+
+    override fun saveMedicalRecord(
+        consultationChatVO: ConsultationChatVO,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mFirebaseApi.saveMedicalRecord(consultationChatVO,onSuccess,onError)
     }
 
 

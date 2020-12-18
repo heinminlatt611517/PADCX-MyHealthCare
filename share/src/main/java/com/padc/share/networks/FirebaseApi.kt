@@ -259,4 +259,6 @@ interface FirebaseApi {
     fun updateDoctorData(doctorVO: DoctorVO ,onSuccess: () -> Unit,
                          onFailure: (String) -> Unit
     )
+
+    fun saveMedicalRecord(consultationChatVO: ConsultationChatVO ,onSuccess: () -> Unit,onFailure: (String) -> Unit)
 }

@@ -68,7 +68,7 @@
         android:layout_height="50dp">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/ed_email"
+            android:id="@+id/ed_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_corner_btn_grey"

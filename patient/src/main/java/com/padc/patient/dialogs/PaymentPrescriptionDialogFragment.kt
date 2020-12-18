@@ -96,6 +96,8 @@ class PaymentPrescriptionDialogFragment : DialogFragment() {
             mPresenter = ViewModelProviders.of(it).get(OrderPrescriptionPresenterImpl::class.java)
         }
 
+        medicinePrice = 0
+
         mPresenter.getPrescriptionLists()
             .observe(this, Observer {
                 mPrescribeMedicineAdapter.setNewData(it.toMutableList())
@@ -106,7 +108,6 @@ class PaymentPrescriptionDialogFragment : DialogFragment() {
                 }
 
                 tv_medicineSubTotal.text = medicinePrice.toString()
-                medicinePrice = 0
                 txt_totalAmountValue.text = (medicinePrice + deliveryFee).toString()
 
             })
