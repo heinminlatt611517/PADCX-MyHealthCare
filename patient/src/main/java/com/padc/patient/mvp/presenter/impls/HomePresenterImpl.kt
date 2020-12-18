@@ -19,10 +19,12 @@ import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.data.vos.QuestionAnswerVO
 import com.padc.share.mvp.presenter.AbstractBasePresenter
+import com.padc.share.utils.DateUtils
 
 class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
     private val mPatientModel: PatientModel = PatientModelImpl
+    private var mConsultationRequestVO : ConsultationRequestVO? =null
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner) {
 
@@ -110,16 +112,34 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         mPatientModel.sendDirectRequest(
             specialityName, dataTime, questionAnswerLists, patientVO,
             doctorVO, onSuccess = {
-
+               mView?.showSuccessStatus("Success")
             }, onFailure = {
                 mView?.showErrorMessage(it)
             }
         )
     }
 
+    override fun onTapDirectRequest(specialityName: String) {
+        mPatientModel.getBroadConsultationRequestByDoctorSpeciality(specialityName,onSuccess = {
+
+            mPatientModel.sendDirectRequest(
+                specialityName, DateUtils().getCurrentDate(), it.case_summary, it.patient_info,
+                it.doctor_info, onSuccess = {
+                   Log.d("DirectRequest","Success")
+
+                    mView?.navigateToMainScreen()
+                }, onFailure = {
+                    mView?.showErrorMessage(it)
+                }
+            )
+
+        },onFailure = {
+            mView?.showErrorMessage(it)
+        })
+    }
+
 
     override fun onTapRecentDoctorItem(doctorVO: DoctorVO) {
-
         mPatientModel.getBroadConsultationRequestByDoctorSpeciality(doctorVO.speciality.toString(),onSuccess = {
             mView?.showRecentDoctorDialog(it.doctor_info,it)
         },onFailure = {

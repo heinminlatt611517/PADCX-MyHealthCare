@@ -17,4 +17,7 @@ interface HomeView : BaseView {
     fun displayConsultationRequestList(consultationRequestVO: List<ConsultationRequestVO>)
 
     fun showRecentDoctorDialog(doctorVO: DoctorVO,consultationRequestVO: ConsultationRequestVO)
+
+    fun showSuccessStatus(message : String)
+    fun navigateToMainScreen()
 }

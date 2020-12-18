@@ -36,4 +36,6 @@ interface HomePresenter : BasePresenter<HomeView>, RecentDoctorItemDelegate,
         doctorVO: DoctorVO
 
     )
+
+    fun onTapDirectRequest(specialityName: String)
 }

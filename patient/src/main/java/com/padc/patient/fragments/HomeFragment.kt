@@ -1,5 +1,6 @@
 package com.padc.patient.fragments
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
@@ -14,20 +16,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.patient.R
 import com.padc.patient.activities.ChatActivity
+import com.padc.patient.activities.MainActivity
+import com.padc.patient.activities.SplashScreenActivity
 import com.padc.patient.adapters.ConsultationAcceptAdapter
 import com.padc.patient.adapters.RecentDoctorAdapter
 import com.padc.patient.adapters.SpecialityDoctorAdapter
 import com.padc.patient.dialogs.ConfirmDialogFragment
 import com.padc.patient.dialogs.ConfirmDialogFragment.Companion.BUNDLE_NAME
+import com.padc.patient.dialogs.RecentDoctorDialogFragment
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.presenter.impls.HomePresenterImpl
 import com.padc.patient.mvp.view.HomeView
-import com.padc.patient.utils.SessionManager
 import com.padc.patient.views.viewPods.ConsultationRequestViewPod
-import com.padc.share.data.vos.*
+import com.padc.share.data.vos.ConsultationRequestVO
+import com.padc.share.data.vos.DoctorVO
+import com.padc.share.data.vos.PatientVO
+import com.padc.share.data.vos.SpecialitiesVO
 import com.padc.share.utils.DateUtils
-import kotlinx.android.synthetic.main.confirm_dialog_layout.view.btn_cancle
-import kotlinx.android.synthetic.main.confirm_dialog_layout.view.btn_confirm
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.recent_doctor_confirm_dialog.view.*
 
@@ -71,6 +76,8 @@ class HomeFragment : Fragment(), HomeView {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
+
+
     }
 
 
@@ -182,34 +189,84 @@ class HomeFragment : Fragment(), HomeView {
     }
 
 
-
     override fun showRecentDoctorDialog(doctorVO: DoctorVO,consultationRequestVO: ConsultationRequestVO) {
 
-        val view = layoutInflater.inflate(R.layout.recent_doctor_confirm_dialog, null)
-        dialog = context?.let { Dialog(it) }
+//        val recentDoctorDialog = RecentDoctorDialogFragment.newFragment()
+//        val bundle = Bundle()
+//        bundle.putString(BUNDLE_NAME, doctorVO.speciality)
+//        recentDoctorDialog.arguments = bundle
+//        activity?.supportFragmentManager?.let {
+//            recentDoctorDialog.show(
+//                it,
+//                RecentDoctorDialogFragment.TAG_ADD_RECENT_DIALOG
+//            )
+//        }
 
-        view.tv_doctorSpeciality?.text = doctorVO.speciality + resources.getString(R.string.consultation_request_message)
+//
+            val view = layoutInflater.inflate(R.layout.recent_doctor_confirm_dialog, null)
+            dialog = context?.let { Dialog(it) }
 
-        dialog?.apply {
-            setCancelable(true)
-            setContentView(view)
-            window?.setBackgroundDrawableResource(android.R.color.transparent)
-        }
+            view.tv_doctorSpeciality?.text = doctorVO.speciality + resources.getString(R.string.consultation_request_message)
 
-        view.btn_cancel.setOnClickListener {
-            dialog?.dismiss()
-        }
+            dialog?.apply {
+                setCancelable(true)
+                setContentView(view)
+                window?.setBackgroundDrawableResource(android.R.color.transparent)
+            }
 
-        view.btnConfirm.setOnClickListener {
+            view.btn_cancel.setOnClickListener {
+                dialog?.dismiss()
+            }
+
+            view.btnConfirm.setOnClickListener {
 
                 mPresenter.onTapConfirmDirectRequest(
                     doctorVO.speciality.toString(), DateUtils().getCurrentDate(),
                     consultationRequestVO.case_summary, consultationRequestVO.patient_info, consultationRequestVO.doctor_info
                 )
-            dialog?.dismiss()
-        }
+             
+                dialog?.dismiss()
+            }
 
-        dialog?.show()
+            dialog?.show()
+
+
+
+
+//        val mDialogView = LayoutInflater.from(activity).inflate(R.layout.recent_doctor_confirm_dialog, null)
+//        val mBuilder = activity?.let {
+//            AlertDialog.Builder(it)
+//                .setView(mDialogView)
+//        }
+//
+//        val mAlertDialog = mBuilder?.show()
+//        if(mAlertDialog != null && mAlertDialog.isShowing) {
+//            mAlertDialog?.dismiss()
+//        }
+//        mDialogView.btn_cancel.setOnClickListener {
+//            mAlertDialog?.dismiss()
+//        }
+//        mDialogView.tv_doctorSpeciality?.text = doctorVO.speciality + resources.getString(R.string.consultation_request_message)
+//        mDialogView.btnConfirm.setOnClickListener {
+//            mPresenter.onTapConfirmDirectRequest(
+//                doctorVO.speciality.toString(), DateUtils().getCurrentDate(),
+//                consultationRequestVO.case_summary, consultationRequestVO.patient_info, consultationRequestVO.doctor_info
+//            )
+//            mAlertDialog?.dismiss()
+//        }
+//
+//        mAlertDialog?.show()
+
+
+
+    }
+
+    override fun showSuccessStatus(message: String) {
+
+    }
+
+    override fun navigateToMainScreen() {
+        startActivity(context?.let { SplashScreenActivity.newIntent(it) })
     }
 
 
@@ -218,9 +275,11 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun getLifeCycleOwner(): LifecycleOwner = this
 
+
     override fun onResume() {
         super.onResume()
 
     }
+
 
 }

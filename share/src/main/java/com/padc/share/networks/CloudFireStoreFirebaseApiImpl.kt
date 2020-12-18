@@ -641,7 +641,6 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             .document(id)
             .set(consultationRequestMap)
             .addOnSuccessListener {
-                onSuccess()
                 Log.d("Success", "Successfully ") }
             .addOnFailureListener { Log.d("Failure", "Failed") }
 
@@ -654,7 +653,8 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         database.collection("$doctors/${doctorVO.id}/$consulted_patient")
             .document(consulted_patient_id)
             .set(consultedPatientMap)
-            .addOnSuccessListener { Log.d("Success", "Successfully ") }
+            .addOnSuccessListener {
+                Log.d("Success", "Successfully ") }
             .addOnFailureListener { Log.d("Failure", "Failed") }
 
         var dataRequest = RequestFCM(
