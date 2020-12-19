@@ -21,6 +21,7 @@ import com.padc.patient.adapters.RecentDoctorAdapter
 import com.padc.patient.adapters.SpecialityDoctorAdapter
 import com.padc.patient.dialogs.ConfirmDialogFragment
 import com.padc.patient.dialogs.ConfirmDialogFragment.Companion.BUNDLE_NAME
+import com.padc.patient.dialogs.RecentDoctorDialogFragment
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.presenter.impls.HomePresenterImpl
 import com.padc.patient.mvp.view.HomeView
@@ -188,58 +189,61 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun showRecentDoctorDialog(doctorVO: DoctorVO,consultationRequestVO: ConsultationRequestVO) {
 
-//        val recentDoctorDialog = RecentDoctorDialogFragment.newFragment()
-//        val bundle = Bundle()
-//        bundle.putString(BUNDLE_NAME, doctorVO.speciality)
-//        recentDoctorDialog.arguments = bundle
-//        activity?.supportFragmentManager?.let {
-//            recentDoctorDialog.show(
-//                it,
-//                RecentDoctorDialogFragment.TAG_ADD_RECENT_DIALOG
-//            )
-//        }
+        val recentDoctorDialog = RecentDoctorDialogFragment.newFragment()
+        val bundle = Bundle()
+        bundle.putString(BUNDLE_NAME, doctorVO.speciality)
+        recentDoctorDialog.arguments = bundle
+        activity?.supportFragmentManager?.let {
+            recentDoctorDialog.show(
+                it,
+                RecentDoctorDialogFragment.TAG_ADD_RECENT_DIALOG
+            )
+        }
 
+
+//            val view = layoutInflater.inflate(R.layout.recent_doctor_confirm_dialog, null)
+//            dialog = context?.let { Dialog(it) }
 //
-            val view = layoutInflater.inflate(R.layout.recent_doctor_confirm_dialog, null)
-            dialog = context?.let { Dialog(it) }
-
-            view.tv_doctorSpeciality?.text = doctorVO.speciality + resources.getString(R.string.consultation_request_message)
-
-            dialog?.apply {
-                setCancelable(true)
-                setContentView(view)
-                window?.setBackgroundDrawableResource(android.R.color.transparent)
-            }
-
-            view.btn_cancel.setOnClickListener {
-                dialog?.dismiss()
-            }
-
-
-
-            view.btnConfirm.setOnClickListener {
-
-                mPresenter.onTapConfirmDirectRequest(
-                    doctorVO.speciality.toString(), DateUtils().getCurrentDate(),
-                    consultationRequestVO.case_summary, consultationRequestVO.patient_info, consultationRequestVO.doctor_info
-                )
-
-                dialog?.dismiss()
-            }
-
-            dialog?.show()
+//            view.tv_doctorSpeciality?.text = doctorVO.speciality + resources.getString(R.string.consultation_request_message)
+//
+//            dialog?.apply {
+//                setCancelable(true)
+//                setContentView(view)
+//                window?.setBackgroundDrawableResource(android.R.color.transparent)
+//            }
+//
+//            view.btn_cancel.setOnClickListener {
+//                dialog?.dismiss()
+//            }
+//
+//            view.btnConfirm.setOnClickListener {
+//
+//                mPresenter.onTapConfirmDirectRequest(
+//                    doctorVO.speciality.toString(), DateUtils().getCurrentDate(),
+//                    consultationRequestVO.case_summary, consultationRequestVO.patient_info, consultationRequestVO.doctor_info
+//                )
+//
+//                dialog?.dismiss()
+//                activity?.finish()
+//            }
+//
+//            dialog?.show()
 
 
 
 
 //        val mDialogView = LayoutInflater.from(activity).inflate(R.layout.recent_doctor_confirm_dialog, null)
-//        val builder =
-//            this.context?.let { AlertDialog.Builder(it) }
+//        val mBuilder = activity?.let {
+//            AlertDialog.Builder(it)
+//                .setView(mDialogView)
+//        }
 //
-//        val mAlertDialog = builder?.show()
+//        val mAlertDialog = mBuilder?.show()
 //        if(mAlertDialog != null && mAlertDialog.isShowing) {
 //            mAlertDialog?.dismiss()
 //        }
+//
+//
 //        mDialogView.btn_cancel.setOnClickListener {
 //            mAlertDialog?.dismiss()
 //        }
@@ -275,10 +279,7 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun onResume() {
         super.onResume()
-        if ( context != null && view != null )
-        {
-            dialog?.dismiss()
-        }
+
     }
 
 

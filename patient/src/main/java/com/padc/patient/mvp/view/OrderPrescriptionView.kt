@@ -13,5 +13,5 @@ interface OrderPrescriptionView : BaseView {
     fun showEmptyAddressView()
     fun showRecyclerAddressView()
     fun selectedRecyclerAddress(address: AddressVO, previousPosition: Int)
-
+    fun navigateToHomeFragment()
 }

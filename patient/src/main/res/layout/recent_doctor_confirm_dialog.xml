@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView app:cardElevation="5dp"
-    android:layout_margin="30dp"
+<com.google.android.material.card.MaterialCardView
+    app:cardElevation="5dp"
     app:cardCornerRadius="20dp"
     android:orientation="vertical"
-    android:padding="5dp"
     android:layout_marginTop="10dp"
+    app:cardUseCompatPadding="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,11 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:layout_marginTop="10dp"
-            android:layout_width="130dp"
+            android:layout_width="160dp"
             android:layout_height="140dp"
-            android:src="@drawable/img_doctor"/>
+            android:src="@drawable/appt_confirmation"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,4 +75,4 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

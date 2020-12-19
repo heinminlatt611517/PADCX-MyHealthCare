@@ -28,6 +28,7 @@ import com.padc.share.data.vos.ConsultedPatientVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.services.FCMService
 import com.padc.share.utils.ImageUtils
+import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_patient_dialog.*
 import kotlinx.android.synthetic.main.fragment_patient_dialog.iv_patient
@@ -68,6 +69,7 @@ class MainActivity : BaseActivity() ,MainView{
         mMainPresenter.onUiReady(this,intent.getStringExtra(ID_EXTRA).toString())
 
         tv_doctorName.text = SessionManager.doctor_name
+        ImageUtils().showImage(iv_doctor_top, SessionManager.doctor_photo.toString(),R.drawable.user)
     }
 
     private fun setUpRecyclerView() {

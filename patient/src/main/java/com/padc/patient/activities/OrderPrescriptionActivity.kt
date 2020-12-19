@@ -15,6 +15,7 @@ import com.padc.patient.adapters.PrescribeMedicineAdapter
 import com.padc.patient.dialogs.PaymentPrescriptionDialogFragment
 import com.padc.patient.dialogs.PaymentPrescriptionDialogFragment.Companion.BITMAP_ADDRESS
 import com.padc.patient.dialogs.PaymentPrescriptionDialogFragment.Companion.SUB_TOTAL
+import com.padc.patient.fragments.HomeFragment
 import com.padc.patient.mvp.presenter.OrderPrescriptionPresenter
 import com.padc.patient.mvp.presenter.impls.OrderPrescriptionPresenterImpl
 import com.padc.patient.mvp.view.OrderPrescriptionView
@@ -248,6 +249,11 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
             rv_fullAddress?.adapter = mPatientAddressAdapter
         }
 
+    }
+
+    override fun navigateToHomeFragment() {
+        startActivity(MainActivity.newIntent(this))
+        finish()
     }
 
 

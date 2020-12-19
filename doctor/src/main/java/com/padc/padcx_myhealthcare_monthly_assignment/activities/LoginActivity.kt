@@ -94,7 +94,7 @@ class LoginActivity : BaseActivity() ,LoginView{
 
 
         startActivity(MainActivity.newIntent(this,"null"))
-        finish()
+        this.finish()
     }
 
     override fun showErrorMessage(errorMessage: String) {

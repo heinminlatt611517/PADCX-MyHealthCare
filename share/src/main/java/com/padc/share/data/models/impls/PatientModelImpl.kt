@@ -233,16 +233,33 @@ object PatientModelImpl : PatientModel, BaseModel() {
         dateTime: String,
         questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
-        doctorVO: DoctorVO
+        doctorVO: DoctorVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
     ) {
         mFirebaseApi.sendDirectRequest(
             speciality,
             dateTime,
             questionAnswerList,
             patientVO,
-            doctorVO
-        )
+            doctorVO,onSuccess = {},onFailure = {})
     }
+
+//    override fun sendDirectRequest(
+//        speciality: String,
+//        dateTime: String,
+//        questionAnswerList: ArrayList<QuestionAnswerVO>,
+//        patientVO: PatientVO,
+//        doctorVO: DoctorVO
+//    ) {
+//        mFirebaseApi.sendDirectRequest(
+//            speciality,
+//            dateTime,
+//            questionAnswerList,
+//            patientVO,
+//            doctorVO,onSuccess = {},onFailure = {}
+//        )
+//    }
 
     override fun getBroadConsultationRequestByDoctorSpeciality(
         speciality: String,

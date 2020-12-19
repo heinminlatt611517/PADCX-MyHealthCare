@@ -104,7 +104,9 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
                     patientVO,it.doctor_info, DeliveryRoutineVO(),prescriptionVO
                     )
 
-                    mPatientModel.checkoutMedicine(checkOutVO,onSuccess = {},onFailure = {
+                    mPatientModel.checkoutMedicine(checkOutVO,onSuccess = {
+                        mView?.navigateToHomeFragment()
+                    },onFailure = {
                         mView?.showErrorMessage(it)
                     })
                 }

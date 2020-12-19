@@ -111,7 +111,9 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
     ) {
         mPatientModel.sendDirectRequest(
             specialityName, dataTime, questionAnswerLists, patientVO,
-            doctorVO
+            doctorVO,onSuccess = {
+                mView?.navigateToMainScreen()
+            },onFailure = {}
         )
     }
 
@@ -120,7 +122,9 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
             mPatientModel.sendDirectRequest(
                 specialityName, DateUtils().getCurrentDate(), it.case_summary, it.patient_info,
-                it.doctor_info
+                it.doctor_info,onSuccess = {
+                    mView?.navigateToMainScreen()
+                },onFailure = {}
             )
 
         },onFailure = {

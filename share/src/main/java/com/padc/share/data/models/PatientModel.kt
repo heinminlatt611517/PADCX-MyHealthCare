@@ -122,7 +122,9 @@ interface PatientModel {
         speciality: String,
         dateTime: String, questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
-        doctorVO: DoctorVO
+        doctorVO: DoctorVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
     )
 
     fun getBroadConsultationRequestByDoctorSpeciality(

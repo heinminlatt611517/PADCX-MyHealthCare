@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/margin_xxlarge">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,8 +14,6 @@
     android:layout_marginBottom="@dimen/margin_medium_3"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ConsultationChatFragment">
-
-
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -31,7 +30,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="@dimen/margin_medium_2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/rv_consultation_chat"/>
 
 

@@ -494,7 +494,9 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         database.collection("checkout")
             .document(id)
             .set(checkOutVO)
-            .addOnSuccessListener { Log.d("Success", "Successfully added patient") }
+            .addOnSuccessListener {
+                onSuccess()
+                Log.d("Success", "Successfully added patient") }
             .addOnFailureListener { Log.d("Failure", "Failed to add patient") }
     }
 
@@ -622,7 +624,8 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         dateTime: String,
         questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
-        doctorVO: DoctorVO
+        doctorVO: DoctorVO,onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
     ) {
 
         val id = UUID.randomUUID().toString()
@@ -639,6 +642,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             .document(id)
             .set(consultationRequestMap)
             .addOnSuccessListener {
+                onSuccess()
                 Log.d("Success", "Successfully ") }
             .addOnFailureListener { Log.d("Failure", "Failed") }
 
