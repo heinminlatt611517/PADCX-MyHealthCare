@@ -5,12 +5,16 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.padc.padcx_myhealthcare_monthly_assignment.activities.LoginActivity
@@ -57,15 +61,21 @@ class DoctorFCMService : FirebaseMessagingService() {
         }
 
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        //Get drawable from resource
+        val drawable : Drawable? = ContextCompat.getDrawable(this,R.drawable.img_doctor)
 
+        //Convert drawable to bitmap
+        val bitmap : Bitmap? = drawable?.toBitmap()
         val notificationBuilder = NotificationCompat.Builder(this,channelId)
-                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark_focused)
+                .setSmallIcon(R.drawable.img_doctor)
                 .setContentTitle(title)
+                .setStyle(NotificationCompat.BigTextStyle().bigText(body))
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setPriority(android.app.Notification.PRIORITY_HIGH)
                 .setSound(soundUri)
                 .setContentIntent(pendingIntent)
+
 
         notificationManager.notify(0,notificationBuilder.build())
     }

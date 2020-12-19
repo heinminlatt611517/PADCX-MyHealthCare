@@ -118,9 +118,7 @@ interface FirebaseApi {
         speciality: String,
         dateTime: String, questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
-        doctorVO: DoctorVO,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
+        doctorVO: DoctorVO
     )
 
     fun sendBroadCastConsultationRequest(

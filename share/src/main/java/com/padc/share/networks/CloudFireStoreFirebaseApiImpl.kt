@@ -608,12 +608,12 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
 
         var dataRequest = RequestFCM(
             data = (
-                    Data("", "Request Doctor By Speciality", "", "Title", 0, id, "")
+                    Data("", "${patientVO.name} မှ \u200Bရောဂါဆိုင်ရာအတွက် \u200Bဆွေး\u200Bနွေးရန် \u200Bတောင်းဆိုထားပါသည်", "", "အ\u200Bကြောင်းကြားစာ", 0, id, "")
                     ),
             to = "fqOlIX8vSR-hCop6QJgb2y:APA91bFWmyfaLSmEVJkbKuJoJW4dAZD3jUJFSGkr9Dbh2UXPymYJvh2PSaBiASx2pXZon9NR4a2N08GovRUmTSBC418zhfgflHtBZUnF1xCzXAllaHFHu242FIcy8a46wYs6S8tFrB8B"
         )
 
-        mPatientModel.sendNotification(dataRequest, onSuccess, onFailure)
+        mPatientModel.sendNotification(dataRequest)
 
     }
 
@@ -622,9 +622,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         dateTime: String,
         questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
-        doctorVO: DoctorVO,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
+        doctorVO: DoctorVO
     ) {
 
         val id = UUID.randomUUID().toString()
@@ -659,12 +657,14 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
 
         var dataRequest = RequestFCM(
             data = (
-                    Data("", "Direct Request", "", "Title", 0, id, "")
+                    Data("", "${patientVO.name} မှ \u200Bရောဂါဆိုင်ရာအတွက် \u200Bဆွေး\u200Bနွေးရန် \u200Bတောင်းဆိုထားပါသည်", "", "အ\u200Bကြောင်းကြားစာ", 0, id, "")
                     ),
             to = doctorVO.deviceID.toString()
         )
 
-        mPatientModel.sendNotification(dataRequest, onSuccess, onFailure)
+
+
+        mPatientModel.sendNotification(dataRequest)
     }
 
 

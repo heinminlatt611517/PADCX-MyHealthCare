@@ -48,7 +48,7 @@
                         android:layout_height="150dp"
                         android:layout_centerInParent="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/doctor_img"
+                        android:src="@drawable/user"
                         />
 
                     <TextView

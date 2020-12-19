@@ -17,18 +17,25 @@ import io.reactivex.schedulers.Schedulers
 object PatientModelImpl : PatientModel, BaseModel() {
     override var mFirebaseApi: FirebaseApi = CloudFireStoreFirebaseApiImpl
     override var mAuthManager: AuthManager = FirebaseAuthManager
-
-    override fun sendNotification(
-        data: RequestFCM,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
-    ) {
+    override fun sendNotification(data: RequestFCM) {
         myHealthCareApi.sendNotificationToDoctorByDeviceID(data).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 Log.d("Notification", it.toString())
             }
     }
+
+//    override fun sendNotification(
+//        data: RequestFCM,
+//        onSuccess: () -> Unit,
+//        onFailure: (String) -> Unit
+//    ) {
+//        myHealthCareApi.sendNotificationToDoctorByDeviceID(data).subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe {
+//                Log.d("Notification", it.toString())
+//            }
+//    }
 
     override fun uploadPhotoToFirebaseStorage(
         image: Bitmap,
@@ -226,18 +233,14 @@ object PatientModelImpl : PatientModel, BaseModel() {
         dateTime: String,
         questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
-        doctorVO: DoctorVO,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
+        doctorVO: DoctorVO
     ) {
         mFirebaseApi.sendDirectRequest(
             speciality,
             dateTime,
             questionAnswerList,
             patientVO,
-            doctorVO,
-            onSuccess,
-            onFailure
+            doctorVO
         )
     }
 

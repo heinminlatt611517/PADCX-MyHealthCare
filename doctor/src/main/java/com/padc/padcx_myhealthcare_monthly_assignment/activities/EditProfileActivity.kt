@@ -59,7 +59,7 @@ class EditProfileActivity : BaseActivity() ,ProfileView{
         setUpActionListener()
         setUpItemSelectedListener()
 
-        ImageUtils().showImage(iv_main_profile, SessionManager.doctor_photo.toString(),R.drawable.doctor_img)
+        ImageUtils().showImage(iv_main_profile, SessionManager.doctor_photo.toString(),R.drawable.user)
 
         mPresenter.onUiReady(this)
     }

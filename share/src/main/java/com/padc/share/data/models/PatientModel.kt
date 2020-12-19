@@ -13,7 +13,7 @@ interface PatientModel {
     var mAuthManager: AuthManager
 
 
-    fun sendNotification(data: RequestFCM, onSuccess: () -> Unit, onFailure: (String) -> Unit)
+    fun sendNotification(data: RequestFCM)
 
     fun uploadPhotoToFirebaseStorage(
         image: Bitmap,
@@ -122,9 +122,7 @@ interface PatientModel {
         speciality: String,
         dateTime: String, questionAnswerList: ArrayList<QuestionAnswerVO>,
         patientVO: PatientVO,
-        doctorVO: DoctorVO,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
+        doctorVO: DoctorVO
     )
 
     fun getBroadConsultationRequestByDoctorSpeciality(

@@ -58,7 +58,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginEnd="311dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/doctor_img"
+                    android:src="@drawable/user"
                     android:layout_margin="10dp"/>
 
                 <LinearLayout

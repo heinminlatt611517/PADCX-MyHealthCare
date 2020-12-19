@@ -91,7 +91,7 @@ class ProfileActivity : BaseActivity() ,ProfileView {
             SessionManager.doctor_address = doctorVO.address
         }
 
-        ImageUtils().showImage(img_profile, doctorVO.photo.toString(),R.drawable.doctor_img)
+        ImageUtils().showImage(img_profile, doctorVO.photo.toString(),R.drawable.user)
 
         tv_doctorName.text = Editable.Factory.getInstance().newEditable( SessionManager.doctor_name)
         tv_doctorPhone.text = Editable.Factory.getInstance().newEditable(SessionManager.doctor_phone)

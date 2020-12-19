@@ -1,6 +1,5 @@
 package com.padc.patient.fragments
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -16,14 +15,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.padc.patient.R
 import com.padc.patient.activities.ChatActivity
-import com.padc.patient.activities.MainActivity
 import com.padc.patient.activities.SplashScreenActivity
 import com.padc.patient.adapters.ConsultationAcceptAdapter
 import com.padc.patient.adapters.RecentDoctorAdapter
 import com.padc.patient.adapters.SpecialityDoctorAdapter
 import com.padc.patient.dialogs.ConfirmDialogFragment
 import com.padc.patient.dialogs.ConfirmDialogFragment.Companion.BUNDLE_NAME
-import com.padc.patient.dialogs.RecentDoctorDialogFragment
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.presenter.impls.HomePresenterImpl
 import com.padc.patient.mvp.view.HomeView
@@ -218,13 +215,15 @@ class HomeFragment : Fragment(), HomeView {
                 dialog?.dismiss()
             }
 
+
+
             view.btnConfirm.setOnClickListener {
 
                 mPresenter.onTapConfirmDirectRequest(
                     doctorVO.speciality.toString(), DateUtils().getCurrentDate(),
                     consultationRequestVO.case_summary, consultationRequestVO.patient_info, consultationRequestVO.doctor_info
                 )
-             
+
                 dialog?.dismiss()
             }
 
@@ -234,12 +233,10 @@ class HomeFragment : Fragment(), HomeView {
 
 
 //        val mDialogView = LayoutInflater.from(activity).inflate(R.layout.recent_doctor_confirm_dialog, null)
-//        val mBuilder = activity?.let {
-//            AlertDialog.Builder(it)
-//                .setView(mDialogView)
-//        }
+//        val builder =
+//            this.context?.let { AlertDialog.Builder(it) }
 //
-//        val mAlertDialog = mBuilder?.show()
+//        val mAlertDialog = builder?.show()
 //        if(mAlertDialog != null && mAlertDialog.isShowing) {
 //            mAlertDialog?.dismiss()
 //        }
@@ -278,7 +275,10 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun onResume() {
         super.onResume()
-
+        if ( context != null && view != null )
+        {
+            dialog?.dismiss()
+        }
     }
 
 
