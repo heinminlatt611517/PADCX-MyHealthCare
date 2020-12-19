@@ -29,10 +29,11 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
 
         private const val NAME_EXTRA = "NAME_EXTRA"
         private const val ID_EXTRA = "ID_EXTRA"
-        fun newIntent(context: Context,specialityName : String) : Intent {
+        private const val DOCTOR_EMAIL_EXTRA = "DOCTOR_EMAIL_EXTRA"
+        fun newIntent(context: Context,specialityName : String,doctorEmail : String) : Intent {
             val intent= Intent(context, CaseSummarySpecialQuestionActivity::class.java)
             intent.putExtra(NAME_EXTRA,specialityName)
-
+            intent.putExtra(DOCTOR_EMAIL_EXTRA,doctorEmail)
             return intent
         }
     }
@@ -89,7 +90,8 @@ class CaseSummarySpecialQuestionActivity : BaseActivity() ,CaseSummarySpecialQue
     override fun navigateToConfirmCaseSummaryScreen() {
         mTheDB.questionAnswerDao().deleteGeneralQuestion()
         mTheDB.questionAnswerDao().insertGeneralQuestion(questionAnswerList)
-       startActivity(CaseSummaryConfirmActivity.newIntent(this,intent.getStringExtra("NAME_EXTRA").toString()))
+       startActivity(CaseSummaryConfirmActivity.newIntent(this,intent.getStringExtra("NAME_EXTRA").toString(),
+           intent.getStringExtra(DOCTOR_EMAIL_EXTRA).toString()))
         this.finish()
     }
 

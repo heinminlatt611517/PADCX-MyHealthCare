@@ -114,8 +114,36 @@
             android:id="@+id/btn_login"
             android:background="@drawable/rounded_corner_btn_blue"
             android:text="Login"
+            android:textAllCaps="false"
             android:layout_height="wrap_content"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btSignInWithFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="8dp"
+            android:gravity="center"
+            android:text="Sign in with Facebook"
+            android:textAllCaps="false"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textStyle="normal"
+            app:icon="@drawable/ic_fb"
+            app:iconSize="32dp"
+            app:iconTintMode="add"
+            app:iconTint="@color/light_blue_A700"
+            app:iconGravity="textStart"
+            app:cornerRadius="12sp"
+            android:layout_marginTop="@dimen/margin_large"
+            app:backgroundTint="@color/light_blue_A700"
+            />
+
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

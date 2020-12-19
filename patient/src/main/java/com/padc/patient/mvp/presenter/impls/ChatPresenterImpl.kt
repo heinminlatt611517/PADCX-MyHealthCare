@@ -16,6 +16,12 @@ class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner, consultationID: String) {
 
+        mPatientModel.getPrescription(consultationID,onSuccess = {
+            mView?.displayPrescriptionLists(it)
+        },onFailure = {
+            mView?.showErrorMessage(it)
+        })
+
         mPatientModel.getConsultationChat(consultationID,onSuccess = {}, onError = {})
 
         mPatientModel.getConsultationChatFromDB(consultationID)
@@ -32,11 +38,6 @@ class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
             mView?.showErrorMessage(it)
         })
 
-        mPatientModel.getPrescription(consultationID,onSuccess = {
-            mView?.displayPrescriptionLists(it)
-        },onFailure = {
-            mView?.showErrorMessage(it)
-        })
 
 
     }
@@ -52,6 +53,16 @@ class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {
 
     override fun onTapAttach() {
 
+    }
+
+    override fun onSwipeRefresh(lifecycleOwner: LifecycleOwner, consultationID: String) {
+        mView?.enableSwipeRefresh()
+        mPatientModel.getPrescription(consultationID,onSuccess = {
+            mView?.disableSwipeRefresh()
+            mView?.displayPrescriptionLists(it)
+        },onFailure = {
+            mView?.showErrorMessage(it)
+        })
     }
 
     override fun onTapOrderPrescription() {

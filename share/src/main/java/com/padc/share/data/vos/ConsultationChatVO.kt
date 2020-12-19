@@ -17,7 +17,7 @@ data class ConsultationChatVO(
     var id : String= "",
     var doctor_id : String ? ="",
     var doctor_case_summary : String? = "",
-    var finish_flag : Boolean? = null,
+    var finish_flag : Boolean = false,
     var patient_id : String = "",
     var patient_info : PatientVO ? =null ,
     var doctor_info : DoctorVO ? = null,

@@ -7,10 +7,20 @@ import com.padc.patient.mvp.view.ProfileView
 import com.padc.share.mvp.presenter.BasePresenter
 
 
-
 interface ProfilePresenter : BasePresenter<ProfileView> {
     fun onUiReady(lifecycleOwner: LifecycleOwner)
-    fun updateUserProfile(bitmap: Bitmap)
-    fun onTapCancelUserData()
-    fun onTapEditProfileImage()
+
+    fun updateUserData(
+        bitmap: Bitmap,
+        blood_type: String,
+        dateofbirth: String,
+        height: String,
+        comment: String,
+        phone: String,
+        address: String,
+        lifecycleOwner: LifecycleOwner
+    )
+
+    fun onTapLogOut()
+    fun onTapEdit()
 }

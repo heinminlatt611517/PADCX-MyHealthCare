@@ -50,11 +50,18 @@ class ChatActivity : BaseActivity(), ChatView {
         setContentView(R.layout.activity_chat)
 
         setUpPresenter()
+        setUpSwipeRefresh()
         setUpRecyclerView()
         setUpActionsListener()
 
         mChatPresenter.onUiReady(this, intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString())
 
+    }
+
+    private fun setUpSwipeRefresh() {
+//        swipeRefreshLayout.setOnRefreshListener {
+//            mChatPresenter.onSwipeRefresh(this,intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString())
+//        }
     }
 
     private fun setUpActionsListener() {

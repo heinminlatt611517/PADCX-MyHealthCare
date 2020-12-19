@@ -44,9 +44,9 @@ class ConfirmCaseSummaryPresenterImpl : ConfirmCaseSummaryPresenter,
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-        mPatientModel.sendBroadCastConsultationRequest(speciality,
-            questionAnswerList, patientVO, dateTime, onSuccess = {
-                mView?.navigateToHomeScreen()
-            }, onFailure = {})
+//        mPatientModel.sendBroadCastConsultationRequest(speciality,
+//            questionAnswerList, patientVO, dateTime, onSuccess = {
+//                mView?.navigateToHomeScreen()
+//            }, onFailure = {})
     }
 }

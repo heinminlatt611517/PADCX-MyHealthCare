@@ -12,7 +12,7 @@ import com.padc.share.utils.DATABASE_NAME
     entities = [SpecialitiesVO::class, PatientVO::class, DoctorVO::class,
         GeneralQuestionTemplateVO::class,SpecialQuestionVO::class,QuestionAnswerVO::class,ConsultationRequestVO::class
     ,ConsultedPatientVO::class,ConsultationChatVO::class],
-    version = 6,
+    version = 8,
     exportSchema = false
 )
 

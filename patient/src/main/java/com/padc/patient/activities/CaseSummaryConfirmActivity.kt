@@ -14,6 +14,7 @@ import com.padc.patient.mvp.presenter.impls.CaseSummaryConfirmPresenterImpl
 import com.padc.patient.mvp.view.CaseSummaryConfirmView
 import com.padc.patient.utils.SessionManager
 import com.padc.share.activities.BaseActivity
+import com.padc.share.data.vos.DoctorVO
 import com.padc.share.data.vos.PatientVO
 import com.padc.share.data.vos.QuestionAnswerVO
 import kotlinx.android.synthetic.main.activity_case_summary_confirm_layout.*
@@ -22,9 +23,11 @@ class CaseSummaryConfirmActivity : BaseActivity(), CaseSummaryConfirmView {
 
     companion object {
         private val NAME_EXTRA = "NAME_EXTRA"
-        fun newIntent(context: Context, specialityName: String): Intent {
+        private const val DOCTOR_EMAIL_EXTRA = "DOCTOR_EMAIL_EXTRA"
+        fun newIntent(context: Context, specialityName: String,doctorEmail : String): Intent {
             val intent = Intent(context, CaseSummaryConfirmActivity::class.java)
             intent.putExtra(NAME_EXTRA, specialityName)
+            intent.putExtra(DOCTOR_EMAIL_EXTRA, doctorEmail)
             return intent
         }
     }
@@ -66,26 +69,14 @@ class CaseSummaryConfirmActivity : BaseActivity(), CaseSummaryConfirmView {
 
     private fun setUpActionListener() {
 
-        val patientVO = PatientVO(
-            SessionManager.patient_id.toString(),
-            SessionManager.patient_name.toString(),
-            SessionManager.patient_email.toString(),
-            SessionManager.patient_device_id,
-            SessionManager.patient_photo,
-            SessionManager.patient_bloodType,
-            SessionManager.patient_bloodPressure,
-            arrayListOf(),
-            SessionManager.patient_weight,
-            SessionManager.patient_height,
-            SessionManager.patient_dateOfBirth.toString(),
-            SessionManager.patient_allegric.toString(),
-            arrayListOf()
-        )
+
+
+        val doctorVO = DoctorVO()
 
         cs_btn_confirm.setOnClickListener {
             mPresenter.onTapStartConsultationButton(
                 intent.getStringExtra(NAME_EXTRA).toString(),
-                patientVO,
+                intent.getStringExtra(DOCTOR_EMAIL_EXTRA).toString(),
                 questionAnswerList
             )
         }

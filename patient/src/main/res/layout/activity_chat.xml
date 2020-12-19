@@ -326,7 +326,6 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-
    <androidx.constraintlayout.widget.ConstraintLayout
        android:id="@+id/bottomLayout"
        android:layout_width="match_parent"

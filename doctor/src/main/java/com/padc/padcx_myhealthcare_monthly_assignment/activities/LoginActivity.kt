@@ -91,8 +91,6 @@ class LoginActivity : BaseActivity() ,LoginView{
         SessionManager.doctor_gender = doctorVO.gender
         SessionManager.doctor_address = doctorVO.address
 
-
-
         startActivity(MainActivity.newIntent(this,"null"))
         this.finish()
     }

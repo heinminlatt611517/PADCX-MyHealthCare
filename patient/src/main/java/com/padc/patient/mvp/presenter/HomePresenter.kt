@@ -7,6 +7,7 @@ import com.padc.patient.delegates.ConsultationAcceptDelegate
 import com.padc.patient.delegates.RecentDoctorItemDelegate
 import com.padc.patient.delegates.SpecialityDoctorItemDelegate
 import com.padc.patient.dialogs.ConfirmDialogFragment
+import com.padc.patient.dialogs.RecentDoctorDialogFragment
 import com.padc.patient.mvp.view.HomeView
 import com.padc.share.data.vos.ConsultationRequestVO
 import com.padc.share.data.vos.DoctorVO
@@ -30,10 +31,8 @@ interface HomePresenter : BasePresenter<HomeView>, RecentDoctorItemDelegate,
 
     fun onTapConfirmDirectRequest(
         specialityName: String,
-        dataTime: String,
-        questionAnswerLists: ArrayList<QuestionAnswerVO>,
-        patientVO: PatientVO,
-        doctorVO: DoctorVO
+        doctorEmail :String,
+        dialogFragment: RecentDoctorDialogFragment
 
     )
 

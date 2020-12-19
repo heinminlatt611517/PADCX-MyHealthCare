@@ -117,11 +117,27 @@ object SessionManager {
             it.putString(sharePreferencePatientPhoto, value)
         }
 
-    var patient_allegric : String?
+    var patient_phone : String?
 
-        get() = preferences.getString(sharePreferencePatientPhoto, "")
+        get() = preferences.getString(sharePreferencePatientPhone, "")
 
         set(value) = preferences.edit {
-            it.putString(sharePreferencePatientPhoto, value)
+            it.putString(sharePreferencePatientPhone, value)
+        }
+
+    var patient_allegric : String?
+
+        get() = preferences.getString(sharePreferencePatientAlegric, "")
+
+        set(value) = preferences.edit {
+            it.putString(sharePreferencePatientAlegric, value)
+        }
+
+    var patient_permanent_address : String?
+
+        get() = preferences.getString(sharePreferencePatientPERMMENTAddress, "")
+
+        set(value) = preferences.edit {
+            it.putString(sharePreferencePatientPERMMENTAddress, value)
         }
 }

@@ -25,14 +25,7 @@ class ChatPresenterImpl : ChatPresenter,AbstractBasePresenter<ChatView>() {
                     }
                 })
 
-
-        mDoctorModel.getAllChatMessage(consultationID,
-            onSuccess = {
-                mView?.displayChatMessage(it)
-            }, onFailure = {
-                mView?.showErrorMessage(it)
-            })
-
+        getAllChatMessage(consultationID)
 
        mDoctorModel.getPrescription(consultationID,onSuccess = {
            mView?.displayPrescriptionLists(it)
@@ -40,6 +33,16 @@ class ChatPresenterImpl : ChatPresenter,AbstractBasePresenter<ChatView>() {
            mView?.showErrorMessage(it)
        })
 
+    }
+
+    private fun getAllChatMessage(consultationID: String) {
+        mDoctorModel.getAllChatMessage(
+            consultationID,
+            onSuccess = {
+                mView?.displayChatMessage(it)
+            }, onFailure = {
+                mView?.showErrorMessage(it)
+            })
     }
 
 
@@ -66,5 +69,9 @@ class ChatPresenterImpl : ChatPresenter,AbstractBasePresenter<ChatView>() {
 
     override fun onTapMedicineHistory() {
         mView?.navigateToMedicalCommentScreen()
+    }
+
+    override fun onSwipeRefresh(lifecycleOwner: LifecycleOwner,consultationID: String) {
+       getAllChatMessage(consultationID)
     }
 }

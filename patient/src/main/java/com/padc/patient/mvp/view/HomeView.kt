@@ -16,7 +16,7 @@ interface HomeView : BaseView {
     fun navigateToChatScreen(consultation_chat_id : String,consultationRequestVO: ConsultationRequestVO)
     fun displayConsultationRequestList(consultationRequestVO: List<ConsultationRequestVO>)
 
-    fun showRecentDoctorDialog(doctorVO: DoctorVO,consultationRequestVO: ConsultationRequestVO)
+    fun showRecentDoctorDialog(doctorEmail :String,speciality: String)
 
     fun showSuccessStatus(message : String)
     fun navigateToMainScreen()

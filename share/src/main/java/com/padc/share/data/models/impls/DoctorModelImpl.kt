@@ -258,7 +258,9 @@ object DoctorModelImpl : DoctorModel, BaseModel() {
     }
 
     override fun upDateDoctorInfo(doctorVO: DoctorVO, onSuccess: () -> Unit, onError: (String) -> Unit) {
-        mFirebaseApi.updateDoctorData(doctorVO, onSuccess = {}, onFailure = { onError(it) })
+        mFirebaseApi.updateDoctorData(doctorVO, onSuccess = {
+            onSuccess()
+        }, onFailure = { onError(it) })
     }
 
     override fun saveMedicalRecord(

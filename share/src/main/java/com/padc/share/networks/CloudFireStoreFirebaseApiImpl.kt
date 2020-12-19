@@ -215,6 +215,21 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         }
     }
 
+    override fun updatePatientData(
+        patientVO: PatientVO,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        database.collection(patients)
+            .document(patientVO.id)
+            .set(patientVO)
+            .addOnSuccessListener {
+                onSuccess()
+                Log.d("Success", "Successfully") }
+            .addOnFailureListener {
+                Log.d("Failure", "Failed ") }
+    }
+
     override fun getRecentDoctor(
         patientID: String,
         onSuccess: (doctors: List<DoctorVO>) -> Unit,
@@ -569,6 +584,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
         speciality: String,
         questionAnswerList: List<QuestionAnswerVO>,
         patientVO: PatientVO,
+        doctorVO: DoctorVO,
         dateTime: String,
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
@@ -608,14 +624,29 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
             }
 
 
-        var dataRequest = RequestFCM(
-            data = (
-                    Data("", "${patientVO.name} မှ \u200Bရောဂါဆိုင်ရာအတွက် \u200Bဆွေး\u200Bနွေးရန် \u200Bတောင်းဆိုထားပါသည်", "", "အ\u200Bကြောင်းကြားစာ", 0, id, "")
-                    ),
-            to = "fqOlIX8vSR-hCop6QJgb2y:APA91bFWmyfaLSmEVJkbKuJoJW4dAZD3jUJFSGkr9Dbh2UXPymYJvh2PSaBiASx2pXZon9NR4a2N08GovRUmTSBC418zhfgflHtBZUnF1xCzXAllaHFHu242FIcy8a46wYs6S8tFrB8B"
-        )
+        if (doctorVO.id.isNotEmpty()){
 
-        mPatientModel.sendNotification(dataRequest)
+            var dataRequest = RequestFCM(
+                data = (
+                        Data("", "${patientVO.name} မှ \u200Bရောဂါဆိုင်ရာအတွက် \u200Bဆွေး\u200Bနွေးရန် \u200Bတောင်းဆိုထားပါသည်", "", "အ\u200Bကြောင်းကြားစာ", 0, id, "")
+                        ),
+                to = doctorVO.deviceID.toString()
+            )
+
+            mPatientModel.sendNotification(dataRequest)
+        }
+        else{
+            var dataRequest = RequestFCM(
+                data = (
+                        Data("", "${patientVO.name} မှ \u200Bရောဂါဆိုင်ရာအတွက် \u200Bဆွေး\u200Bနွေးရန် \u200Bတောင်းဆိုထားပါသည်", "", "အ\u200Bကြောင်းကြားစာ", 0, id, "")
+                        ),
+                to = "fqOlIX8vSR-hCop6QJgb2y:APA91bFWmyfaLSmEVJkbKuJoJW4dAZD3jUJFSGkr9Dbh2UXPymYJvh2PSaBiASx2pXZon9NR4a2N08GovRUmTSBC418zhfgflHtBZUnF1xCzXAllaHFHu242FIcy8a46wYs6S8tFrB8B"
+            )
+
+            mPatientModel.sendNotification(dataRequest)
+        }
+
+
 
     }
 
@@ -1265,9 +1296,12 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
                 .document(doctorVO.id)
                 .set(doctorVO)
                 .addOnSuccessListener {
+                    onSuccess()
                     Log.d("Success", "Successfully") }
                 .addOnFailureListener {
                     Log.d("Failure", "Failed ") }
+
+
     }
 
     override fun saveMedicalRecord(

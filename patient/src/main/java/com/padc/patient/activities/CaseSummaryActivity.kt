@@ -33,9 +33,11 @@ class CaseSummaryActivity : BaseActivity(), CaseSummaryView {
 
         private const val NAME_EXTRA = "NAME_EXTRA"
         private const val ID_EXTRA = "ID_EXTRA"
-        fun newIntent(context: Context, specialityName: String): Intent {
+        private const val DOCTOR_EMAIL_EXTRA = "DOCTOR_EMAIL_EXTRA"
+        fun newIntent(context: Context, specialityName: String,doctorEmail : String): Intent {
             val intent = Intent(context, CaseSummaryActivity::class.java)
             intent.putExtra(NAME_EXTRA, specialityName)
+            intent.putExtra(DOCTOR_EMAIL_EXTRA, doctorEmail)
             return intent
 
         }
@@ -67,7 +69,7 @@ class CaseSummaryActivity : BaseActivity(), CaseSummaryView {
         Log.d("PatientCaseSummaryID", intent.getStringExtra(ID_EXTRA).toString())
         btn_continue.setOnClickListener {
             intent.getStringExtra(NAME_EXTRA)?.let { it1 ->
-                mPresenter.onTapContinue(it1)
+                mPresenter.onTapContinue(it1, intent.getStringExtra(DOCTOR_EMAIL_EXTRA).toString())
             }
         }
     }
@@ -79,8 +81,8 @@ class CaseSummaryActivity : BaseActivity(), CaseSummaryView {
     }
 
 
-    override fun navigateToSpecialQuestionCaseSummaryScreen(specialityName: String) {
-        startActivity(CaseSummarySpecialQuestionActivity.newIntent(this, specialityName))
+    override fun navigateToSpecialQuestionCaseSummaryScreen(specialityName: String,doctorEmail: String) {
+        startActivity(CaseSummarySpecialQuestionActivity.newIntent(this, specialityName,doctorEmail))
     }
 
     override fun displayPatientInfo(patientVO: PatientVO) {

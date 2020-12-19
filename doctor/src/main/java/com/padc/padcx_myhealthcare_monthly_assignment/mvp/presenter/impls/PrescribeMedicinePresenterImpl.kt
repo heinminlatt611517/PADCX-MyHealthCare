@@ -58,6 +58,9 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
     override fun onTapStopConsultation(consultationVO : ConsultationChatVO) {
 
         if (prescriptionLists.isNotEmpty()){
+
+           
+
             mDoctorModel.finishConsultation(consultationVO, prescriptionLists, onSuccess = {
                 mView?.navigateToChatScreen()
             }, onError = {})
@@ -144,6 +147,7 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
                 if (medicineName.equals(medicineVO.name)) {
                     i.isSelect = false
                     mView?.displayMedicineLists(medicineLists)
+
                 }
 
             }

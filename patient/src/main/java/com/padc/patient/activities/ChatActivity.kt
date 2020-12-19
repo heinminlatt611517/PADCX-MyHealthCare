@@ -32,8 +32,8 @@ class ChatActivity : BaseActivity(), ChatView {
         const val PARAM_CONSULTATION_CHAT_ID = " chat id"
         fun newIntent(
             context: Context,
-            consultation_chat_id : String
-        ) : Intent {
+            consultation_chat_id: String
+        ): Intent {
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra(PARAM_CONSULTATION_CHAT_ID, consultation_chat_id)
             return intent
@@ -41,9 +41,11 @@ class ChatActivity : BaseActivity(), ChatView {
 
     }
 
+    var isShow =false
+    var finishConservationStatus =false
     private lateinit var mChatPresenter: ChatPresenter
-    private lateinit var mChatMessageAdapter : ChatMessageAdapter
-    private lateinit var mRecommendMedicineViewPod : RecommendMedicineViewPod
+    private lateinit var mChatMessageAdapter: ChatMessageAdapter
+    private lateinit var mRecommendMedicineViewPod: RecommendMedicineViewPod
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -52,18 +54,27 @@ class ChatActivity : BaseActivity(), ChatView {
         setContentView(R.layout.activity_chat)
 
         setUpPresenter()
+        setUpSwipeRefresh()
         setUpActionsListener()
         setUpRecyclerView()
 
         mChatPresenter.onUiReady(this, intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString())
     }
 
+    override fun onResume() {
+        super.onResume()
+        mChatPresenter.onUiReady(this, intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString())
+    }
+
+    private fun setUpSwipeRefresh() {
+
+    }
+
     private fun setUpRecyclerView() {
         rv_chatMessage?.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mChatMessageAdapter =  ChatMessageAdapter()
+        mChatMessageAdapter = ChatMessageAdapter()
         rv_chatMessage?.adapter = mChatMessageAdapter
-
 
     }
 
@@ -74,12 +85,17 @@ class ChatActivity : BaseActivity(), ChatView {
 
         iv_sendText.setOnClickListener {
             if (ed_text_message.text.toString() != "") {
-                mChatPresenter.onTapSend( intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
-                        message = ChatMessageVO(UUID.randomUUID().toString(),
-                            DateUtils().getCurrentDateTime(), ed_text_message.text.toString(), "",
-                                SenderTypeVO(UUID.randomUUID().toString(),
-                                        "patient","")
-                       ))
+                mChatPresenter.onTapSend(
+                    intent.getStringExtra(PARAM_CONSULTATION_CHAT_ID).toString(),
+                    message = ChatMessageVO(
+                        UUID.randomUUID().toString(),
+                        DateUtils().getCurrentDateTime(), ed_text_message.text.toString(), "",
+                        SenderTypeVO(
+                            UUID.randomUUID().toString(),
+                            "patient", ""
+                        )
+                    )
+                )
                 ed_text_message.text = Editable.Factory.getInstance().newEditable("")
 
             }
@@ -104,15 +120,15 @@ class ChatActivity : BaseActivity(), ChatView {
             Log.d("messageName", i.messageText)
         }
 
-       mChatMessageAdapter.setTypeListList(messageLists)
+        mChatMessageAdapter.setTypeListList(messageLists)
 
         mChatMessageAdapter.setNewData(messageLists.toMutableList())
 
     }
 
     override fun navigateToRequestPatientDataScreen() {
-       startActivity(RequestPatientDataActivity.newIntent(this))
-        this.finish()
+        startActivity(RequestPatientDataActivity.newIntent(this))
+
     }
 
     override fun displayPatientRequestData(data: ConsultationChatVO) {
@@ -120,23 +136,45 @@ class ChatActivity : BaseActivity(), ChatView {
     }
 
 
-
     override fun navigateToOrderPrescriptionScreen() {
-        startActivity(OrderPrescriptionActivity.newIntent(this,intent.getStringExtra(
-            PARAM_CONSULTATION_CHAT_ID).toString()))
+        startActivity(
+            OrderPrescriptionActivity.newIntent(
+                this, intent.getStringExtra(
+                    PARAM_CONSULTATION_CHAT_ID
+                ).toString()
+            )
+        )
     }
 
     override fun displayPrescriptionLists(lists: List<PrescriptionVO>) {
-       if (lists.isNotEmpty()){
-           prescribe_medicine_view_pod.visibility = View.VISIBLE
-           mRecommendMedicineViewPod = prescribe_medicine_view_pod as RecommendMedicineViewPod
+        if (lists.isNotEmpty()) {
+            prescribe_medicine_view_pod.visibility = View.VISIBLE
+            mRecommendMedicineViewPod = prescribe_medicine_view_pod as RecommendMedicineViewPod
 
-           mRecommendMedicineViewPod.setDelegate(mChatPresenter)
-           mRecommendMedicineViewPod.setPrescriptionData(lists, SessionManager.patient_photo.toString())
-       }
+            mRecommendMedicineViewPod.setDelegate(mChatPresenter)
+
+                mRecommendMedicineViewPod.setPrescriptionData(
+                    lists,
+                    SessionManager.patient_photo.toString())
+
+//            if(finishConservationStatus) {
+//                prescribe_medicine_view_pod.visibility = View.VISIBLE
+//            }else{
+//                prescribe_medicine_view_pod.visibility = View.GONE
+//            }
+        }
+    }
+
+    override fun enableSwipeRefresh() {
+
+    }
+
+    override fun disableSwipeRefresh() {
+
     }
 
     private fun bindPatientData(data: ConsultationChatVO) {
+        isShow= true
         pname.text = data.patient_info?.name
         pdateofBirth.text = data.patient_info?.dateOfBirth
         pheight.text = data.patient_info?.height
@@ -145,7 +183,7 @@ class ChatActivity : BaseActivity(), ChatView {
         pweight.text = data.patient_info?.weight
         pbloodpressure.text = data.patient_info?.blood_pressure
 
-       data?.let {
+        data?.let {
             txt_question1.text = data.case_summary?.get(0)?.question
             txt_answer1.text = data.case_summary?.get(0)?.answer
 
@@ -153,11 +191,18 @@ class ChatActivity : BaseActivity(), ChatView {
             txt_answer2.text = data.case_summary?.get(1)?.answer
         }
 
+//        finishConservationStatus = data.finish_flag
+//        if(finishConservationStatus) {
+//            prescribe_medicine_view_pod.visibility = View.VISIBLE
+//        }else{
+//            prescribe_medicine_view_pod.visibility = View.GONE
+//        }
+
 
     }
 
     override fun showErrorMessage(errorMessage: String) {
-       showErrorMessage(errorMessage)
+        showErrorMessage(errorMessage)
     }
 
     override fun getLifeCycleOwner(): LifecycleOwner = this

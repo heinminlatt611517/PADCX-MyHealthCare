@@ -21,6 +21,14 @@ interface PatientModel {
         onFailure: (String) -> Unit
     )
 
+    fun getDoctorByEmail(
+        email: String,
+        onSuccess: (doctorVO: DoctorVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
+
+    fun updatePatientData(patientVO: PatientVO, onSuccess: () -> Unit, onError: (String) -> Unit)
+
     fun registerNewPatient(
         patientVO: PatientVO,
         onSuccess: (patientVO: PatientVO) -> Unit,
@@ -43,7 +51,11 @@ interface PatientModel {
         onSuccess: (PatientVO) -> Unit,
         onError: (String) -> Unit
     )
-
+    fun getPatientByID(
+        patientID: String,
+        onSuccess: (patientVO: PatientVO) -> Unit,
+        onFailure: (String) -> Unit
+    )
 
 
     fun getPatientFromDatabase(patientID: String): LiveData<PatientVO>
@@ -61,6 +73,7 @@ interface PatientModel {
         speciality: String,
         questionAnswerList: List<QuestionAnswerVO>,
         patientVO: PatientVO,
+        doctorVO: DoctorVO,
         dateTime: String,
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
@@ -133,11 +146,7 @@ interface PatientModel {
         onFailure: (String) -> Unit
     )
 
-    fun getPatientByID(
-        patientID: String,
-        onSuccess: (patientVO: PatientVO) -> Unit,
-        onFailure: (String) -> Unit
-    )
+
 
     fun getPrescriptionByID(
         consulationId: String,

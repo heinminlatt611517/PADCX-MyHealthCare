@@ -7,5 +7,6 @@ interface ProfileView : BaseView {
     fun displayDoctorData( doctorVO: DoctorVO)
     fun hideProgressDialog()
     fun navigateToEditProfileScreen()
+    fun navigateToMainScreen()
 
 }

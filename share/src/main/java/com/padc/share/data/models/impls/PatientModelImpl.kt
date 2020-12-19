@@ -45,6 +45,25 @@ object PatientModelImpl : PatientModel, BaseModel() {
         mFirebaseApi.uploadPhotoToFirebaseStorage(image, onSuccess, onFailure)
     }
 
+    override fun getDoctorByEmail(
+        email: String,
+        onSuccess: (doctorVO: DoctorVO) -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        mFirebaseApi.getDoctorByEmail(email,onSuccess,onFailure)
+    }
+
+    override fun updatePatientData(
+        patientVO: PatientVO,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mFirebaseApi.updatePatientData(patientVO, onSuccess = {
+            onSuccess()
+        }, onFailure = { onError(it) })
+    }
+
+
     override fun registerNewPatient(
         patientVO: PatientVO,
         onSuccess: (patientVO: PatientVO) -> Unit,
@@ -129,6 +148,7 @@ object PatientModelImpl : PatientModel, BaseModel() {
         speciality: String,
         questionAnswerList: List<QuestionAnswerVO>,
         patientVO: PatientVO,
+        doctorVO: DoctorVO,
         dateTime: String,
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
@@ -136,6 +156,7 @@ object PatientModelImpl : PatientModel, BaseModel() {
         mFirebaseApi.sendBroadCastConsultationRequest(speciality = speciality,
             questionAnswerList = questionAnswerList,
             patientVO = patientVO,
+            doctorVO = doctorVO,
             dateTime = dateTime,
             onSuccess = {
                 onSuccess()

@@ -7,10 +7,12 @@ import com.padc.share.data.vos.PrescriptionVO
 import com.padc.share.mvp.view.BaseView
 
 interface ChatView : BaseView {
-  fun displayChatMessage(messageLists : List<ChatMessageVO>)
+    fun displayChatMessage(messageLists: List<ChatMessageVO>)
 
     fun navigateToRequestPatientDataScreen()
-    fun displayPatientRequestData(data : ConsultationChatVO)
+    fun displayPatientRequestData(data: ConsultationChatVO)
     fun navigateToOrderPrescriptionScreen()
-    fun displayPrescriptionLists(lists : List<PrescriptionVO>)
+    fun displayPrescriptionLists(lists: List<PrescriptionVO>)
+    fun enableSwipeRefresh()
+    fun disableSwipeRefresh()
 }

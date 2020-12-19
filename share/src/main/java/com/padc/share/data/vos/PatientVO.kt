@@ -22,6 +22,7 @@ data class PatientVO(
     var address: ArrayList<AddressVO> = arrayListOf(),
     var weight: String? = "",
     var height: String? = "",
+    var phone: String?= "",
     var dateOfBirth: String= "",
     var allergic_reactions: String? = "",
     var one_time_general_question: ArrayList<OneTimeGeneralQuestionVO> = arrayListOf()

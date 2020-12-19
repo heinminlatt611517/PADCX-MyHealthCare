@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.padc.patient.activities.CaseSummaryActivity
 import com.padc.patient.activities.EmptyCaseSummaryActivity
 import com.padc.patient.dialogs.ConfirmDialogFragment
+import com.padc.patient.dialogs.RecentDoctorDialogFragment
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.view.HomeView
 import com.padc.patient.utils.SessionManager
@@ -74,15 +75,15 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
                     if (it.isBlank()) {
                         dialogFragment.startActivity(dialogFragment.context?.let { context ->
                             EmptyCaseSummaryActivity.newIntent(
-                                context, specialityName
-                            )
+                                context, specialityName,
+                            "")
                         })
                         dialogFragment.dismiss()
                     } else {
                         dialogFragment.startActivity(dialogFragment.context?.let { context ->
                             CaseSummaryActivity.newIntent(
-                                context, specialityName
-                            )
+                                context, specialityName,
+                            "")
                         })
                         dialogFragment.dismiss()
                     }
@@ -103,18 +104,27 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
     override fun onTapConfirmDirectRequest(
         specialityName: String,
-        dataTime: String,
-        questionAnswerLists: ArrayList<QuestionAnswerVO>,
-        patientVO: PatientVO,
-        doctorVO: DoctorVO
-
+        doctorEmail :String,
+        dialogFragment: RecentDoctorDialogFragment
     ) {
-        mPatientModel.sendDirectRequest(
-            specialityName, dataTime, questionAnswerLists, patientVO,
-            doctorVO,onSuccess = {
-                mView?.navigateToMainScreen()
-            },onFailure = {}
-        )
+
+                    if (SessionManager.patient_allegric?.isEmpty()!!) {
+                        dialogFragment.startActivity(dialogFragment.context?.let { context ->
+                            EmptyCaseSummaryActivity.newIntent(
+                                context, specialityName,doctorEmail
+                            )
+                        })
+                        dialogFragment.dismiss()
+                    } else {
+                        dialogFragment.startActivity(dialogFragment.context?.let { context ->
+                            CaseSummaryActivity.newIntent(
+                                context, specialityName,doctorEmail
+                            )
+                        })
+                        dialogFragment.dismiss()
+                    }
+
+
     }
 
     override fun onTapDirectRequest(specialityName: String) {
@@ -134,12 +144,12 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
 
     override fun onTapRecentDoctorItem(doctorVO: DoctorVO) {
-        mPatientModel.getBroadConsultationRequestByDoctorSpeciality(doctorVO.speciality.toString(),onSuccess = {
-            mView?.showRecentDoctorDialog(it.doctor_info,it)
-        },onFailure = {
-            mView?.showErrorMessage(it)
-        })
-
+//        mPatientModel.getBroadConsultationRequestByDoctorSpeciality(doctorVO.speciality.toString(),onSuccess = {
+//            mView?.showRecentDoctorDialog(it.doctor_info,it)
+//        },onFailure = {
+//            mView?.showErrorMessage(it)
+//        })
+        doctorVO.speciality?.let { mView?.showRecentDoctorDialog(doctorVO.email, it) }
     }
 
     override fun onTapSpecialityDoctorItem(specialitiesID: String) {

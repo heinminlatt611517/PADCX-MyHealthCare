@@ -21,12 +21,12 @@ class RecentDoctorDialogFragment : DialogFragment() {
     companion object {
 
         const val TAG_ADD_RECENT_DIALOG = "TAG_ADD_RECENT_DIALOG"
-        const val BUNDLE_NAME = "BUNDLE_NAME"
+        const val BUNDLE_RECENT_NAME = "BUNDLE_RECENT_NAME"
         const val BUNDLE_DESCRIPTION = "BUNDLE_DESCRIPTION"
         const val BUNDLE_AMOUNT = "BUNDLE_AMOUNT"
         const val BUNDLE_PATIENT_ID = "BUNDLE_PATIENT_ID"
         const val BITMAP_IMAGE = "BITMAP_IMAGE"
-
+        const val BUNDLE_EMAIL = "BUNDLE_EMAIL"
         fun newFragment(): RecentDoctorDialogFragment {
             return RecentDoctorDialogFragment()
         }
@@ -54,7 +54,7 @@ class RecentDoctorDialogFragment : DialogFragment() {
     }
 
     private fun init(){
-        tv_doctorSpeciality?.text = arguments?.getString(BUNDLE_NAME)+resources.getString(R.string.consultation_request_message)
+        tv_doctorSpeciality?.text = arguments?.getString(BUNDLE_RECENT_NAME)+resources.getString(R.string.consultation_request_message)
     }
 
     private fun setUpActionsListener() {
@@ -63,7 +63,8 @@ class RecentDoctorDialogFragment : DialogFragment() {
         }
 
         btnConfirm.setOnClickListener {
-            mPresenter.onTapDirectRequest(arguments?.getString(BUNDLE_NAME).toString())
+            mPresenter.onTapConfirmDirectRequest(arguments?.getString(BUNDLE_RECENT_NAME).toString(),
+                arguments?.getString(BUNDLE_EMAIL).toString(),this)
             dismiss()
         }
     }

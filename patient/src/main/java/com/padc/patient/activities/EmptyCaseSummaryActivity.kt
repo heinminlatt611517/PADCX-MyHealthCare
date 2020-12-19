@@ -24,9 +24,11 @@ class EmptyCaseSummaryActivity : BaseActivity(), EmptyCaseSummaryView {
 
     companion object {
         private val NAME_EXTRA = "NAME_EXTRA"
-        fun newIntent(context: Context, specialityName: String): Intent {
+        private const val DOCTOR_EMAIL_EXTRA = "DOCTOR_EMAIL_EXTRA"
+        fun newIntent(context: Context, specialityName: String,doctorEmail : String): Intent {
             val intent = Intent(context, EmptyCaseSummaryActivity::class.java)
             intent.putExtra(NAME_EXTRA, specialityName)
+            intent.putExtra(DOCTOR_EMAIL_EXTRA, doctorEmail)
             return intent
         }
     }
@@ -72,6 +74,7 @@ class EmptyCaseSummaryActivity : BaseActivity(), EmptyCaseSummaryView {
                     arrayListOf(),
                     ed_weight.text.toString(),
                     ed_height.text.toString(),
+                    SessionManager.patient_phone,
                     "$day/$month/$year",
                     ed_allergic_medicine.text.toString(),
                     arrayListOf()
@@ -160,7 +163,7 @@ class EmptyCaseSummaryActivity : BaseActivity(), EmptyCaseSummaryView {
         startActivity(
             CaseSummaryActivity.newIntent(
                 this,
-                intent.getStringExtra(NAME_EXTRA).toString()
+                intent.getStringExtra(NAME_EXTRA).toString(),intent.getStringExtra(DOCTOR_EMAIL_EXTRA).toString()
             )
         )
 

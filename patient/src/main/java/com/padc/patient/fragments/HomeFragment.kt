@@ -22,6 +22,8 @@ import com.padc.patient.adapters.SpecialityDoctorAdapter
 import com.padc.patient.dialogs.ConfirmDialogFragment
 import com.padc.patient.dialogs.ConfirmDialogFragment.Companion.BUNDLE_NAME
 import com.padc.patient.dialogs.RecentDoctorDialogFragment
+import com.padc.patient.dialogs.RecentDoctorDialogFragment.Companion.BUNDLE_EMAIL
+import com.padc.patient.dialogs.RecentDoctorDialogFragment.Companion.BUNDLE_RECENT_NAME
 import com.padc.patient.mvp.presenter.HomePresenter
 import com.padc.patient.mvp.presenter.impls.HomePresenterImpl
 import com.padc.patient.mvp.view.HomeView
@@ -186,12 +188,11 @@ class HomeFragment : Fragment(), HomeView {
         mConsultationAcceptAdapter.setNewData(consultationRequestVO.toMutableList())
     }
 
-
-    override fun showRecentDoctorDialog(doctorVO: DoctorVO,consultationRequestVO: ConsultationRequestVO) {
-
+    override fun showRecentDoctorDialog(doctorEmail: String,speciality: String) {
         val recentDoctorDialog = RecentDoctorDialogFragment.newFragment()
         val bundle = Bundle()
-        bundle.putString(BUNDLE_NAME, doctorVO.speciality)
+        bundle.putString(BUNDLE_EMAIL,doctorEmail)
+        bundle.putString(BUNDLE_RECENT_NAME,speciality)
         recentDoctorDialog.arguments = bundle
         activity?.supportFragmentManager?.let {
             recentDoctorDialog.show(
@@ -199,6 +200,21 @@ class HomeFragment : Fragment(), HomeView {
                 RecentDoctorDialogFragment.TAG_ADD_RECENT_DIALOG
             )
         }
+    }
+
+
+//    override fun showRecentDoctorDialog(doctorVO: DoctorVO,consultationRequestVO: ConsultationRequestVO) {
+//
+//        val recentDoctorDialog = RecentDoctorDialogFragment.newFragment()
+//        val bundle = Bundle()
+//        bundle.putString(BUNDLE_NAME, doctorVO.speciality)
+//        recentDoctorDialog.arguments = bundle
+//        activity?.supportFragmentManager?.let {
+//            recentDoctorDialog.show(
+//                it,
+//                RecentDoctorDialogFragment.TAG_ADD_RECENT_DIALOG
+//            )
+//        }
 
 
 //            val view = layoutInflater.inflate(R.layout.recent_doctor_confirm_dialog, null)
@@ -230,8 +246,6 @@ class HomeFragment : Fragment(), HomeView {
 //            dialog?.show()
 
 
-
-
 //        val mDialogView = LayoutInflater.from(activity).inflate(R.layout.recent_doctor_confirm_dialog, null)
 //        val mBuilder = activity?.let {
 //            AlertDialog.Builder(it)
@@ -257,10 +271,7 @@ class HomeFragment : Fragment(), HomeView {
 //        }
 //
 //        mAlertDialog?.show()
-
-
-
-    }
+//    }
 
     override fun showSuccessStatus(message: String) {
 

@@ -374,12 +374,14 @@
 
             </androidx.cardview.widget.CardView>
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_chatMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
                 />
+
 
             <include layout="@layout/recommend_mecidine_for_chat_viewpod"
                 android:id="@+id/recommend_medicine_view_pod"

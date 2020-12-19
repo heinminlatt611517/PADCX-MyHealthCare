@@ -14,5 +14,5 @@ interface ChatPresenter : BasePresenter<ChatView> {
     fun onTapQuestion()
     fun onTapPrescribeMedicine()
     fun onTapMedicineHistory()
-
+    fun onSwipeRefresh(lifecycleOwner: LifecycleOwner,consultationID: String)
 }

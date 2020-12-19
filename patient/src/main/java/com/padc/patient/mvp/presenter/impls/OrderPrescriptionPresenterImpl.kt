@@ -62,6 +62,7 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
                 mAddressLists,
                 SessionManager.patient_weight,
                 SessionManager.patient_height,
+                SessionManager.patient_phone,
                 SessionManager.patient_dateOfBirth.toString(),
                 SessionManager.patient_allegric,
                 arrayListOf()
@@ -91,6 +92,7 @@ class OrderPrescriptionPresenterImpl : OrderPrescriptionPresenter,AbstractBasePr
             mAddressLists,
             SessionManager.patient_weight,
             SessionManager.patient_height,
+            SessionManager.patient_phone,
             SessionManager.patient_dateOfBirth.toString(),
             SessionManager.patient_allegric,
             arrayListOf()

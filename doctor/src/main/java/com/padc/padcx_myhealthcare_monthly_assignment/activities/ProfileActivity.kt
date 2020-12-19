@@ -112,6 +112,10 @@ class ProfileActivity : BaseActivity() ,ProfileView {
        startActivity(EditProfileActivity.newIntent(this))
     }
 
+    override fun navigateToMainScreen() {
+
+    }
+
 
     override fun showErrorMessage(errorMessage: String) {
         showSnackbar(errorMessage)

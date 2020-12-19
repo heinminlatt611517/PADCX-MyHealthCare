@@ -11,6 +11,10 @@ interface FirebaseApi {
         onFailure: (String) -> Unit
     )
 
+    fun updatePatientData(patientVO: PatientVO ,onSuccess: () -> Unit,
+                          onFailure: (String) -> Unit
+    )
+
     fun getRecentDoctor(
         patientId: String,
         onSuccess: (doctors: List<DoctorVO>) -> Unit,
@@ -127,8 +131,10 @@ interface FirebaseApi {
         speciality: String,
         questionAnswerList: List<QuestionAnswerVO>,
         patientVO: PatientVO,
+        doctorVO: DoctorVO,
         dateTime: String,
-        onSuccess: () -> Unit, onFailure: (String) -> Unit
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
     )
 
 
@@ -246,7 +252,6 @@ interface FirebaseApi {
     )
 
     fun updatePatientAddress(patients: PatientVO,addressLists : List<AddressVO>, onSuccess: () -> Unit, onFailure: (String) -> Unit)
-
 
     fun getBroadcastConsultationRequest(
             consulation_request_id : String,

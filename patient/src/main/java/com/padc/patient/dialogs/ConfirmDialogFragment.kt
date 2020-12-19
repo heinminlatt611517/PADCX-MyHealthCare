@@ -25,6 +25,7 @@ class ConfirmDialogFragment : DialogFragment() {
         const val BUNDLE_PATIENT_ID = "BUNDLE_PATIENT_ID"
         const val BITMAP_IMAGE = "BITMAP_IMAGE"
 
+
         fun newFragment(): ConfirmDialogFragment {
             return ConfirmDialogFragment()
         }

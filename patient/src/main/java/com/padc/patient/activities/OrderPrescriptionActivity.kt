@@ -117,22 +117,22 @@ class OrderPrescriptionActivity : BaseActivity(), OrderPrescriptionView {
             val patientAddress = AddressVO(state.toString(), "", township.toString(), ed_fullAddress.text.toString())
             addressLists.add(patientAddress)
 
-            val patientVO = PatientVO(
-                    SessionManager.patient_id.toString(),
-                    SessionManager.patient_name.toString(),
-                    SessionManager.patient_email.toString(),
-                    SessionManager.patient_device_id,
-                    SessionManager.patient_photo,
-                    SessionManager.patient_bloodType,
-                    SessionManager.patient_bloodPressure,
-                    addressLists,
-                    SessionManager.patient_weight,
-                    SessionManager.patient_height,
-                    SessionManager.patient_dateOfBirth.toString(),
-                    SessionManager.patient_allegric,
-                    arrayListOf()
-
-            )
+//            val patientVO = PatientVO(
+//                    SessionManager.patient_id.toString(),
+//                    SessionManager.patient_name.toString(),
+//                    SessionManager.patient_email.toString(),
+//                    SessionManager.patient_device_id,
+//                    SessionManager.patient_photo,
+//                    SessionManager.patient_bloodType,
+//                    SessionManager.patient_bloodPressure,
+//                    addressLists,
+//                    SessionManager.patient_weight,
+//                    SessionManager.patient_height,
+//                    SessionManager.patient_dateOfBirth.toString(),
+//                    SessionManager.patient_allegric,
+//                    arrayListOf()
+//
+//            )
 
             mPresenter.onTapMadePayment(addressLists)
         }

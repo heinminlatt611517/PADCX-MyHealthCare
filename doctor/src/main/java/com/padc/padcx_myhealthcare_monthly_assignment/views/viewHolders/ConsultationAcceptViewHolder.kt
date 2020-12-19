@@ -25,7 +25,7 @@ class ConsultationAcceptViewHolder(private val mDelegate: ConsultationDelegate, 
         mData = data
 
         data?.let {
-            ImageUtils().showImage(itemView.iv_patient,data.patient_info?.photo.toString(), R.drawable.sample_patient)
+            ImageUtils().showImage(itemView.iv_patient_accept,data.patient_info?.photo.toString(), R.drawable.sample_patient)
             itemView.tv_patient_name.text = data.patient_info?.name
             itemView.tv_patient_dateofbirth.text = data.patient_info?.dateOfBirth
         }

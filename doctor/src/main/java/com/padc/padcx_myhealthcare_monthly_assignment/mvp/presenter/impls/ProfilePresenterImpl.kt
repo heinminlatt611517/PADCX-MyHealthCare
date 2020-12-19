@@ -67,7 +67,11 @@ class ProfilePresenterImpl : ProfilePresenter,AbstractBasePresenter<ProfileView>
                     experience = experience,
                     gender = gender
                 )
-                mDoctorModel.upDateDoctorInfo(doctorVO,onSuccess = {}, onError = {})
+                mDoctorModel.upDateDoctorInfo(doctorVO,onSuccess = {
+
+                    mView?.navigateToMainScreen()
+
+                }, onError = {})
             },
             onFailure = {
                 mView?.showErrorMessage("Profile Update Failed")

@@ -12,4 +12,5 @@ interface ChatPresenter : BasePresenter<ChatView> , RecommendMedicineViewPod.Del
     fun onTapSend(consultationID : String,message : ChatMessageVO)
     fun onTapSeeMore()
     fun onTapAttach()
+    fun onSwipeRefresh(lifecycleOwner: LifecycleOwner,consultationID: String)
 }
