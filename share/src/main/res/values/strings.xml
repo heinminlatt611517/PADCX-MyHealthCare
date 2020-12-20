@@ -104,7 +104,7 @@
     <string name="logout">အကောင့်မှ ထွက် မည်</string>
     <string name="upload_photo">ပုံတင်မည်</string>
     <string name="profilelabel">ပရိုဖိုင်ဖြည့်သွင်းမည်</string>
-
+    <string name="empty_profile_data">သင့်ပရိုဖိုင်တွင် အချက်အလက် များမဖြည့်သွင်းရသေးပါ</string>
     <string-array name="days">
         <item>1</item>
         <item>2</item>

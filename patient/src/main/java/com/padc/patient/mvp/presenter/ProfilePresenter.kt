@@ -12,6 +12,7 @@ interface ProfilePresenter : BasePresenter<ProfileView> {
 
     fun updateUserData(
         bitmap: Bitmap,
+        userName :String,
         blood_type: String,
         dateofbirth: String,
         height: String,

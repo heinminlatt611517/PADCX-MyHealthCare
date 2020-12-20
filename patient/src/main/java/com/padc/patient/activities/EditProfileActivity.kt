@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -31,22 +32,22 @@ import kotlinx.android.synthetic.main.fragment_patient_account.*
 import mk.monthlytut.patient.mvp.presenters.ProfilePresenterImpl
 import java.io.IOException
 
-class EditProfileActivity :BaseActivity(),ProfileView {
+class EditProfileActivity : BaseActivity(), ProfileView {
 
     companion object {
         const val PICK_IMAGE_REQUEST = 1111
         fun newIntent(context: Context) = Intent(context, EditProfileActivity::class.java)
     }
 
-    private  var bitmap : Bitmap? = null
+    private var bitmap: Bitmap? = null
 
     private var year: String? = null
     private var month: String? = null
     private var day: String? = null
     private var bloodType: String? = null
-    private lateinit var  mProgressDialog : ProgressDialog
+    private lateinit var mProgressDialog: ProgressDialog
 
-    private lateinit var mProfilePresenter : ProfilePresenter
+    private lateinit var mProfilePresenter: ProfilePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,19 +75,21 @@ class EditProfileActivity :BaseActivity(),ProfileView {
         mProgressDialog.setMessage("Please Wait.....")
 
         btn_save.setOnClickListener {
-            if(ptphone.text.toString().isNotEmpty() && pt_height.text.toString().isNotEmpty() && pt_comment.text.toString().isNotEmpty()&& et_address.text.toString().isNotEmpty()) {
+
+            if (edt_userName.text.toString().isNotEmpty() && ptphone.text.toString().isNotEmpty() && pt_height.text.toString().isNotEmpty()
+                    && pt_comment.text.toString().isNotEmpty() && et_address.text.toString().isNotEmpty()) {
                 mProgressDialog.show()
                 var dateofbirth = "$day  $month $year"
                 bitmap?.let { it1 ->
                     mProfilePresenter?.updateUserData(it1,
-                        bloodType.toString(), dateofbirth,
-                        pt_height.text.toString(), pt_comment.text.toString(), ptphone.text.toString(),
-                        et_address.text.toString(),this
+                            edt_userName.text.toString(),
+                            bloodType.toString(), dateofbirth,
+                            pt_height.text.toString(), pt_comment.text.toString(), ptphone.text.toString(),
+                            et_address.text.toString(), this
                     )
                 }
-            }else
-            {
-                Toast.makeText(this,"Please enter all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -96,16 +99,16 @@ class EditProfileActivity :BaseActivity(),ProfileView {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"),PICK_IMAGE_REQUEST)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
     private fun setUpItemSelectedListener() {
         year_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
             ) {
                 year = parent.getItemAtPosition(position).toString()
             }
@@ -114,10 +117,10 @@ class EditProfileActivity :BaseActivity(),ProfileView {
         }
         month_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
             ) {
                 month = parent.getItemAtPosition(position).toString()
             }
@@ -126,10 +129,10 @@ class EditProfileActivity :BaseActivity(),ProfileView {
         }
         day_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
             ) {
                 day = parent.getItemAtPosition(position).toString()
             }
@@ -138,10 +141,10 @@ class EditProfileActivity :BaseActivity(),ProfileView {
         }
         bloodtype_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
             ) {
                 bloodType = parent.getItemAtPosition(position).toString()
             }
@@ -149,7 +152,6 @@ class EditProfileActivity :BaseActivity(),ProfileView {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
     }
-
 
 
     private fun setUpPresenter() {
@@ -171,10 +173,10 @@ class EditProfileActivity :BaseActivity(),ProfileView {
                     if (Build.VERSION.SDK_INT >= 29) {
                         val source: ImageDecoder.Source = ImageDecoder.createSource(contentResolver!!, filePath)
                         bitmap = ImageDecoder.decodeBitmap(source)
-                        ImageUtils().showImageProfile(iv_main_profile.context,iv_main_profile,null,filePath)
+                        ImageUtils().showImageProfile(iv_main_profile.context, iv_main_profile, null, filePath)
                     } else {
                         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                        ImageUtils().showImageProfile(iv_main_profile.context,iv_main_profile,null,filePath)
+                        ImageUtils().showImageProfile(iv_main_profile.context, iv_main_profile, null, filePath)
 
                     }
                 }
@@ -186,10 +188,10 @@ class EditProfileActivity :BaseActivity(),ProfileView {
     }
 
     override fun displayPatientData(patientData: PatientVO) {
-        ptphone.text =    Editable.Factory.getInstance().newEditable(patientData.phone)
-        pt_height.text =    Editable.Factory.getInstance().newEditable(patientData.height)
-        pt_comment.text =    Editable.Factory.getInstance().newEditable(patientData.allergic_reactions)
-        et_address.text =    Editable.Factory.getInstance().newEditable(patientData.address[0].fullAddress)
+        ptphone.text = Editable.Factory.getInstance().newEditable(patientData.phone)
+        pt_height.text = Editable.Factory.getInstance().newEditable(patientData.height)
+        pt_comment.text = Editable.Factory.getInstance().newEditable(patientData.allergic_reactions)
+        et_address.text = Editable.Factory.getInstance().newEditable(patientData.address[0].fullAddress)
 
     }
 
@@ -211,10 +213,10 @@ class EditProfileActivity :BaseActivity(),ProfileView {
     }
 
     override fun showErrorMessage(errorMessage: String) {
-       showSnackbar(errorMessage)
+        showSnackbar(errorMessage)
     }
 
-    override fun getLifeCycleOwner(): LifecycleOwner  =this
+    override fun getLifeCycleOwner(): LifecycleOwner = this
 
 
 }

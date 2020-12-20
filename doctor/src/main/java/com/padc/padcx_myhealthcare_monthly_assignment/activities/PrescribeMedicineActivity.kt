@@ -385,7 +385,10 @@ class PrescribeMedicineActivity : BaseActivity(), PrescribeMedicineView {
                 routineVO= routineLists
             )
             if(comment?.text.toString().isNotEmpty()) {
-                mPresenter.addToPrescribeMedicineLists(prescriptionVO)
+
+                    mPresenter.addToPrescribeMedicineLists(prescriptionVO)
+
+
                 dialog?.dismiss()
             }else{
                 Toast.makeText(this,"Please enter all field",Toast.LENGTH_SHORT).show()

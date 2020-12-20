@@ -1,6 +1,7 @@
 package com.padc.patient.fragments
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
@@ -27,6 +29,7 @@ import com.padc.share.utils.ImageUtils
 import kotlinx.android.synthetic.main.fragment_account.*
 import kotlinx.android.synthetic.main.fragment_account.account_btngroup
 import kotlinx.android.synthetic.main.fragment_patient_account.*
+import kotlinx.android.synthetic.main.patient_profile_dialog.view.*
 import mk.monthlytut.patient.mvp.presenters.ProfilePresenterImpl
 import java.io.IOException
 
@@ -163,6 +166,7 @@ class AccountFragment : Fragment(), ProfileView {
     override fun displayPatientData(patientData: PatientVO) {
         patientData?.let {
             savePatientDataToPrefrence(it)
+            checkPatientInfoDialog()
         }
         ImageUtils().showImage(img_profile, patientData.photo.toString(), R.drawable.user)
         tv_patientName.text = SessionManager.patient_name
@@ -174,13 +178,13 @@ class AccountFragment : Fragment(), ProfileView {
         }
 
         if (SessionManager.patient_dateOfBirth.toString().isNotEmpty()) {
-            et_dateofbirth.text = SessionManager.patient_dateOfBirth
+            et_dateofbirth.text = " : " +SessionManager.patient_dateOfBirth
         } else {
             et_dateofbirth.text = "Empty"
         }
 
         if (SessionManager.patient_email.toString().isNotEmpty()) {
-            tv_email.text = SessionManager.patient_email
+            tv_email.text = " : " +SessionManager.patient_email
         } else {
             et_dateofbirth.text = "Empty"
         }
@@ -188,29 +192,55 @@ class AccountFragment : Fragment(), ProfileView {
 
 
         if (SessionManager.patient_bloodType.toString().isNotEmpty()) {
-            et_bloodtype.text = SessionManager.patient_bloodType
+            et_bloodtype.text =" : " +SessionManager.patient_bloodType
         } else {
             et_bloodtype.text = "Empty"
         }
 
         if (SessionManager.patient_height.toString().isNotEmpty()) {
-            et_height.text = SessionManager.patient_height
+            et_height.text =" : " +SessionManager.patient_height+"ft"
         } else {
             et_height.text = "Empty"
         }
 
         if (SessionManager.patient_allegric.toString().isNotEmpty()) {
-            et_comment.text = SessionManager.patient_allegric
+            et_comment.text =" : " +SessionManager.patient_allegric
         } else {
             et_comment.text = "Empty"
         }
 
         if (patientData.address.size > 0) {
-            ets_address.text = patientData.address[0].fullAddress
+            ets_address.text =" : " +patientData.address[0].fullAddress
         } else {
             ets_address.text = "Empty"
         }
     }
+
+    private fun checkPatientInfoDialog() {
+      if (SessionManager.patient_bloodType.toString().isEmpty()){
+          val view = layoutInflater.inflate(R.layout.patient_profile_dialog, null)
+          val dialog = context?.let { Dialog(it) }
+          dialog?.window?.setLayout(
+                  WindowManager.LayoutParams.MATCH_PARENT,
+                  WindowManager.LayoutParams.MATCH_PARENT
+          )
+          dialog?.apply {
+              setCancelable(false)
+              setContentView(view)
+              window?.setBackgroundDrawableResource(android.R.color.transparent)
+          }
+
+          view.android_cancel.setOnClickListener {
+              dialog?.dismiss()
+          }
+
+          view.btn_fill_patient.setOnClickListener {
+              dialog?.dismiss()
+              startActivity(  activity?.applicationContext?.let{ EditProfileActivity.newIntent(it)})
+          }
+          dialog?.show()
+      }
+      }
 
 
     override fun hideProgressDialog() {

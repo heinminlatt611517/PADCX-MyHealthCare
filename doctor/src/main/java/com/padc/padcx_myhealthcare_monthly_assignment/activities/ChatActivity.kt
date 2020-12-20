@@ -66,6 +66,9 @@ class ChatActivity : BaseActivity(), ChatView {
 
     private fun setUpActionsListener() {
 
+        iv_backChat.setOnClickListener {
+            onBackPressed()
+        }
         iv_attach.setOnClickListener {
             mChatPresenter.onTapAttach()
         }

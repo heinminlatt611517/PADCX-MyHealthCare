@@ -52,6 +52,7 @@ class ProfilePresenterImpl : ProfilePresenter, AbstractBasePresenter<ProfileView
 
     override fun updateUserData(
         bitmap: Bitmap,
+        userName :String,
         blood_type: String,
         dateofbirth: String,
         height: String,
@@ -80,7 +81,7 @@ class ProfilePresenterImpl : ProfilePresenter, AbstractBasePresenter<ProfileView
                 var patientVo = PatientVO(
                     id= SessionManager.patient_id.toString(),
                     deviceID = SessionManager.patient_device_id.toString(),
-                    name = SessionManager.patient_name.toString(),
+                    name = userName,
                     email = SessionManager.patient_email.toString(),
                     photo = it,
                     blood_type = blood_type,

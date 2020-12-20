@@ -59,7 +59,6 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
 
         if (prescriptionLists.isNotEmpty()){
 
-           
 
             mDoctorModel.finishConsultation(consultationVO, prescriptionLists, onSuccess = {
                 mView?.navigateToChatScreen()
@@ -118,6 +117,8 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
     }
 
     override fun addToPrescribeMedicineLists(prescriptionVO: PrescriptionVO) {
+
+
         prescriptionLists.add(prescriptionVO)
 
 
@@ -141,6 +142,17 @@ class PrescribeMedicinePresenterImpl : PrescribeMedicinePresenter,
     }
 
     override fun onTapRemoveMedicine(medicineVO: MedicineVO) {
+
+        var index=0
+        for(item in prescriptionLists)
+        {
+            if(item.medicine == medicineVO.name)
+            {
+                prescriptionLists.removeAt(index)
+            }
+            index++
+        }
+
         for (i in medicineLists) {
 
             i.name.let { medicineName ->
