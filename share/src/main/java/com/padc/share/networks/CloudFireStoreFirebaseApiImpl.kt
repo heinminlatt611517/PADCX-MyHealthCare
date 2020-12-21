@@ -640,7 +640,7 @@ object CloudFireStoreFirebaseApiImpl : FirebaseApi {
                 data = (
                         Data("", "${patientVO.name} မှ \u200Bရောဂါဆိုင်ရာအတွက် \u200Bဆွေး\u200Bနွေးရန် \u200Bတောင်းဆိုထားပါသည်", "", "အ\u200Bကြောင်းကြားစာ", 0, id, "")
                         ),
-                to = "fqOlIX8vSR-hCop6QJgb2y:APA91bFWmyfaLSmEVJkbKuJoJW4dAZD3jUJFSGkr9Dbh2UXPymYJvh2PSaBiASx2pXZon9NR4a2N08GovRUmTSBC418zhfgflHtBZUnF1xCzXAllaHFHu242FIcy8a46wYs6S8tFrB8B"
+                to = "fCswj_ygQ2KYv3_jNMHg3j:APA91bHtNDk88LSoq6VhNydNKjW07IUtW4K0KTX_lodgsANrsmISpUYKnDjA28pc0mBhBDAPmLrLhWkKNKhvQRxOW7OoUajwNapYyAQcDnI3H0vg9Vx3gPJX-tRTzaHrZWR8djL1boC2"
             )
 
             mPatientModel.sendNotification(dataRequest)
