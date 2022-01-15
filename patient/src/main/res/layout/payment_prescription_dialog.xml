@@ -49,7 +49,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/btn1"
                     />
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/tv_divider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -57,7 +57,7 @@
                     android:background="@color/grey_300"
                     app:layout_constraintTop_toBottomOf="@+id/rv_prescribeMedicine" />
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/tv_subTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_divider" />
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/tv_deliveryFee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_subTotal" />
 
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/tv_medicineSubTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_divider" />
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/tv_deliveryFeeAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_medicineSubTotal" />
 
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/tv_divider1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -107,7 +107,7 @@
                     android:background="@color/grey_300"
                     app:layout_constraintTop_toBottomOf="@+id/tv_deliveryFee" />
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/txt_totalAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_divider1" />
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/txt_totalAmountValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
                     app:backgroundTint="@color/black"
                     app:cornerRadius="14dp" />
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/ed_patientFullAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -192,7 +192,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_medium_3"
                 android:orientation="vertical">
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/paymenet_desc"

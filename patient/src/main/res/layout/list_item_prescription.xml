@@ -22,7 +22,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:weightSum="2">
 
-    <org.mmtextview.components.MMTextView
+    <TextView
         android:id="@+id/tv_amount_label"
         android:layout_width="0dp"
         android:layout_weight="1"
@@ -31,7 +31,7 @@
         android:textSize="15sp"
         android:textColor="#424656" />
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_amount"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -48,7 +48,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:weightSum="2">
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_number_label"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -57,7 +57,7 @@
             android:textSize="15sp"
             android:textColor="#424656" />
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_number"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -74,7 +74,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:weightSum="2">
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_time_label"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -83,7 +83,7 @@
             android:textSize="15sp"
             android:textColor="#424656" />
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_day_time"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -102,7 +102,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:weightSum="2">
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_time_count_label"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -111,7 +111,7 @@
             android:textSize="15sp"
             android:textColor="#424656" />
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_time_count"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -131,7 +131,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:weightSum="2">
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_repeat_label"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -140,7 +140,7 @@
             android:textSize="15sp"
             android:textColor="#424656" />
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_repeat"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -159,7 +159,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:weightSum="2">
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_comment_label"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -168,7 +168,7 @@
             android:textSize="15sp"
             android:textColor="#424656" />
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_comment"
             android:layout_width="0dp"
             android:layout_weight="1"

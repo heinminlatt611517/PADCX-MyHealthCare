@@ -234,7 +234,7 @@
                         android:layout_width="match_parent"
                         android:orientation="vertical"
                         android:layout_height="wrap_content">
-                        <org.mmtextview.components.MMTextView
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -244,7 +244,7 @@
                             android:id="@+id/txt_question1"
                             android:layout_margin="10dp"
                             android:text="My Questions ?"/>
-                        <org.mmtextview.components.MMTextView
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_marginTop="5dp"
                             android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
                         android:layout_width="match_parent"
                         android:orientation="vertical"
                         android:layout_height="wrap_content">
-                        <org.mmtextview.components.MMTextView
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -273,7 +273,7 @@
                             android:id="@+id/txt_question2"
                             android:layout_margin="10dp"
                             android:text="My Questions ?"/>
-                        <org.mmtextview.components.MMTextView
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_marginTop="5dp"
                             android:layout_height="wrap_content"

@@ -97,7 +97,6 @@ ext {
             mmdetect                : "com.github.mgkaung692018:myanmar_font_detect:$mmDetectVersion",
             firebase_cloud_messaging : "com.google.firebase:firebase-messaging:$fcm_version",
             stepperIndicator        :  "com.github.badoualy:stepper-indicator:$stepperIndicatorVersion",
-            mmtextview : "org.mmtextview:mmtextview:$mmTextVersion",
             circleImageView : "de.hdodenhof:circleimageview:$circleImageVersion"
 
     ]

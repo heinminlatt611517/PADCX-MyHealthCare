@@ -65,7 +65,7 @@
           android:paddingBottom="@dimen/margin_medium"
           android:layout_height="wrap_content">
 
-            <org.mmtextview.components.MMTextView
+            <TextView
                 android:id="@+id/tv_label_patientName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/margin_medium"
             app:layout_constraintTop_toBottomOf="@+id/constraint1">
-            <org.mmtextview.components.MMTextView
+            <TextView
                 android:id="@+id/tv_label_birthDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/margin_medium"
                 app:layout_constraintTop_toBottomOf="@+id/constraint2">
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/tv_label_height"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/margin_medium"
                 app:layout_constraintTop_toBottomOf="@+id/constraint3">
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/tv_label_bloodType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/margin_medium"
                 app:layout_constraintTop_toBottomOf="@+id/constraint4">
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:id="@+id/tv_label_allergic_reactions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -224,7 +224,7 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <org.mmtextview.components.MMTextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
@@ -272,7 +272,7 @@
     </androidx.cardview.widget.CardView>
 
 
-    <org.mmtextview.components.MMTextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"

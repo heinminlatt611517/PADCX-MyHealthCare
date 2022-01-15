@@ -78,7 +78,7 @@
                     android:id="@+id/iv_send"
                     android:src="@drawable/ic_baseline_send_24" />
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -104,7 +104,7 @@
                     android:layout_marginRight="@dimen/margin_medium"
                     android:src="@drawable/ic_baseline_medical_services_24"/>
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

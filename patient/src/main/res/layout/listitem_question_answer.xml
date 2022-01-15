@@ -7,7 +7,7 @@
         android:orientation="vertical"
         android:layout_margin="5dp"
         android:layout_height="wrap_content">
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -17,7 +17,7 @@
             android:id="@+id/txt_question"
             android:layout_margin="10dp"
             android:text="My Questions ?"/>
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
