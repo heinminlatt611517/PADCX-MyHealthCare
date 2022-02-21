@@ -20,7 +20,7 @@
         android:layout_margin="@dimen/margin_medium"
         android:orientation="vertical">
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_medicine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,14 +44,14 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_medium"
                     android:layout_weight="1"
                     android:text="@string/number" />
 
-                <org.mmtextview.components.MMTextView
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_medium"
@@ -83,7 +83,7 @@
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
-                    <org.mmtextview.components.MMTextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -146,7 +146,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             app:layout_constraintTop_toBottomOf="@+id/topLayout">
 
-            <org.mmtextview.components.MMTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_medium"
@@ -225,7 +225,7 @@
             android:orientation="vertical"
            >
 
-            <org.mmtextview.components.MMTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_medium"
@@ -277,7 +277,7 @@
             </LinearLayout>
 
 
-            <org.mmtextview.components.MMTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_medium"

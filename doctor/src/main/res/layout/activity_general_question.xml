@@ -27,7 +27,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <org.mmtextview.components.MMTextView
+        <TextView
             android:id="@+id/tv_patientName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
